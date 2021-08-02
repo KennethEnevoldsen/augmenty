@@ -3,9 +3,12 @@
 from spacy.language import Language
 from spacy.training import Example
 
+from spacy.tokens import Doc
+
 import random
 
-from typing import Callable, Iterable, Iterator
+from typing import Callable, Iterable, Iterator, List
+
 
 def combine_augmenters(
     augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]]
@@ -63,3 +66,11 @@ def make_text_from_orth(example_dict: dict) -> str:
         if spacy:
             text += " "
     return text
+
+
+def augment_docs(docs: List[Doc], augmenter: Callable[[Language, Example], Iterator[Example]], nlp: Language) -> Iterable[Doc]:
+    for doc in docs:
+        example = Example(doc, doc)
+        examples = augmenter(nlp, example)
+        for e in examples:
+            yield e
