@@ -5,8 +5,9 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
-from ...character import char_replace_augmenter
-from ...token.casing import create_conditional_casing_augmenter
+from ...character import create_char_replace_augmenter
+from ...token import create_conditional_token_casing_augmenter
+
 
 @spacy.registry.augmenters("da_æøå_replace.v1")
 def create_da_æøå_replace_augmenter(
@@ -28,15 +29,14 @@ def create_da_æøå_replace_augmenter(
         "Ø": ["Oe"],
         "Å": ["Aa"],
     }
-    return partial(
-        char_replace_augmenter,
-        replacement=replace_dict,
-        level=level
-    )
+    return create_char_replace_augmenter(replace=replace_dict, level=level)
+
 
 @spacy.registry.augmenters("da_historical_noun_casing.v1")
-def create_da_historical_noun_casing_augmenter() -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that changes all nouns to uppercase, reflecting that 
+def create_da_historical_noun_casing_augmenter() -> Callable[
+    [Language, Example], Iterator[Example]
+]:
+    """Creates an augmenter that changes all nouns to uppercase, reflecting that
      cases the first letter a token based on the getter.
     Either lower og upper needs to specifiedd as True.
 
@@ -50,9 +50,10 @@ def create_da_historical_noun_casing_augmenter() -> Callable[[Language, Example]
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
+
     def conditional(token):
         if token.pos_ == "NOUN":
             return True
         return False
 
-    return create_conditional_casing_augmenter(conditional=conditional, upper=True)
+    return create_conditional_token_casing_augmenter(conditional=conditional, upper=True)

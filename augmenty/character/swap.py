@@ -3,7 +3,6 @@ Augmenters for swapping characters
 """
 
 
-
 from typing import Callable, Dict, Iterator
 
 from functools import partial
@@ -15,9 +14,10 @@ from spacy.training import Example
 
 from ..augment_utilites import make_text_from_orth
 
+
 @spacy.registry.augmenters("char_swap.v1")
 def create_char_swap_augmenter(
-    level: float
+    level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that swaps two characters in a token.
 
@@ -30,11 +30,7 @@ def create_char_swap_augmenter(
     return partial(char_swap_augmenter, level=level)
 
 
-def char_swap_augmenter(
-    nlp: Language,
-    example: Example,
-    level
-) -> Iterator[Example]:
+def char_swap_augmenter(nlp: Language, example: Example, level) -> Iterator[Example]:
     def __replace(t):
         for i, c in enumerate(t.text[:-1]):
             if random.random() < level:
@@ -42,9 +38,7 @@ def char_swap_augmenter(
         return t
 
     example_dict = example.to_dict()
-    example_dict["token_annotation"]["ORTH"] = [
-        __replace(t) for t in example.reference
-    ]
+    example_dict["token_annotation"]["ORTH"] = [__replace(t) for t in example.reference]
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield example.from_dict(doc, example_dict)

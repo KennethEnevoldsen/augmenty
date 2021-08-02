@@ -1,4 +1,3 @@
-
 import random
 from functools import partial
 from typing import Iterator, Callable
@@ -9,6 +8,7 @@ from spacy.training import Example
 from spacy.tokens import Token
 
 from ..augment_utilites import make_text_from_orth
+
 
 @spacy.registry.augmenters("token_swap.v1")
 def create_token_swap_augmenter(
@@ -35,9 +35,8 @@ def token_swap_augmenter(
     nlp: Language,
     example: Example,
     level: float,
-    respect_ents: bool=True,
-    respect_sent: bool=True,
-
+    respect_ents: bool = True,
+    respect_sent: bool = True,
 ) -> Iterator[Example]:
 
     example_dict = example.to_dict()
@@ -46,7 +45,7 @@ def token_swap_augmenter(
 
     if respect_ents is True:
         swap_ents = False
-    
+
     is_swapped = set()
 
     for i in range(n_tok):
@@ -58,10 +57,12 @@ def token_swap_augmenter(
 
             min_i = i + fb if 0 < i + fb < n_tok else i - fb
             if min_i > i:
-                i, min_i = min_i, i # make so that i is always the biggest
+                i, min_i = min_i, i  # make so that i is always the biggest
                 is_swapped.add(i)
 
-            if respect_sent is True and (example.y[i].is_sent_start or example.y[min_i].is_sent_end):
+            if respect_sent is True and (
+                example.y[i].is_sent_start or example.y[min_i].is_sent_end
+            ):
                 continue
 
             if respect_ents is True:
@@ -69,28 +70,30 @@ def token_swap_augmenter(
                 # 2 not an ent
                 # 3 start ent
                 # 1 in ent
-                if (example.y[min_i].ent_iob in {0, 2} and example.y[i].ent_iob in {0, 2}):
+                if example.y[min_i].ent_iob in {0, 2} and example.y[i].ent_iob in {
+                    0,
+                    2,
+                }:
                     # Neither is an entity
                     # swap and keep ent spans the same
                     pass
-                elif ((example.y[min_i].ent_iob == 3 and example.y[i].ent_iob == 1) or 
-                    (example.y[min_i].ent_iob == 1 and example.y[i].ent_iob == 1)):
+                elif (example.y[min_i].ent_iob == 3 and example.y[i].ent_iob == 1) or (
+                    example.y[min_i].ent_iob == 1 and example.y[i].ent_iob == 1
+                ):
                     # both part of the same entity
                     # swap and keep ent spans the same
                     pass
-                elif ((example.y[min_i].ent_iob == 3 and example.y[i].ent_type == 0) or 
-                      (example.y[i].ent_iob == 3 and 
-                       i != n_tok and 
-                       example.y[i+1].ent_iob in {0, 2})
-                     ):
+                elif (example.y[min_i].ent_iob == 3 and example.y[i].ent_type == 0) or (
+                    example.y[i].ent_iob == 3
+                    and i != n_tok
+                    and example.y[i + 1].ent_iob in {0, 2}
+                ):
                     # 1st or second token is a one word entity
                     # swap and swap ents
                     swap_ents = True
                 else:
                     # don't swap
                     continue
-            
-
 
         tok_anno = example_dict["token_annotation"]
         for k in tok_anno:

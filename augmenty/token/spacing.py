@@ -48,7 +48,7 @@ def grundtvigian_spacing_augmenter(
 @spacy.registry.augmenters("spacing_insertion.v1")
 def create_random_spacing_augmenter(
     level: float,
-    max_insertions: int=1,
+    max_insertions: int = 1,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Randomly adds a space after a chara cter. Tokens are kept the same.
 
@@ -63,10 +63,7 @@ def create_random_spacing_augmenter(
 
 
 def random_spacing_augmenter(
-    nlp: Language,
-    example: Example,
-    level: float,
-    max_insertions: int
+    nlp: Language, example: Example, level: float, max_insertions: int
 ) -> Iterator[Example]:
     def __spacing(t):
         insertions = 0
@@ -76,7 +73,7 @@ def random_spacing_augmenter(
             if random.random() < level and insertions < max_insertions:
                 insertions += 1
                 text.append(" ")
-        text = text[:-1] if  text[-1] == " " else text
+        text = text[:-1] if text[-1] == " " else text
         return " ".join(text)
 
     example_dict = example.to_dict()

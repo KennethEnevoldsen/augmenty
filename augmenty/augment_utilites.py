@@ -36,7 +36,7 @@ def set_doc_level(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Set the document level at which the tokenizer should be 
+    """Set the document level at which the tokenizer should be
 
     Args:
         augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters which you only want to apply to a certain percentage of docs
@@ -45,13 +45,16 @@ def set_doc_level(
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The combined augmenter
     """
+
     def __augment(nlp: Language, example: Example):
         if random.random() > level:
             yield example
         else:
             for e in augmenter(nlp, example):
                 yield e
+
     return __augment
+
 
 def make_text_from_orth(example_dict: dict) -> str:
     """
@@ -66,11 +69,3 @@ def make_text_from_orth(example_dict: dict) -> str:
         if spacy:
             text += " "
     return text
-
-
-def augment_docs(docs: List[Doc], augmenter: Callable[[Language, Example], Iterator[Example]], nlp: Language) -> Iterable[Doc]:
-    for doc in docs:
-        example = Example(doc, doc)
-        examples = augmenter(nlp, example)
-        for e in examples:
-            yield e

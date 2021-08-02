@@ -191,11 +191,11 @@ def create_ent_format_augmenter(
     """Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.
 
     Args:
-        reordering (List[Union[int, None]]): A reordering consisting of a the desired order of the list of indices, 
+        reordering (List[Union[int, None]]): A reordering consisting of a the desired order of the list of indices,
             where None denotes the remainder. For instance if this function was solely used on names [-1, None]
             indicate last name (the last token in the name) followed by the remainder of the name. Similarly one could more
             use the reordering [3, 1, 2] e.g. indicating last name, first name, middle name. Note that if the entity only include two
-            tokens the 3 will be ignored producing the pattern [1, 2]. 
+            tokens the 3 will be ignored producing the pattern [1, 2].
         formatter (List[Union[Callable[[Token], str], None]]): A list of function taking in a spaCy Token returning the reformatted str.
             E.g. the function `lambda token: token.text[0] + "."` would abbreviate the token and add punctuation. None corresponds to no augmentation.
         level (float): The probability of an entities being augmented.
@@ -209,7 +209,9 @@ def create_ent_format_augmenter(
 def abbreviate(token):
     return token.text[0]
 
+
 lambda token: token.text[0] + "."
+
 
 def abbr_punct(token):
     return token.text[0] + "."
@@ -246,7 +248,7 @@ def ent_format_augmenter(
             new_ent_ = [e if f is None else f(e) for e, f in zip(new_ent, formatter)]
 
             if len(new_ent_) < len(new_ent):
-                new_ent_ += new_ent[len(new_ent_):]
+                new_ent_ += new_ent[len(new_ent_) :]
 
             tok_anno["ORTH"][ent.start : ent.end] = new_ent
             tok_anno["LEMMA"][ent.start : ent.end] = new_ent

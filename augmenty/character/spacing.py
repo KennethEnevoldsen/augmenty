@@ -16,7 +16,7 @@ from ..augment_utilites import make_text_from_orth
 
 @spacy.registry.augmenters("remove_spacing.v1")
 def create_spacing_augmenter(
-    level: float
+    level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that removes spacing.
 
@@ -46,5 +46,3 @@ def spacing_augmenter(
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield example.from_dict(doc, example_dict)
-
-

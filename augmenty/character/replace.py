@@ -12,7 +12,7 @@ from spacy.language import Language
 from spacy.training import Example
 
 from ..augment_utilites import make_text_from_orth
-from ..lang.keyboard import Keyboard
+from ..keyboard import Keyboard
 
 
 from ..util import registry
@@ -85,7 +85,7 @@ def char_replace_augmenter(
 @spacy.registry.augmenters("keystroke_error.v1")
 def create_keystroke_error_augmenter(
     level: float,
-    distance: float=1.5,
+    distance: float = 1.5,
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates a document level augmenter using plausible typos based on keyboard distance.
@@ -101,8 +101,4 @@ def create_keystroke_error_augmenter(
     """
     kb = Keyboard(keyboard_array=registry.keyboards.get(keyboard))
     replace_dict = kb.create_distance_dict(distance=distance)
-    return partial(
-        char_replace_augmenter,
-        replacement=replace_dict,
-        level=level
-    )
+    return partial(char_replace_augmenter, replacement=replace_dict, level=level)

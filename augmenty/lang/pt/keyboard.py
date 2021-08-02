@@ -1,8 +1,8 @@
 from ...util import registry
 
 
-@registry.keyboards("es_qwerty.v1")
-def create_qwerty_es():
+@registry.keyboards("pt_qwerty.v1")
+def create_qwerty_pt():
     qwerty = {
         "default": [
             ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "'", "+"],

@@ -6,6 +6,7 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
+
 @spacy.registry.augmenters("upper_case.v1")
 def create_upper_casing_augmenter(
     level: float,
@@ -45,7 +46,9 @@ def upper_casing_augmenter(
     else:
         example_dict = example.to_dict()
         doc = nlp.make_doc(example.text.upper())
-        example_dict["token_annotation"]["ORTH"] = [t.text.upper() for t in example.reference]
+        example_dict["token_annotation"]["ORTH"] = [
+            t.text.upper() for t in example.reference
+        ]
         yield example.from_dict(doc, example_dict)
 
 
@@ -58,5 +61,5 @@ def spongebob_augmenter(
         chars = [c.lower() if i % 2 else c.upper() for i, c in enumerate(example.text)]
         example_dict = example.to_dict()
         doc = nlp.make_doc("".join(chars))
-        example_dict["token_annotation"]["ORTH"] = [t.text for t in doc] 
+        example_dict["token_annotation"]["ORTH"] = [t.text for t in doc]
         yield example.from_dict(doc, example_dict)
