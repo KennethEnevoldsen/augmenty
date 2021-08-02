@@ -15,7 +15,7 @@ from spacy.training import Example
 
 from ..augment_utilites import make_text_from_orth
 
-@spacy.registry.augmenters("char_swap_augmenter.v1")
+@spacy.registry.augmenters("char_swap.v1")
 def create_char_swap_augmenter(
     level: float
 ) -> Callable[[Language, Example], Iterator[Example]]:

@@ -18,7 +18,7 @@ from ..lang.keyboard import Keyboard
 from ..util import registry
 
 
-@spacy.registry.augmenters("char_random_augmenter.v1")
+@spacy.registry.augmenters("char_replace_random.v1")
 def create_char_random_augmenter(
     level: float, keyboard: str = "en_qwerty.v1"
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -39,17 +39,16 @@ def create_char_random_augmenter(
     return partial(char_replace_augmenter, replacement=replace_dict, level=level)
 
 
-@spacy.registry.augmenters("char_replace_augmenter.v1")
+@spacy.registry.augmenters("char_replace.v1")
 def create_char_replace_augmenter(
-    level: float, replacement: dict
+    level: float, replace: dict
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that replaces a character with a random character from the
-    keyboard.
+    """Creates an augmenter that replaces a character with a random character from replace dict
 
     Args:
         doc_level (float): probability to augment document.
         char_level (float): probability to augment character, if document is augmented.
-        replace (dict): A dictionary denoting which characters denote potentials replacement for each character.
+        replace (dict): A dictionary denoting which characters denote potentials replace for each character.
             E.g. {"æ": ["ae"]}
 
     Returns:
@@ -58,7 +57,7 @@ def create_char_replace_augmenter(
     return partial(
         char_replace_augmenter,
         level=level,
-        replacement=replacement,
+        replace=replace,
     )
 
 
@@ -66,13 +65,13 @@ def char_replace_augmenter(
     nlp: Language,
     example: Example,
     level: float,
-    replacement: dict,
+    replace: dict,
 ) -> Iterator[Example]:
     def __replace(t):
         t_ = []
         for i, c in enumerate(t.text):
-            if random.random() < level and c in replacement:
-                c = random.sample(replacement[c], k=1)[0]
+            if random.random() < level and c in replace:
+                c = random.sample(replace[c], k=1)[0]
             t_.append(c)
         return "".join(t_)
 
@@ -83,8 +82,8 @@ def char_replace_augmenter(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("keyboard_augmenter.v1")
-def create_keyboard_augmenter(
+@spacy.registry.augmenters("keystroke_error.v1")
+def create_keystroke_error_augmenter(
     level: float,
     distance: float=1.5,
     keyboard: str = "en_qwerty.v1",

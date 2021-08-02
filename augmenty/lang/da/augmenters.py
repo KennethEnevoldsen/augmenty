@@ -8,8 +8,8 @@ from spacy.training import Example
 from ...character import char_replace_augmenter
 from ...token.casing import create_conditional_casing_augmenter
 
-@spacy.registry.augmenters("æøå_augmenter.v1")
-def create_æøå_augmenter(
+@spacy.registry.augmenters("da_æøå_replace.v1")
+def create_da_æøå_replace_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Augments æ, ø, and å into their spelling variants ae, oe, aa.
@@ -34,8 +34,8 @@ def create_æøå_augmenter(
         level=level
     )
 
-@spacy.registry.augmenters("historical_noun_casing_augmenter.v1")
-def create_historical_noun_casing_augmenter() -> Callable[[Language, Example], Iterator[Example]]:
+@spacy.registry.augmenters("da_historical_noun_casing.v1")
+def create_da_historical_noun_casing_augmenter() -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that changes all nouns to uppercase, reflecting that 
      cases the first letter a token based on the getter.
     Either lower og upper needs to specifiedd as True.

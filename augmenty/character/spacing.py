@@ -14,7 +14,7 @@ from spacy.training import Example
 from ..augment_utilites import make_text_from_orth
 
 
-@spacy.registry.augmenters("spacing_augmenter.v1")
+@spacy.registry.augmenters("remove_spacing.v1")
 def create_spacing_augmenter(
     level: float
 ) -> Callable[[Language, Example], Iterator[Example]]:

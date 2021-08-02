@@ -22,7 +22,7 @@ def create_upper_casing_augmenter(
     return partial(upper_casing_augmenter, level=level)
 
 
-@spacy.registry.augmenters("spongebob_augmenter.v1")
+@spacy.registry.augmenters("spongebob.v1")
 def create_spongebob_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:

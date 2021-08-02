@@ -21,7 +21,7 @@ from spacy.tokens import Token
 from ..augment_utilites import make_text_from_orth
 
 
-@spacy.registry.augmenters("ent_augmenter.v1")
+@spacy.registry.augmenters("ents_replace.v1")
 def create_ent_augmenter(
     ent_dict: Dict[str, Iterable[List[str]]],
     level: float,
@@ -116,8 +116,8 @@ def ent_augmenter(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("pers_augmenter.v1")
-def create_pers_replace_augmenter(
+@spacy.registry.augmenters("per_replace.v1")
+def create_per_replace_augmenter(
     names: Dict[
         str, List[str]
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
@@ -148,7 +148,7 @@ def create_pers_replace_augmenter(
     Example:
         >>> names = {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
         >>> patterns = [["firstname], ["firstname", "Lastname"], ["firstname", "firstname", "Lastname"]]
-        >>> per_augmenter = create_pers_replace_augmenter(names, patterns, level=0.1) # replace 10% of names
+        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1) # replace 10% of names
     """
 
     names_gen = generator_from_name_dict(names, patterns, names_p, patterns_p)
@@ -181,7 +181,7 @@ def generator_from_name_dict(
         ]
 
 
-@spacy.registry.augmenters("ent_format_augmenter.v1")
+@spacy.registry.augmenters("ents_format.v1")
 def create_ent_format_augmenter(
     reordering: List[Union[int, None]],
     formatter: List[Union[Callable[[Token], str], None]],
