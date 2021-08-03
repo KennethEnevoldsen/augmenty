@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 Work order:
 - [x] create tests for package
 - [x] create list all
@@ -14,13 +7,12 @@ Work order:
 - [x] Add/update/check documentations and at examples to augmenters
 - [x] create readme
 - [ ] create documentation
-- [ ] set up GitHub
+- [ ] set up GitHub w. secrets
 - [ ] publish
-- [ ] Fix DaCy to use augmenty
-- [ ] 
+- [ ] create issue DaCy to use augmenty and textdescriptives
+  - [ ] Add synonym list from DaCy
 
 Todo:
-- [ ] Add synonym list from DaCy
 - [ ] Add entity, names ... (check NL augment)
   - [ ] https://github.com/GEM-benchmark/NL-Augmenter/tree/main/transformations/gender_culture_diverse_name_two_way
   - [ ] Usernames
