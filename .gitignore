@@ -5,3 +5,8 @@ __pycache__
 # vs code
 .vscode/*
 
+# docs
+docs/_build/*
+
+# mac
+.DS_Store
