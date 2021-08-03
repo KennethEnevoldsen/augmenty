@@ -6,6 +6,8 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
+from ..augment_utilites import make_text_from_orth
+
 
 @spacy.registry.augmenters("random_casing.v1")
 def create_random_casing_augmenter(
@@ -31,8 +33,8 @@ def random_casing_augmenter(
             return c.lower() if random.random() < 0.5 else c.upper()
         return c
 
-    chars = [__casing(c) for c in example.text]
     example_dict = example.to_dict()
-    doc = nlp.make_doc("".join(chars))
-    example_dict["token_annotation"]["ORTH"] = [t.text for t in doc]
-    yield example.from_dict(doc, example_dict)
+    example_dict["token_annotation"]["ORTH"] = ["".join(__casing(c) for c in t.text) for t in example.y]
+    text = make_text_from_orth(example_dict)
+    doc = nlp.make_doc(text)
+    yield Example.from_dict(doc, example_dict)

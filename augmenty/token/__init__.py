@@ -5,6 +5,6 @@ from .casing import (
 from .replace import create_token_replace_augmenter, create_wordnet_synonym_augmenter
 from .spacing import (
     create_grundtvigian_spacing_augmenter,
-    create_random_spacing_augmenter,
+    create_spacing_insertion_augmenter,
 )
 from .swap import create_token_swap_augmenter

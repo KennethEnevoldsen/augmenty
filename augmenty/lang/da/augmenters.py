@@ -33,19 +33,13 @@ def create_da_æøå_replace_augmenter(
 
 
 @spacy.registry.augmenters("da_historical_noun_casing.v1")
-def create_da_historical_noun_casing_augmenter() -> Callable[
+def create_da_historical_noun_casing_augmenter(level: float) -> Callable[
     [Language, Example], Iterator[Example]
 ]:
-    """Creates an augmenter that changes all nouns to uppercase, reflecting that
-     cases the first letter a token based on the getter.
-    Either lower og upper needs to specifiedd as True.
+    """Creates an augmenter that changes nouns to uppercase.
 
     Args:
-        conditional (Callable):
-        lower (Optional[bool], optional): If the conditional returns True should the casing the lowercased.
-            Default to None.
-        upper (Optional[bool], optional): If the conditional returns True should the casing the uppercased.
-            Default to None.
+        level (float): The probabiliy to upper case a noun.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -56,4 +50,4 @@ def create_da_historical_noun_casing_augmenter() -> Callable[
             return True
         return False
 
-    return create_conditional_token_casing_augmenter(conditional=conditional, upper=True)
+    return create_conditional_token_casing_augmenter(conditional=conditional, upper=True, level=level)

@@ -20,7 +20,8 @@ from ..util import registry
 
 @spacy.registry.augmenters("char_replace_random.v1")
 def create_char_random_augmenter(
-    level: float, keyboard: str = "en_qwerty.v1"
+    level: float, 
+    keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that replacies a character with a random character from the
     keyboard.
@@ -34,9 +35,9 @@ def create_char_random_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter function.
     """
 
-    kb = Keyboard(keyboard_array=registry.keyboards.get(keyboard))
+    kb = Keyboard.from_registry(keyboard)
     replace_dict = {k: list(kb.all_keys()) for k in kb.all_keys()}
-    return partial(char_replace_augmenter, replacement=replace_dict, level=level)
+    return partial(char_replace_augmenter, replace=replace_dict, level=level)
 
 
 @spacy.registry.augmenters("char_replace.v1")
@@ -99,6 +100,6 @@ def create_keystroke_error_augmenter(
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmentation function
     """
-    kb = Keyboard(keyboard_array=registry.keyboards.get(keyboard))
+    kb = Keyboard.from_registry(keyboard)
     replace_dict = kb.create_distance_dict(distance=distance)
-    return partial(char_replace_augmenter, replacement=replace_dict, level=level)
+    return partial(char_replace_augmenter, replace=replace_dict, level=level)

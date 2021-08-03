@@ -12,7 +12,7 @@ from ..augment_utilites import make_text_from_orth
 
 @spacy.registry.augmenters("token_swap.v1")
 def create_token_swap_augmenter(
-    level: float, respect_ents: bool = True, respect_sent: bool = True
+    level: float, respect_ents: bool = True, respect_eos: bool = True
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
@@ -21,14 +21,14 @@ def create_token_swap_augmenter(
         respect_ents (bool, optional): Should the pipeline respect entities? Defaults to True. In which
             case it will not swap a token inside an entity with a token outside the entity span, unless
             it is a one word span. If false it will disregard correcting the entity labels.
-        respect_sent (bool, optional): Should it respect sentence bounderies? Default to True, indicating
-            that it will not swap across sentence bounderies. If false it will disregard correcting the sentence
+        respect_eos (bool, optional): Should it respect end of sentence bounderies? Default to True, indicating
+            that it will not swap and end of sentence token. If False it will disregard correcting the sentence
             start as this becomes arbitrary.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
-    return partial(token_swap_augmenter, level=level)
+    return partial(token_swap_augmenter, level=level, respect_eos=respect_eos, respect_ents=respect_ents)
 
 
 def token_swap_augmenter(
@@ -36,7 +36,7 @@ def token_swap_augmenter(
     example: Example,
     level: float,
     respect_ents: bool = True,
-    respect_sent: bool = True,
+    respect_eos: bool = True,
 ) -> Iterator[Example]:
 
     example_dict = example.to_dict()
@@ -48,6 +48,7 @@ def token_swap_augmenter(
 
     is_swapped = set()
 
+    tok_anno = example_dict["token_annotation"]
     for i in range(n_tok):
         if i in is_swapped:
             continue
@@ -56,12 +57,16 @@ def token_swap_augmenter(
             fb = random.sample([1, -1], k=1)[0]
 
             min_i = i + fb if 0 < i + fb < n_tok else i - fb
+            
+            if min_i in is_swapped:
+                continue
+
             if min_i > i:
                 i, min_i = min_i, i  # make so that i is always the biggest
                 is_swapped.add(i)
 
-            if respect_sent is True and (
-                example.y[i].is_sent_start or example.y[min_i].is_sent_end
+            if respect_eos is True and (
+                example.y[i].is_sent_end is True or example.y[min_i].is_sent_end is True
             ):
                 continue
 
@@ -95,7 +100,6 @@ def token_swap_augmenter(
                     # don't swap
                     continue
 
-        tok_anno = example_dict["token_annotation"]
         for k in tok_anno:
             if k == "SENT_START":
                 continue

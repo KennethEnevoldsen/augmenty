@@ -35,7 +35,7 @@ def grundtvigian_spacing_augmenter(
 ) -> Iterator[Example]:
     def __spacing(t):
         if random.random() < level:
-            return " ".join([c for c in text])
+            return " ".join([c for c in t.text])
         return t.text
 
     example_dict = example.to_dict()
@@ -46,7 +46,7 @@ def grundtvigian_spacing_augmenter(
 
 
 @spacy.registry.augmenters("spacing_insertion.v1")
-def create_random_spacing_augmenter(
+def create_spacing_insertion_augmenter(
     level: float,
     max_insertions: int = 1,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -59,10 +59,10 @@ def create_random_spacing_augmenter(
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
-    return partial(random_spacing_augmenter, level=level)
+    return partial(spacing_insertion_augmenter, level=level, max_insertions=max_insertions)
 
 
-def random_spacing_augmenter(
+def spacing_insertion_augmenter(
     nlp: Language, example: Example, level: float, max_insertions: int
 ) -> Iterator[Example]:
     def __spacing(t):
@@ -74,7 +74,7 @@ def random_spacing_augmenter(
                 insertions += 1
                 text.append(" ")
         text = text[:-1] if text[-1] == " " else text
-        return " ".join(text)
+        return "".join(text)
 
     example_dict = example.to_dict()
     example_dict["token_annotation"]["ORTH"] = [__spacing(t) for t in example.y]

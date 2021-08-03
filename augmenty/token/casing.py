@@ -27,6 +27,7 @@ def create_starting_case_augmenter(
 @spacy.registry.augmenters("conditional_token_casing.v1")
 def create_conditional_token_casing_augmenter(
     conditional: Callable,
+    level: float, 
     lower: Optional[bool] = None,
     upper: Optional[bool] = None,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -34,6 +35,7 @@ def create_conditional_token_casing_augmenter(
     Either lower og upper needs to specifiedd as True.
 
     Args:
+        level (float):
         conditional (Callable):
         lower (Optional[bool], optional): If the conditional returns True should the casing the lowercased.
             Default to None.
@@ -49,7 +51,7 @@ def create_conditional_token_casing_augmenter(
         )
     if lower == True:
         upper = False
-    return partial(conditional_casing_augmenter, upper=upper, conditional=conditional)
+    return partial(conditional_casing_augmenter, level=level, upper=upper, conditional=conditional)
 
 
 def starting_case_augmenter(
@@ -74,11 +76,12 @@ def starting_case_augmenter(
 def conditional_casing_augmenter(
     nlp: Language,
     example: Example,
+    level: float,
     upper: bool,
     conditional: Callable,
 ) -> Iterator[Example]:
     def __casing(t):
-        if conditional(t):
+        if conditional(t) and random.random() < level:
             if upper:
                 return t.text.capitalize()
             return uncapitalize(t.text)
