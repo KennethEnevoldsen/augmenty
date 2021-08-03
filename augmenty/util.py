@@ -17,26 +17,71 @@ class registry(thinc.registry):
     keyboards = catalogue.create("augmenty", "keyboards", entry_points=True)
 
 
-def augment_docs(
+
+def docs(
     docs: Iterable[Doc],
     augmenter: Callable[[Language, Example], Iterator[Example]],
-    nlp: Language,
-) -> Iterable[Doc]:
+    nlp: Language
+) -> Iterator[Doc]:
     """Augments an iterable of spaCy Doc
 
     Args:
-        docs (Iterable[Doc]): A interable of spaCy Docs
+        docs (Iterable[Doc]): A iterable of spaCy Docs
         augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter
-        nlp (Language): A spaCy language pipeline
+        nlp (Language): A spaCy language pipeline.
+        
+    Return:
+        Iterator[Doc]: An iterator of the augmented Docs.
 
     Yields:
-        Iterator[Doc]: An iterator of the augmented Docs.
+        Doc: The augmented Docs.
+
+    Example:
+        >>> from spacy.tokens import Doc
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> docs = [Doc(words=["Fine", "by", "me"])]
+        >>> augmenter = augmenty.load("upper_case.v1", level=1)
+        >>> augmented_docs = augmenty.docs(docs, augmenter, nlp)
+
     """
+    if isinstance(docs, Doc):
+        docs = [docs]
     for doc in docs:
         example = Example(doc, doc)
         examples = augmenter(nlp, example)
         for e in examples:
-            yield e
+            yield e.y
+
+
+
+def texts(
+    texts: Iterable[str],
+    augmenter: Callable[[Language, Example], Iterator[Example]],
+    nlp: Language
+) -> Iterable[str]:
+    """Augments an list of texts
+
+    Args:
+        texts (Iterable[str]): A iterable of strings
+        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter
+        nlp (Language): A spaCy language pipeline.
+        
+    Return:
+        Iterator[str]: An iterator of the augmented texts.
+
+    Yields:
+        str: The augmented text.
+
+    """
+    if isinstance(texts, str):
+        texts = [texts]
+    def __gen() -> Iterable[Doc]:
+        for text in texts:
+            yield nlp(text)
+
+    for doc in docs(__gen()):
+        yield doc.text
 
 
 def augmenters() -> Dict[str, Callable]:
@@ -52,6 +97,23 @@ def augmenters() -> Dict[str, Callable]:
     """
     return spacy.registry.augmenters.get_all()
 
+
+def load(augmenter=str, **kwargs) -> Callable:
+    """A utility functionload an augmenter
+
+    Returns:
+        Dict[str, Callable]: Dictionary of all augmenters
+
+    Example:
+    >>> from spacy.lang.en import English
+    >>> nlp = English()
+    >>> upper_case_augmenter = augmenty.load("upper_case.v1", level = 1)
+    >>> texts = ["hello there!"]
+    >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
+    ["HELLO THERE!"]
+    """
+    aug = spacy.registry.augmenters.get(augmenter)
+    return aug(**kwargs)
 
 def keyboards() -> List[str]:
     """A utility function to get an overview of all keyboards
