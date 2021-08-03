@@ -1,7 +1,14 @@
 spacy>=3.0.0,<3.2.0
+catalogue>=2.0.4,<2.1.0
+thinc>=8.0.8,<8.1.0
+pydantic>=1.7.4,!=1.8,!=1.8.1,<1.9.0
 
 # wordnet
 nltk >= 3.6.2,<3.7.0
+
+# Danish
+dacy >= 1.1.0,<2.0.0
+
 
 # testing
 pytest

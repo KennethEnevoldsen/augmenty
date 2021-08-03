@@ -2,13 +2,15 @@
 Work order:
 - [x] create tests for package
 - [x] create list all
-- [ ] setup init and load for package
-- [ ] test the thing!
+- [x] setup init and load for package
+- [x] test the thing!
 - [ ] setup install for package
 - [ ] Add/update/check documentations and at examples to augmenters
 - [ ] create documentation
 - [ ] set up GitHub
 - [ ] publish
+- [ ] Fix DaCy to use augmenty
+- [ ] 
 
 Todo:
 - [ ] Add synonym list from DaCy
