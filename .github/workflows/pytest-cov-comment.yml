@@ -40,7 +40,7 @@ jobs:
       with:
         auth: ${{ secrets.PYTEST_COVERAGE_COMMENT }}
         gistID: af8637d94475ea8bcb6b6a03c4fbcd3e
-        filename: badge-dacy-pytest-coverage.json
+        filename: badge-augmenty-pytest-coverage.json
         label: Coverage
         message: ${{ steps.coverage-comment.outputs.coverage }}
         color: ${{ steps.coverage-comment.outputs.color }}
