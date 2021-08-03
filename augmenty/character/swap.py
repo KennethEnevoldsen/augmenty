@@ -19,13 +19,22 @@ from ..augment_utilites import make_text_from_orth
 def create_char_swap_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that swaps two characters in a token.
+    """Creates an augmenter that swaps two characters in a token with a given probability.
 
     Args:
         level (float): probability to replace a character.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter function.
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> char_swap_augmenter = augmenty.load("char_swap.v1", level=0.1)
+        >>> texts = ["A sample text"]
+        >>> list(augmenty.texts(texts, char_swap_augmenter, nlp))
+        ["A smaple txet"]
     """
     return partial(char_swap_augmenter, level=level)
 

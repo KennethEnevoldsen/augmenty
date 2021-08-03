@@ -20,6 +20,15 @@ def create_starting_case_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> augmenter = augmenty.load("random_starting_case.v1", level=0.5)
+        >>> texts = ["one two three"]
+        >>> list(augmenty.texts(texts, augmenter, nlp))
+        ["one Two Three"]
     """
     return partial(starting_case_augmenter, level=level)
 

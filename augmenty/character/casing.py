@@ -13,14 +13,22 @@ from ..augment_utilites import make_text_from_orth
 def create_random_casing_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Create a data augmentation callback that randomly changes the casing of the document.
-    The callback can be added to a corpus or other data iterator during training.
+    """Create an augment that randomly changes the casing of the document.
 
     Args:
         level (float): The percentage of character that will have its casing changed.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> random_casing_augmenter = augmenty.load("random_casing.v1", level=0.1)
+        >>> texts = ["A sample text"]
+        >>> list(augmenty.texts(texts, random_casing_augmenter, nlp))
+        ["A saMple texT"]
     """
     return partial(random_casing_augmenter, level=level)
 

@@ -11,14 +11,22 @@ from spacy.training import Example
 def create_upper_casing_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Create a data augmentation callback that converts documents to uppercase.
-    The callback can be added to a corpus or other data iterator during training.
+    """Create an augmenter that converts documents to uppercase.
 
     Args:
         level (float): The percentage of examples that will be augmented.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> upper_case_augmenter = augmenty.load("upper_case.v1", level=0.1)
+        >>> texts = ["A sample text"]
+        >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
+        ["A SAMPLE TEXT"]
     """
     return partial(upper_casing_augmenter, level=level)
 
@@ -27,13 +35,22 @@ def create_upper_casing_augmenter(
 def create_spongebob_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Create a data augmentation callback that converts documents to SpOnGeBoB casing.
+    """Create an augmneter that converts documents to SpOnGeBoB casing.
 
     Args:
         level (float): The percentage of examples that will be augmented.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> spongebob_augmenter = augmenty.load("spongebob.v1", level=0.1)
+        >>> texts = ["A sample text"]
+        >>> list(augmenty.texts(texts, spongebob_augmenter, nlp))
+        ["a sAmPlE TeXt"]
     """
     return partial(spongebob_augmenter, level=level)
 

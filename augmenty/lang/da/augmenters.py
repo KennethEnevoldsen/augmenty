@@ -13,13 +13,22 @@ from ...token import create_conditional_token_casing_augmenter
 def create_da_æøå_replace_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Augments æ, ø, and å into their spelling variants ae, oe, aa.
+    """Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.
 
     Args:
         level (float): probability to augment æ, ø or å.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The desired augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> augmenter = augmenty.load("da_æøå_replace.v1", level=0.1)
+        >>> texts = ["æ ø Å"]
+        >>> list(augmenty.texts(texts, augmenter, nlp))
+        ["ae oe Aa"]
     """
     replace_dict = {
         "æ": ["ae"],
@@ -36,7 +45,7 @@ def create_da_æøå_replace_augmenter(
 def create_da_historical_noun_casing_augmenter(level: float) -> Callable[
     [Language, Example], Iterator[Example]
 ]:
-    """Creates an augmenter that changes nouns to uppercase.
+    """Creates an augmenter that capitalizes nouns.
 
     Args:
         level (float): The probabiliy to upper case a noun.

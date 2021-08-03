@@ -27,7 +27,7 @@ def create_ent_augmenter(
     level: float,
     replace_consistency: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Create entity augmenter
+    """Create an augmenter which replaces an entity based on a dictionary lookup.
 
     Args:
         ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding the the entity type
@@ -203,18 +203,17 @@ def create_ent_format_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
+
+    Example:
+        >>> import augmenty
+        >>> import spacy
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> abbreviate = lambda token: token.text[0] + "."
+        >>> augmenter = augmenty.load("ents_format.v1", reordering = [-1, None], formatter=[None, abbreviate])
+        >>> texts = ["my name is Kenneth Enevoldsen"]
+        >>> list(augmenty.texts(texts, augmenter, nlp))
+        ["my name is Enevoldsen K."]
     """
-
-
-def abbreviate(token):
-    return token.text[0]
-
-
-lambda token: token.text[0] + "."
-
-
-def abbr_punct(token):
-    return token.text[0] + "."
 
 
 def ent_format_augmenter(

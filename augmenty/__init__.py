@@ -7,7 +7,7 @@ from .character import (
     create_char_random_augmenter,
     create_keystroke_error_augmenter,
     create_random_casing_augmenter,
-    create_spacing_augmenter,
+    create_remove_spacing_augmenter,
 )
 from .token import (
     create_conditional_token_casing_augmenter,

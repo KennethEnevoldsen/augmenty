@@ -33,6 +33,15 @@ def create_char_random_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter function.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> char_random_augmenter = augmenty.load("char_replace_random.v1", level=0.1)
+        >>> texts = ["A sample text"]
+        >>> list(augmenty.texts(texts, char_random_augmenter, nlp))
+        ["A sabple tex3"]
     """
 
     kb = Keyboard.from_registry(keyboard)
@@ -89,16 +98,25 @@ def create_keystroke_error_augmenter(
     distance: float = 1.5,
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates a document level augmenter using plausible typos based on keyboard distance.
+    """Creates a augmenter which augments a text with plausible typos based on keyboard distance.
 
     Args:
         level (float): The probability to replace a character with a neightbouring character.
-        distance (float, optional): keyboard distance. Defaults to 1.5.
+        distance (float, optional): keyboard distance. Defaults to 1.5 corresponding to neighbouring keys including diagonals.
         keyboard (str, optional): A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty,keyboards.get_all()`.
             Defaults to "en_qwerty.v1".
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmentation function
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> keystroke_error_augmenter = augmenty.load("keystroke_error.v1", level=0.1, keyboard="en_qwerty.v1")
+        >>> texts = ["A sample text"]
+        >>> list(augmenty.texts(texts, keystroke_error_augmenter, nlp))
+        ["A sajple texr"]
     """
     kb = Keyboard.from_registry(keyboard)
     replace_dict = kb.create_distance_dict(distance=distance)

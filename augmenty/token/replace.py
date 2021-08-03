@@ -1,10 +1,11 @@
 import random
 from functools import partial
-from typing import Dict, Iterator, Callable, List
+from typing import Dict, Iterator, Callable, List, Union
 
 import spacy
 from spacy.language import Language
 from spacy.training import Example
+from spacy.tokens import Token
 
 from ..augment_utilites import make_text_from_orth
 
@@ -12,19 +13,27 @@ from ..augment_utilites import make_text_from_orth
 @spacy.registry.augmenters("token_replace.v1")
 def create_token_replace_augmenter(
     level: float,
-    replace: Dict[str, List[str]],
-    getter: Callable = lambda token: token.pos_,
+    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    getter: Callable[[Token], str] = lambda token: token.pos_,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
     Args:
         level (float): Probability to replace token given that it is in synonym dictionary.
-        replace (dict): a dictionary of words and a list of their synonyms
-            {"act": ["perform", "move", "action"], ...} or {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}, ...}
-            Union[Dict[str, Iterable], Dict[str, Dict[str, Iterable]]]
+        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A dictionary of
+            words and a list of their replacement (e.g. synonyms) or a dictionary denoting
+            replacement based on pos tag.
+        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Examples:
+        >>> replace = {"act": ["perform", "move", "action"], }
+        >>> create_token_replace_augmenter(replace=replace, level=.10)
+        >>> # or
+        >>> replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}
+        >>> create_token_replace_augmenter(replace=replace, level=.10)
     """
     return partial(token_replace_augmenter, level=level, replace=replace, getter=getter)
 
@@ -33,8 +42,8 @@ def token_replace_augmenter(
     nlp: Language,
     example: Example,
     level: float,
-    replace: Dict[str, List[str]],
-    getter: Callable,
+    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    getter: Callable[[Token], str],
 ) -> Iterator[Example]:
     def __replace(t):
         if t.text in replace and random.random() < level:
@@ -66,6 +75,9 @@ def create_wordnet_synonym_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1, lang="en")
     """
     try:
         from nltk.corpus import wordnet

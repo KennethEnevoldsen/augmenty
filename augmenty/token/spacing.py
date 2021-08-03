@@ -50,7 +50,7 @@ def create_spacing_insertion_augmenter(
     level: float,
     max_insertions: int = 1,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Randomly adds a space after a chara cter. Tokens are kept the same.
+    """Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.
 
     Args:
         level (float): The probability to add a space after a character.
