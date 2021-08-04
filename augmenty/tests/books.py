@@ -320,3 +320,5 @@ this very natural question will be more fitly and easily given when I
 come to describe the inhabitants of Flatland.  For the present let me
 defer this subject, and say a word or two about the climate and houses
 in our country."""
+
+BOOKS = [oliver_twist, secret_garden, flatland]

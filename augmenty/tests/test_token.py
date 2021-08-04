@@ -7,10 +7,11 @@ import augmenty
 
 import pytest
 
+from .books import BOOKS
 
 @pytest.fixture()
 def nlp():
-    nlp = English()
+    nlp = spacy.load("en_core_web_sm")
     return nlp
 
 
@@ -70,15 +71,19 @@ def test_create_token_replace_augmenter(nlp):
     assert next(docs).text == "Look a level door!"
 
 
-def test_create_wordnet_synonym_augmenter():
+def test_create_wordnet_synonym_augmenter(nlp):
     text = "Skal jeg pande dig en?"
-    nlp = Danish()
+    nlp_da = Danish()
 
     aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(level=1, lang="da")
-    doc = nlp(text)
+    doc = nlp_da(text)
 
-    docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)
+    docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
     assert next(docs)[2].text in ["pande", "stegepande"]
+
+    docs = nlp.pipe(BOOKS)
+    docs = list(augmenty.docs(docs, augmenter=aug, nlp=nlp))
+
 
 
 def test_create_grundtvigian_spacing_augmenter(nlp):

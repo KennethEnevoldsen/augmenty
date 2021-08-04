@@ -112,9 +112,9 @@ def ent_augmenter(
 
         # Handle entities IOB tags
         if len_ent == 1:
-            ents[i] = ["U-PER"]
+            ents[i] = ["U-" + ent.label_]
         else:
-            ents[i] = ["B-PER"] + ["I-PER"] * (len_ent - 2) + ["L-PER"]
+            ents[i] = ["B-" + ent.label_] + ["I-" + ent.label_] * (len_ent - 2) + ["L-" + ent.label_]
 
     if example.y.has_annotation("HEAD"):
         tok_anno["HEAD"] = head.tolist()
