@@ -100,14 +100,14 @@ def token_swap_augmenter(
                     # don't swap
                     continue
 
-        for k in tok_anno:
-            if k == "SENT_START":
-                continue
-            tok_anno[k][i], tok_anno[k][min_i] = tok_anno[k][min_i], tok_anno[k][i]
+            for k in tok_anno:
+                if k in ["SENT_START", "SPACY"]:
+                    continue
+                tok_anno[k][i], tok_anno[k][min_i] = tok_anno[k][min_i], tok_anno[k][i]
 
-        if respect_ents is True and swap_ents is True:
-            ents = example_dict["doc_annotation"]["entities"]
-            ents[i], ents[min_i] = ents[min_i], ents[i]
+            if respect_ents is True and swap_ents is True:
+                ents = example_dict["doc_annotation"]["entities"]
+                ents[i], ents[min_i] = ents[min_i], ents[i]
 
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
