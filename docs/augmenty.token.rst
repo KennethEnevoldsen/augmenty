@@ -1,44 +1,42 @@
-Augmenters
---------------------
+Token-based
+--------------------------------------------------
 
-dacy.augmenters.character
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: dacy.augmenters.character
+augmenty.token.casing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: augmenty.token.casing
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: spacing_augmenter, char_replace_augmenter, char_swap_augmenter,
-      
+   :exclude-members: starting_case_augmenter, conditional_casing_augmenter, uncapitalize
 
-dacy.augmenters.danish
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: dacy.augmenters.danish
+augmenty.token.replace
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: augmenty.token.replace
    :members:
    :undoc-members:
    :show-inheritance:
+   :exclude-members: token_replace_augmenter
 
 
-dacy.augmenters.person
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: dacy.augmenters.person
+augmenty.token.spacing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: augmenty.token.spacing
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: get_ent_slices, get_slice_spans, handle_dep, handle_entities, 
-      handle_head, handle_lemma, sample_abbreviation_punct, sample_last_name, 
-      sample_first_name, update_slice, handle_morph, handle_sent_start, handle_orth, 
-      handle_tag, resize_entity_list, update_spacy_properties, sample_abbreviation,
-      handle_pos, handle_spacy, pers_augmenter
+   :exclude-members: spacing_insertion_augmenter, grundtvigian_spacing_augmenter
 
+augmenty.token.swap
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-dacy.augmenters.keyboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: dacy.augmenters.keyboard
+.. automodule:: augmenty.token.swap
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: 
+   :exclude-members: token_swap_augmenter

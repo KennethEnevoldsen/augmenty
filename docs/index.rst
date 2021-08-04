@@ -7,18 +7,11 @@ Augmenty
 Augmenty is an augmentation library based on spaCy for augmenting texts. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the token, 
 sentence and document labels under the augmentation.
 
-📰 News
----------------------------------
-
-* 0.0.1 (03/08/21)
-
-  - First version of augmenty launches 🎉
-
 
 Contents
 ---------------------------------
   
-The documentation is organized in two parts:
+The documentation is organized in three parts:
 
 - **Getting started** contains the installation instructions, guides, and tutorials on how to use augmenty.
 - **Augmenters** contains the documentation for each augmenter implemented in augmenty.

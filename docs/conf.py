@@ -18,11 +18,11 @@ sys.path.insert(0, "..")
 sys.path.insert(0, os.path.abspath("../"))
 
 
-from dacy.about import __version__
+from augmenty.about import __version__
 
 # -- Project information -----------------------------------------------------
 
-project = "DaCy"
+project = "augmenty"
 copyright = "2021, Kenneth Enevoldsen"
 author = "Kenneth Enevoldsen"
 
@@ -78,7 +78,7 @@ html_context = {
 
 
 html_static_path = ["_static"]
-html_favicon = 'favicon.ico'
+html_favicon = '_static/favicon.ico'
 
 html_theme_options = {
     "light_logo": "icon.png",

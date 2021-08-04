@@ -1,20 +1,12 @@
-Sentiment
-----------------------------------------------------
+Document-based
+--------------------------------------------------
 
 
-dacy.sentiment.getters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+augmenty.doc.casing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: dacy.sentiment.getters
+.. automodule:: augmenty.doc.casing
    :members:
    :undoc-members:
    :show-inheritance:
-
-
-dacy.sentiment.wrapped\_models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: dacy.sentiment.wrapped_models
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   :exclude-members: upper_casing_augmenter, spongebob_augmenter

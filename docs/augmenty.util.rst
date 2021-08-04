@@ -1,12 +1,13 @@
-Span-based
+Utilities
 --------------------------------------------------
 
+Utilities include convenience functions for working with augmenters.
 
-augmenty.span.entities
+augmenty.span.util
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: augmenty.span.entities
+.. automodule:: augmenty.util
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: ent_augmenter, generator_from_name_dict, ent_format_augmenter
+   :exclude-members: registry

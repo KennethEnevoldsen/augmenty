@@ -1,23 +1,40 @@
-Score
+Character-based
 --------------------------------------------------
 
 
-dacy.score.score
+augmenty.character.casing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(Beta)
 
-.. automodule:: dacy.score.score
+.. automodule:: augmenty.character.casing
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: dep_getter
+   :exclude-members: random_casing_augmenter
 
-dacy.score.input\_length
+augmenty.character.replace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(Beta)
 
-.. automodule:: dacy.score.input_length
+.. automodule:: augmenty.character.replace
    :members:
    :undoc-members:
    :show-inheritance:
+   :exclude-members: char_replace_augmenter
+
+augmenty.character.spacing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: augmenty.character.spacing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: remove_spacing_augmenter
+
+augmenty.character.swap
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: augmenty.character.swap
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: char_swap_augmenter
 
