@@ -1,5 +1,6 @@
 """Utility functions for the package."""
 
+import augmenty
 import thinc
 import catalogue
 
@@ -80,7 +81,7 @@ def texts(
         for text in texts:
             yield nlp(text)
 
-    for doc in docs(__gen()):
+    for doc in docs(__gen(), augmenter=augmenter, nlp=nlp):
         yield doc.text
 
 
@@ -125,3 +126,5 @@ def keyboards() -> List[str]:
     >>> keyboards = augmenty.keyboards()
     """
     return list(registry.keyboards.get_all().keys())
+
+

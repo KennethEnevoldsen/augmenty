@@ -7,7 +7,7 @@ from spacy.language import Language
 from spacy.training import Example
 from spacy.tokens import Token
 
-from ..augment_utilites import make_text_from_orth
+from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("token_replace.v1")

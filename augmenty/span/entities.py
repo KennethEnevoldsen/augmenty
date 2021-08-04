@@ -18,7 +18,7 @@ from spacy.language import Language
 from spacy.training import Example
 from spacy.tokens import Token
 
-from ..augment_utilites import make_text_from_orth
+from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("ents_replace.v1")
@@ -42,6 +42,12 @@ def create_ent_augmenter(
         >>> ent_dict = {"ORG": [["Google"], ["Apple"]], "PER": [["Kenneth"], ["Lasse", "Hansen"]]}
         >>> ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)  # augment 10% of names
     """
+    return partial(
+        ent_augmenter,
+        ent_dict=ent_dict,
+        level=level,
+        replace_consistency=replace_consistency,
+    )
 
 
 def ent_augmenter(

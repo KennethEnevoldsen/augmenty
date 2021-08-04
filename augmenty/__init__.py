@@ -43,3 +43,5 @@ from .lang import (
     create_da_æøå_replace_augmenter,
     create_qwerty_da,
 )
+
+from .augment_utilities import combine_augmenters, set_doc_level
