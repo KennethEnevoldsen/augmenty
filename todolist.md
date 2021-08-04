@@ -13,6 +13,12 @@ Work order:
     - [ ] Add synonym list from DaCy
   - [ ] add to spacy-universe
   - [ ] Create an overview of augmenters and augmentation utilies
+- [ ] More robust tests
+  - [x] Add test for entities which include a parsed example
+  - [ ] Fix token swap for HEAD
+  - [ ] Apply all augs with a range of inputs to 3 longer texts in Danish and English
+- [ ] Design considerations
+  - [ ] Make wordnet use lang of pipeline of no lang is given
 
 
 Todo:
