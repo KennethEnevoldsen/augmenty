@@ -64,7 +64,8 @@ def ent_augmenter(
 
     tok_anno = example_dict["token_annotation"]
     ents = example_dict["doc_annotation"]["entities"]
-    head = np.array(tok_anno["HEAD"])
+    if example.y.has_annotation("HEAD"):
+        head = np.array(tok_anno["HEAD"])
 
     for ent in example.y.ents:
         if ent.label_ in ent_dict and random.random() < level:
@@ -89,24 +90,25 @@ def ent_augmenter(
 
         tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (len_ent - 1)
         tok_anno["SPACY"][i] = [True] * (len_ent - 1) + (
-            tok_anno["SPACY"][-1:]  # set last spacing
+            tok_anno["SPACY"][i][-1:]  # set last spacing
         )
 
-        # Handle HEAD
-        offset_ = len_ent - (ent.end - ent.start)
+        if example.y.has_annotation("HEAD"):
+            # Handle HEAD
+            offset_ = len_ent - (ent.end - ent.start)
 
-        head[head > ent.start + offset] += offset_
-        # keep first head correcting for changing entity size, set rest to refer to index of first name
-        head = np.concatenate(
-            [
-                np.array(head[: ent.start + offset]),
-                np.array(
-                    [head[ent.start + offset]] + [ent.start + offset] * (len_ent - 1)
-                ),
-                np.array(head[ent.start + offset :]),
-            ]
-        )
-        offset += offset_
+            head[head > ent.start + offset] += offset_
+            # keep first head correcting for changing entity size, set rest to refer to index of first name
+            head = np.concatenate(
+                [
+                    np.array(head[: ent.start + offset]), # before
+                    np.array(
+                        [head[ent.start + offset]] + [ent.start + offset] * (len_ent - 1)
+                    ), # the entity
+                    np.array(head[ent.start + 1 + offset :]), # after
+                ]
+            )
+            offset += offset_
 
         # Handle entities IOB tags
         if len_ent == 1:
@@ -114,7 +116,8 @@ def ent_augmenter(
         else:
             ents[i] = ["B-PER"] + ["I-PER"] * (len_ent - 2) + ["L-PER"]
 
-    tok_anno["HEAD"] = head.tolist()
+    if example.y.has_annotation("HEAD"):
+        tok_anno["HEAD"] = head.tolist()
 
     text = make_text_from_orth(example_dict)
 
