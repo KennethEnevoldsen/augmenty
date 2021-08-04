@@ -10,7 +10,7 @@ import random
 from typing import Callable, Iterable, Iterator, List
 
 
-def combine_augmenters(
+def combine(
     augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]]
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Combines a series og spaCy style augmenters.
@@ -25,9 +25,9 @@ def combine_augmenters(
     def apply_multiple_augmenters(nlp: Language, example: Example):
         examples = [example]
         for aug in augmenters:
-            examples = (e for example in examples for e in aug(nlp, example))
+            examples = [e for example in examples for e in aug(nlp, example)]
         for e in examples:
-            yield example
+            yield e
 
     return apply_multiple_augmenters
 
@@ -52,6 +52,26 @@ def set_doc_level(
         else:
             for e in augmenter(nlp, example):
                 yield e
+
+    return __augment
+
+
+def yield_original(
+    augmenter: Callable[[Language, Example], Iterator[Example]]
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Wraps and augmented such that it yields both the original and augmented example.
+
+    Args:
+        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now yields both the original and augmented example.
+    """
+
+    def __augment(nlp: Language, example: Example):
+        for e in augmenter(nlp, example):
+            yield e
+        yield example
 
     return __augment
 
