@@ -23,6 +23,7 @@ The documentation is organized in three parts:
 
    installation
    introduction
+   adding_an_augmenter
    news
 
 .. toctree::
