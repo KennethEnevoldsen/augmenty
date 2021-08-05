@@ -6,7 +6,7 @@ with open("augmenty/about.py") as f:
         if l.startswith("__version__"):
             __version__ = l.split('"')[-2]
 
-with open("README.md", encoding="utf-8") as f:
+with open("readme.md", encoding="utf-8") as f:
     long_description = f.read()
 
 with open("requirements.txt", encoding="utf-8") as f:
