@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🗯 Discussions forum
+    url: https://kennethenevoldsen/augmenty/discussions
+    about: Usage questions, general discussion and anything else that isn't a bug report or a feature request.
+  - name: 🍒 Augmenty usage guides & package references
+    url: https://kennethenevoldsen.github.io/augmenty/
+    about: Everything you need to know about augmenty and how to use it.
+  - name: 🛠 Submit a pull request
+    url: https://github.com/kennethenevoldsen/augmenty/pulls
+    about: Did you spot a mistake and know how to fix it? Feel free to submit a PR and contribute!
