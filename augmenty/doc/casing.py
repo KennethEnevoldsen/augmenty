@@ -47,10 +47,10 @@ def create_spongebob_augmenter(
         >>> import augmenty
         >>> from spacy.lang.en import English
         >>> nlp = English()
-        >>> spongebob_augmenter = augmenty.load("spongebob.v1", level=0.1)
+        >>> spongebob_augmenter = augmenty.load("spongebob.v1", level=1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, spongebob_augmenter, nlp))
-        ["a sAmPlE TeXt"]
+        ["A SaMpLe tExT"]
     """
     return partial(spongebob_augmenter, level=level)
 

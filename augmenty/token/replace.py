@@ -14,6 +14,7 @@ from ..augment_utilities import make_text_from_orth
 def create_token_replace_augmenter(
     level: float,
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    ignore_casing: bool = True,
     getter: Callable[[Token], str] = lambda token: token.pos_,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
@@ -23,6 +24,7 @@ def create_token_replace_augmenter(
         replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A dictionary of
             words and a list of their replacement (e.g. synonyms) or a dictionary denoting
             replacement based on pos tag.
+        ignore_casing: When doing the lookup should the model ignore casing? Defaults to True.
         getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
 
     Returns:
@@ -35,7 +37,11 @@ def create_token_replace_augmenter(
         >>> replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}
         >>> create_token_replace_augmenter(replace=replace, level=.10)
     """
-    return partial(token_replace_augmenter, level=level, replace=replace, getter=getter)
+    if ignore_casing is True:
+        for k in replace:
+            replace[k.lower()] = replace[k]
+            
+    return partial(token_replace_augmenter, level=level, replace=replace, getter=getter, ignore_casing=ignore_casing)
 
 
 def token_replace_augmenter(
@@ -43,10 +49,14 @@ def token_replace_augmenter(
     example: Example,
     level: float,
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    ignore_casing: bool,
     getter: Callable[[Token], str],
 ) -> Iterator[Example]:
     def __replace(t):
-        if t.text in replace and random.random() < level:
+        text = t.text
+        if ignore_casing is True:
+            text = text.lower()
+        if text in replace and random.random() < level:
             if isinstance(replace[t.text], dict):
                 pos = getter(t)
                 if pos in replace[t.text]:

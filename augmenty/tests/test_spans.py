@@ -10,7 +10,6 @@ import pytest
 @pytest.fixture()
 def nlp():
     nlp = spacy.load("en_core_web_sm")
-    nlp = English()
     return nlp
 
 
@@ -49,3 +48,29 @@ def test_create_ent_replace(nlp):
         assert (
             docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."
         )
+
+
+
+
+def test_create_ent_replace(nlp):
+    doc = Doc(
+        nlp.vocab,
+        words=["My", "name", "is", "Kenneth", "Enevoldsen"
+        ],
+        spaces=[True, True, True, True, False],
+        ents=["O", "O", "O", "B-PER", "I-PER"]
+    )
+    names = {"firstname": ["Lasse"], "lastname": ["Hansen"]}
+
+    patterns = [["firstname"], ["firstname", "lastname"], ["firstname", "firstname", "lastname"]]
+    expected = ["My name is Lasse", "My name is Lasse Hansen", "My name is Lasse Lasse Hansen"]
+
+    for p, e in zip(patterns, expected):
+
+        per_augmenter = augmenty.load(
+            "per_replace.v1", level=1.00, names=names, patterns=[p],
+        )
+
+        docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp))
+
+        assert docs[0].text == e

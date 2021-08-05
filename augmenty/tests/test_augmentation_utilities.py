@@ -9,7 +9,7 @@ def nlp():
     return nlp
 
 
-def test_combine_augmenters(nlp):
+def test_combine(nlp):
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     ent_augmenter = augmenty.load(
@@ -25,3 +25,29 @@ def test_combine_augmenters(nlp):
     augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp))
 
     assert augmented_docs[0][0].text == "spaCy"
+
+
+
+
+def test_yield_original(nlp):
+    texts = ["Augmenty is a wonderful tool for augmentation."]
+
+    aug = augmenty.load("upper_case.v1", level=1)
+
+    aug = augmenty.yield_original(aug)
+
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
+
+    assert len(augmented_docs) == 2
+
+
+
+def test_set_doc_level(nlp):
+    texts = ["Augmenty is a wonderful tool for augmentation."]
+
+    aug = augmenty.load("upper_case.v1", level=1)
+
+    aug = augmenty.set_doc_level(aug, level = 0.5)
+
+    # simply testing it it runs
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))

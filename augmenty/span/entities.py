@@ -2,13 +2,13 @@ import random
 from functools import partial
 from typing import (
     Callable,
-    DefaultDict,
     Dict,
     Iterable,
     Iterator,
     List,
     Optional,
     Union,
+    Generator
 )
 
 import numpy as np
@@ -72,7 +72,10 @@ def ent_augmenter(
             if replace_consistency and ent.text in replaced_ents:
                 new_ent = replaced_ents[ent.text]
             else:
-                new_ent = random.sample(ent_dict[ent.label_], k=1)[0]
+                if isinstance(ent_dict[ent.label_], Generator):
+                    new_ent = next(ent_dict[ent.label_])
+                else:
+                    new_ent = random.sample(ent_dict[ent.label_], k=1)[0]
                 if replace_consistency:
                     replaced_ents[ent.text] = new_ent
 
@@ -118,6 +121,8 @@ def ent_augmenter(
 
     if example.y.has_annotation("HEAD"):
         tok_anno["HEAD"] = head.tolist()
+    else:
+        tok_anno["HEAD"] = list(range(len(tok_anno["ORTH"])))
 
     text = make_text_from_orth(example_dict)
 
@@ -132,7 +137,7 @@ def create_per_replace_augmenter(
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
     patterns: List[List[str]],  # ["firstname", "firstname", "lastname"]
     level: float,
-    names_p: Optional[Dict[str, List[float]]] = None,
+    names_p: Dict[str, List[float]] = {},
     patterns_p: Optional[List[float]] = None,
     replace_consistency: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -145,8 +150,8 @@ def create_per_replace_augmenter(
             Where a pattern is a list of strings, where the string denote the list in the names
             dictionary in which to sample from.
         level (float): The proportion of PER entities to replace.
-        names_p (Optional[Dict[str, List[float]]], optional): The probability to sample each name.
-            Defaults to None, indicating equal probability for each name.
+        names_p (Dict[str, List[float]], optional): The probability to sample each name.
+            Defaults to {}, indicating equal probability for each name.
         patterns_p (Optional[List[float]], optional): The probability to sample each pattern.
             Defaults to None, indicating equal probability for each pattern.
         replace_consistency (bool, optional): Should the entity always be replaced with the same entity? Defaults to True.
@@ -156,7 +161,7 @@ def create_per_replace_augmenter(
 
     Example:
         >>> names = {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
-        >>> patterns = [["firstname], ["firstname", "Lastname"], ["firstname", "firstname", "Lastname"]]
+        >>> patterns = [["firstname"], ["firstname", "lastname"], ["firstname", "firstname", "lastname"]]
         >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1) # replace 10% of names
     """
 
@@ -172,8 +177,8 @@ def create_per_replace_augmenter(
 def generator_from_name_dict(
     names: Dict[str, List[str]],
     patterns: List[List[str]],
-    names_p: Optional[Dict[str, List[float]]] = None,
-    patterns_p: Optional[List[float]] = None,
+    names_p: Dict[str, List[float]],
+    patterns_p: Optional[List[float]],
 ):
     """
     A utility function for create_pers_replace_augmenter, which creates an infinite generator based on
@@ -185,7 +190,7 @@ def generator_from_name_dict(
     while True:
         i = np.random.choice(lp, size=1, replace=True, p=patterns_p)[0]
         yield [
-            np.random.choice(names[p], size=1, replace=True, p=names_p.get(p))[0]
+            str(np.random.choice(names[p], size=1, replace=True, p=names_p.get(p))[0])
             for p in patterns[i]
         ]
 
