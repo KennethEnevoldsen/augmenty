@@ -1,15 +1,21 @@
-Using augmenty
+Using Augmenty
 ==================
 
-Introduction text
+.. |colab_tut| image:: https://colab.research.google.com/assets/colab-badge.svg
+   :width: 200pt
+   :target: https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/main/tutorials/introduction.ipynb
 
-.. code-block:: python
+|colab_tut|
+
+For now the tutorial is only available in Google Colab.
+
+.. .. code-block:: python
    
-   import augmenty
-   # code
+..    import augmenty
+..    # code
 
-.. note::
-   a great note
+.. .. note::
+..    a great note
 
 
 .. Tutorials:
