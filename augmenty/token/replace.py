@@ -82,6 +82,7 @@ def create_wordnet_synonym_augmenter(
     try:
         from nltk import download
         download("wordnet", quiet=True, raise_on_error=True)
+        download("omw", quiet=True, raise_on_error=True)
         from nltk.corpus import wordnet
     except ModuleNotFoundError as e:
         print(e)
