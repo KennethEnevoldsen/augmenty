@@ -1,4 +1,4 @@
-<a href="https://github.com/kennethenevoldsen/augmenty"><img src="img/icon.png" width="175" height="175" align="right" /></a>
+<a href="https://github.com/kennethenevoldsen/augmenty"><img src="img/icon.png" width="200" align="right" /></a>
 # Augmenty: The cherry on top of your NLP pipeline
 
 [![PyPI version](https://badge.fury.io/py/augmenty.svg)](https://pypi.org/project/augmenty/)
@@ -16,6 +16,7 @@ Augmenty is an augmentation library based on spaCy for augmenting texts. Besides
 
 
 ## 📖 Documentation
+---
 
 | Documentation              |                                                                              |
 | -------------------------- | ---------------------------------------------------------------------------- |
@@ -30,20 +31,24 @@ Augmenty is an augmentation library based on spaCy for augmenting texts. Besides
 [Installation]: https://kennethenevoldsen.github.io/augmenty/
 [usage guides]: https://kennethenevoldsen.github.io/augmenty/
 [api reference]: https://kennethenevoldsen.github.io/augmenty/
-[news]: https://kennethenevoldsen.github.io/augmenty/
+[Augmenters]: https://kennethenevoldsen.github.io/augmenty/
+[News and changelog]: https://kennethenevoldsen.github.io/augmenty/
 [List of augmenters]: https://github.com/kennethenevoldsen/augmenty/augmenters.md
 
 ## 💬 Where to ask questions
+---
 
-| Type                            | Platforms                               |
+| Type                            |                                 |
 | ------------------------------- | --------------------------------------- |
 | 🚨 **Bug Reports**              | [GitHub Issue Tracker]                  |
 | 🎁 **Feature Requests & Ideas** | [GitHub Issue Tracker]                  |
 | 👩‍💻 **Usage Questions**          | [GitHub Discussions]                    |
 | 🗯 **General Discussion**       | [GitHub Discussions]                    |
+| 🍒 **Adding an Augmenter**       | [Adding an augmenter]                    |
 
 [github issue tracker]: https://github.com/kennethenevoldsen/augmenty/issues
 [github discussions]: https://github.com/kennethenevoldsen/augmenty/discussions
+[Adding an augmenter]: https://github.com/kennethenevoldsen/augmenty/discussions
 
 
 # 🤔 FAQ
@@ -122,7 +127,7 @@ python -m pytest--cov=.
 
  <br /> 
 
-# Citing this work
+# 🎓 Citing this work
 
 If you use this library in your research, please cite:
 
