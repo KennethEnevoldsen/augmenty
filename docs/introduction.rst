@@ -7,7 +7,7 @@ Using Augmenty
 
 |colab_tut|
 
-For now the tutorial is only available in Google Colab.
+For now the tutorial is only available in Google Colab. But will soon be available here as well.
 
 .. .. code-block:: python
    
