@@ -1,3 +1,5 @@
+from .about import __version__, __download_url__, __title__
+
 from .util import augmenters, docs, texts, keyboards, load
 
 # import augmenters
