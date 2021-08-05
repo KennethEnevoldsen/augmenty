@@ -1,0 +1,30 @@
+{
+    "wordnet_synonym.v1": {
+        "Data": {
+            "author": "Miller",
+            "year": "1998",
+            "link": "https://www.google.com/books?hl=da&lr=&id=Rehu8OOzMIMC&oi=fnd&pg=PR11&dq=WordNet:+An+electronic+lexical+database&ots=IsieQmWUg8&sig=06asxxcQ1I3i9C1TcEcz7bv62Kw"
+        },
+        "Package": {
+            "author": "Steven",
+            "year": "2006",
+            "link": "https://www.nltk.org"
+        },
+        "Usage": [
+            {
+                "author": "Wei and Zau (2019)",
+                "year": "2019",
+                "link": "https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&utm_medium=email&utm_source=Revue%20newsletter"
+            }
+        ]
+    }
+    "token_swap.v1": {
+        "Usage": [
+            {
+                "author": "Wei and Zau (2019)",
+                "year": "2019",
+                "link": "https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&utm_medium=email&utm_source=Revue%20newsletter"
+            }
+        ]
+    }
+}
