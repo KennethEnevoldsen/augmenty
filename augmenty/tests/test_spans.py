@@ -50,27 +50,48 @@ def test_create_ent_replace(nlp):
         )
 
 
-
-
 def test_create_ent_replace(nlp):
     doc = Doc(
         nlp.vocab,
-        words=["My", "name", "is", "Kenneth", "Enevoldsen"
-        ],
+        words=["My", "name", "is", "Kenneth", "Enevoldsen"],
         spaces=[True, True, True, True, False],
-        ents=["O", "O", "O", "B-PER", "I-PER"]
+        ents=["O", "O", "O", "B-PER", "I-PER"],
     )
     names = {"firstname": ["Lasse"], "lastname": ["Hansen"]}
 
-    patterns = [["firstname"], ["firstname", "lastname"], ["firstname", "firstname", "lastname"]]
-    expected = ["My name is Lasse", "My name is Lasse Hansen", "My name is Lasse Lasse Hansen"]
+    patterns = [
+        ["firstname"],
+        ["firstname", "lastname"],
+        ["firstname", "firstname", "lastname"],
+    ]
+    expected = [
+        "My name is Lasse",
+        "My name is Lasse Hansen",
+        "My name is Lasse Lasse Hansen",
+    ]
 
     for p, e in zip(patterns, expected):
 
         per_augmenter = augmenty.load(
-            "per_replace.v1", level=1.00, names=names, patterns=[p],
+            "per_replace.v1",
+            level=1.00,
+            names=names,
+            patterns=[p],
         )
 
         docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp))
 
         assert docs[0].text == e
+
+
+def test_create_ent_format_augmenter(nlp):
+    abbreviate = lambda token: token.text[0] + "."
+
+    augmenter = augmenty.load(
+        "ents_format.v1", reordering=[-1, None], formatter=[None, abbreviate], level=1.00
+    )
+    texts = ["my name is Kenneth Enevoldsen"]
+    aug_text = "my name is Enevoldsen K."
+
+    aug_texts = list(augmenty.texts(texts, augmenter, nlp))
+    assert aug_texts[0] == aug_text

@@ -1,15 +1,6 @@
 import random
 from functools import partial
-from typing import (
-    Callable,
-    Dict,
-    Iterable,
-    Iterator,
-    List,
-    Optional,
-    Union,
-    Generator
-)
+from typing import Callable, Dict, Iterable, Iterator, List, Optional, Union, Generator
 
 import numpy as np
 
@@ -104,11 +95,12 @@ def ent_augmenter(
             # keep first head correcting for changing entity size, set rest to refer to index of first name
             head = np.concatenate(
                 [
-                    np.array(head[: ent.start + offset]), # before
+                    np.array(head[: ent.start + offset]),  # before
                     np.array(
-                        [head[ent.start + offset]] + [ent.start + offset] * (len_ent - 1)
-                    ), # the entity
-                    np.array(head[ent.start + 1 + offset :]), # after
+                        [head[ent.start + offset]]
+                        + [ent.start + offset] * (len_ent - 1)
+                    ),  # the entity
+                    np.array(head[ent.start + 1 + offset :]),  # after
                 ]
             )
             offset += offset_
@@ -117,7 +109,11 @@ def ent_augmenter(
         if len_ent == 1:
             ents[i] = ["U-" + ent.label_]
         else:
-            ents[i] = ["B-" + ent.label_] + ["I-" + ent.label_] * (len_ent - 2) + ["L-" + ent.label_]
+            ents[i] = (
+                ["B-" + ent.label_]
+                + ["I-" + ent.label_] * (len_ent - 2)
+                + ["L-" + ent.label_]
+            )
 
     if example.y.has_annotation("HEAD"):
         tok_anno["HEAD"] = head.tolist()
@@ -200,7 +196,7 @@ def create_ent_format_augmenter(
     reordering: List[Union[int, None]],
     formatter: List[Union[Callable[[Token], str], None]],
     level: float,
-    ent_types: Optional[Iterable[str]] = None,
+    ent_types: Optional[List[str]] = None,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.
 
@@ -213,7 +209,7 @@ def create_ent_format_augmenter(
         formatter (List[Union[Callable[[Token], str], None]]): A list of function taking in a spaCy Token returning the reformatted str.
             E.g. the function `lambda token: token.text[0] + "."` would abbreviate the token and add punctuation. None corresponds to no augmentation.
         level (float): The probability of an entities being augmented.
-        ent_types (Optional[Iterable[str]], optional):  The entity types which should be augmented. Defaults to None.
+        ent_types (Optional[Iterable[str]], optional):  The entity types which should be augmented. Defaults to None, indicating all entity types.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
@@ -223,23 +219,27 @@ def create_ent_format_augmenter(
         >>> import spacy
         >>> nlp = spacy.load("en_core_web_sm")
         >>> abbreviate = lambda token: token.text[0] + "."
-        >>> augmenter = augmenty.load("ents_format.v1", reordering = [-1, None], formatter=[None, abbreviate])
+        >>> augmenter = augmenty.load("ents_format.v1", reordering = [-1, None], formatter=[None, abbreviate], level=1, ent_types=["PER"])
         >>> texts = ["my name is Kenneth Enevoldsen"]
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["my name is Enevoldsen K."]
     """
+    return partial(
+        ent_format_augmenter,
+        reordering=reordering,
+        formatter=formatter,
+        level=level,
+        ent_types=ent_types,
+    )
 
 
 def ent_format_augmenter(
     nlp: Language,
     example: Example,
-    reordering: List[
-        Union[int, None]
-    ],  # e.g. [-1, None] -1 == last name, None == the rest, or [3, 1, 2] last name, first name, middle name.
-    # if the name is only two long the 3 is ignored. Adding multiple Nones to a reordering will cause problems.
+    reordering: List[Union[int, None]],
     formatter: List[Union[Callable[[Token], str], None]],
     level: float,
-    ent_types: Optional[Iterable[str]] = None,  # entity types it should be applied to
+    ent_types: Optional[List[str]] = None,
 ) -> Iterator[Example]:
     example_dict = example.to_dict()
 
@@ -251,20 +251,20 @@ def ent_format_augmenter(
 
             # reorder tokens
             new_ent = []
-            ent_ = [e.text for e in ent]
+            ent_ = [e for e in ent]
             for i in reordering:
-                if i >= len(ent):
+                if i is not None and i >= len(ent):
                     continue
                 new_ent += ent_ if i is None else [ent_.pop(i)]
 
             # format tokens
-            new_ent_ = [e if f is None else f(e) for e, f in zip(new_ent, formatter)]
+            new_ent_ = [e.text if f is None else f(e) for e, f in zip(new_ent, formatter)]
 
             if len(new_ent_) < len(new_ent):
                 new_ent_ += new_ent[len(new_ent_) :]
 
-            tok_anno["ORTH"][ent.start : ent.end] = new_ent
-            tok_anno["LEMMA"][ent.start : ent.end] = new_ent
+            tok_anno["ORTH"][ent.start : ent.end] = new_ent_
+            tok_anno["LEMMA"][ent.start : ent.end] = new_ent_
 
     text = make_text_from_orth(example_dict)
 
