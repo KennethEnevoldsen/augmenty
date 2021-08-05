@@ -80,6 +80,8 @@ def create_wordnet_synonym_augmenter(
         >>> english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1, lang="en")
     """
     try:
+        from nltk import download
+        download("wordnet", quiet=True, raise_on_error=True)
         from nltk.corpus import wordnet
     except ModuleNotFoundError as e:
         print(e)
