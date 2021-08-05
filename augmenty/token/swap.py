@@ -2,6 +2,8 @@ import random
 from functools import partial
 from typing import Iterator, Callable
 
+import numpy as np
+
 import spacy
 from spacy.language import Language
 from spacy.training import Example
@@ -28,7 +30,12 @@ def create_token_swap_augmenter(
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
-    return partial(token_swap_augmenter, level=level, respect_eos=respect_eos, respect_ents=respect_ents)
+    return partial(
+        token_swap_augmenter,
+        level=level,
+        respect_eos=respect_eos,
+        respect_ents=respect_ents,
+    )
 
 
 def token_swap_augmenter(
@@ -57,7 +64,7 @@ def token_swap_augmenter(
             fb = random.sample([1, -1], k=1)[0]
 
             min_i = i + fb if 0 < i + fb < n_tok else i - fb
-            
+
             if min_i in is_swapped:
                 continue
 
@@ -103,6 +110,13 @@ def token_swap_augmenter(
             for k in tok_anno:
                 if k in ["SENT_START", "SPACY"]:
                     continue
+                if k == "HEAD":
+                    if example.y.has_annotation("HEAD"):
+                        head = np.array(tok_anno[k])
+                        head[head == i], head[head == min_i] = min_i, i
+                        tok_anno[k] = head
+                    else:
+                        continue
                 tok_anno[k][i], tok_anno[k][min_i] = tok_anno[k][min_i], tok_anno[k][i]
 
             if respect_ents is True and swap_ents is True:
