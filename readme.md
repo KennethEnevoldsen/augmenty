@@ -34,17 +34,16 @@ For more detailed instructions on installing augmenty, including specific langua
 | Documentation              |                                                                              |
 | -------------------------- | ---------------------------------------------------------------------------- |
 | 📚 **[Usage Guides]**      | Guides and instruction on how to use augmenty and its features.              |
-| 🍒 **[Augmenters]** | Contains a full list of current and planned augmenters in augmenty.         |
 | 📰 **[News and changelog]** | New additions, changes and version history.                                 | 
 | 🎛 **[API Reference]**      | The detailed reference for augmenty's API. Including function documentation |
-
+<!-- | 🍒 **[Augmenters]** | Contains a full list of current and planned augmenters in augmenty.         | -->
 <!-- | ⭐️ **[augmenty 101]**        | New to spaCy? Here's everything you need to know!              | -->
 
 [usage guides]: https://kennethenevoldsen.github.io/augmenty/
 [api reference]: https://kennethenevoldsen.github.io/augmenty/
-[Augmenters]: https://kennethenevoldsen.github.io/augmenty/
-[News and changelog]: https://kennethenevoldsen.github.io/augmenty/
-[List of augmenters]: https://github.com/kennethenevoldsen/augmenty/augmenters.md
+<!-- [Augmenters]: https://kennethenevoldsen.github.io/augmenty/ -->
+[News and changelog]: hhttps://kennethenevoldsen.github.io/augmenty/news.html
+<!-- [List of augmenters]: https://github.com/kennethenevoldsen/augmenty/augmenters.md -->
 
 ## 💬 Where to ask questions
 
