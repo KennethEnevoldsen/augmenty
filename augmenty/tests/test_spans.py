@@ -9,17 +9,26 @@ import pytest
 
 @pytest.fixture()
 def nlp():
-    nlp = spacy.load("en_core_web_sm") 
+    nlp = spacy.load("en_core_web_sm")
     nlp = English()
     return nlp
 
 
 def test_create_ent_replace(nlp):
-    for nlp_ in [English(), nlp]: # with and without a parser
+    for nlp_ in [English(), nlp]:  # with and without a parser
         doc = Doc(
             nlp_.vocab,
-            words=["Augmenty", "is", "a", "wonderful", "tool", "for", "augmentation", "."],
-            spaces=[True] * 6 + [False]*2,
+            words=[
+                "Augmenty",
+                "is",
+                "a",
+                "wonderful",
+                "tool",
+                "for",
+                "augmentation",
+                ".",
+            ],
+            spaces=[True] * 6 + [False] * 2,
             ents=["B-ORG"] + ["O"] * 7,
         )
 
@@ -37,4 +46,6 @@ def test_create_ent_replace(nlp):
 
         docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_))
 
-        assert docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."
+        assert (
+            docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."
+        )

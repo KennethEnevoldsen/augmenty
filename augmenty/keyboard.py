@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 from .util import registry
 
+
 class Keyboard(BaseModel):
     """A Pydantic dataclass object for constructing Keyboard setup.
 
@@ -108,9 +109,7 @@ class Keyboard(BaseModel):
         return {k: self.get_neighbours(k, distance=distance) for k in self.all_keys()}
 
     @staticmethod
-    def from_registry(entry: str, shift_distance: int=3) -> "Keyboard":
-        """Creates a keyboard from a registry
-        """
+    def from_registry(entry: str, shift_distance: int = 3) -> "Keyboard":
+        """Creates a keyboard from a registry"""
         array = registry.keyboards.get(entry)()
         return Keyboard(keyboard_array=array, shift_distance=shift_distance)
-

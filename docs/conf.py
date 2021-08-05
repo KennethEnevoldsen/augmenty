@@ -23,7 +23,6 @@ from augmenty.about import __version__
 # -- Project information -----------------------------------------------------
 
 project = "augmenty"
-copyright = "2021, Kenneth Enevoldsen"
 author = "Kenneth Enevoldsen"
 
 # The full version, including alpha/beta/rc tags

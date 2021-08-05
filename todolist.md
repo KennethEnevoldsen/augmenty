@@ -4,12 +4,8 @@ Work order:
   - [x] check that documentation completes
   - [x] Write introduction/tutorials
   - [ ] Set the view to view in github instead of on the website
-- [x] create tmp logo
-- [ ] create actual logo
 - [ ] PR to spacy w. augmenters
-- [x] set up GitHub w. secrets
-  - [x] fix main -> master
-- [ ] publish
+- [x] publish
   - [ ] create issue DaCy to use augmenty and textdescriptives
     - [ ] Add synonym list from DaCy
   - [ ] add to spacy-universe

@@ -18,11 +18,10 @@ class registry(thinc.registry):
     keyboards = catalogue.create("augmenty", "keyboards", entry_points=True)
 
 
-
 def docs(
     docs: Iterable[Doc],
     augmenter: Callable[[Language, Example], Iterator[Example]],
-    nlp: Language
+    nlp: Language,
 ) -> Iterator[Doc]:
     """Augments an iterable of spaCy Doc
 
@@ -30,7 +29,7 @@ def docs(
         docs (Iterable[Doc]): A iterable of spaCy Docs
         augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter
         nlp (Language): A spaCy language pipeline.
-        
+
     Return:
         Iterator[Doc]: An iterator of the augmented Docs.
 
@@ -55,11 +54,10 @@ def docs(
             yield e.y
 
 
-
 def texts(
     texts: Iterable[str],
     augmenter: Callable[[Language, Example], Iterator[Example]],
-    nlp: Language
+    nlp: Language,
 ) -> Iterable[str]:
     """Augments an list of texts
 
@@ -67,7 +65,7 @@ def texts(
         texts (Iterable[str]): A iterable of strings
         augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter
         nlp (Language): A spaCy language pipeline.
-        
+
     Return:
         Iterator[str]: An iterator of the augmented texts.
 
@@ -77,6 +75,7 @@ def texts(
     """
     if isinstance(texts, str):
         texts = [texts]
+
     def __gen() -> Iterable[Doc]:
         for text in texts:
             yield nlp(text)
@@ -116,6 +115,7 @@ def load(augmenter=str, **kwargs) -> Callable:
     aug = spacy.registry.augmenters.get(augmenter)
     return aug(**kwargs)
 
+
 def keyboards() -> List[str]:
     """A utility function to get an overview of all keyboards
 
@@ -126,5 +126,3 @@ def keyboards() -> List[str]:
     >>> keyboards = augmenty.keyboards()
     """
     return list(registry.keyboards.get_all().keys())
-
-

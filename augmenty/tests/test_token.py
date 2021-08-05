@@ -9,6 +9,7 @@ import pytest
 
 from .books import BOOKS
 
+
 @pytest.fixture()
 def nlp():
     nlp = spacy.load("en_core_web_sm")
@@ -83,7 +84,6 @@ def test_create_wordnet_synonym_augmenter(nlp):
 
     docs = nlp.pipe(BOOKS)
     docs = list(augmenty.docs(docs, augmenter=aug, nlp=nlp))
-
 
 
 def test_create_grundtvigian_spacing_augmenter(nlp):

@@ -54,7 +54,9 @@ def test_create_keystroke_error_augmenter():
     text = "q"
 
     nlp = Danish()
-    aug = spacy.registry.augmenters.get("keystroke_error.v1")(level=1, keyboard="da_qwerty.v1")
+    aug = spacy.registry.augmenters.get("keystroke_error.v1")(
+        level=1, keyboard="da_qwerty.v1"
+    )
     doc = nlp(text)
 
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)

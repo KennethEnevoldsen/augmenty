@@ -58,7 +58,7 @@ def create_conditional_token_casing_augmenter(
         raise ValueError(
             "You need to specify the desired casing the token should get either using lower=True or upper=True."
         )
-    if lower == True:
+    if lower is True:
         upper = False
     return partial(conditional_casing_augmenter, level=level, upper=upper, conditional=conditional)
 
