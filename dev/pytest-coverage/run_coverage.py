@@ -9,7 +9,7 @@ from pathlib import Path
 test_failed = False
 try:
     grepOut = subprocess.check_output(
-        "pytest --cov=dacy --cov-config=dev/pytest-coverage/.coveragerc --cov-report term-missing",
+        "pytest --cov=augmenty --cov-config=dev/pytest-coverage/.coveragerc --cov-report term-missing",
         shell=True,
     )
     output = grepOut.decode("utf-8")
