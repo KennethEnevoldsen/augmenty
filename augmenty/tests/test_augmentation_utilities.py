@@ -24,4 +24,4 @@ def test_combine_augmenters(nlp):
     docs = nlp.pipe(texts)
     augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp))
 
-    assert augmented_docs[0][0] == "spaCy"
+    assert augmented_docs[0][0].text == "spaCy"
