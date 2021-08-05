@@ -214,13 +214,13 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">DefaultDict</span><span class="p">,</span>
     <span class="n">Dict</span><span class="p">,</span>
     <span class="n">Iterable</span><span class="p">,</span>
     <span class="n">Iterator</span><span class="p">,</span>
     <span class="n">List</span><span class="p">,</span>
     <span class="n">Optional</span><span class="p">,</span>
     <span class="n">Union</span><span class="p">,</span>
+    <span class="n">Generator</span>
 <span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -284,7 +284,10 @@
             <span class="k">if</span> <span class="n">replace_consistency</span> <span class="ow">and</span> <span class="n">ent</span><span class="o">.</span><span class="n">text</span> <span class="ow">in</span> <span class="n">replaced_ents</span><span class="p">:</span>
                 <span class="n">new_ent</span> <span class="o">=</span> <span class="n">replaced_ents</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">new_ent</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">],</span> <span class="n">Generator</span><span class="p">):</span>
+                    <span class="n">new_ent</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_ent</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">replace_consistency</span><span class="p">:</span>
                     <span class="n">replaced_ents</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
 
@@ -330,6 +333,8 @@
 
     <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">):</span>
         <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tok_anno</span><span class="p">[</span><span class="s2">"ORTH"</span><span class="p">])))</span>
 
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
 
@@ -344,7 +349,7 @@
     <span class="p">],</span>  <span class="c1"># {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}</span>
     <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>  <span class="c1"># ["firstname", "firstname", "lastname"]</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">names_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
@@ -357,8 +362,8 @@
 <span class="sd">            Where a pattern is a list of strings, where the string denote the list in the names</span>
 <span class="sd">            dictionary in which to sample from.</span>
 <span class="sd">        level (float): The proportion of PER entities to replace.</span>
-<span class="sd">        names_p (Optional[Dict[str, List[float]]], optional): The probability to sample each name.</span>
-<span class="sd">            Defaults to None, indicating equal probability for each name.</span>
+<span class="sd">        names_p (Dict[str, List[float]], optional): The probability to sample each name.</span>
+<span class="sd">            Defaults to {}, indicating equal probability for each name.</span>
 <span class="sd">        patterns_p (Optional[List[float]], optional): The probability to sample each pattern.</span>
 <span class="sd">            Defaults to None, indicating equal probability for each pattern.</span>
 <span class="sd">        replace_consistency (bool, optional): Should the entity always be replaced with the same entity? Defaults to True.</span>
@@ -368,7 +373,7 @@
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; names = {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}</span>
-<span class="sd">        &gt;&gt;&gt; patterns = [["firstname], ["firstname", "Lastname"], ["firstname", "firstname", "Lastname"]]</span>
+<span class="sd">        &gt;&gt;&gt; patterns = [["firstname"], ["firstname", "lastname"], ["firstname", "firstname", "lastname"]]</span>
 <span class="sd">        &gt;&gt;&gt; per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1) # replace 10% of names</span>
 <span class="sd">    """</span>
 
@@ -384,8 +389,8 @@
 <span class="k">def</span> <span class="nf">generator_from_name_dict</span><span class="p">(</span>
     <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
-    <span class="n">names_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
+    <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
 <span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    A utility function for create_pers_replace_augmenter, which creates an infinite generator based on</span>
@@ -397,7 +402,7 @@
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">patterns_p</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">yield</span> <span class="p">[</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">names_p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">names_p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="p">]</span>
 

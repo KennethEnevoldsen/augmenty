@@ -226,6 +226,7 @@
 <span class="k">def</span> <span class="nf">create_token_replace_augmenter</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
+    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
@@ -235,6 +236,7 @@
 <span class="sd">        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A dictionary of</span>
 <span class="sd">            words and a list of their replacement (e.g. synonyms) or a dictionary denoting</span>
 <span class="sd">            replacement based on pos tag.</span>
+<span class="sd">        ignore_casing: When doing the lookup should the model ignore casing? Defaults to True.</span>
 <span class="sd">        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.</span>
 
 <span class="sd">    Returns:</span>
@@ -247,7 +249,11 @@
 <span class="sd">        &gt;&gt;&gt; replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}</span>
 <span class="sd">        &gt;&gt;&gt; create_token_replace_augmenter(replace=replace, level=.10)</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">token_replace_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
+            <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">token_replace_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">token_replace_augmenter</span><span class="p">(</span>
@@ -255,10 +261,14 @@
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
+    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="ow">in</span> <span class="n">replace</span> <span class="ow">and</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">replace</span> <span class="ow">and</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="n">pos</span> <span class="o">=</span> <span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">]:</span>

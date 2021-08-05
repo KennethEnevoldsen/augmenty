@@ -259,10 +259,10 @@
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
 <span class="sd">        &gt;&gt;&gt; from spacy.lang.en import English</span>
 <span class="sd">        &gt;&gt;&gt; nlp = English()</span>
-<span class="sd">        &gt;&gt;&gt; spongebob_augmenter = augmenty.load("spongebob.v1", level=0.1)</span>
+<span class="sd">        &gt;&gt;&gt; spongebob_augmenter = augmenty.load("spongebob.v1", level=1)</span>
 <span class="sd">        &gt;&gt;&gt; texts = ["A sample text"]</span>
 <span class="sd">        &gt;&gt;&gt; list(augmenty.texts(texts, spongebob_augmenter, nlp))</span>
-<span class="sd">        ["a sAmPlE TeXt"]</span>
+<span class="sd">        ["A SaMpLe tExT"]</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">spongebob_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 
