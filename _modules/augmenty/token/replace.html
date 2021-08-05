@@ -291,6 +291,8 @@
 <span class="sd">        &gt;&gt;&gt; english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1, lang="en")</span>
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">nltk</span> <span class="k">import</span> <span class="n">download</span>
+        <span class="n">download</span><span class="p">(</span><span class="s2">"wordnet"</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">wordnet</span>
     <span class="k">except</span> <span class="n">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
