@@ -2,7 +2,6 @@
 # Augmenty: The cherry on top of your NLP pipeline
 
 [![PyPI version](https://badge.fury.io/py/augmenty.svg)](https://pypi.org/project/augmenty/)
-<!-- [![pip downloads](https://img.shields.io/pypi/dm/augmenty.svg)](https://pypi.org/project/augmenty/) -->
 [![python version](https://img.shields.io/badge/Python-%3E=3.7-blue)](https://github.com/kennethenevoldsen/augmenty)
 [![Code style: black](https://img.shields.io/badge/Code%20Style-Black-black)](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 [![spacy](https://img.shields.io/badge/built%20with-spaCy-09a3d5.svg)](https://spacy.io)
@@ -11,6 +10,7 @@
 ![github coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/KennethEnevoldsen/2d5c14e682c3560240fe05cc7c9f4d2d/raw/badge-augmenty-pytest-coverage.json)
 [![CodeFactor](https://www.codefactor.io/repository/github/kennethenevoldsen/augmenty/badge)](https://www.codefactor.io/repository/github/kennethenevoldsen/augmenty)
 <!-- [![Demo](https://img.shields.io/badge/Try%20the-Demo-important)](https://huggingface.co/chcaa/da_augmenty_medium_trf?text=augmenty+er+en+pipeline+til+anvendelse+af+dansk+sprogteknologi+lavet+af+K.+Enevoldsen%2C+L.+Hansen+og+K.+Nielbo+fra+Center+for+Humanities+Computing.) -->
+<!-- [![pip downloads](https://img.shields.io/pypi/dm/augmenty.svg)](https://pypi.org/project/augmenty/) -->
 
 
 Augmenty is an augmentation library based on spaCy for augmenting texts. Besides a wide array of highly flexible augmenters, Augmenty provides a series of tools for working with augmenters, including combining and moderating augmenters. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the assigned labels under the augmentation, thus making many of the augmenters valid for training more than simply sentence classification.
