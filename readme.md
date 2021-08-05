@@ -91,7 +91,7 @@ If you want to check code coverage you can run the following:
 ```
 pip install pytest-cov
 
-python -m pytest--cov=.
+python -m pytest --cov=.
 ```
 
 
