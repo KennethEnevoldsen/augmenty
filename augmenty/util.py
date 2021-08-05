@@ -1,6 +1,5 @@
 """Utility functions for the package."""
 
-import augmenty
 import thinc
 import catalogue
 
