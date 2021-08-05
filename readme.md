@@ -1,4 +1,4 @@
-<a href="https://github.com/kennethenevoldsen/augmenty"><img src="img/icon.png" width="200" align="right" /></a>
+<a href="https://github.com/kennethenevoldsen/augmenty"><img src="https://github.com/KennethEnevoldsen/augmenty/blob/master/img/icon.png?raw=true" width="200" align="right" /></a>
 # Augmenty: The cherry on top of your NLP pipeline
 
 [![PyPI version](https://badge.fury.io/py/augmenty.svg)](https://pypi.org/project/augmenty/)
@@ -106,11 +106,11 @@ python -m pytest--cov=.
 <details>
   <summary>Does augmenty run on X?</summary>
 
-  augmenty is intended to run on all major OS, this includes Windows (latest version), MacOS (Catalina) and the latest version of Linux (Ubuntu). Below you can see if augmenty passes its test suite for the system of interest. The first one indicated Linux. Please note these are only the systems augmenty is being actively tested on, if you run on a similar system (e.g. an earlier version of Linux) augmenty will likely run there as well.
+  augmenty is intended to run on all major OS, this includes Windows (latest version), MacOS (Catalina) and the latest version of Linux (Ubuntu). Below you can see if augmenty passes its test suite for the system of interest. Please note these are only the systems augmenty is being actively tested on, if you run on a similar system (e.g. an earlier version of Linux) augmenty will likely run there as well, if not please create an issue.
 
 | Operating System | Status                                                                                                                                                                                                                  |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ubuntu (Latest)  | [![github actions pytest ubuntu](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml)     |
+| Ubuntu/Linux (Latest)  | [![github actions pytest ubuntu](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml)     |
 | MacOS (Catalina) | [![github actions pytest catalina](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_mac_catalina.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_mac_catalina.yml) |
 | Windows (Latest) | [![github actions pytest windows](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_windows.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_windows.yml)            |
 
@@ -137,7 +137,31 @@ python -m pytest--cov=.
   
 </details>
 
- <br /> 
+
+<br /> 
+
+<details>
+  <summary>Many of these augmenters are completely useless for training?</summary>
+
+  That is true, some of the augmenters are rarely something you would augment with during training. For instance randomly adding or removing spacing. However, augmentation can just as well be used to test whether a model is robust to certain variations.
+  
+</details>
+
+<br /> 
+
+
+
+<br /> 
+
+<details>
+  <summary>Can I use augmenty without using spacy?</summary>
+
+  Indeed augmenty contains convenience functions for applying augmentation directly to raw texts. Check out the [getting started guide](https://kennethenevoldsen.github.io/augmenty/introduction.html) to learn how. 
+  
+</details>
+
+<br /> 
+
 
 # 🎓 Citing this work
 
