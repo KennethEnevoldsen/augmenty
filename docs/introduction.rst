@@ -2,8 +2,8 @@ Using Augmenty
 ==================
 
 .. |colab_tut| image:: https://colab.research.google.com/assets/colab-badge.svg
-   :width: 200pt
-   :target: https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/main/tutorials/introduction.ipynb
+   :width: 180pt
+   :target: https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/master/tutorials/introduction.ipynb
 
 |colab_tut|
 
