@@ -9,6 +9,7 @@
 [![github actions docs](https://github.com/kennethenevoldsen/augmenty/actions/workflows/documentation.yml/badge.svg)](https://kennethenevoldsen.github.io/augmenty/)
 ![github coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/KennethEnevoldsen/2d5c14e682c3560240fe05cc7c9f4d2d/raw/badge-augmenty-pytest-coverage.json)
 [![CodeFactor](https://www.codefactor.io/repository/github/kennethenevoldsen/augmenty/badge)](https://www.codefactor.io/repository/github/kennethenevoldsen/augmenty)
+[![pip downloads](https://img.shields.io/pypi/dm/augmenty.svg)](https://pypi.org/project/augmenty/)
 <!-- [![Demo](https://img.shields.io/badge/Try%20the-Demo-important)](https://huggingface.co/chcaa/da_augmenty_medium_trf?text=augmenty+er+en+pipeline+til+anvendelse+af+dansk+sprogteknologi+lavet+af+K.+Enevoldsen%2C+L.+Hansen+og+K.+Nielbo+fra+Center+for+Humanities+Computing.) -->
 
 
