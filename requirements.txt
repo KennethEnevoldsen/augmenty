@@ -7,7 +7,7 @@ pydantic>=1.8.2,<1.9.0
 nltk >= 3.6.2,<3.7.0
 
 # Danish
-dacy >= 1.1.0,<2.0.0
+dacy >= 1.1.1,<2.0.0
 
 
 # testing
