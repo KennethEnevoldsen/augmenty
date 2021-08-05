@@ -35,8 +35,8 @@ def token_swap_augmenter(
     nlp: Language,
     example: Example,
     level: float,
-    respect_ents: bool = True,
-    respect_eos: bool = True,
+    respect_ents: bool,
+    respect_eos: bool,
 ) -> Iterator[Example]:
 
     example_dict = example.to_dict()
