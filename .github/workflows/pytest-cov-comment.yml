@@ -38,7 +38,7 @@ jobs:
     - name: Create the Badge
       uses: schneegans/dynamic-badges-action@v1.0.0
       with:
-        auth: ${{ secrets.PYTEST_COVERAGE_COMMENT }}
+        auth: ${{ secrets.PYTEST_COVERAGE }}
         gistID: 2d5c14e682c3560240fe05cc7c9f4d2d
         filename: badge-augmenty-pytest-coverage.json
         label: Coverage
