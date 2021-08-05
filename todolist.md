@@ -2,12 +2,13 @@ Work order:
 
 - [x] create documentation
   - [x] check that documentation completes
-  - [ ] Write introduction/tutorials
+  - [x] Write introduction/tutorials
   - [ ] Set the view to view in github instead of on the website
-- [ ] create logo
+- [x] create tmp logo
+- [ ] create actual logo
 - [ ] PR to spacy w. augmenters
-- [ ] set up GitHub w. secrets
-  - [ ] fix main -> master
+- [x] set up GitHub w. secrets
+  - [x] fix main -> master
 - [ ] publish
   - [ ] create issue DaCy to use augmenty and textdescriptives
     - [ ] Add synonym list from DaCy
@@ -19,6 +20,12 @@ Work order:
   - [ ] Apply all augs with a range of inputs to 3 longer texts in Danish and English
 - [ ] Design considerations
   - [ ] Make wordnet use lang of pipeline of no lang is given
+- [ ] Add description of what is needed to add submit a new augmenter
+  - [ ] A create function for the augmenter
+    - [ ] which has the documentation, including at least one example
+  - [ ] Adding it to spacy's registry using the registry decorator
+  - [ ] Added a short description of it to the overview page
+  - [ ] Adding at least one test of the function
 
 
 Todo:
