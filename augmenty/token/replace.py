@@ -1,6 +1,6 @@
 import random
 from functools import partial
-from typing import Dict, Iterator, Callable, List, Union
+from typing import Dict, Iterator, Callable, List, Optional, Union
 
 import spacy
 from spacy.language import Language
@@ -74,13 +74,15 @@ def token_replace_augmenter(
 
 @spacy.registry.augmenters("wordnet_synonym.v1")
 def create_wordnet_synonym_augmenter(
-    level: float, lang: str, getter: Callable = lambda token: token.pos_
+    level: float, lang: Optional[str] = None, getter: Callable = lambda token: token.pos_
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
     Args:
-        lang (str): Language supplied a ISO 639-1 language code. Possible langauge include
-        "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
+        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None, 
+            in which case the lang is based on the language of the spacy nlp pipeline used.
+            Possible language codes include:
+            "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
         level (float): Probability to replace token given that it is in synonym dictionary.
 
     Returns:
@@ -132,9 +134,12 @@ def create_wordnet_synonym_augmenter(
         nlp: Language,
         example: Example,
         level: float,
-        lang: str,
+        lang: Optional[str],
         getter: Callable,
     ) -> Iterator[Example]:
+        if lang is None:
+            lang = nlp.lang
+
         def __replace(t):
             word = t.text
             if random.random() < level and getter(t) in upos_wn_dict:
