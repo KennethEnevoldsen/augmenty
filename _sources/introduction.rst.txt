@@ -2,12 +2,12 @@ Using Augmenty
 ==================
 
 .. |colab_tut| image:: https://colab.research.google.com/assets/colab-badge.svg
-   :width: 200pt
-   :target: https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/main/tutorials/introduction.ipynb
+   :width: 180pt
+   :target: https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/master/tutorials/introduction.ipynb
 
 |colab_tut|
 
-For now the tutorial is only available in Google Colab.
+For now the tutorial is only available in Google Colab. But will soon be available here as well.
 
 .. .. code-block:: python
    
