@@ -149,9 +149,6 @@ python -m pytest --cov=.
 <br /> 
 
 
-
-<br /> 
-
 <details>
   <summary>Can I use augmenty without using spacy?</summary>
 
@@ -162,7 +159,7 @@ python -m pytest --cov=.
 <br /> 
 
 
-### 🎓 Citing this work
+## 🎓 Citing this work
 
 If you use this library in your research, please cite:
 
