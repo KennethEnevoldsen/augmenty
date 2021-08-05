@@ -30,7 +30,6 @@ pip install augmenty[all]
 For more detailed instructions on installing augmenty, including specific language support, see the [installation instructions](https://kennethenevoldsen.github.io/augmenty/installation).
 
 ## 📖 Documentation
----
 
 | Documentation              |                                                                              |
 | -------------------------- | ---------------------------------------------------------------------------- |
@@ -48,7 +47,6 @@ For more detailed instructions on installing augmenty, including specific langua
 [List of augmenters]: https://github.com/kennethenevoldsen/augmenty/augmenters.md
 
 ## 💬 Where to ask questions
----
 
 | Type                            |                                 |
 | ------------------------------- | --------------------------------------- |
@@ -63,7 +61,7 @@ For more detailed instructions on installing augmenty, including specific langua
 [Adding an augmenter]: https://github.com/kennethenevoldsen/augmenty/discussions
 
 
-# 🤔 FAQ
+## 🤔 FAQ
 
 
 <details>
@@ -163,7 +161,7 @@ python -m pytest--cov=.
 <br /> 
 
 
-# 🎓 Citing this work
+### 🎓 Citing this work
 
 If you use this library in your research, please cite:
 
