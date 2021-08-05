@@ -14,13 +14,26 @@
 
 Augmenty is an augmentation library based on spaCy for augmenting texts. Besides a wide array of highly flexible augmenters, Augmenty provides a series of tools for working with augmenters, including combining and moderating augmenters. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the assigned labels under the augmentation, thus making many of the augmenters valid for training more than simply sentence classification.
 
+## 🔧 Installation
+To get started using augmenty simply install it using pip by running the following line in your terminal:
+
+```
+pip install augmenty
+```
+
+Do note that this is a minimal installation. As some augmenters requires additional packages please the following line to install all dependencies.
+
+```
+pip install augmenty[all]
+```
+
+For more detailed instructions on installing augmenty, including specific language support, see the [installation instructions](https://kennethenevoldsen.github.io/augmenty/installation).
 
 ## 📖 Documentation
 ---
 
 | Documentation              |                                                                              |
 | -------------------------- | ---------------------------------------------------------------------------- |
-| 🔧 **[Installation]**      | Installation instructions                                                    |
 | 📚 **[Usage Guides]**      | Guides and instruction on how to use augmenty and its features.              |
 | 🍒 **[Augmenters]** | Contains a full list of current and planned augmenters in augmenty.         |
 | 📰 **[News and changelog]** | New additions, changes and version history.                                 | 
@@ -28,7 +41,6 @@ Augmenty is an augmentation library based on spaCy for augmenting texts. Besides
 
 <!-- | ⭐️ **[augmenty 101]**        | New to spaCy? Here's everything you need to know!              | -->
 
-[Installation]: https://kennethenevoldsen.github.io/augmenty/
 [usage guides]: https://kennethenevoldsen.github.io/augmenty/
 [api reference]: https://kennethenevoldsen.github.io/augmenty/
 [Augmenters]: https://kennethenevoldsen.github.io/augmenty/
