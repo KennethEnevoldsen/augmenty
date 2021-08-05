@@ -71,7 +71,7 @@ html_context = {
     "display_github": True,  # Add 'Edit on Github' link instead of 'View page source'
     "github_user": "KennethEnevoldsen",
     "github_repo": project,
-    "github_version": "main",
+    "github_version": "master",
     "conf_py_path": "/docs/",
 }
 
@@ -95,4 +95,4 @@ html_theme_options = {
 }
 
 # pygments_style = "monokai"
-pygments_dark_style = "monokai"
+# pygments_dark_style = "monokai"
