@@ -57,7 +57,7 @@ For more detailed instructions on installing augmenty, including specific langua
 
 [github issue tracker]: https://github.com/kennethenevoldsen/augmenty/issues
 [github discussions]: https://github.com/kennethenevoldsen/augmenty/discussions
-[Adding an augmenter]: https://github.com/kennethenevoldsen/augmenty/discussions
+[Adding an augmenter]: https://kennethenevoldsen.github.io/augmenty/adding_an_augmenter.html
 
 
 ## 🤔 FAQ
