@@ -9,7 +9,9 @@ If you find yourself in trouble feel free to ask in the augmenty `forums <https:
 When you are satisfied with your augmenter feel free submit a `pull request <https://github.com/KennethEnevoldsen/augmenty/pulls>`__ to add the augmenter to augmenty.
 
 An augmenter in Augmenty should include:
+
 - Documentation including an example
 - Adding it spacy augmenters registry. You can do this easily using the decorator :code:`@spacy.registry.augmenters("name_of_your_augmenter.v1")`
+- Adding at least one test of the function
 
 Additionally, you might want to add known references using the augmenter to the `reference.json <https://github.com/KennethEnevoldsen/augmenty/blob/master/augmenty/references.json>`__.
