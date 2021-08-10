@@ -16,6 +16,7 @@ def create_token_replace_augmenter(
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
     ignore_casing: bool = True,
     getter: Callable[[Token], str] = lambda token: token.pos_,
+    keep_titlecase: bool=True, 
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
@@ -26,6 +27,7 @@ def create_token_replace_augmenter(
             replacement based on pos tag.
         ignore_casing: When doing the lookup should the model ignore casing? Defaults to True.
         getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
+        keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -41,7 +43,7 @@ def create_token_replace_augmenter(
         for k in replace:
             replace[k.lower()] = replace[k]
             
-    return partial(token_replace_augmenter, level=level, replace=replace, getter=getter, ignore_casing=ignore_casing)
+    return partial(token_replace_augmenter, level=level, replace=replace, getter=getter, ignore_casing=ignore_casing, keep_titlecase=keep_titlecase)
 
 
 def token_replace_augmenter(
@@ -51,6 +53,7 @@ def token_replace_augmenter(
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
     ignore_casing: bool,
     getter: Callable[[Token], str],
+    keep_titlecase: bool
 ) -> Iterator[Example]:
     def __replace(t):
         text = t.text
@@ -60,9 +63,11 @@ def token_replace_augmenter(
             if isinstance(replace[t.text], dict):
                 pos = getter(t)
                 if pos in replace[t.text]:
-                    return random.sample(replace[t.text][pos], k=1)[0]
+                    text = random.sample(replace[t.text][pos], k=1)[0]
             else:
-                return random.sample(replace[t.text], k=1)[0]
+                text = random.sample(replace[t.text], k=1)[0]
+            if keep_titlecase is True and t.is_title is True:
+                return text.capitalize()
         return t.text
 
     example_dict = example.to_dict()
@@ -84,6 +89,7 @@ def create_wordnet_synonym_augmenter(
             Possible language codes include:
             "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
         level (float): Probability to replace token given that it is in synonym dictionary.
+        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
         keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.
 
     Returns:
