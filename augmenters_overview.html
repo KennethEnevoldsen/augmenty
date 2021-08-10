@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Creating and Contributing Augmenters" />
+  <meta property="og:title" content="Overview of Augmenters" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="adding_an_augmenter.html" />
-  <meta property="og:description" content="After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter per_replace.v1, which rep..." />
-  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="News and Changelog" href="news.html" /><link rel="prev" title="Using Augmenty" href="introduction.html" />
+  <meta property="og:url" content="augmenters_overview.html" />
+  <meta property="og:description" content="Add some kind of searchable table? The table should include: augmenter name, short description (automatically taken from docs), References, What the augmenter respects." />
+  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
-        <title>Creating and Contributing Augmenters - augmenty 0.0.3 documentation</title>
+        <title>Overview of Augmenters - augmenty 0.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -168,10 +168,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Using Augmenty</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Creating and Contributing Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_an_augmenter.html">Creating and Contributing Augmenters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="news.html">News and Changelog</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Augmenters</span></p>
@@ -215,46 +215,24 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <section id="creating-and-contributing-augmenters">
-<h1>Creating and Contributing Augmenters<a class="headerlink" href="#creating-and-contributing-augmenters" title="Permalink to this headline">¶</a></h1>
-<p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter <code class="code docutils literal notranslate"><span class="pre">per_replace.v1</span></code>,
-which replaces names in a text is a special case of the augmenter <code class="code docutils literal notranslate"><span class="pre">ents_replace.v1</span></code> with better handling of first and last names.
-If you want to create an augmenter from scratch following spaCy’s guide on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well.
-If you find yourself in trouble feel free to ask in the augmenty <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/discussions">forums</a>.</p>
-<p>When you are satisfied with your augmenter feel free submit a <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/pulls">pull request</a> to add the augmenter to augmenty.</p>
-<p>An augmenter in Augmenty should include:</p>
+        <section id="overview-of-augmenters">
+<h1>Overview of Augmenters<a class="headerlink" href="#overview-of-augmenters" title="Permalink to this headline">¶</a></h1>
+<p>Add some kind of searchable table?</p>
+<p>The table should include:</p>
 <ul class="simple">
-<li><p>Documentation including an example</p></li>
-<li><p>Adding it spacy augmenters registry. You can do this easily using the decorator <code class="code docutils literal notranslate"><span class="pre">@spacy.registry.augmenters("name_of_your_augmenter.v1")</span></code></p></li>
-<li><p>Adding at least one test of the function</p></li>
+<li><p>augmenter name</p></li>
+<li><p>short description (automatically taken from docs)</p></li>
+<li><p>References</p></li>
+<li><p>What the augmenter respects</p></li>
 </ul>
-<p>Additionally, you might want to add known references using the augmenter to the <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/blob/master/augmenty/references.json">reference.json</a>.</p>
 </section>
 
       </article>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="news.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">News and Changelog</div>
-              </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="introduction.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Using Augmenty</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
 
         <div class="related-information">
@@ -265,7 +243,7 @@ If you find yourself in trouble feel free to ask in the augmenty <a class="refer
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="_sources/adding_an_augmenter.rst.txt"
+            <a class="muted-link" href="_sources/augmenters_overview.rst.txt"
                rel="nofollow">
               Show Source
             </a>
