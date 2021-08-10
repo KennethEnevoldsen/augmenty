@@ -22,8 +22,8 @@ def create_ent_augmenter(
 
     Args:
         ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding the the entity type
-        you wish to replace (e.g. "PER") and a itarable of the replacements. A replacement is a list of string of
-        the desired entity replacement ["Kenneth", "Enevoldsen"].
+            you wish to replace (e.g. "PER") and a itarable of the replacements. A replacement is a list of string of
+            the desired entity replacement ["Kenneth", "Enevoldsen"].
         level (float): the percentage of entities to be augmented.
         replace_consistency (bool, optional): Should an entity always be replaced with the same entity? Defaults to True.
     Returns:
