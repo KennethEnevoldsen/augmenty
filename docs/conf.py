@@ -40,6 +40,7 @@ extensions = [
     "sphinxext.opengraph",
     "sphinx_copybutton",
     "sphinx.ext.githubpages",
+    'myst_parser',
 ]
 
 # autodoc_mock_imports = ["dacy"]
@@ -75,6 +76,12 @@ html_context = {
     "conf_py_path": "/docs/",
 }
 
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}
 
 html_static_path = ["_static"]
 html_favicon = '_static/favicon.ico'

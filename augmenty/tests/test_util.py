@@ -13,3 +13,10 @@ def test_keyboards():
 
     assert isinstance(kb, list)
     assert "da_qwerty.v1" in kb
+
+
+def test_meta():
+    meta = augmenty.meta()
+
+    assert isinstance(meta, dict)
+    assert "upper_case.v1" in meta

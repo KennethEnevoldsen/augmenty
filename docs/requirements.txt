@@ -2,3 +2,4 @@ sphinx
 furo
 sphinx-copybutton
 sphinxext-opengraph
+myst-parser
