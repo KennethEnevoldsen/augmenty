@@ -42,7 +42,7 @@ For more detailed instructions on installing augmenty, including specific langua
 [usage guides]: https://kennethenevoldsen.github.io/augmenty/
 [api reference]: https://kennethenevoldsen.github.io/augmenty/
 <!-- [Augmenters]: https://kennethenevoldsen.github.io/augmenty/ -->
-[News and changelog]: hhttps://kennethenevoldsen.github.io/augmenty/news.html
+[News and changelog]: https://kennethenevoldsen.github.io/augmenty/news.html
 <!-- [List of augmenters]: https://github.com/kennethenevoldsen/augmenty/augmenters.md -->
 
 ## 💬 Where to ask questions
@@ -57,7 +57,7 @@ For more detailed instructions on installing augmenty, including specific langua
 
 [github issue tracker]: https://github.com/kennethenevoldsen/augmenty/issues
 [github discussions]: https://github.com/kennethenevoldsen/augmenty/discussions
-[Adding an augmenter]: https://github.com/kennethenevoldsen/augmenty/discussions
+[Adding an augmenter]: https://kennethenevoldsen.github.io/augmenty/adding_an_augmenter.html
 
 
 ## 🤔 FAQ
