@@ -1,6 +1,6 @@
 # Overview of Augmenters
 
-The following tables list all the available augmenters in augmenty, along with a short description.It also list all of the labels which the augmenters respects. For instance if you wish to train an namedentity recognition pipeline you should not use augmenters which does not respect entity labels. Lastly the package includes a list of references to any data or packages used as well as references to example application of the augmenter in practice.
+The following tables list all the available augmenters in augmenty, along with a short description.It also list all of the labels which the augmenters respects. For instance, if you wish to train an namedentity recognition pipeline you should not use augmenters which does not respect entity labels. Lastly the package includes a list of references to any data or packages used as well as references to example application of the augmenter in practice.
 
 | Augmenter name | Description | Respects | References |
 | :---: | --- | --- | --- |
