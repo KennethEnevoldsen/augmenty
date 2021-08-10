@@ -64,7 +64,7 @@ def test_create_per_replace(nlp):
         nlp.vocab,
         words=["My", "name", "is", "Kenneth", "Enevoldsen"],
         spaces=[True, True, True, True, False],
-        ents=["O", "O", "O", "B-PER", "I-PER"],
+        ents=["O", "O", "O", "B-PERSON", "I-PERSON"],
     )
     names = {"firstname": ["Lasse"], "lastname": ["Hansen"]}
 
