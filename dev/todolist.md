@@ -1,8 +1,4 @@
-
-- [ ] Create a list of augmenters to add
-  - [ ] Check NL augment
-  - [ ] check nlpaug
-
+- [ ] Lave lasse check the package
 - [ ] PR to spacy w. augmenters
 - [x] publish
   - [ ] add to spacy-universe
