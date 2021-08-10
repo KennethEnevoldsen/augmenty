@@ -30,7 +30,7 @@ def create_ent_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter
 
     Example:
-        >>> ent_dict = {"ORG": [["Google"], ["Apple"]], "PER": [["Kenneth"], ["Lasse", "Hansen"]]}
+        >>> ent_dict = {"ORG": [["Google"], ["Apple"]], "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}
         >>> ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)  # augment 10% of names
     """
     return partial(
@@ -70,50 +70,50 @@ def ent_augmenter(
                 if replace_consistency:
                     replaced_ents[ent.text] = new_ent
 
-        # Handle token annotations
-        len_ent = len(new_ent)
-        i = slice(ent.start + offset, ent.end + offset)
-        tok_anno["ORTH"][i] = new_ent
-        tok_anno["LEMMA"][i] = new_ent
+            # Handle token annotations
+            len_ent = len(new_ent)
+            i = slice(ent.start + offset, ent.end + offset)
+            tok_anno["ORTH"][i] = new_ent
+            tok_anno["LEMMA"][i] = new_ent
 
-        tok_anno["TAG"][i] = ["PROPN"] * len_ent
-        tok_anno["POS"][i] = ["PROPN"] * len_ent
+            tok_anno["TAG"][i] = ["PROPN"] * len_ent
+            tok_anno["POS"][i] = ["PROPN"] * len_ent
 
-        tok_anno["MORPH"][i] = [""] * len_ent
-        tok_anno["DEP"][i] = [tok_anno["DEP"][i][0]] + ["flat"] * (len_ent - 1)
+            tok_anno["MORPH"][i] = [""] * len_ent
+            tok_anno["DEP"][i] = [tok_anno["DEP"][i][0]] + ["flat"] * (len_ent - 1)
 
-        tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (len_ent - 1)
-        tok_anno["SPACY"][i] = [True] * (len_ent - 1) + (
-            tok_anno["SPACY"][i][-1:]  # set last spacing
-        )
-
-        if example.y.has_annotation("HEAD"):
-            # Handle HEAD
-            offset_ = len_ent - (ent.end - ent.start)
-
-            head[head > ent.start + offset] += offset_
-            # keep first head correcting for changing entity size, set rest to refer to index of first name
-            head = np.concatenate(
-                [
-                    np.array(head[: ent.start + offset]),  # before
-                    np.array(
-                        [head[ent.start + offset]]
-                        + [ent.start + offset] * (len_ent - 1)
-                    ),  # the entity
-                    np.array(head[ent.start + 1 + offset :]),  # after
-                ]
+            tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (len_ent - 1)
+            tok_anno["SPACY"][i] = [True] * (len_ent - 1) + (
+                tok_anno["SPACY"][i][-1:]  # set last spacing
             )
-            offset += offset_
 
-        # Handle entities IOB tags
-        if len_ent == 1:
-            ents[i] = ["U-" + ent.label_]
-        else:
-            ents[i] = (
-                ["B-" + ent.label_]
-                + ["I-" + ent.label_] * (len_ent - 2)
-                + ["L-" + ent.label_]
-            )
+            if example.y.has_annotation("HEAD"):
+                # Handle HEAD
+                offset_ = len_ent - (ent.end - ent.start)
+
+                head[head > ent.start + offset] += offset_
+                # keep first head correcting for changing entity size, set rest to refer to index of first name
+                head = np.concatenate(
+                    [
+                        np.array(head[: ent.start + offset]),  # before
+                        np.array(
+                            [head[ent.start + offset]]
+                            + [ent.start + offset] * (len_ent - 1)
+                        ),  # the entity
+                        np.array(head[ent.start + 1 + offset :]),  # after
+                    ]
+                )
+                offset += offset_
+
+            # Handle entities IOB tags
+            if len_ent == 1:
+                ents[i] = ["U-" + ent.label_]
+            else:
+                ents[i] = (
+                    ["B-" + ent.label_]
+                    + ["I-" + ent.label_] * (len_ent - 2)
+                    + ["L-" + ent.label_]
+                )
 
     if example.y.has_annotation("HEAD"):
         tok_anno["HEAD"] = head.tolist()
@@ -136,6 +136,7 @@ def create_per_replace_augmenter(
     names_p: Dict[str, List[float]] = {},
     patterns_p: Optional[List[float]] = None,
     replace_consistency: bool = True,
+    person_tag: str = "PERSON"
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.
 
@@ -151,6 +152,7 @@ def create_per_replace_augmenter(
         patterns_p (Optional[List[float]], optional): The probability to sample each pattern.
             Defaults to None, indicating equal probability for each pattern.
         replace_consistency (bool, optional): Should the entity always be replaced with the same entity? Defaults to True.
+        person_tag (str, optional) The tag of the person entity. Defaults to "PERSON".
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
@@ -164,7 +166,7 @@ def create_per_replace_augmenter(
     names_gen = generator_from_name_dict(names, patterns, names_p, patterns_p)
 
     return create_ent_augmenter(
-        ent_dict={"PER": names_gen},
+        ent_dict={person_tag: names_gen},
         level=level,
         replace_consistency=replace_consistency,
     )
