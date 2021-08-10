@@ -279,7 +279,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">text</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
