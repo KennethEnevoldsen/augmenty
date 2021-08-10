@@ -227,10 +227,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ent_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Iterable</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary with keys corresponding the the entity type</p></li>
-<li><p><strong>replace</strong> (<em>you wish to</em>) – </p></li>
-<li><p><strong>[</strong><strong>"Kenneth"</strong> (<em>the desired entity replacement</em>) – </p></li>
-<li><p><strong>"Enevoldsen"</strong><strong>]</strong><strong></strong> – </p></li>
+<li><p><strong>ent_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Iterable</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary with keys corresponding the the entity type
+you wish to replace (e.g. “PER”) and a itarable of the replacements. A replacement is a list of string of
+the desired entity replacement [“Kenneth”, “Enevoldsen”].</p></li>
 <li><p><strong>level</strong> (<em>float</em>) – the percentage of entities to be augmented.</p></li>
 <li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should an entity always be replaced with the same entity? Defaults to True.</p></li>
 </ul>
