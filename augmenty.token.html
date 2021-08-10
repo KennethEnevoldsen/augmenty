@@ -261,7 +261,7 @@ Default to None.</p></li>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="kn">import</span> <span class="n">English</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"random_starting_case.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"one two three"</span><span class="p">]</span>
@@ -298,10 +298,10 @@ replacement based on pos tag.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">replace</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"act"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"perform"</span><span class="p">,</span> <span class="s2">"move"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">],</span> <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">level</span><span class="o">=.</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">.10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># or</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">replace</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"act"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"VERB"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"perform"</span><span class="p">,</span> <span class="s2">"move"</span><span class="p">],</span> <span class="s2">"NOUN"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"deed"</span><span class="p">]}}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">level</span><span class="o">=.</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">.10</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

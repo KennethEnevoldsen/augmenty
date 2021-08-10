@@ -214,11 +214,11 @@
 <span></span><span class="sd">"""</span>
 <span class="sd">Function for defining and handling keyboard layouts.</span>
 <span class="sd">"""</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span>
 
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="k">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
-<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="n">registry</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">registry</span>
 
 
 <div class="viewcode-block" id="Keyboard"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard">[docs]</a><span class="k">class</span> <span class="nc">Keyboard</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -252,7 +252,7 @@
                     <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
                         <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">"key </span><span class="si">{key}</span><span class="s2"> was not found in keyboard array"</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> was not found in keyboard array"</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Keyboard.is_shifted"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.is_shifted">[docs]</a>    <span class="k">def</span> <span class="nf">is_shifted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">"""is the key shifted?</span>

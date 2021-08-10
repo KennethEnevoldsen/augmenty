@@ -217,18 +217,18 @@
 
 
 <span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span>
 
 <span class="kn">import</span> <span class="nn">spacy</span>
-<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="k">import</span> <span class="n">Language</span>
-<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="k">import</span> <span class="n">Example</span>
+<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
+<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
 
-<span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="k">import</span> <span class="n">make_text_from_orth</span>
-<span class="kn">from</span> <span class="nn">..keyboard</span> <span class="k">import</span> <span class="n">Keyboard</span>
+<span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
+<span class="kn">from</span> <span class="nn">..keyboard</span> <span class="kn">import</span> <span class="n">Keyboard</span>
 
 
-<span class="kn">from</span> <span class="nn">..util</span> <span class="k">import</span> <span class="n">registry</span>
+<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">registry</span>
 
 
 <div class="viewcode-block" id="create_char_random_augmenter"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_char_random_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"char_replace_random.v1"</span><span class="p">)</span>
