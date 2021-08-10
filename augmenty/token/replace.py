@@ -67,7 +67,8 @@ def token_replace_augmenter(
             else:
                 text = random.sample(replace[t.text], k=1)[0]
             if keep_titlecase is True and t.is_title is True:
-                return text.capitalize()
+                text = text.capitalize()
+            return text
         return t.text
 
     example_dict = example.to_dict()
