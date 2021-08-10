@@ -11,7 +11,7 @@
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Keyboard" href="augmenty.keyboard.html" /><link rel="prev" title="Augmentation Utilities" href="augmenty.augment_utilities.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
-        <title>Utilities - augmenty 0.0.5 documentation</title>
+        <title>Utilities - augmenty 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -133,7 +133,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.5 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 0.0.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -176,6 +176,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Augmenters</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="augmenters.html">Augmenters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.character.html">Character-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.token.html">Token-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.span.html">Span-based</a></li>
@@ -304,6 +305,22 @@ True</p>
 &gt;&gt;&gt; texts = [“hello there!”]
 &gt;&gt;&gt; list(augmenty.texts(texts, upper_case_augmenter, nlp))
 [“HELLO THERE!”]</p>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="augmenty.util.meta">
+<span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">meta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a a dictionary containing metadata for each augmenter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary of meta data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[str, dict]</p>
+</dd>
+</dl>
+<p>Example:
+&gt;&gt;&gt; metadata = augmenty.meta()
+&gt;&gt;&gt; metadata[“token_swap.v1”]</p>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.texts">

@@ -11,7 +11,7 @@
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="News and Changelog" href="news.html" /><link rel="prev" title="Using Augmenty" href="introduction.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
-        <title>Creating and Contributing Augmenters - augmenty 0.0.5 documentation</title>
+        <title>Creating and Contributing Augmenters - augmenty 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -133,7 +133,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.5 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 0.0.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -176,6 +176,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Augmenters</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="augmenters.html">Augmenters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.character.html">Character-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.token.html">Token-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.span.html">Span-based</a></li>
@@ -222,13 +223,24 @@ which replaces names in a text is a special case of the augmenter <code class="c
 If you want to create an augmenter from scratch following spaCy’s guide on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well.
 If you find yourself in trouble feel free to ask in the augmenty <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/discussions">forums</a>.</p>
 <p>When you are satisfied with your augmenter feel free submit a <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/pulls">pull request</a> to add the augmenter to augmenty.</p>
-<p>An augmenter in Augmenty should include:</p>
+<p>When adding an new augmenter to Augmenty you should:</p>
 <ul class="simple">
-<li><p>Documentation including an example</p></li>
-<li><p>Adding it spacy augmenters registry. You can do this easily using the decorator <code class="code docutils literal notranslate"><span class="pre">@spacy.registry.augmenters("name_of_your_augmenter.v1")</span></code></p></li>
-<li><p>Adding at least one test of the function</p></li>
+<li><p>Add the augmenter.</p></li>
+<li><p>Add a create function for the augmenter.</p>
+<ul>
+<li><p>You should also add this to the spacy augmenters registry. You can do this easily using the decorator <code class="code docutils literal notranslate"><span class="pre">@spacy.registry.augmenters("name_of_your_augmenter.v1")</span></code>. This allows the function to be fetchable using <code class="code docutils literal notranslate"><span class="pre">augmenty.load</span></code>.</p></li>
+<li><p>This is also the function that should contain the documentation. Which we recommend includes at least one example of usage.</p></li>
 </ul>
-<p>Additionally, you might want to add known references using the augmenter to the <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/blob/master/augmenty/references.json">reference.json</a>.</p>
+</li>
+<li><p>Add at least one test of the function.</p></li>
+<li><p>Add an entry to the file <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/blob/master/augmenty/meta.json">meta.json</a>. This entry is used for generating the augmenters overview and can contain:</p>
+<ul>
+<li><p>“description”: An optional short description, if there isn’t any it is extracted from the function documentation.</p></li>
+<li><p>“respects”: What label the augmentation respects.</p></li>
+<li><p>“references”: An optional dictionary of references, where the key refers to the reference type. Typically these include, “Data” (a reference to any data used), “Package” (a reference to any additional packages used), “Usage” (the reference to articles or other work using the augmentation). Each of this should contain a dictionary (or a list of dictionaries in case of multiples), where each have a “name” (e.g. “Miller (1998)”) and a “link”. See examples of other augmenters in the meta.json.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 
       </article>

@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Document-based" />
+  <meta property="og:title" content="Augmenters" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="augmenty.doc.html" />
-  <meta property="og:description" content="augmenty.doc.casing:" />
-  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Language-specific" href="augmenty.lang.html" /><link rel="prev" title="Span-based" href="augmenty.span.html" />
+  <meta property="og:url" content="augmenters.html" />
+  <meta property="og:description" content="The following is a list of augmenters:,,,, Augmenter name, Description, Respects, References,,, char_replace.v1, Creates an augmenter that replaces a character with a random character from replace ..." />
+  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Character-based" href="augmenty.character.html" /><link rel="prev" title="News and Changelog" href="news.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
-        <title>Document-based - augmenty 0.0.6 documentation</title>
+        <title>Augmenters - augmenty 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -144,7 +144,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -176,11 +176,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Augmenters</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="augmenters.html">Augmenters</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Augmenters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.character.html">Character-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.token.html">Token-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.span.html">Span-based</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Document-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.doc.html">Document-based</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.lang.html">Language-specific</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.augment_utilities.html">Augmentation Utilities</a></li>
 </ul>
@@ -211,91 +211,158 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <section id="document-based">
-<h1>Document-based<a class="headerlink" href="#document-based" title="Permalink to this headline">¶</a></h1>
-<section id="module-augmenty.doc.casing">
-<span id="augmenty-doc-casing"></span><h2>augmenty.doc.casing<a class="headerlink" href="#module-augmenty.doc.casing" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="augmenty.doc.casing.create_spongebob_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.doc.casing.</span></span><span class="sig-name descname"><span class="pre">create_spongebob_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/doc/casing.html#create_spongebob_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.doc.casing.create_spongebob_augmenter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The percentage of examples that will be augmented.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">spongebob_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"spongebob.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">spongebob_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A SaMpLe tExT"]</span>
-</pre></div>
-</div>
-</dd></dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="augmenty.doc.casing.create_upper_casing_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.doc.casing.</span></span><span class="sig-name descname"><span class="pre">create_upper_casing_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/doc/casing.html#create_upper_casing_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.doc.casing.create_upper_casing_augmenter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an augmenter that converts documents to uppercase.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The percentage of examples that will be augmented.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="k">import</span> <span class="n">English</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">upper_case_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"upper_case.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">upper_case_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A SAMPLE TEXT"]</span>
-</pre></div>
-</div>
-</dd></dl>
-</section>
+        <section class="tex2jax_ignore mathjax_ignore" id="augmenters">
+<h1>Augmenters<a class="headerlink" href="#augmenters" title="Permalink to this headline">¶</a></h1>
+<p>The following is a list of augmenters:</p>
+<div class="table-wrapper"><table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Augmenter name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Respects</p></th>
+<th class="head"><p>References</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>char_replace.v1</p></td>
+<td><p>Creates an augmenter that replaces a character with a random character from replace dict</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>char_replace_random.v1</p></td>
+<td><p>Creates an augmenter that replacies a character with a random character from the</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>char_swap.v1</p></td>
+<td><p>Creates an augmenter that swaps two characters in a token with a given probability.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>conditional_token_casing.v1</p></td>
+<td><p>Creates an augmenter that conditionally cases the first letter of a token based on the getter.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>da_historical_noun_casing.v1</p></td>
+<td><p>Creates an augmenter that capitalizes nouns.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>da_æøå_replace.v1</p></td>
+<td><p>Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>ents_format.v1</p></td>
+<td><p>Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>ents_replace.v1</p></td>
+<td><p>Create an augmenter which replaces an entity based on a dictionary lookup.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>grundtvigian_spacing_augmenter.v1</p></td>
+<td><p>The Danish philosopher N.F.S. Grundtvig used letter spacing to add</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>keystroke_error.v1</p></td>
+<td><p>Creates a augmenter which augments a text with plausible typos based on keyboard distance.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>per_replace.v1</p></td>
+<td><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>random_casing.v1</p></td>
+<td><p>Create an augment that randomly changes the casing of the document.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>random_starting_case.v1</p></td>
+<td><p>Creates an augmenter which randomly cases the first letter in each token.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>remove_spacing.v1</p></td>
+<td><p>Creates an augmenter that removes spacing with a given probability.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>spacing_insertion.v1</p></td>
+<td><p>Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>spacy.lower_case.v1</p></td>
+<td><p>Create a data augmentation callback that converts documents to lowercase.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>spacy.orth_variants.v1</p></td>
+<td><p>Create a data augmentation callback that uses orth-variant replacement.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>spongebob.v1</p></td>
+<td><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>token_replace.v1</p></td>
+<td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>token_swap.v1</p></td>
+<td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>upper_case.v1</p></td>
+<td><p>Create an augmenter that converts documents to uppercase.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>wordnet_synonym.v1</p></td>
+<td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
+<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Data: <a class="reference external" href="https://www.google.com/books?hl=da&amp;lr=&amp;id=Rehu8OOzMIMC&amp;oi=fnd&amp;pg=PR11&amp;dq=WordNet:+An+electronic+lexical+database&amp;ots=IsieQmWUg8&amp;sig=06asxxcQ1I3i9C1TcEcz7bv62Kw">Miller (1998) (1998)</a>, Package: <a class="reference external" href="https://www.nltk.org">Steven (2006)</a>, Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
+</tr>
+</tbody>
+</table></div>
 </section>
 
       </article>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="augmenty.lang.html">
+          <a class="next-page" href="augmenty.character.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Language-specific</div>
+                <div class="title">Character-based</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="augmenty.span.html">
+          <a class="prev-page" href="news.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Span-based</div>
+                <div class="title">News and Changelog</div>
                 
               </div>
             </a>
@@ -309,7 +376,7 @@
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="_sources/augmenty.doc.rst.txt"
+            <a class="muted-link" href="_sources/augmenters.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -317,27 +384,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            Contents
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Document-based</a><ul>
-<li><a class="reference internal" href="#module-augmenty.doc.casing">augmenty.doc.casing</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
