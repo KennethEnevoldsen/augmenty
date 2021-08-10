@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
-        <title>augmenty.span.entities - augmenty 0.0.6 documentation</title>
+        <title>augmenty.span.entities - augmenty 0.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -127,7 +127,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">augmenty 0.0.6 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">augmenty 0.0.7 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -243,7 +243,7 @@
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; ent_dict = {"ORG": [["Google"], ["Apple"]], "PER": [["Kenneth"], ["Lasse", "Hansen"]]}</span>
+<span class="sd">        &gt;&gt;&gt; ent_dict = {"ORG": [["Google"], ["Apple"]], "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}</span>
 <span class="sd">        &gt;&gt;&gt; ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)  # augment 10% of names</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
@@ -283,50 +283,50 @@
                 <span class="k">if</span> <span class="n">replace_consistency</span><span class="p">:</span>
                     <span class="n">replaced_ents</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
 
-        <span class="c1"># Handle token annotations</span>
-        <span class="n">len_ent</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_ent</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"ORTH"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"LEMMA"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
+            <span class="c1"># Handle token annotations</span>
+            <span class="n">len_ent</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_ent</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"ORTH"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"LEMMA"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
 
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"TAG"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PROPN"</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"POS"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PROPN"</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"TAG"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PROPN"</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"POS"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PROPN"</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
 
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"MORPH"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">""</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"DEP"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok_anno</span><span class="p">[</span><span class="s2">"DEP"</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"flat"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"MORPH"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">""</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"DEP"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok_anno</span><span class="p">[</span><span class="s2">"DEP"</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"flat"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SENT_START"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SENT_START"</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SPACY"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
-            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SPACY"</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># set last spacing</span>
-        <span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">):</span>
-            <span class="c1"># Handle HEAD</span>
-            <span class="n">offset_</span> <span class="o">=</span> <span class="n">len_ent</span> <span class="o">-</span> <span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
-
-            <span class="n">head</span><span class="p">[</span><span class="n">head</span> <span class="o">&gt;</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_</span>
-            <span class="c1"># keep first head correcting for changing entity size, set rest to refer to index of first name</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">head</span><span class="p">[:</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]),</span>  <span class="c1"># before</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                        <span class="p">[</span><span class="n">head</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]]</span>
-                        <span class="o">+</span> <span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="p">),</span>  <span class="c1"># the entity</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">offset</span> <span class="p">:]),</span>  <span class="c1"># after</span>
-                <span class="p">]</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SENT_START"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SENT_START"</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SPACY"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
+                <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"SPACY"</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># set last spacing</span>
             <span class="p">)</span>
-            <span class="n">offset</span> <span class="o">+=</span> <span class="n">offset_</span>
 
-        <span class="c1"># Handle entities IOB tags</span>
-        <span class="k">if</span> <span class="n">len_ent</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">ents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"U-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">ents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="p">[</span><span class="s2">"B-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span>
-                <span class="o">+</span> <span class="p">[</span><span class="s2">"I-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="o">+</span> <span class="p">[</span><span class="s2">"L-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span>
-            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">):</span>
+                <span class="c1"># Handle HEAD</span>
+                <span class="n">offset_</span> <span class="o">=</span> <span class="n">len_ent</span> <span class="o">-</span> <span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+
+                <span class="n">head</span><span class="p">[</span><span class="n">head</span> <span class="o">&gt;</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span> <span class="o">+=</span> <span class="n">offset_</span>
+                <span class="c1"># keep first head correcting for changing entity size, set rest to refer to index of first name</span>
+                <span class="n">head</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">head</span><span class="p">[:</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]),</span>  <span class="c1"># before</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                            <span class="p">[</span><span class="n">head</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="p">),</span>  <span class="c1"># the entity</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">offset</span> <span class="p">:]),</span>  <span class="c1"># after</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+                <span class="n">offset</span> <span class="o">+=</span> <span class="n">offset_</span>
+
+            <span class="c1"># Handle entities IOB tags</span>
+            <span class="k">if</span> <span class="n">len_ent</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"U-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">[</span><span class="s2">"B-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="p">[</span><span class="s2">"I-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="p">[</span><span class="s2">"L-"</span> <span class="o">+</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">]</span>
+                <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">):</span>
         <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -349,6 +349,7 @@
     <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">person_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"PERSON"</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</span>
 
@@ -364,6 +365,7 @@
 <span class="sd">        patterns_p (Optional[List[float]], optional): The probability to sample each pattern.</span>
 <span class="sd">            Defaults to None, indicating equal probability for each pattern.</span>
 <span class="sd">        replace_consistency (bool, optional): Should the entity always be replaced with the same entity? Defaults to True.</span>
+<span class="sd">        person_tag (str, optional) The tag of the person entity. Defaults to "PERSON".</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
@@ -377,7 +379,7 @@
     <span class="n">names_gen</span> <span class="o">=</span> <span class="n">generator_from_name_dict</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">names_p</span><span class="p">,</span> <span class="n">patterns_p</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">create_ent_augmenter</span><span class="p">(</span>
-        <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">"PER"</span><span class="p">:</span> <span class="n">names_gen</span><span class="p">},</span>
+        <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="n">person_tag</span><span class="p">:</span> <span class="n">names_gen</span><span class="p">},</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
         <span class="n">replace_consistency</span><span class="o">=</span><span class="n">replace_consistency</span><span class="p">,</span>
     <span class="p">)</span></div>

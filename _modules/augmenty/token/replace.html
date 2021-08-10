@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
-        <title>augmenty.token.replace - augmenty 0.0.6 documentation</title>
+        <title>augmenty.token.replace - augmenty 0.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -127,7 +127,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">augmenty 0.0.6 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">augmenty 0.0.7 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -375,6 +375,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">lang</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lang</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">lang</span>
+            <span class="n">lang</span> <span class="o">=</span> <span class="n">lang_dict</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span>
 
         <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
             <span class="n">word</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -402,10 +403,12 @@
         <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">lang</span><span class="p">:</span>
+        <span class="n">lang</span> <span class="o">=</span> <span class="n">lang_dict</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">wordnet_synonym_augmenter</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
-        <span class="n">lang</span><span class="o">=</span><span class="n">lang_dict</span><span class="p">[</span><span class="n">lang</span><span class="p">],</span>
+        <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">,</span>
         <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
         <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
         <span class="n">respect_pos</span><span class="o">=</span><span class="n">respect_pos</span><span class="p">,</span>
