@@ -149,6 +149,7 @@ def create_wordnet_synonym_augmenter(
         "pt": "por",
         "es": "spa",
         "th": "tha",
+        None, None,
     }
 
     def wordnet_synonym_augmenter(
