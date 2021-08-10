@@ -73,7 +73,7 @@ def starting_case_augmenter(
             return (
                 uncapitalize(t.text) if random.random() < 0.5 else t.text.capitalize()
             )
-        return t
+        return t.text
 
     example_dict = example.to_dict()
     example_dict["token_annotation"]["ORTH"] = [__casing(t) for t in example.reference]
