@@ -60,5 +60,5 @@ table = md.table(
 md.add(table)
 
 
-with open("../docs/augmenters.md", "w") as f:
+with open("../docs/augmenters_overview.md", "w") as f:
     f.write(md.text)
