@@ -30,7 +30,7 @@ The documentation is organized into three parts:
    :maxdepth: 3
    :caption: Augmenters
 
-   augmenters
+   augmenters_overview
    augmenty.character
    augmenty.token
    augmenty.span
