@@ -28,3 +28,7 @@ myst-parser
 # code style
 flake8
 black
+
+# streamlit
+st-annotated-text
+streamlit
