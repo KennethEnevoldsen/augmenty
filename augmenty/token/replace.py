@@ -146,7 +146,7 @@ def create_wordnet_synonym_augmenter(
                 syns = wordnet.synsets(word, pos=upos_wn_dict[getter(t)], lang=lang)
                 if syns:
                     syn = random.sample(syns, k=1)[0]
-                    return random.sample(syn.lemma_names(), k=1)[0]
+                    return random.sample(syn.lemma_names(lang=lang), k=1)[0]
             return t.text
 
         example_dict = example.to_dict()
