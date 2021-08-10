@@ -44,7 +44,7 @@ def char_swap_augmenter(nlp: Language, example: Example, level) -> Iterator[Exam
         for i, c in enumerate(t.text[:-1]):
             if random.random() < level:
                 return t.text[:i] + t.text[i + 1] + c + t.text[i + 2 :]
-        return t
+        return t.text
 
     example_dict = example.to_dict()
     example_dict["token_annotation"]["ORTH"] = [__replace(t) for t in example.reference]
