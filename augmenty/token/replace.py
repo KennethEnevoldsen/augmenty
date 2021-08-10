@@ -16,7 +16,7 @@ def create_token_replace_augmenter(
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
     ignore_casing: bool = True,
     getter: Callable[[Token], str] = lambda token: token.pos_,
-    keep_titlecase: bool=True, 
+    keep_titlecase: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
@@ -42,8 +42,15 @@ def create_token_replace_augmenter(
     if ignore_casing is True:
         for k in replace:
             replace[k.lower()] = replace[k]
-            
-    return partial(token_replace_augmenter, level=level, replace=replace, getter=getter, ignore_casing=ignore_casing, keep_titlecase=keep_titlecase)
+
+    return partial(
+        token_replace_augmenter,
+        level=level,
+        replace=replace,
+        getter=getter,
+        ignore_casing=ignore_casing,
+        keep_titlecase=keep_titlecase,
+    )
 
 
 def token_replace_augmenter(
@@ -53,7 +60,7 @@ def token_replace_augmenter(
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
     ignore_casing: bool,
     getter: Callable[[Token], str],
-    keep_titlecase: bool
+    keep_titlecase: bool,
 ) -> Iterator[Example]:
     def __replace(t):
         text = t.text
@@ -80,16 +87,21 @@ def token_replace_augmenter(
 
 @spacy.registry.augmenters("wordnet_synonym.v1")
 def create_wordnet_synonym_augmenter(
-    level: float, lang: Optional[str] = None, getter: Callable = lambda token: token.pos_, keep_titlecase: bool=True,
+    level: float,
+    lang: Optional[str] = None,
+    respect_pos: bool = True,
+    getter: Callable = lambda token: token.pos_,
+    keep_titlecase: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
     Args:
-        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None, 
+        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None,
             in which case the lang is based on the language of the spacy nlp pipeline used.
             Possible language codes include:
             "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
         level (float): Probability to replace token given that it is in synonym dictionary.
+        respect_pos (bool, optional): Should POS-tag be respected? Defaults to True.
         getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
         keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.
 
@@ -101,6 +113,7 @@ def create_wordnet_synonym_augmenter(
     """
     try:
         from nltk import download
+
         download("wordnet", quiet=True, raise_on_error=True)
         download("omw", quiet=True, raise_on_error=True)
         from nltk.corpus import wordnet
@@ -144,20 +157,28 @@ def create_wordnet_synonym_augmenter(
         level: float,
         lang: Optional[str],
         getter: Callable,
-        keep_titlecase: bool
+        respect_pos: bool,
+        keep_titlecase: bool,
     ) -> Iterator[Example]:
         if lang is None:
             lang = nlp.lang
 
         def __replace(t):
-            word = t.text
-            if random.random() < level and getter(t) in upos_wn_dict:
-                syns = wordnet.synsets(word, pos=upos_wn_dict[getter(t)], lang=lang)
+            word = t.text.lower()
+            if random.random() < level and (respect_pos is False or getter(t) in upos_wn_dict):
+                if respect_pos is True:
+                    syns = wordnet.synsets(word, pos=upos_wn_dict[getter(t)], lang=lang)
+                else:
+                    syns = wordnet.synsets(word, lang=lang)
                 if syns:
-                    syn = random.sample(syns, k=1)[0]
-                    text = random.sample(syn.lemma_names(lang=lang), k=1)[0]
-                    if keep_titlecase is True and t.is_title is True:
-                        return text.capitalize()
+                    rep = {l for syn in syns for l in syn.lemma_names(lang=lang)}
+                    if word in rep:
+                        rep.remove(word)
+                    if rep:
+                        text = random.sample(rep, k=1)[0]
+                        if keep_titlecase is True and t.is_title is True:
+                            text = text.capitalize()
+                        return text
             return t.text
 
         example_dict = example.to_dict()
@@ -169,5 +190,10 @@ def create_wordnet_synonym_augmenter(
         yield example.from_dict(doc, example_dict)
 
     return partial(
-        wordnet_synonym_augmenter, level=level, lang=lang_dict[lang], getter=getter, keep_titlecase=keep_titlecase,
+        wordnet_synonym_augmenter,
+        level=level,
+        lang=lang_dict[lang],
+        getter=getter,
+        keep_titlecase=keep_titlecase,
+        respect_pos=respect_pos,
     )

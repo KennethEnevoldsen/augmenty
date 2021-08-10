@@ -76,14 +76,21 @@ def test_create_wordnet_synonym_augmenter(nlp):
     text = "Skal jeg pande dig en?"
     nlp_da = Danish()
 
-    aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(level=1, lang="da")
+    aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(level=1, lang="da", respect_pos=False)
     doc = nlp_da(text)
 
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
-    assert next(docs)[2].text in ["pande", "stegepande"]
+    assert next(docs)[2].text in ["stegepande"]
 
+    aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(level=1, lang="da")
     docs = nlp.pipe(BOOKS)
     docs = list(augmenty.docs(docs, augmenter=aug, nlp=nlp))
+
+    text = "Det kan jeg ikke slå"
+    doc = nlp_da(text)
+    doc[-1].pos_ = "VERB"
+    docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
+    assert next(docs)[-1].text in ["pulsere", "banke"]
 
 
 def test_create_grundtvigian_spacing_augmenter(nlp):
