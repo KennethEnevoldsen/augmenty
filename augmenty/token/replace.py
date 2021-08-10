@@ -149,7 +149,6 @@ def create_wordnet_synonym_augmenter(
         "pt": "por",
         "es": "spa",
         "th": "tha",
-        None, None,
     }
 
     def wordnet_synonym_augmenter(
@@ -163,6 +162,7 @@ def create_wordnet_synonym_augmenter(
     ) -> Iterator[Example]:
         if lang is None:
             lang = nlp.lang
+            lang = lang_dict[lang]
 
         def __replace(t):
             word = t.text.lower()
@@ -190,10 +190,12 @@ def create_wordnet_synonym_augmenter(
         doc = nlp.make_doc(text)
         yield example.from_dict(doc, example_dict)
 
+    if lang:
+        lang = lang_dict[lang]
     return partial(
         wordnet_synonym_augmenter,
         level=level,
-        lang=lang_dict[lang],
+        lang=lang,
         getter=getter,
         keep_titlecase=keep_titlecase,
         respect_pos=respect_pos,
