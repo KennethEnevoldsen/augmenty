@@ -11,11 +11,11 @@ sentence and document labels under the augmentation.
 Contents
 ---------------------------------
   
-The documentation is organized in three parts:
+The documentation is organized into three parts:
 
 - **Getting started** contains the installation instructions, guides, and tutorials on how to use augmenty.
 - **Augmenters** contains the documentation for each augmenter implemented in augmenty.
-- **Package references** contains the documentation of each function and public class other than augmenters.
+- **API references** contains the documentation of each function and public class other than augmenters.
 
 .. toctree::
    :maxdepth: 3
@@ -23,15 +23,14 @@ The documentation is organized in three parts:
 
    installation
    introduction
-   adding_an_augmenter
    news
-
-.. toctree::
+   adding_an_augmenter
+   
+   .. toctree::
    :maxdepth: 3
    :caption: Augmenters
 
    augmenters
-   augmenters_overview
    augmenty.character
    augmenty.token
    augmenty.span
@@ -42,7 +41,7 @@ The documentation is organized in three parts:
 
 .. toctree::
    :maxdepth: 3
-   :caption: Package references
+   :caption: API references
 
    augmenty.util
    augmenty.keyboard
