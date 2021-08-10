@@ -23,7 +23,7 @@ def create_char_random_augmenter(
     level: float, 
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that replacies a character with a random character from the
+    """Creates an augmenter that replaces a character with a random character from the
     keyboard.
 
     Args:
