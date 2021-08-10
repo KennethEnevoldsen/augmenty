@@ -1,0 +1,397 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta property="og:title" content="Span-based" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="augmenty.span.html" />
+  <meta property="og:description" content="augmenty.span.entities:" />
+  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Document-based" href="augmenty.doc.html" /><link rel="prev" title="Token-based" href="augmenty.token.html" />
+
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
+        <title>Span-based - augmenty 0.0.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #ff5454;
+  --color-brand-content: #ff7575;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+    }
+  }
+</style>
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+  <body>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">augmenty 0.0.6 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/icon.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/icon_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Using Augmenty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news.html">News and Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_an_augmenter.html">Creating and Contributing Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenters.html">Overview of Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.character.html">Character-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.token.html">Token-based</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Span-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.doc.html">Document-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.lang.html">Language-specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.augment_utilities.html">Augmentation Utilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API references</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.util.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmenty.keyboard.html">Keyboard</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kennethenevoldsen/augmenty">GitHub Repository</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <article role="main">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <section id="span-based">
+<h1>Span-based<a class="headerlink" href="#span-based" title="Permalink to this headline">¶</a></h1>
+<section id="module-augmenty.span.entities">
+<span id="augmenty-span-entities"></span><h2>augmenty.span.entities<a class="headerlink" href="#module-augmenty.span.entities" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="augmenty.span.entities.create_ent_augmenter">
+<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_ent_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ent_dict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_consistency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_ent_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_ent_augmenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an augmenter which replaces an entity based on a dictionary lookup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ent_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Iterable</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary with keys corresponding the the entity type</p></li>
+<li><p><strong>replace</strong> (<em>you wish to</em>) – </p></li>
+<li><p><strong>[</strong><strong>"Kenneth"</strong> (<em>the desired entity replacement</em>) – </p></li>
+<li><p><strong>"Enevoldsen"</strong><strong>]</strong><strong></strong> – </p></li>
+<li><p><strong>level</strong> (<em>float</em>) – the percentage of entities to be augmented.</p></li>
+<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should an entity always be replaced with the same entity? Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The augmenter</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ent_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ORG"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"Google"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Apple"</span><span class="p">]],</span> <span class="s2">"PER"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"Kenneth"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Lasse"</span><span class="p">,</span> <span class="s2">"Hansen"</span><span class="p">]]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">create_ent_augmenter</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># augment 10% of names</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="augmenty.span.entities.create_ent_format_augmenter">
+<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_ent_format_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reordering</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.tokens.token.Token</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ent_types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_ent_format_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_ent_format_augmenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reordering</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A reordering consisting of a the desired order of the list of indices,
+where None denotes the remainder. For instance if this function was solely used on names [-1, None]
+indicate last name (the last token in the name) followed by the remainder of the name. Similarly one could more
+use the reordering [3, 1, 2] e.g. indicating last name, first name, middle name. Note that if the entity only include two
+tokens the 3 will be ignored producing the pattern [1, 2].</p></li>
+<li><p><strong>formatter</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A list of function taking in a spaCy Token returning the reformatted str.
+E.g. the function <cite>lambda token: token.text[0] + “.”</cite> would abbreviate the token and add punctuation. None corresponds to no augmentation.</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – The probability of an entities being augmented.</p></li>
+<li><p><strong>ent_types</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The entity types which should be augmented. Defaults to None, indicating all entity types.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The augmenter</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"en_core_web_sm"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abbreviate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"."</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"ents_format.v1"</span><span class="p">,</span> <span class="n">reordering</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">formatter</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">abbreviate</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ent_types</span><span class="o">=</span><span class="p">[</span><span class="s2">"PER"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"my name is Kenneth Enevoldsen"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
+<span class="go">["my name is Enevoldsen K."]</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="augmenty.span.entities.create_per_replace_augmenter">
+<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_per_replace_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_p</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns_p</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_consistency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_per_replace_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_per_replace_augmenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>names</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary of list of names to sample from.
+These could for example include first name and last names.</p></li>
+<li><p><strong>pattern</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – The pattern to create the names. This should be a list of patterns.
+Where a pattern is a list of strings, where the string denote the list in the names
+dictionary in which to sample from.</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – The proportion of PER entities to replace.</p></li>
+<li><p><strong>names_p</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each name.
+Defaults to {}, indicating equal probability for each name.</p></li>
+<li><p><strong>patterns_p</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each pattern.
+Defaults to None, indicating equal probability for each pattern.</p></li>
+<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the entity always be replaced with the same entity? Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The augmenter</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"firstname"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Kenneth"</span><span class="p">,</span> <span class="s2">"Lasse"</span><span class="p">],</span> <span class="s2">"lastname"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Enevoldsen"</span><span class="p">,</span> <span class="s2">"Hansen"</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">"firstname"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"lastname"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"lastname"</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">per_augmenter</span> <span class="o">=</span> <span class="n">create_per_replace_augmenter</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1"># replace 10% of names</span>
+</pre></div>
+</div>
+</dd></dl>
+</section>
+</section>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="augmenty.doc.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Document-based</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="augmenty.token.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Token-based</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/augmenty.span.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Span-based</a><ul>
+<li><a class="reference internal" href="#module-augmenty.span.entities">augmenty.span.entities</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    </body>
+</html>

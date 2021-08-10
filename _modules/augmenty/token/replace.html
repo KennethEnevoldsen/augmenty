@@ -1,0 +1,418 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
+        <title>augmenty.token.replace - augmenty 0.0.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=daa650a7760fac3eee23aa959745d2c866b74cb3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #ff5454;
+  --color-brand-content: #ff7575;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+    }
+  }
+</style>
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css"></head>
+  <body>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">augmenty 0.0.6 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/icon.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/icon_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Using Augmenty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../news.html">News and Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_an_augmenter.html">Creating and Contributing Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenters.html">Overview of Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.character.html">Character-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.token.html">Token-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.span.html">Span-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.doc.html">Document-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.lang.html">Language-specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.augment_utilities.html">Augmentation Utilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API references</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.util.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../augmenty.keyboard.html">Keyboard</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kennethenevoldsen/augmenty">GitHub Repository</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <article role="main">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <h1>Source code for augmenty.token.replace</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="k">import</span> <span class="n">Language</span>
+<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="k">import</span> <span class="n">Example</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="k">import</span> <span class="n">Token</span>
+
+<span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="k">import</span> <span class="n">make_text_from_orth</span>
+
+
+<div class="viewcode-block" id="create_token_replace_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token_replace_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"token_replace.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_token_replace_augmenter</span><span class="p">(</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
+    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+    <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        level (float): Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A dictionary of</span>
+<span class="sd">            words and a list of their replacement (e.g. synonyms) or a dictionary denoting</span>
+<span class="sd">            replacement based on pos tag.</span>
+<span class="sd">        ignore_casing: When doing the lookup should the model ignore casing? Defaults to True.</span>
+<span class="sd">        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.</span>
+<span class="sd">        keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; replace = {"act": ["perform", "move", "action"], }</span>
+<span class="sd">        &gt;&gt;&gt; create_token_replace_augmenter(replace=replace, level=.10)</span>
+<span class="sd">        &gt;&gt;&gt; # or</span>
+<span class="sd">        &gt;&gt;&gt; replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}</span>
+<span class="sd">        &gt;&gt;&gt; create_token_replace_augmenter(replace=replace, level=.10)</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
+            <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">token_replace_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">token_replace_augmenter</span><span class="p">(</span>
+    <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
+    <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
+    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">replace</span> <span class="ow">and</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">]:</span>
+                    <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">][</span><span class="n">pos</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">text</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+
+    <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="create_wordnet_synonym_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_wordnet_synonym_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"wordnet_synonym.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_wordnet_synonym_augmenter</span><span class="p">(</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+    <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None, </span>
+<span class="sd">            in which case the lang is based on the language of the spacy nlp pipeline used.</span>
+<span class="sd">            Possible language codes include:</span>
+<span class="sd">            "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".</span>
+<span class="sd">        level (float): Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.</span>
+<span class="sd">        keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1, lang="en")</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">nltk</span> <span class="k">import</span> <span class="n">download</span>
+        <span class="n">download</span><span class="p">(</span><span class="s2">"wordnet"</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">download</span><span class="p">(</span><span class="s2">"omw"</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">wordnet</span>
+    <span class="k">except</span> <span class="n">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ModuleNotFoundError</span><span class="p">(</span>
+            <span class="s2">"This augmenter requires NLTK. Use `pip install nltk` or `pip install augmenty[all]`"</span>
+        <span class="p">)</span>
+
+    <span class="n">upos_wn_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"VERB"</span><span class="p">:</span> <span class="s2">"v"</span><span class="p">,</span>
+        <span class="s2">"NOUN"</span><span class="p">:</span> <span class="s2">"n"</span><span class="p">,</span>
+        <span class="s2">"ADV"</span><span class="p">:</span> <span class="s2">"r"</span><span class="p">,</span>
+        <span class="s2">"ADJ"</span><span class="p">:</span> <span class="s2">"s"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">lang_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"da"</span><span class="p">:</span> <span class="s2">"dan"</span><span class="p">,</span>
+        <span class="s2">"ca"</span><span class="p">:</span> <span class="s2">"cat"</span><span class="p">,</span>
+        <span class="s2">"en"</span><span class="p">:</span> <span class="s2">"eng"</span><span class="p">,</span>
+        <span class="s2">"eu"</span><span class="p">:</span> <span class="s2">"eus"</span><span class="p">,</span>
+        <span class="s2">"fa"</span><span class="p">:</span> <span class="s2">"fas"</span><span class="p">,</span>
+        <span class="s2">"fi"</span><span class="p">:</span> <span class="s2">"fin"</span><span class="p">,</span>
+        <span class="s2">"fr"</span><span class="p">:</span> <span class="s2">"fre"</span><span class="p">,</span>
+        <span class="s2">"gl"</span><span class="p">:</span> <span class="s2">"glg"</span><span class="p">,</span>
+        <span class="s2">"he"</span><span class="p">:</span> <span class="s2">"heb"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"ind"</span><span class="p">,</span>
+        <span class="s2">"it"</span><span class="p">:</span> <span class="s2">"ita"</span><span class="p">,</span>
+        <span class="s2">"ja"</span><span class="p">:</span> <span class="s2">"jpn"</span><span class="p">,</span>
+        <span class="s2">"nn"</span><span class="p">:</span> <span class="s2">"nno"</span><span class="p">,</span>
+        <span class="s2">"no"</span><span class="p">:</span> <span class="s2">"nob"</span><span class="p">,</span>
+        <span class="s2">"pl"</span><span class="p">:</span> <span class="s2">"pol"</span><span class="p">,</span>
+        <span class="s2">"pt"</span><span class="p">:</span> <span class="s2">"por"</span><span class="p">,</span>
+        <span class="s2">"es"</span><span class="p">:</span> <span class="s2">"spa"</span><span class="p">,</span>
+        <span class="s2">"th"</span><span class="p">:</span> <span class="s2">"tha"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">wordnet_synonym_augmenter</span><span class="p">(</span>
+        <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
+        <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
+        <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">lang</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lang</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">lang</span>
+
+        <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="n">upos_wn_dict</span><span class="p">:</span>
+                <span class="n">syns</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">upos_wn_dict</span><span class="p">[</span><span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">syns</span><span class="p">:</span>
+                    <span class="n">syn</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">syns</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">lemma_names</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span>
+        <span class="p">]</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">wordnet_synonym_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="n">lang_dict</span><span class="p">[</span><span class="n">lang</span><span class="p">],</span> <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
+    <span class="p">)</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/main.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    </body>
+</html>
