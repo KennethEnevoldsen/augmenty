@@ -31,29 +31,27 @@ For more detailed instructions on installing augmenty, including specific langua
 
 ## 📖 Documentation
 
-| Documentation              |                                                                              |
-| -------------------------- | ---------------------------------------------------------------------------- |
-| 📚 **[Usage Guides]**      | Guides and instruction on how to use augmenty and its features.              |
-| 📰 **[News and changelog]** | New additions, changes and version history.                                 | 
-| 🎛 **[API Reference]**      | The detailed reference for augmenty's API. Including function documentation |
-<!-- | 🍒 **[Augmenters]** | Contains a full list of current and planned augmenters in augmenty.         | -->
-<!-- | ⭐️ **[augmenty 101]**        | New to spaCy? Here's everything you need to know!              | -->
+| Documentation              |                                                                             |
+| -------------------------- | --------------------------------------------------------------------------- |
+| 📚 **[Usage Guides]**       | Guides and instruction on how to use augmenty and its features.             |
+| 📰 **[News and changelog]** | New additions, changes and version history.                                 |
+| 🎛 **[API References]**     | The detailed reference for augmenty's API. Including function documentation |
+| 🍒 **[Augmenters]**         | Contains a full list of current augmenters in augmenty.                     |
 
-[usage guides]: https://kennethenevoldsen.github.io/augmenty/
-[api reference]: https://kennethenevoldsen.github.io/augmenty/
-<!-- [Augmenters]: https://kennethenevoldsen.github.io/augmenty/ -->
+[usage guides]: https://kennethenevoldsen.github.io/augmenty/introduction.html
+[api references]: https://kennethenevoldsen.github.io/augmenty/
+[Augmenters]: https://kennethenevoldsen.github.io/augmenty/augmenters.html
 [News and changelog]: https://kennethenevoldsen.github.io/augmenty/news.html
-<!-- [List of augmenters]: https://github.com/kennethenevoldsen/augmenty/augmenters.md -->
 
 ## 💬 Where to ask questions
 
-| Type                            |                                 |
-| ------------------------------- | --------------------------------------- |
-| 🚨 **Bug Reports**              | [GitHub Issue Tracker]                  |
-| 🎁 **Feature Requests & Ideas** | [GitHub Issue Tracker]                  |
-| 👩‍💻 **Usage Questions**          | [GitHub Discussions]                    |
-| 🗯 **General Discussion**       | [GitHub Discussions]                    |
-| 🍒 **Adding an Augmenter**       | [Adding an augmenter]                    |
+| Type                           |                        |
+| ------------------------------ | ---------------------- |
+| 🚨 **Bug Reports**              | [GitHub Issue Tracker] |
+| 🎁 **Feature Requests & Ideas** | [GitHub Issue Tracker] |
+| 👩‍💻 **Usage Questions**          | [GitHub Discussions]   |
+| 🗯 **General Discussion**       | [GitHub Discussions]   |
+| 🍒 **Adding an Augmenter**      | [Adding an augmenter]  |
 
 [github issue tracker]: https://github.com/kennethenevoldsen/augmenty/issues
 [github discussions]: https://github.com/kennethenevoldsen/augmenty/discussions
@@ -105,11 +103,11 @@ python -m pytest --cov=.
 
   augmenty is intended to run on all major OS, this includes Windows (latest version), MacOS (Catalina) and the latest version of Linux (Ubuntu). Below you can see if augmenty passes its test suite for the system of interest. Please note these are only the systems augmenty is being actively tested on, if you run on a similar system (e.g. an earlier version of Linux) augmenty will likely run there as well, if not please create an issue.
 
-| Operating System | Status                                                                                                                                                                                                                  |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ubuntu/Linux (Latest)  | [![github actions pytest ubuntu](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml)     |
-| MacOS (Catalina) | [![github actions pytest catalina](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_mac_catalina.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_mac_catalina.yml) |
-| Windows (Latest) | [![github actions pytest windows](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_windows.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_windows.yml)            |
+| Operating System      | Status                                                                                                                                                                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ubuntu/Linux (Latest) | [![github actions pytest ubuntu](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest-cov-comment.yml)     |
+| MacOS (Catalina)      | [![github actions pytest catalina](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_mac_catalina.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_mac_catalina.yml) |
+| Windows (Latest)      | [![github actions pytest windows](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_windows.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions/workflows/pytest_windows.yml)            |
 
   
 </details>
