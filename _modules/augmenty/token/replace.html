@@ -226,7 +226,7 @@
     <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
     <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
-    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
 
@@ -252,8 +252,15 @@
     <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
             <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-            
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">token_replace_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">)</span></div>
+
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">token_replace_augmenter</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+        <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span>
+        <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
+        <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">,</span>
+        <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
+    <span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">token_replace_augmenter</span><span class="p">(</span>
@@ -263,7 +270,7 @@
     <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
     <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
-    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
@@ -290,16 +297,21 @@
 
 <div class="viewcode-block" id="create_wordnet_synonym_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_wordnet_synonym_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"wordnet_synonym.v1"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_wordnet_synonym_augmenter</span><span class="p">(</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">respect_pos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None, </span>
+<span class="sd">        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None,</span>
 <span class="sd">            in which case the lang is based on the language of the spacy nlp pipeline used.</span>
 <span class="sd">            Possible language codes include:</span>
 <span class="sd">            "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        respect_pos (bool, optional): Should POS-tag be respected? Defaults to True.</span>
 <span class="sd">        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.</span>
 <span class="sd">        keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.</span>
 
@@ -311,6 +323,7 @@
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">nltk</span> <span class="k">import</span> <span class="n">download</span>
+
         <span class="n">download</span><span class="p">(</span><span class="s2">"wordnet"</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">download</span><span class="p">(</span><span class="s2">"omw"</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">wordnet</span>
@@ -354,20 +367,28 @@
         <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span>
+        <span class="n">respect_pos</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">lang</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lang</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">lang</span>
 
         <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-            <span class="n">word</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
-            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="n">upos_wn_dict</span><span class="p">:</span>
-                <span class="n">syns</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">upos_wn_dict</span><span class="p">[</span><span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">)</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="p">(</span><span class="n">respect_pos</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="n">upos_wn_dict</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">respect_pos</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">syns</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">upos_wn_dict</span><span class="p">[</span><span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">syns</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">syns</span><span class="p">:</span>
-                    <span class="n">syn</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">syns</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">lemma_names</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-                        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+                    <span class="n">rep</span> <span class="o">=</span> <span class="p">{</span><span class="n">l</span> <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="n">syns</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">syn</span><span class="o">.</span><span class="n">lemma_names</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">)}</span>
+                    <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">:</span>
+                        <span class="n">rep</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">rep</span><span class="p">:</span>
+                        <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+                        <span class="k">return</span> <span class="n">text</span>
             <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
         <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
@@ -379,7 +400,12 @@
         <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
-        <span class="n">wordnet_synonym_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="n">lang_dict</span><span class="p">[</span><span class="n">lang</span><span class="p">],</span> <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
+        <span class="n">wordnet_synonym_augmenter</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+        <span class="n">lang</span><span class="o">=</span><span class="n">lang_dict</span><span class="p">[</span><span class="n">lang</span><span class="p">],</span>
+        <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
+        <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
+        <span class="n">respect_pos</span><span class="o">=</span><span class="n">respect_pos</span><span class="p">,</span>
     <span class="p">)</span></div>
 </pre></div>
       </article>
