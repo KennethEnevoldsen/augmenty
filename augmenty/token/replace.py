@@ -74,7 +74,7 @@ def token_replace_augmenter(
 
 @spacy.registry.augmenters("wordnet_synonym.v1")
 def create_wordnet_synonym_augmenter(
-    level: float, lang: Optional[str] = None, getter: Callable = lambda token: token.pos_
+    level: float, lang: Optional[str] = None, getter: Callable = lambda token: token.pos_, keep_titlecase: bool=True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
@@ -84,6 +84,7 @@ def create_wordnet_synonym_augmenter(
             Possible language codes include:
             "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
         level (float): Probability to replace token given that it is in synonym dictionary.
+        keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -136,6 +137,7 @@ def create_wordnet_synonym_augmenter(
         level: float,
         lang: Optional[str],
         getter: Callable,
+        keep_titlecase: bool
     ) -> Iterator[Example]:
         if lang is None:
             lang = nlp.lang
@@ -146,7 +148,9 @@ def create_wordnet_synonym_augmenter(
                 syns = wordnet.synsets(word, pos=upos_wn_dict[getter(t)], lang=lang)
                 if syns:
                     syn = random.sample(syns, k=1)[0]
-                    return random.sample(syn.lemma_names(lang=lang), k=1)[0]
+                    text = random.sample(syn.lemma_names(lang=lang), k=1)[0]
+                    if keep_titlecase is True and t.is_title is True:
+                        return text.capitalize()
             return t.text
 
         example_dict = example.to_dict()
@@ -158,5 +162,5 @@ def create_wordnet_synonym_augmenter(
         yield example.from_dict(doc, example_dict)
 
     return partial(
-        wordnet_synonym_augmenter, level=level, lang=lang_dict[lang], getter=getter
+        wordnet_synonym_augmenter, level=level, lang=lang_dict[lang], getter=getter, keep_titlecase=keep_titlecase,
     )
