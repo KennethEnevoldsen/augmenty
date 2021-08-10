@@ -125,3 +125,24 @@ def keyboards() -> List[str]:
     >>> keyboards = augmenty.keyboards()
     """
     return list(registry.keyboards.get_all().keys())
+
+
+def meta() -> Dict[str, dict]:
+    """Returns a a dictionary containing metadata for each augmenter.
+
+    Returns:
+        Dict[str, dict]: A dictionary of meta data
+
+    Example:
+    >>> metadata = augmenty.meta()
+    >>> metadata["token_swap.v1"]
+    """
+    import json
+    import pathlib
+    import os
+
+    p = pathlib.Path(__file__).parent.resolve()
+    p = os.path.join(p, "meta.json")
+    with open(p) as f:
+        r = json.load(f)
+    return r
