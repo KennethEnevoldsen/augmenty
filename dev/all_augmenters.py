@@ -41,7 +41,7 @@ for aug, f in sorted(augmenty.augmenters().items()):
                 aug_refs_strings.append(ref)
 
     # Augmenter name, description, respects, references
-    table_list.append((aug, desc, respects, ", ".join(aug_refs_strings)))
+    table_list.append((md.bold(aug), desc, respects, ", ".join(aug_refs_strings)))
 
 
 md.add(md.title(1, "Overview of Augmenters"))
