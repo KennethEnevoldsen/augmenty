@@ -7,7 +7,7 @@
   <meta property="og:title" content="Overview of Augmenters" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="augmenters_overview.html" />
-  <meta property="og:description" content="The following tables list all the available augmenters in augmenty, along with a short description.It also list all of the labels which the augmenters respects. For instance, if you wish to train a..." />
+  <meta property="og:description" content="The following tables list all the available augmenters in augmenty, along with a short description. It also contains list all of the labels which the augmenters respects. For instance, if you wish ..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Character-based" href="augmenty.character.html" /><link rel="prev" title="Creating and Contributing Augmenters" href="adding_an_augmenter.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.08.11.beta42"/>
@@ -218,124 +218,259 @@
         </div>
         <section class="tex2jax_ignore mathjax_ignore" id="overview-of-augmenters">
 <h1>Overview of Augmenters<a class="headerlink" href="#overview-of-augmenters" title="Permalink to this headline">¶</a></h1>
-<p>The following tables list all the available augmenters in augmenty, along with a short description.It also list all of the labels which the augmenters respects. For instance, if you wish to train an namedentity recognition pipeline you should not use augmenters which does not respect entity labels. Lastly the package includes a list of references to any data or packages used as well as references to example application of the augmenter in practice.</p>
+<p>The following tables list all the available augmenters in augmenty, along with a short description. It also contains list all of the labels which the augmenters respects. For instance, if you wish to train a named entity recognition pipeline you should not use augmenters which do not respect entity labels. Similarly, a hint is also given to whether the augmenter is recommended for training or evaluation. Lastly, the package includes a list of references to any data or packages used as well as references to example application of the augmenter in practice.</p>
 <div class="table-wrapper"><table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="text-align:center head"><p>Augmenter name</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Respects</p></th>
+<th class="head"><p>Token</p></th>
+<th class="head"><p>Dependency parsing</p></th>
+<th class="head"><p>Entity</p></th>
+<th class="head"><p>Document</p></th>
+<th class="head"><p>Training</p></th>
+<th class="head"><p>Evaluation</p></th>
 <th class="head"><p>References</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:center"><p><strong>char_replace.v1</strong></p></td>
 <td><p>Creates an augmenter that replaces a character with a random character from replace dict</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>char_replace_random.v1</strong></p></td>
-<td><p>Creates an augmenter that replacies a character with a random character from the</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Creates an augmenter that replaces a character with a random character from the     keyboard.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>char_swap.v1</strong></p></td>
-<td><p>Creates an augmenter that swaps two characters in a token with a given probability.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Creates an augmenter that swaps two neighbouring characters in a token with a given probability.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>conditional_token_casing.v1</strong></p></td>
-<td><p>Creates an augmenter that conditionally cases the first letter of a token based on the getter.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Creates an augmenter that conditionally cases the first letter of a token based on the getter.     Either lower og upper needs to specifiedd as True.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>da_historical_noun_casing.v1</strong></p></td>
 <td><p>Creates an augmenter that capitalizes nouns.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>da_æøå_replace.v1</strong></p></td>
 <td><p>Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>ents_format.v1</strong></p></td>
 <td><p>Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>ents_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces an entity based on a dictionary lookup.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>grundtvigian_spacing_augmenter.v1</strong></p></td>
-<td><p>The Danish philosopher N.F.S. Grundtvig used letter spacing to add</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>The Danish philosopher N.F.S. Grundtvig used letter spacing to add      e m p h a s i s  to words (Baunvig, Jarvis and Nielbo, 2020).      This augmenter randomly adds letter spacing emphasis to words.      This augmentation which are human readable, but which are clearly      challenging for systems using a white-space centric tokenization.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>keystroke_error.v1</strong></p></td>
 <td><p>Creates a augmenter which augments a text with plausible typos based on keyboard distance.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>per_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>random_casing.v1</strong></p></td>
 <td><p>Create an augment that randomly changes the casing of the document.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>random_starting_case.v1</strong></p></td>
 <td><p>Creates an augmenter which randomly cases the first letter in each token.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>remove_spacing.v1</strong></p></td>
 <td><p>Creates an augmenter that removes spacing with a given probability.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>spacing_insertion.v1</strong></p></td>
 <td><p>Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>spacy.lower_case.v1</strong></p></td>
-<td><p>Create a data augmentation callback that converts documents to lowercase.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Create a data augmentation callback that converts documents to lowercase.     The callback can be added to a corpus or other data iterator during training.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p><strong>spacy.orth_variants.v1</strong></p></td>
-<td><p>Create a data augmentation callback that uses orth-variant replacement.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>spongebob.v1</strong></p></td>
 <td><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>token_replace.v1</strong></p></td>
+<tr class="row-even"><td class="text-align:center"><p><strong>token_dict_replace.v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>token_swap.v1</strong></p></td>
+<tr class="row-odd"><td class="text-align:center"><p><strong>token_replace.v1</strong></p></td>
+<td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><strong>token_swap.v1</strong></p></td>
 <td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p>Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>upper_case.v1</strong></p></td>
+<tr class="row-odd"><td class="text-align:center"><p><strong>upper_case.v1</strong></p></td>
 <td><p>Create an augmenter that converts documents to uppercase.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><strong>word_embedding.v1</strong></p></td>
+<td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+<td><p>✅</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p><strong>wordnet_synonym.v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
-<td><p>token labels, dependency parsing, entity labels, document labels</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 <td><p>Data: <a class="reference external" href="https://www.google.com/books?hl=da&amp;lr=&amp;id=Rehu8OOzMIMC&amp;oi=fnd&amp;pg=PR11&amp;dq=WordNet:+An+electronic+lexical+database&amp;ots=IsieQmWUg8&amp;sig=06asxxcQ1I3i9C1TcEcz7bv62Kw">Miller (1998) (1998)</a>, Package: <a class="reference external" href="https://www.nltk.org">Steven (2006)</a>, Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
 </tr>
 </tbody>
