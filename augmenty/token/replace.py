@@ -219,7 +219,7 @@ def token_replace_augmenter(
         __replace = replace
 
     example_dict = example.to_dict()
-    example_dict["token_annotation"]["ORTH"] = [__replace(t) if random.random() < level else t for t in example.reference]
+    example_dict["token_annotation"]["ORTH"] = [__replace(t) if random.random() < level else t.text for t in example.reference]
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield example.from_dict(doc, example_dict)
@@ -280,18 +280,18 @@ def create_word_embedding_augmenter(
             vocab = nlp.vocab
         if vocab.vectors.shape == (0, 0):
             raise ValueError("Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue.")
-        if t.text not in vocab:
-            return t.text
-
-        v = vocab.get_vector(t.text)
-        v = np.reshape(v, (1,-1))
-        ms = vocab.vectors.most_similar(v, n=n)
-        rep = [vocab.strings[w] for w in ms[0][0]]
-        if ignore_casing is True:
-            rep = [w for w in rep if w.lower() != t.text.lower()]
-        else:
-            rep = [w for w in rep if w != t.text]
-        return random.choice(rep)
+        if t.text in vocab:
+            v = vocab.get_vector(t.text)
+            v = np.reshape(v, (1,-1))
+            ms = vocab.vectors.most_similar(v, n=n)
+            rep = [vocab.strings[w] for w in ms[0][0]]
+            if ignore_casing is True:
+                rep = [w for w in rep if w.lower() != t.text.lower()]
+            else:
+                rep = [w for w in rep if w != t.text]
+            if rep:
+                return random.choice(rep)
+        return t.text
 
     __replace = partial(replace, n=n, ignore_casing=ignore_casing, nlp=nlp)
     return partial(token_replace_augmenter, replace=__replace, keep_titlecase=keep_titlecase, level=level)
