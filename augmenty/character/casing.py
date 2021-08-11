@@ -34,7 +34,7 @@ def create_random_casing_augmenter(
 
 
 def random_casing_augmenter(
-    nlp: Language, example: Example, *, level: float
+    nlp: Language, example: Example, level: float
 ) -> Iterator[Example]:
     def __casing(c):
         if random.random() < level:
