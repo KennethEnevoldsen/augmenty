@@ -30,6 +30,28 @@ pip install augmenty[all]
 
 For more detailed instructions on installing augmenty, including specific language support, see the [installation instructions](https://kennethenevoldsen.github.io/augmenty/installation).
 
+## 🍒 Simple Example
+The following shows a simple example of how you can quickly augment text using Augmenty. For more on using augmenty see the [usage guides].
+
+```python
+import spacy
+import augmenty
+
+nlp = spacy.load("en_core_web_sm")
+
+docs = nlp.pipe(["Augmenty is a great tool for text augmentation"])
+
+entity_augmenter = augmenty.load("ents_replace.v1", 
+                                 ent_dict = {{"ORG": [["spaCy"], ["spaCy", "Universe"]]})
+
+for doc in augmenty.docs(docs, augmenter=entity_augmenter)
+    print(doc)
+```
+
+```
+spaCy Universe is a great tool for text augmentation.
+```
+
 ## 📖 Documentation
 
 | Documentation              |                                                                             |
@@ -39,7 +61,6 @@ For more detailed instructions on installing augmenty, including specific langua
 | 🎛 **[API References]**     | The detailed reference for augmenty's API. Including function documentation |
 | 🍒 **[Augmenters]**         | Contains a full list of current augmenters in augmenty.                     |
 | 😎 **[Demo]**         | A simple streamlit demo to try out the augmenters.                    |
-
 
 
 [usage guides]: https://kennethenevoldsen.github.io/augmenty/introduction.html
