@@ -151,12 +151,12 @@ def test_create_word_embedding_augmenter():
     
     aug = augmenty.load("word_embedding.v1", level=1)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
-    assert docs[0].text in ['CATS', 'CATs', 'cats', 'Cats', 'kitten', 'KITTEN', 'Kitten']
+    assert docs[0].text in ['FELINE', 'cats', 'FELINES', 'TABBY', 'KENNEL', 'dog', 'kitty', 'sanrio', 'pet']
 
     aug = augmenty.load("word_embedding.v1", level=1, ignore_casing=False)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
-    assert docs[0].text in ['CAT', 'Cat', 'CATS', 'CATs', 'cats', 'Cats', 'kitten', 'KITTEN', 'Kitten']
+    assert docs[0].text in ['FELINE', 'cats', 'FELINES', 'TABBY', 'KENNEL', 'dog', 'kitty', 'sanrio', 'pet']
 
     aug = augmenty.load("word_embedding.v1", level=1, nlp=nlp)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
-    assert docs[0].text in ['CATS', 'CATs', 'cats', 'Cats', 'kitten', 'KITTEN', 'Kitten']
+    assert docs[0].text in ['FELINE', 'cats', 'FELINES', 'TABBY', 'KENNEL', 'dog', 'kitty', 'sanrio', 'pet']
