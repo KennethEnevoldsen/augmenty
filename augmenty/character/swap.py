@@ -19,7 +19,7 @@ from ..augment_utilities import make_text_from_orth
 def create_char_swap_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that swaps two characters in a token with a given probability.
+    """Creates an augmenter that swaps two neighbouring characters in a token with a given probability.
 
     Args:
         level (float): probability to replace a character.
