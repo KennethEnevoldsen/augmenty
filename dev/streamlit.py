@@ -21,7 +21,7 @@ import random
 random.seed(1)
 
 st.title("Augmentation using 🍒 Augmenty")
-st.markdown("Not all augmenters are included as some require external sources. This demo uses the SpaCy model `en_core_web_lg` for tagging and named entity recognition.")
+st.markdown("Not all augmenters are included as some require external sources. This demo uses the SpaCy model `en_core_web_md` for tagging and named entity recognition.")
 
 not_relevant = {
     "spacy.orth_variants.v1",
@@ -33,7 +33,7 @@ not_relevant = {
 }
 augmenters = augmenty.augmenters()
 augmenter_list = sorted([a for a in augmenters if a not in not_relevant])
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_md")
 
 default = "Write the text you wish augmented here!"
 example = st.text_area("Example:", default)

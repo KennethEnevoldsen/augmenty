@@ -144,7 +144,7 @@ def test_create_token_swap_augmenter(nlp):
 
 
 def test_create_word_embedding_augmenter():
-    nlp = spacy.load("en_core_web_lg")
+    nlp = spacy.load("en_core_web_md")
     text = "cat"
 
     doc = nlp(text)
