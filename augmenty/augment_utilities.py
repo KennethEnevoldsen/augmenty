@@ -1,13 +1,12 @@
 """Utility functions used for augmentation."""
 
-from spacy.language import Language
-from spacy.training import Example
-
-from spacy.tokens import Doc
-
 import random
-
+from functools import partial
 from typing import Callable, Iterable, Iterator, List
+
+from spacy.language import Language
+from spacy.tokens import Doc
+from spacy.training import Example
 
 
 def combine(
@@ -57,23 +56,27 @@ def set_doc_level(
 
 
 def yield_original(
-    augmenter: Callable[[Language, Example], Iterator[Example]]
+    augmenter: Callable[[Language, Example], Iterator[Example]],
+    doc_level: float=1.0
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Wraps and augmented such that it yields both the original and augmented example.
 
     Args:
         augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters.
+        doc_level (float, optional): The percentage of documents the augmenter should be applied to.
+            Only yield the original when the original doc is augmented. 
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter, which now yields both the original and augmented example.
     """
 
-    def __augment(nlp: Language, example: Example):
-        for e in augmenter(nlp, example):
-            yield e
+    def __augment(nlp: Language, example: Example, level: float):
+        if random.random < level:
+            for e in augmenter(nlp, example):
+                yield e
         yield example
 
-    return __augment
+    return partial(__augment, level=doc_level)
 
 
 def make_text_from_orth(example_dict: dict) -> str:
