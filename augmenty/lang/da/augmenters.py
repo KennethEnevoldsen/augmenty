@@ -1,24 +1,33 @@
-from functools import partial
 from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
 from spacy.training import Example
 
-from ...character import char_replace_augmenter
-from ...token.casing import create_conditional_casing_augmenter
+from ...character import create_char_replace_augmenter
+from ...token import create_conditional_token_casing_augmenter
 
-@spacy.registry.augmenters("æøå_augmenter.v1")
-def create_æøå_augmenter(
+
+@spacy.registry.augmenters("da_æøå_replace.v1")
+def create_da_æøå_replace_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Augments æ, ø, and å into their spelling variants ae, oe, aa.
+    """Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.
 
     Args:
         level (float): probability to augment æ, ø or å.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The desired augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> from spacy.lang.en import English
+        >>> nlp = English()
+        >>> augmenter = augmenty.load("da_æøå_replace.v1", level=0.1)
+        >>> texts = ["æ ø Å"]
+        >>> list(augmenty.texts(texts, augmenter, nlp))
+        ["ae oe Aa"]
     """
     replace_dict = {
         "æ": ["ae"],
@@ -28,31 +37,25 @@ def create_æøå_augmenter(
         "Ø": ["Oe"],
         "Å": ["Aa"],
     }
-    return partial(
-        char_replace_augmenter,
-        replacement=replace_dict,
-        level=level
-    )
+    return create_char_replace_augmenter(replace=replace_dict, level=level)
 
-@spacy.registry.augmenters("historical_noun_casing_augmenter.v1")
-def create_historical_noun_casing_augmenter() -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that changes all nouns to uppercase, reflecting that 
-     cases the first letter a token based on the getter.
-    Either lower og upper needs to specifiedd as True.
+
+@spacy.registry.augmenters("da_historical_noun_casing.v1")
+def create_da_historical_noun_casing_augmenter(level: float) -> Callable[
+    [Language, Example], Iterator[Example]
+]:
+    """Creates an augmenter that capitalizes nouns.
 
     Args:
-        conditional (Callable):
-        lower (Optional[bool], optional): If the conditional returns True should the casing the lowercased.
-            Default to None.
-        upper (Optional[bool], optional): If the conditional returns True should the casing the uppercased.
-            Default to None.
+        level (float): The probabiliy to upper case a noun.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
+
     def conditional(token):
         if token.pos_ == "NOUN":
             return True
         return False
 
-    return create_conditional_casing_augmenter(conditional=conditional, upper=True)
+    return create_conditional_token_casing_augmenter(conditional=conditional, upper=True, level=level)

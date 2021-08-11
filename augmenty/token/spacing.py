@@ -6,7 +6,7 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
-from ..augment_utilites import make_text_from_orth
+from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("grundtvigian_spacing_augmenter.v1")
@@ -35,7 +35,7 @@ def grundtvigian_spacing_augmenter(
 ) -> Iterator[Example]:
     def __spacing(t):
         if random.random() < level:
-            return " ".join([c for c in text])
+            return " ".join([c for c in t.text])
         return t.text
 
     example_dict = example.to_dict()
@@ -45,34 +45,36 @@ def grundtvigian_spacing_augmenter(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_spacing_augmenter.v1")
-def create_random_spacing_augmenter(
+@spacy.registry.augmenters("spacing_insertion.v1")
+def create_spacing_insertion_augmenter(
     level: float,
+    max_insertions: int = 1,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Randomly adds a space after a chara cter. Tokens are kept the same.
+    """Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.
 
     Args:
         level (float): The probability to add a space after a character.
+        max_insertions (int, optional): Maximum number of insertions pr. word.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
-    return partial(random_spacing_augmenter, level=level)
+    return partial(spacing_insertion_augmenter, level=level, max_insertions=max_insertions)
 
 
-def random_spacing_augmenter(
-    nlp: Language,
-    example: Example,
-    level: float,
+def spacing_insertion_augmenter(
+    nlp: Language, example: Example, level: float, max_insertions: int
 ) -> Iterator[Example]:
     def __spacing(t):
+        insertions = 0
         text = []
         for c in t.text:
             text.append(c)
-            if random.random() < level:
+            if random.random() < level and insertions < max_insertions:
+                insertions += 1
                 text.append(" ")
-        text = text[:-1] if  text[-1] == " " else text
-        return " ".join(text)
+        text = text[:-1] if text[-1] == " " else text
+        return "".join(text)
 
     example_dict = example.to_dict()
     example_dict["token_annotation"]["ORTH"] = [__spacing(t) for t in example.y]

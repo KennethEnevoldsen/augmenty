@@ -1,0 +1,16 @@
+# python
+*.pyc
+__pycache__
+
+# vs code
+.vscode/*
+
+# docs
+docs/_build/*
+
+# mac
+.DS_Store
+
+# coverage report
+.coverage
+dev/pytest-coverage/pytest-coverage.txt
