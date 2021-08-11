@@ -12,7 +12,7 @@ from spacy.training import Example
 def combine(
     augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]]
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Combines a series og spaCy style augmenters.
+    """Combines a series of spaCy style augmenters.
 
     Args:
         augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An list of spaCy augmenters.

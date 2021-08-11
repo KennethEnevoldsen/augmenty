@@ -22,7 +22,7 @@ To get started using augmenty simply install it using pip by running the followi
 pip install augmenty
 ```
 
-Do note that this is a minimal installation. As some augmenters requires additional packages please the following line to install all dependencies.
+Do note that this is a minimal installation. As some augmenters requires additional packages please write the following line to install all dependencies.
 
 ```
 pip install augmenty[all]

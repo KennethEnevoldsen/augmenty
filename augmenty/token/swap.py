@@ -61,7 +61,7 @@ def token_swap_augmenter(
             continue
         if random.random() < level:
             # select which neighbour
-            fb = random.sample([1, -1], k=1)[0]
+            fb = random.choice([1, -1])
 
             min_i = i + fb if 0 < i + fb < n_tok else i - fb
 
