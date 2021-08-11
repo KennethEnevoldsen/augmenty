@@ -89,6 +89,15 @@
         ],
         "use": ["evaluation", "training"]
     },
+    "token_dict_replace.v1": {
+        "respects": [
+            "token labels",
+            "dependency parsing",
+            "entity labels",
+            "document labels"
+        ],
+        "use": ["evaluation", "training"]
+    },
     "wordnet_synonym.v1": {
         "respects": [
             "token labels",
