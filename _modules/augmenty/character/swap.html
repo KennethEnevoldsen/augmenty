@@ -232,7 +232,7 @@
 <span class="k">def</span> <span class="nf">create_char_swap_augmenter</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter that swaps two characters in a token with a given probability.</span>
+    <span class="sd">"""Creates an augmenter that swaps two neighbouring characters in a token with a given probability.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): probability to replace a character.</span>

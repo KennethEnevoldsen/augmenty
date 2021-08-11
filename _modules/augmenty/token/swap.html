@@ -274,7 +274,7 @@
             <span class="k">continue</span>
         <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
             <span class="c1"># select which neighbour</span>
-            <span class="n">fb</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
             <span class="n">min_i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">fb</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">fb</span> <span class="o">&lt;</span> <span class="n">n_tok</span> <span class="k">else</span> <span class="n">i</span> <span class="o">-</span> <span class="n">fb</span>
 

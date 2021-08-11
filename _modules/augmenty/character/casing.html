@@ -247,7 +247,7 @@
 
 
 <span class="k">def</span> <span class="nf">random_casing_augmenter</span><span class="p">(</span>
-    <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="k">def</span> <span class="nf">__casing</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
