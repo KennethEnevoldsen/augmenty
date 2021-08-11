@@ -223,8 +223,8 @@
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 
 
-<div class="viewcode-block" id="create_token_replace_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token_replace_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"token_replace.v1"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_token_replace_augmenter</span><span class="p">(</span>
+<div class="viewcode-block" id="create_token__dict_replace_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token__dict_replace_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"token_dict_replace.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_token__dict_replace_augmenter</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
     <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -247,17 +247,17 @@
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; replace = {"act": ["perform", "move", "action"], }</span>
-<span class="sd">        &gt;&gt;&gt; create_token_replace_augmenter(replace=replace, level=.10)</span>
+<span class="sd">        &gt;&gt;&gt; create_token_dict_replace_augmenter(replace=replace, level=.10)</span>
 <span class="sd">        &gt;&gt;&gt; # or</span>
 <span class="sd">        &gt;&gt;&gt; replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}</span>
-<span class="sd">        &gt;&gt;&gt; create_token_replace_augmenter(replace=replace, level=.10)</span>
+<span class="sd">        &gt;&gt;&gt; create_token_dict_replace_augmenter(replace=replace, level=.10)</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
             <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
-        <span class="n">token_replace_augmenter</span><span class="p">,</span>
+        <span class="n">token_dict_replace_augmenter</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
         <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span>
         <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
@@ -266,7 +266,7 @@
     <span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">token_replace_augmenter</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">token_dict_replace_augmenter</span><span class="p">(</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -413,6 +413,101 @@
         <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
         <span class="n">respect_pos</span><span class="o">=</span><span class="n">respect_pos</span><span class="p">,</span>
     <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">token_replace_augmenter</span><span class="p">(</span>
+    <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
+    <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">replace</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">text</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">__replace</span> <span class="o">=</span> <span class="n">replace</span>
+
+    <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="k">else</span> <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
+
+<div class="viewcode-block" id="create_token_replace_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token_replace_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"token_replace.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_token_replace_augmenter</span><span class="p">(</span>
+    <span class="n">replace</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+    <span class="sd">"""Creates an augmenter which replaces a token based on a replace function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        level (float): Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        replace (Callable[[Token], str): A callable which takes a spaCy Token as input and returns the replaces word as a string.</span>
+<span class="sd">        keep_titlecase (bool, optional): If original text was uppercased cased should replaces text also be? Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; def remove_vowels(token):</span>
+<span class="sd">            vowels = ['a','e','i','o','u', 'y']</span>
+<span class="sd">            non_vowels = [c for c in token.text if c.lower() not in vowels]</span>
+<span class="sd">            return ''.join(non_vowels)</span>
+<span class="sd">        &gt;&gt;&gt; remove_vowel_augmenter = create_token_replace_augmenter(replace=remove_vowels, level=.10)</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">token_replace_augmenter</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="create_word_embedding_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_word_embedding_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"word_embedding.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_word_embedding_augmenter</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+    <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">nlp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Language</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+    <span class="sd">"""Creates an augmenter which replaces a token based on a replace function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        level (float): Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        n (int, optional): Number of most similar word vectors to sample from </span>
+<span class="sd">        nlp (Optional[Language], optional): A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn't contain word vectors.</span>
+<span class="sd">        keep_titlecase (bool, optional): If original text was uppercased cased should replaces text also be? Defaults to True.</span>
+<span class="sd">        ignore_case (bool, optional): The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing? Default to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; nlp = spacy.load('en_core_web_lg')</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Token</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nlp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vocab</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">vocab</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vocab</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span>
+        <span class="k">if</span> <span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="n">v</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">rep</span> <span class="o">=</span> <span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">strings</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">rep</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">rep</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rep</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">rep</span> <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span>
+
+    <span class="n">__replace</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">replace</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">token_replace_augmenter</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">__replace</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 </pre></div>
       </article>
       <footer>

@@ -284,7 +284,7 @@
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">augmenter</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">e</span>
         <span class="k">yield</span> <span class="n">example</span>
