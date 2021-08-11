@@ -41,6 +41,17 @@ def test_yield_original(nlp):
     assert len(augmented_docs) == 2
 
 
+def test_repeat(nlp):
+    texts = ["Augmenty is a wonderful tool for augmentation."]
+
+    aug = augmenty.load("upper_case.v1", level=1)
+
+    aug = augmenty.repeat(aug, n=3)
+
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
+
+    assert len(augmented_docs) == 3
+
 
 def test_set_doc_level(nlp):
     texts = ["Augmenty is a wonderful tool for augmentation."]

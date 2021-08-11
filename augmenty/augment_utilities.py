@@ -35,7 +35,7 @@ def set_doc_level(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Set the document level at which the tokenizer should be
+    """Set the percantage of examples that the augmenter should be applied to.
 
     Args:
         augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters which you only want to apply to a certain percentage of docs
@@ -51,6 +51,32 @@ def set_doc_level(
         else:
             for e in augmenter(nlp, example):
                 yield e
+
+    return __augment
+
+
+def repeat(
+    augmenter: Callable[[Language, Example], Iterator[Example]],
+    n: int,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Set the document level at which the tokenizer should be
+
+    Args:
+        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter.
+        n (int): Number of times the augmenter should be repeated
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The repeated augmenter
+    
+    Example:
+        >>> augmenter = augmenty.load("char_swap.v1", level=.02)
+        >>> repeated_augmenter = augmenty.repeat(augmenter=aug, n=3)
+    """
+
+    def __augment(nlp: Language, example: Example):
+        for i in range(n):
+            for e in augmenter(nlp, example):
+                yield e 
 
     return __augment
 
