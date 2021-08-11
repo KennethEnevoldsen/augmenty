@@ -19,7 +19,7 @@ augmenty.token.replace
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: token_replace_augmenter
+   :exclude-members: token_replace_augmenter, token_dict_replace_augmenter
 
 
 

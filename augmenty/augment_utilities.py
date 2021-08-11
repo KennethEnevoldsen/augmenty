@@ -71,7 +71,7 @@ def yield_original(
     """
 
     def __augment(nlp: Language, example: Example, level: float):
-        if random.random < level:
+        if random.random() < level:
             for e in augmenter(nlp, example):
                 yield e
         yield example

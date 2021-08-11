@@ -28,6 +28,7 @@ not_relevant = {
     "char_replace.v1",
     "conditional_token_casing.v1",
     "ents_format.v1",
+    "token_replace.v1"
 
 }
 augmenters = augmenty.augmenters()

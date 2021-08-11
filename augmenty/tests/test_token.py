@@ -47,7 +47,7 @@ def test_create_conditional_token_casing_augmenter(nlp):
     assert next(docs).text == solution
 
 
-def test_create_token_replace_augmenter(nlp):
+def test_create_token_dict_replace_augmenter(nlp):
 
     doc1 = Doc(
         nlp.vocab, words=["I", "am", "happy", "!"], spaces=[True, True, False, False]
@@ -59,7 +59,7 @@ def test_create_token_replace_augmenter(nlp):
         spaces=[True, True, True, False, False],
     )
 
-    aug = spacy.registry.augmenters.get("token_replace.v1")(
+    aug = spacy.registry.augmenters.get("token_dict_replace.v1")(
         level=1,
         replace={
             "happy": ["cheery", "joyful"],
@@ -141,3 +141,22 @@ def test_create_token_swap_augmenter(nlp):
     docs = augmenty.docs([doc1, doc2], augmenter=aug, nlp=nlp)
     assert next(docs).text in ["I happy am ! New ", "am I happy ! New "]
     assert next(docs).text in ["I happy am ! New ", "I am happy ! New "]
+
+
+def test_create_word_embedding_augmenter():
+    nlp = spacy.load("en_core_web_lg")
+    text = "cat"
+
+    doc = nlp(text)
+    
+    aug = augmenty.load("word_embedding.v1", level=1)
+    docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
+    assert docs[0].text in ['CATS', 'CATs', 'cats', 'Cats', 'kitten', 'KITTEN', 'Kitten']
+
+    aug = augmenty.load("word_embedding.v1", level=1, ignore_casing=False)
+    docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
+    assert docs[0].text in ['CAT', 'Cat', 'CATS', 'CATs', 'cats', 'Cats', 'kitten', 'KITTEN', 'Kitten']
+
+    aug = augmenty.load("word_embedding.v1", level=1, nlp=nlp)
+    docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
+    assert docs[0].text in ['CATS', 'CATs', 'cats', 'Cats', 'kitten', 'KITTEN', 'Kitten']

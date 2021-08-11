@@ -10,8 +10,8 @@ from spacy.tokens import Token
 from ..augment_utilities import make_text_from_orth
 
 
-@spacy.registry.augmenters("token_replace.v1")
-def create_token_replace_augmenter(
+@spacy.registry.augmenters("token_dict_replace.v1")
+def create_token__dict_replace_augmenter(
     level: float,
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
     ignore_casing: bool = True,
@@ -34,17 +34,17 @@ def create_token_replace_augmenter(
 
     Examples:
         >>> replace = {"act": ["perform", "move", "action"], }
-        >>> create_token_replace_augmenter(replace=replace, level=.10)
+        >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
         >>> # or
         >>> replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}
-        >>> create_token_replace_augmenter(replace=replace, level=.10)
+        >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
     """
     if ignore_casing is True:
         for k in replace:
             replace[k.lower()] = replace[k]
 
     return partial(
-        token_replace_augmenter,
+        token_dict_replace_augmenter,
         level=level,
         replace=replace,
         getter=getter,
@@ -53,7 +53,7 @@ def create_token_replace_augmenter(
     )
 
 
-def token_replace_augmenter(
+def token_dict_replace_augmenter(
     nlp: Language,
     example: Example,
     level: float,
@@ -200,3 +200,98 @@ def create_wordnet_synonym_augmenter(
         keep_titlecase=keep_titlecase,
         respect_pos=respect_pos,
     )
+
+
+def token_replace_augmenter(
+    nlp: Language,
+    example: Example,
+    level: float,
+    replace: Callable[[Token], str],
+    keep_titlecase: bool,
+) -> Iterator[Example]:
+    if keep_titlecase is True:
+        def __replace(t) -> str:
+            text = replace(t)
+            if t.is_title is True:
+                text = text.capitalize()
+            return text
+    else:
+        __replace = replace
+
+    example_dict = example.to_dict()
+    example_dict["token_annotation"]["ORTH"] = [__replace(t) if random.random() < level else t for t in example.reference]
+    text = make_text_from_orth(example_dict)
+    doc = nlp.make_doc(text)
+    yield example.from_dict(doc, example_dict)
+
+@spacy.registry.augmenters("token_replace.v1")
+def create_token_replace_augmenter(
+    replace: Callable[[Token], str],
+    keep_titlecase: bool=True,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Creates an augmenter which replaces a token based on a replace function.
+
+    Args:
+        level (float): Probability to replace token given that it is in synonym dictionary.
+        replace (Callable[[Token], str): A callable which takes a spaCy Token as input and returns the replaces word as a string.
+        keep_titlecase (bool, optional): If original text was uppercased cased should replaces text also be? Defaults to True.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Examples:
+        >>> def remove_vowels(token):
+            vowels = ['a','e','i','o','u', 'y']
+            non_vowels = [c for c in token.text if c.lower() not in vowels]
+            return ''.join(non_vowels)
+        >>> remove_vowel_augmenter = create_token_replace_augmenter(replace=remove_vowels, level=.10)
+    """
+    return partial(token_replace_augmenter, replace=replace, keep_titlecase=keep_titlecase)
+
+@spacy.registry.augmenters("word_embedding.v1")
+def create_word_embedding_augmenter(
+    level=float,
+    n: int=10,
+    nlp: Optional[Language]=None,
+    keep_titlecase: bool=True, 
+    ignore_casing: bool=True,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Creates an augmenter which replaces a token based on a replace function.
+
+    Args:
+        level (float): Probability to replace token given that it is in synonym dictionary.
+        n (int, optional): Number of most similar word vectors to sample from 
+        nlp (Optional[Language], optional): A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn't contain word vectors.
+        keep_titlecase (bool, optional): If original text was uppercased cased should replaces text also be? Defaults to True.
+        ignore_case (bool, optional): The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing? Default to True.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Examples:
+        >>> nlp = spacy.load('en_core_web_lg')
+    """
+    import numpy as np
+
+    def replace(t: Token, n: int, ignore_casing: bool, nlp: Language) -> str:
+        if nlp is None:
+            vocab = t.doc.vocab
+        else:
+            vocab = nlp.vocab
+        if vocab.vectors.shape == (0, 0):
+            raise ValueError("Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue.")
+        if t.text not in vocab:
+            return t.text
+
+        v = vocab.get_vector(t.text)
+        v = np.reshape(v, (1,-1))
+        ms = vocab.vectors.most_similar(v, n=n)
+        rep = [vocab.strings[w] for w in ms[0][0]]
+        if ignore_casing is True:
+            rep = [w for w in rep if w.lower() != t.text.lower()]
+        else:
+            rep = [w for w in rep if w != t.text]
+        return random.choice(rep)
+
+    __replace = partial(replace, n=n, ignore_casing=ignore_casing, nlp=nlp)
+    return partial(token_replace_augmenter, replace=__replace, keep_titlecase=keep_titlecase, level=level)
