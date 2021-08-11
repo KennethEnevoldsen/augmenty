@@ -81,7 +81,7 @@ def char_replace_augmenter(
         t_ = []
         for i, c in enumerate(t.text):
             if random.random() < level and c in replace:
-                c = random.sample(replace[c], k=1)[0]
+                c = random.choice(replace[c])
             t_.append(c)
         return "".join(t_)
 
