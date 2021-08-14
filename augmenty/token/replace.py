@@ -241,9 +241,9 @@ def create_token_replace_augmenter(
 
     Examples:
         >>> def remove_vowels(token):
-            vowels = ['a','e','i','o','u', 'y']
-            non_vowels = [c for c in token.text if c.lower() not in vowels]
-            return ''.join(non_vowels)
+        ...    vowels = ['a','e','i','o','u', 'y']
+        ...    non_vowels = [c for c in token.text if c.lower() not in vowels]
+        ...    return ''.join(non_vowels)
         >>> remove_vowel_augmenter = create_token_replace_augmenter(replace=remove_vowels, level=.10)
     """
     return partial(token_replace_augmenter, replace=replace, keep_titlecase=keep_titlecase)
