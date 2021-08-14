@@ -53,6 +53,13 @@ def create_conditional_token_casing_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
+    
+    Example:
+        >>> def is_pronoun(token):
+        ... if token.pos_ == "PRON":
+        ...    return True
+        ... return False
+        >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True, conditional=is_pronoun)
     """
     if upper == lower or (upper is not True and lower is not True):
         raise ValueError(
