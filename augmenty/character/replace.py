@@ -56,13 +56,14 @@ def create_char_replace_augmenter(
     """Creates an augmenter that replaces a character with a random character from replace dict
 
     Args:
-        doc_level (float): probability to augment document.
-        char_level (float): probability to augment character, if document is augmented.
+        level (float): probability to augment character, if document is augmented.
         replace (dict): A dictionary denoting which characters denote potentials replace for each character.
-            E.g. {"æ": ["ae"]}
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter function.
+    
+    Example:
+        >>> create_char_replace_augmenter(level=0.02, replace={"æ": ["ae"], "ß": ["ss"]})
     """
     return partial(
         char_replace_augmenter,
