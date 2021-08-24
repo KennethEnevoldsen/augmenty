@@ -1,6 +1,5 @@
 import spacy
 from spacy.lang.da import Danish
-from spacy.lang.en import English
 from spacy.tokens import Doc
 
 import augmenty
