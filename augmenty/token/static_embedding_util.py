@@ -42,7 +42,13 @@ class static_embedding(BaseModel):
         return [self.vocab.strings[self.keys[w]] for w in d]
 
     def __contains__(self, key: str) -> bool:
-        return key in self.vocab
+        if key in self.vocab:
+            v = self.vocab.get_vector(key)
+            if np.linalg.norm(v) > 0:
+                return True
+        return False
+
+
 
     @staticmethod
     def from_vocab(vocab: Vocab) -> "static_embedding":

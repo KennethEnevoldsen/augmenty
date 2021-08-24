@@ -231,7 +231,7 @@ def create_word_embedding_augmenter(
     n: int = 10,
     nlp: Optional[Language] = None,
     keep_titlecase: bool = True,
-    ignore_casing: bool = True,
+    ignore_casing: bool = True
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which replaces a token based on a replace function.
 
@@ -248,7 +248,6 @@ def create_word_embedding_augmenter(
     Examples:
         >>> nlp = spacy.load('en_core_web_lg')
     """
-    import numpy as np
 
     def replace(t: Token, n: int, ignore_casing: bool, embedding: static_embedding) -> str:
         if embedding.vocab is None:
