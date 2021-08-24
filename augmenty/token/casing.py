@@ -61,12 +61,14 @@ def create_conditional_token_casing_augmenter(
         ... return False
         >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True, conditional=is_pronoun)
     """
-    if upper == lower or (upper is not True and lower is not True):
+    if upper == lower or (upper is None and lower is None):
         raise ValueError(
-            "You need to specify the desired casing the token should get either using lower=True or upper=True."
+            "You need to specify the desired casing the token should get either using lower=True/False or upper=True/False."
         )
     if lower is True:
         upper = False
+    if lower is False:
+        upper = True
     return partial(conditional_casing_augmenter, level=level, upper=upper, conditional=conditional)
 
 
