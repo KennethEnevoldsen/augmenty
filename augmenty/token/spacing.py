@@ -68,12 +68,12 @@ def spacing_insertion_augmenter(
     def __spacing(t):
         insertions = 0
         text = []
-        for c in t.text:
+        for c in t.text[:-1]:  # can't put a space at the end
             text.append(c)
             if random.random() < level and insertions < max_insertions:
                 insertions += 1
                 text.append(" ")
-        text = text[:-1] if text[-1] == " " else text
+        text.append(t.text[-1])
         return "".join(text)
 
     example_dict = example.to_dict()
