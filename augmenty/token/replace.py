@@ -8,6 +8,8 @@ from spacy.training import Example
 from spacy.tokens import Token
 
 from ..augment_utilities import make_text_from_orth
+from .wordnet_util import init_wordnet
+from .static_embedding_util import static_embedding
 
 
 @spacy.registry.augmenters("token_dict_replace.v1")
@@ -111,45 +113,10 @@ def create_wordnet_synonym_augmenter(
     Example:
         >>> english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1, lang="en")
     """
-    try:
-        from nltk import download
-
-        download("wordnet", quiet=True, raise_on_error=True)
-        download("omw", quiet=True, raise_on_error=True)
-        from nltk.corpus import wordnet
-    except ModuleNotFoundError as e:
-        print(e)
-        raise ModuleNotFoundError(
-            "This augmenter requires NLTK. Use `pip install nltk` or `pip install augmenty[all]`"
-        )
-
-    upos_wn_dict = {
-        "VERB": "v",
-        "NOUN": "n",
-        "ADV": "r",
-        "ADJ": "s",
-    }
-
-    lang_dict = {
-        "da": "dan",
-        "ca": "cat",
-        "en": "eng",
-        "eu": "eus",
-        "fa": "fas",
-        "fi": "fin",
-        "fr": "fre",
-        "gl": "glg",
-        "he": "heb",
-        "id": "ind",
-        "it": "ita",
-        "ja": "jpn",
-        "nn": "nno",
-        "no": "nob",
-        "pl": "pol",
-        "pt": "por",
-        "es": "spa",
-        "th": "tha",
-    }
+    init_wordnet()
+    from nltk.corpus import wordnet
+    from .wordnet_util import upos_wn_dict
+    from .wordnet_util import lang_wn_dict
 
     def wordnet_synonym_augmenter(
         nlp: Language,
@@ -162,11 +129,13 @@ def create_wordnet_synonym_augmenter(
     ) -> Iterator[Example]:
         if lang is None:
             lang = nlp.lang
-            lang = lang_dict[lang]
+            lang = lang_wn_dict[lang]
 
         def __replace(t):
             word = t.text.lower()
-            if random.random() < level and (respect_pos is False or getter(t) in upos_wn_dict):
+            if random.random() < level and (
+                respect_pos is False or getter(t) in upos_wn_dict
+            ):
                 if respect_pos is True:
                     syns = wordnet.synsets(word, pos=upos_wn_dict[getter(t)], lang=lang)
                 else:
@@ -191,7 +160,7 @@ def create_wordnet_synonym_augmenter(
         yield example.from_dict(doc, example_dict)
 
     if lang:
-        lang = lang_dict[lang]
+        lang = lang_wn_dict[lang]
     return partial(
         wordnet_synonym_augmenter,
         level=level,
@@ -210,24 +179,29 @@ def token_replace_augmenter(
     keep_titlecase: bool,
 ) -> Iterator[Example]:
     if keep_titlecase is True:
+
         def __replace(t) -> str:
             text = replace(t)
             if t.is_title is True:
                 text = text.capitalize()
             return text
+
     else:
         __replace = replace
 
     example_dict = example.to_dict()
-    example_dict["token_annotation"]["ORTH"] = [__replace(t) if random.random() < level else t.text for t in example.reference]
+    example_dict["token_annotation"]["ORTH"] = [
+        __replace(t) if random.random() < level else t.text for t in example.reference
+    ]
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield example.from_dict(doc, example_dict)
 
+
 @spacy.registry.augmenters("token_replace.v1")
 def create_token_replace_augmenter(
     replace: Callable[[Token], str],
-    keep_titlecase: bool=True,
+    keep_titlecase: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which replaces a token based on a replace function.
 
@@ -246,21 +220,24 @@ def create_token_replace_augmenter(
         ...    return ''.join(non_vowels)
         >>> remove_vowel_augmenter = create_token_replace_augmenter(replace=remove_vowels, level=.10)
     """
-    return partial(token_replace_augmenter, replace=replace, keep_titlecase=keep_titlecase)
+    return partial(
+        token_replace_augmenter, replace=replace, keep_titlecase=keep_titlecase
+    )
+
 
 @spacy.registry.augmenters("word_embedding.v1")
 def create_word_embedding_augmenter(
     level=float,
-    n: int=10,
-    nlp: Optional[Language]=None,
-    keep_titlecase: bool=True, 
-    ignore_casing: bool=True,
+    n: int = 10,
+    nlp: Optional[Language] = None,
+    keep_titlecase: bool = True,
+    ignore_casing: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
         level (float): Probability to replace token given that it is in synonym dictionary.
-        n (int, optional): Number of most similar word vectors to sample from 
+        n (int, optional): Number of most similar word vectors to sample from
         nlp (Optional[Language], optional): A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn't contain word vectors.
         keep_titlecase (bool, optional): If original text was uppercased cased should replaces text also be? Defaults to True.
         ignore_case (bool, optional): The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing? Default to True.
@@ -273,18 +250,15 @@ def create_word_embedding_augmenter(
     """
     import numpy as np
 
-    def replace(t: Token, n: int, ignore_casing: bool, nlp: Language) -> str:
-        if nlp is None:
-            vocab = t.doc.vocab
-        else:
-            vocab = nlp.vocab
-        if vocab.vectors.shape == (0, 0):
-            raise ValueError("Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue.")
-        if t.text in vocab:
-            v = vocab.get_vector(t.text)
-            v = np.reshape(v, (1,-1))
-            ms = vocab.vectors.most_similar(v, n=n)
-            rep = [vocab.strings[w] for w in ms[0][0]]
+    def replace(t: Token, n: int, ignore_casing: bool, embedding: static_embedding) -> str:
+        if embedding.vocab is None:
+            embedding.update_from_vocab(t.doc.vocab)
+        if embedding.vocab.vectors.shape == (0, 0):
+            raise ValueError(
+                "Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue."
+            )
+        if t.text in embedding:
+            rep = embedding.most_similar(t.text, n=n)
             if ignore_casing is True:
                 rep = [w for w in rep if w.lower() != t.text.lower()]
             else:
@@ -293,5 +267,14 @@ def create_word_embedding_augmenter(
                 return random.choice(rep)
         return t.text
 
-    __replace = partial(replace, n=n, ignore_casing=ignore_casing, nlp=nlp)
-    return partial(token_replace_augmenter, replace=__replace, keep_titlecase=keep_titlecase, level=level)
+    
+    embedding = static_embedding.from_vocab(nlp.vocab) if nlp else static_embedding()
+
+    __replace = partial(replace, n=n, ignore_casing=ignore_casing, embedding=embedding)
+    return partial(
+        token_replace_augmenter,
+        replace=__replace,
+        keep_titlecase=keep_titlecase,
+        level=level,
+    )
+
