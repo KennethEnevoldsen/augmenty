@@ -14,18 +14,21 @@ from ..augment_utilities import make_text_from_orth
 
 @spacy.registry.augmenters("ents_replace.v1")
 def create_ent_augmenter(
-    ent_dict: Dict[str, Iterable[List[str]]],
     level: float,
+    ent_dict: Dict[str, Iterable[List[str]]],
     replace_consistency: bool = True,
+    resolve_dependencies: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmenter which replaces an entity based on a dictionary lookup.
 
     Args:
+        level (float): the percentage of entities to be augmented.
         ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding the the entity type
             you wish to replace (e.g. "PER") and a itarable of the replacements. A replacement is a list of string of
             the desired entity replacement ["Kenneth", "Enevoldsen"].
-        level (float): the percentage of entities to be augmented.
         replace_consistency (bool, optional): Should an entity always be replaced with the same entity? Defaults to True.
+        resolve_dependencies (bool, optional): Attempts to resolve the dependency tree by setting head of the original entitity as
+        the head of the first token in the new entity. The remainder is the passed as 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
 
@@ -35,18 +38,20 @@ def create_ent_augmenter(
     """
     return partial(
         ent_augmenter,
-        ent_dict=ent_dict,
         level=level,
+        ent_dict=ent_dict,
         replace_consistency=replace_consistency,
+        resolve_dependencies=resolve_dependencies
     )
 
 
 def ent_augmenter(
     nlp: Language,
     example: Example,
-    ent_dict: Dict[str, Iterable[List[str]]],
     level: float,
+    ent_dict: Dict[str, Iterable[List[str]]],
     replace_consistency: bool,
+    resolve_dependencies: bool
 ) -> Iterator[Example]:
     replaced_ents = {}
     example_dict = example.to_dict()
@@ -87,9 +92,10 @@ def ent_augmenter(
                 tok_anno["SPACY"][i][-1:]  # set last spacing
             )
 
-            if example.y.has_annotation("HEAD"):
+            if example.y.has_annotation("HEAD") and resolve_dependencies:
                 # Handle HEAD
                 offset_ = len_ent - (ent.end - ent.start)
+
 
                 head[head > ent.start + offset] += offset_
                 # keep first head correcting for changing entity size, set rest to refer to index of first name
@@ -97,10 +103,10 @@ def ent_augmenter(
                     [
                         np.array(head[: ent.start + offset]),  # before
                         np.array(
-                            [head[ent.start + offset]]
+                            [head[ent.root.i +  offset]]
                             + [ent.start + offset] * (len_ent - 1)
                         ),  # the entity
-                        np.array(head[ent.start + 1 + offset :]),  # after
+                        np.array(head[ent.end + offset :]),  # after
                     ]
                 )
                 offset += offset_
@@ -115,7 +121,7 @@ def ent_augmenter(
                     + ["L-" + ent.label_]
                 )
 
-    if example.y.has_annotation("HEAD"):
+    if example.y.has_annotation("HEAD") and resolve_dependencies:
         tok_anno["HEAD"] = head.tolist()
     else:
         tok_anno["HEAD"] = list(range(len(tok_anno["ORTH"])))
