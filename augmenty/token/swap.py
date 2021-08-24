@@ -67,10 +67,11 @@ def token_swap_augmenter(
 
             if min_i in is_swapped:
                 continue
-
             if min_i > i:
                 i, min_i = min_i, i  # make so that i is always the biggest
                 is_swapped.add(i)
+            if min_i < 0 or i == n_tok: # e.g. if n_tok == 1
+                continue
 
             if respect_eos is True and (
                 example.y[i].is_sent_end is True or example.y[min_i].is_sent_end is True
@@ -121,8 +122,12 @@ def token_swap_augmenter(
 
             if respect_ents is True and swap_ents is True:
                 ents = example_dict["doc_annotation"]["entities"]
-                ents[i], ents[min_i] = ents[min_i], ents[i]
-
+                ent1, ent2 = ents[min_i], ents[i]
+                if ent1 != "O" or ent2 != "O":
+                    ent1, ent2 = ent2[0] + ent1[1:], ent1[0] + ent2[1:]   # swap the BILOU tag
+                ents[i], ents[min_i] = ent1, ent2
+    if respect_ents is False:
+        example_dict["doc_annotation"].pop("entities")
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield example.from_dict(doc, example_dict)
