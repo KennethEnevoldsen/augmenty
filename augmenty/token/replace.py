@@ -257,11 +257,11 @@ def create_word_embedding_augmenter(
                 "Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue."
             )
         if t.text in embedding:
-            rep = embedding.most_similar(t.text, n=n)
+            rep = embedding.most_similar(t.text, n=n+2)
             if ignore_casing is True:
-                rep = [w for w in rep if w.lower() != t.text.lower()]
+                rep = [w for w in rep if w.lower() != t.text.lower()][:n]
             else:
-                rep = [w for w in rep if w != t.text]
+                rep = [w for w in rep if w != t.text][:n]
             if rep:
                 return random.choice(rep)
         return t.text
