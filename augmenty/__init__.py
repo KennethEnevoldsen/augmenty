@@ -19,6 +19,10 @@ from .token import (
     create_wordnet_synonym_augmenter,
     create_token_replace_augmenter,
     create_starting_case_augmenter,
+    create_token_insert_random_augmenter,
+    create_token_insert_augmenter,
+    create_random_synonym_insertion_augmenter,
+    create_duplicate_token_augmenter
 )
 from .span import (
     create_per_replace_augmenter,

@@ -8,3 +8,10 @@ from .spacing import (
     create_spacing_insertion_augmenter,
 )
 from .swap import create_token_swap_augmenter
+
+from .insert import (
+    create_duplicate_token_augmenter,
+    create_random_synonym_insertion_augmenter,
+    create_token_insert_augmenter,
+    create_token_insert_random_augmenter,
+)
