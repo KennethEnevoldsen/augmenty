@@ -9,6 +9,7 @@ import pytest
 from .books import BOOKS
 from augmenty.token.insert import create_token_insert_random_augmenter
 
+
 @pytest.fixture()
 def nlp():
     nlp = spacy.load("en_core_web_sm")
@@ -75,7 +76,9 @@ def test_create_wordnet_synonym_augmenter(nlp):
     text = "Skal jeg pande dig en?"
     nlp_da = Danish()
 
-    aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(level=1, lang="da", respect_pos=False)
+    aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(
+        level=1, lang="da", respect_pos=False
+    )
     doc = nlp_da(text)
 
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
@@ -148,7 +151,18 @@ def test_create_word_embedding_augmenter():
 
     doc = nlp(text)
 
-    rep = ['cats', 'Cats', 'kitten', 'Dog', 'dog', 'kitty', 'Kitty', 'pet', 'Pet', 'puppy']
+    rep = [
+        "cats",
+        "Cats",
+        "kitten",
+        "Dog",
+        "dog",
+        "kitty",
+        "Kitty",
+        "pet",
+        "Pet",
+        "puppy",
+    ]
 
     aug = augmenty.load("word_embedding.v1", level=1)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
@@ -156,7 +170,7 @@ def test_create_word_embedding_augmenter():
 
     aug = augmenty.load("word_embedding.v1", level=1, ignore_casing=False)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
-    assert docs[0].text in rep
+    assert docs[0].text in rep + ["Cat"]
 
     aug = augmenty.load("word_embedding.v1", level=1, nlp=nlp)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
@@ -167,19 +181,37 @@ def test_create_token_insert_augmenter(nlp):
     text = "cat"
     doc = nlp(text)
     insert_fun = lambda t: {"ORTH": "word"}
-    aug = augmenty.load("token_insert.v1", level=1, insert = insert_fun)
+    aug = augmenty.load("token_insert.v1", level=1, insert=insert_fun)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
     assert len(docs[0]) == 2
     assert docs[0][0].text == "word"
 
 
 def test_create_token_insert_random_augmenter(nlp):
-    aug = create_token_insert_random_augmenter(level = 0.5, insert = ["words", "to", "insert"])
-    texts = ["one two three"]*3
+    texts = ["one two three"] * 3
+    # w. word list
+    aug = create_token_insert_random_augmenter(
+        level=0.5, insert=["words", "to", "insert"]
+    )
     list(augmenty.texts(texts, aug, nlp))
-    aug = create_token_insert_random_augmenter(level = 0.5, insert = [{"ORTH": "replacements", "LEMMA": "replacement", "POS": "NOUN", "TAG": "NOUN", "entities": "O", "MORPH": "Number=Plur"}])
+    # w. dict
+    aug = create_token_insert_random_augmenter(
+        level=0.5,
+        insert=[
+            {
+                "ORTH": "replacements",
+                "LEMMA": "replacement",
+                "POS": "NOUN",
+                "TAG": "NOUN",
+                "entities": "O",
+                "MORPH": "Number=Plur",
+            }
+        ],
+    )
     list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
-   
+    # w. None (i.e. vocab)
+    aug = create_token_insert_random_augmenter(level=0.5)
+    list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
 
 
 def test_create_duplicate_token_augmenter(nlp):
@@ -192,7 +224,6 @@ def test_create_duplicate_token_augmenter(nlp):
     assert docs[0][1].text == "cat"
 
 
-
 def test_create_random_synonym_insertion_augmenter(nlp):
     text = "cat"
     doc = nlp(text)
@@ -201,5 +232,3 @@ def test_create_random_synonym_insertion_augmenter(nlp):
     assert len(docs[0]) == 2
     assert docs[0][1].text == "cat"
     assert docs[0][1].pos_ == "NOUN"
-
-
