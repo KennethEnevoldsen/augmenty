@@ -7,6 +7,9 @@ from spacy.language import Language
 from spacy.training import Example
 from spacy.tokens import Token
 
+from wasabi import msg
+
+
 from ..augment_utilities import make_text_from_orth
 from .wordnet_util import init_wordnet
 
@@ -194,6 +197,8 @@ def create_random_synonym_insertion_augmenter(
     respect_ents: bool = True,
     pos_getter=lambda token: token.pos_,
     lang: Optional[str] = None,
+    context_window: Optional[int] = None, 
+    verbose: bool = True
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly inserts a synonym or from the tokens context.
     The synonyms are based on wordnet.
@@ -208,6 +213,9 @@ def create_random_synonym_insertion_augmenter(
             in which case the lang is based on the language of the spacy nlp pipeline used.
             Possible language codes include:
             "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
+        context_window (Optional[int], optional): Sets window in which synonyms can be generated from. If None the context
+        is set to the sentence.
+        verbose (bool, optional): Toggle the verbosity of the function. Default to True.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -226,21 +234,33 @@ def create_random_synonym_insertion_augmenter(
     from .wordnet_util import upos_wn_dict
     from .wordnet_util import lang_wn_dict
 
-    def __insert(t: Token, lang: str) -> dict:
+    def __insert(t: Token, lang: str, respect_pos: bool, verbose: bool) -> dict:
         doc = t.doc
+        if respect_pos is True and doc.has_annotation("POS") is False:
+            if verbose:
+                msg.warn("respect_pos is True, but the doc is not annotated for part of speech. Setting respect_pos to False.")
+            respect_pos = False
+
         if lang is None:
             lang = doc.lang_
             lang = lang_wn_dict[lang]
 
         rep = set()
-        for t in doc:
+        if context_window:
+            span = doc[max(0, t.i-context_window): min(len(doc), t.i+context_window)]
+        elif doc.has_annotation("SENT_START"):
+            span = t.sent
+        else:
+            raise ValueError("context_window is None, but the document is not sentence segmented. Either use a nlp which include a sentencizer component or specify a context_window") 
+        for t in span:
             word = t.lower_
             if respect_pos is True:
                 pos = pos_getter(t)
-                syns = wordnet.synsets(word, pos=upos_wn_dict[pos], lang=lang)
-                rep = rep.union(
-                    {(l, pos) for syn in syns for l in syn.lemma_names(lang=lang)}
-                )
+                if pos in upos_wn_dict:
+                    syns = wordnet.synsets(word, pos=upos_wn_dict[pos], lang=lang)
+                    rep = rep.union(
+                        {(l, pos) for syn in syns for l in syn.lemma_names(lang=lang)}
+                    )
             else:
                 syns = wordnet.synsets(word, lang=lang)
                 rep = rep.union({l for syn in syns for l in syn.lemma_names(lang=lang)})
@@ -258,7 +278,7 @@ def create_random_synonym_insertion_augmenter(
             }
         return None
 
-    insert = partial(__insert, lang=lang)
+    insert = partial(__insert, lang=lang, respect_pos=respect_pos, verbose=verbose)
     return partial(
         token_insert_augmenter, level=level, respect_ents=respect_ents, insert=insert
     )
