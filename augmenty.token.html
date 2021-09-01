@@ -10,10 +10,10 @@
   <meta property="og:description" content="augmenty.token.casing: augmenty.token.replace: augmenty.token.spacing: augmenty.token.swap:" />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Span-based" href="augmenty.span.html" /><link rel="prev" title="Character-based" href="augmenty.character.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.08.17.beta43"/>
-        <title>Token-based - augmenty 0.0.8 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
+        <title>Token-based - augmenty 0.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=910ac4ccc9d7c023151c34010d7b500fb9777a51" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
     
@@ -44,9 +44,11 @@
   
     }
   }
-</style>
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style></head>
   <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
@@ -133,7 +135,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.8 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 0.0.9 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -243,6 +245,14 @@ Default to None.</p></li>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">is_pronoun</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="gp">... </span><span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="o">==</span> <span class="s2">"PRON"</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="kc">True</span>
+<span class="gp">... </span><span class="k">return</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"conditional_token_casing.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">conditional</span><span class="o">=</span><span class="n">is_pronoun</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.token.casing.create_starting_case_augmenter">
@@ -326,9 +336,9 @@ replacement based on pos tag.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">remove_vowels</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-<span class="go">    vowels = ['a','e','i','o','u', 'y']</span>
-<span class="go">    non_vowels = [c for c in token.text if c.lower() not in vowels]</span>
-<span class="go">    return ''.join(non_vowels)</span>
+<span class="gp">... </span>   <span class="n">vowels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'e'</span><span class="p">,</span><span class="s1">'i'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">]</span>
+<span class="gp">... </span>   <span class="n">non_vowels</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">token</span><span class="o">.</span><span class="n">text</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">]</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">non_vowels</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">remove_vowel_augmenter</span> <span class="o">=</span> <span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">remove_vowels</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">.10</span><span class="p">)</span>
 </pre></div>
 </div>
