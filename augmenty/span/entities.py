@@ -269,7 +269,7 @@ def ent_format_augmenter(
             new_ent_ = [e.text if f is None else f(e) for e, f in zip(new_ent, formatter)]
 
             if len(new_ent_) < len(new_ent):
-                new_ent_ += new_ent[len(new_ent_) :]
+                new_ent_ += [e.text for e in new_ent[len(new_ent_) :]]
 
             tok_anno["ORTH"][ent.start : ent.end] = new_ent_
             tok_anno["LEMMA"][ent.start : ent.end] = new_ent_
