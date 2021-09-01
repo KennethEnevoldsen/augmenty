@@ -78,5 +78,5 @@ def spongebob_augmenter(
         chars = [c.lower() if i % 2 else c.upper() for i, c in enumerate(example.text)]
         example_dict = example.to_dict()
         doc = nlp.make_doc("".join(chars))
-        example_dict["token_annotation"]["ORTH"] = [t.text for t in example.y]
+        example_dict["token_annotation"]["ORTH"] = [doc.text[t.idx: t.idx+len(t.text)] for t in example.y]
         yield example.from_dict(doc, example_dict)
