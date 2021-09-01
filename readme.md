@@ -106,7 +106,7 @@ which will run all the test in the `augmenty/tests` folder.
 Specific tests can be run using:
 
 ```
-python -m pytest augmenty/tests/test_readability.py
+python -m pytest augmenty/tests/test_docs.py
 ```
 
 **Code Coverage**
