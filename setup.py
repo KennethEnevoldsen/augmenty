@@ -9,9 +9,6 @@ with open("augmenty/about.py") as f:
 with open("readme.md", encoding="utf-8") as f:
     long_description = f.read()
 
-with open("requirements.txt", encoding="utf-8") as f:
-    requirements = f.read()
-
 setuptools.setup(
     name="augmenty",
     version=__version__,
