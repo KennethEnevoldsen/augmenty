@@ -68,7 +68,7 @@ spaCy Universe is a great tool for text augmentation.
 [Augmenters]: https://kennethenevoldsen.github.io/augmenty/augmenters.html
 [Demo]: https://share.streamlit.io/kennethenevoldsen/augmenty/dev/streamlit.py
 [News and changelog]: https://kennethenevoldsen.github.io/augmenty/news.html
-[News and changelog]: https://kennethenevoldsen.github.io/augmenty/faq.html
+[FAQ]: https://kennethenevoldsen.github.io/augmenty/faq.html
 
 ## 💬 Where to ask questions
 
