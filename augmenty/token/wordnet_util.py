@@ -3,7 +3,7 @@ def init_wordnet():
         from nltk import download
 
         download("wordnet", quiet=True, raise_on_error=True)
-        download("omw", quiet=True, raise_on_error=True)
+        download("omw-1.4", quiet=True, raise_on_error=True)
     except ModuleNotFoundError as e:
         print(e)
         raise ModuleNotFoundError(
