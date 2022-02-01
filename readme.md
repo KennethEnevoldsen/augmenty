@@ -56,7 +56,7 @@ spaCy Universe is a great tool for text augmentation.
 
 | Documentation              |                                                                             |
 | -------------------------- | --------------------------------------------------------------------------- |
-| 📚 **[Usage Guides]**       | Guides and instruction on how to use augmenty and its features.             |
+| 📚 **[Usage Guides]**       | Guides and instructions on how to use augmenty and its features.             |
 | 📰 **[News and changelog]** | New additions, changes and version history.                                 |
 | 🎛 **[API References]**     | The detailed reference for augmenty's API. Including function documentation |
 | 🍒 **[Augmenters]**         | Contains a full list of current augmenters in augmenty.                     |
