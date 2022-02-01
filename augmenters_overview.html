@@ -297,7 +297,17 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>ents_format.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>duplicate_token.v1</strong></p></td>
+<td><p>Creates an augmenter that randomly duplicate a token token.</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>ents_format.v1</strong></p></td>
 <td><p>Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -307,7 +317,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>ents_replace.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>ents_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces an entity based on a dictionary lookup.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -317,7 +327,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>grundtvigian_spacing_augmenter.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>grundtvigian_spacing_augmenter.v1</strong></p></td>
 <td><p>The Danish philosopher N.F.S. Grundtvig used letter spacing to add      e m p h a s i s  to words (Baunvig, Jarvis and Nielbo, 2020).      This augmenter randomly adds letter spacing emphasis to words.      This augmentation which are human readable, but which are clearly      challenging for systems using a white-space centric tokenization.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -327,7 +337,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>keystroke_error.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>keystroke_error.v1</strong></p></td>
 <td><p>Creates a augmenter which augments a text with plausible typos based on keyboard distance.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -337,7 +347,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>per_replace.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>per_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -347,7 +357,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>random_casing.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>random_casing.v1</strong></p></td>
 <td><p>Create an augment that randomly changes the casing of the document.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -357,10 +367,20 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>random_starting_case.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>random_starting_case.v1</strong></p></td>
 <td><p>Creates an augmenter which randomly cases the first letter in each token.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>random_synonym_insertion.v1</strong></p></td>
+<td><p>Creates an augmenter that randomly inserts a synonym or from the tokens context.     The synonyms are based on wordnet.</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -427,6 +447,26 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td class="text-center"><p><strong>token_insert.v1</strong></p></td>
+<td><p>Creates an augmenter that randomly inserts a token generated based on a insert function.</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>token_insert_random.v1</strong></p></td>
+<td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
 <tr class="row-odd"><td class="text-center"><p><strong>token_replace.v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
@@ -475,7 +515,7 @@
 <td><p>✅</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
-<td><p>Data: <a class="reference external" href="https://www.google.com/books?hl=da&amp;lr=&amp;id=Rehu8OOzMIMC&amp;oi=fnd&amp;pg=PR11&amp;dq=WordNet:+An+electronic+lexical+database&amp;ots=IsieQmWUg8&amp;sig=06asxxcQ1I3i9C1TcEcz7bv62Kw">Miller (1998) (1998)</a>, Package: <a class="reference external" href="https://www.nltk.org">Steven (2006)</a>, Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
+<td><p>Data: <a class="reference external" href="https://www.google.com/books?hl=da&amp;lr=&amp;id=Rehu8OOzMIMC&amp;oi=fnd&amp;pg=PR11&amp;dq=WordNet:+An+electronic+lexical+database&amp;ots=IsieQmWUg8&amp;sig=06asxxcQ1I3i9C1TcEcz7bv62Kw">Miller (1998)</a>, Package: <a class="reference external" href="https://www.nltk.org">Steven (2006)</a>, Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
 </tr>
 </tbody>
 </table></div>
