@@ -13,7 +13,7 @@
 <!-- [![pip downloads](https://img.shields.io/pypi/dm/augmenty.svg)](https://pypi.org/project/augmenty/) -->
 
 
-Augmenty is an augmentation library based on spaCy for augmenting texts. Besides a wide array of highly flexible augmenters, Augmenty provides a series of tools for working with augmenters, including combining and moderating augmenters. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the assigned labels under the augmentation, thus making many of the augmenters valid for training more than simply sentence classification.
+Augmenty is an augmentation library based on spaCy for augmenting texts. Besides a wide array of highly flexible augmenters, Augmenty provides a series of tools for working with augmenters, including combining and moderating augmenters. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the assigned labels under the augmentation, thus making many of the augmenters valid for training in a wider range of tasks.
 
 ## 🔧 Installation
 To get started using augmenty simply install it using pip by running the following line in your terminal:
