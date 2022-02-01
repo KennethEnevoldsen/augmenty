@@ -32,17 +32,18 @@ not_relevant = {
     "conditional_token_casing.v1",
     "ents_format.v1",
     "token_replace.v1",
+    "wordnet_synonym.v1",
 }
 augmenters = augmenty.augmenters()
 augmenter_list = sorted([a for a in augmenters if a not in not_relevant])
 nlp = spacy.load("en_core_web_md")
 
-default = "Write the text you wish augmented here!"
+default = "Write the text you wish augmented here! it could for example include names such as Sara."
 example = st.text_area("Example:", default)
 
 st.markdown("## Choose your augmenter\n --------")
 
-def_aug = "wordnet_synonym.v1"
+def_aug = "per_replace.v1"
 for i, _ in enumerate(augmenter_list):
     if _ == def_aug:
         break
