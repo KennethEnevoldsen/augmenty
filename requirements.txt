@@ -12,7 +12,7 @@ dacy >=1.1.1,<2.0.0
 
 # testing
 pytest>=6.2.0,<6.3.0
-pytest-coverage>=3.0.0,<3.1.0
+pytest-cov>=3.0.0,<3.1.0
 
 # small english model for testing
 https://huggingface.co/spacy/en_core_web_sm/resolve/main/en_core_web_sm-any-py3-none-any.whl
