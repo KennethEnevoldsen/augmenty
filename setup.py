@@ -22,8 +22,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     # external packages as dependencies
-    install_requires=["spacy>=3.0.0,<3.2.0"],
-    extras_require={"da": ["dacy>=1.1.0"], "all": ["nltk>=3.6.2,<3.7.0"]},
+    install_requires=["spacy>=3.2.0,<3.3.0"],
+    extras_require={"da": ["dacy>=1.1.0"], "all": ["nltk>=3.6.7,<3.7.0"]},
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         # How mature is this project? Common values are
