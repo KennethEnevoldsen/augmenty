@@ -16,7 +16,7 @@ This will also install the required development dependencies and test utilities 
    python -m pytest
 
 
-which will run all the test in the `augmenty/tests` folder.
+which will run all the test in the :code:`augmenty/tests` folder.
 
 Specific tests can be run using:
 
@@ -43,7 +43,7 @@ will likely run there as well, if not please create an issue.
 How is the documentation generated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Augmenty uses `sphinx <https://www.sphinx-doc.org/en/master/index.html>`__ to generate documentation. It uses the `Furo <https://github.com/pradyunsg/furo>`-_ theme with custom styling.
+Augmenty uses `sphinx <https://www.sphinx-doc.org/en/master/index.html>`__ to generate documentation. It uses the `Furo <https://github.com/pradyunsg/furo>`__ theme with custom styling.
 
 To make the documentation you can run:
 
@@ -66,13 +66,13 @@ Can I use augmenty without using spaCy?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Indeed augmenty contains convenience functions for applying augmentation directly to raw texts.
-Check out the [getting started guide](https://kennethenevoldsen.github.io/augmenty/introduction.html) to learn how.
+Check out the `getting started guide <https://kennethenevoldsen.github.io/augmenty/introduction.html>`__ to learn how.
 However, augmenty still used spaCy in the background for this task.
   
 
 How do I cite this work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you use this library in your research, we would appreciate if you would cite:
+If you use this library in your research, it would be much appreciated it if you would cite:
 
 ```bibtex
 @inproceedings{augmenty2021,
