@@ -74,10 +74,9 @@ How do I cite this work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you use this library in your research, it would be much appreciated it if you would cite:
 
-```bibtex
-@inproceedings{augmenty2021,
-    title={Augmenty, the cherry on top of your NLP pipeline},
-    author={Enevoldsen, Kenneth and Hansen, Lasse},
-    year={2021}
-}
-```
+.. code-block::
+   @inproceedings{augmenty2021,
+      title={Augmenty, the cherry on top of your NLP pipeline},
+      author={Enevoldsen, Kenneth and Hansen, Lasse},
+      year={2021}
+   }
