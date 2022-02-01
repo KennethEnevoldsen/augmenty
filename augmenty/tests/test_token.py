@@ -178,8 +178,9 @@ def test_create_word_embedding_augmenter():
 
 
 def test_create_token_insert_augmenter(nlp):
-    text = "cat"
-    doc = nlp(text)
+    words = ["cat"]
+    spaces = [False]
+    doc = Doc(nlp.vocab, words=words, spaces=spaces, pos=["NOUN"])
     insert_fun = lambda t: {"ORTH": "word"}
     aug = augmenty.load("token_insert.v1", level=1, insert=insert_fun)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
