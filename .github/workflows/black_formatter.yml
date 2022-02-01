@@ -1,0 +1,21 @@
+# GitHub action for checking in any files in the repo should
+# be reformatted with black.
+# you can always run
+# black .
+# to format all scripts.
+
+name: black
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: psf/black@stable
