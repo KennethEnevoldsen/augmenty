@@ -3,7 +3,7 @@
 pip install streamlit
 pip install st-annotated-text
 
-streamlit run dev/streamlit.py
+streamlit run demo/streamlit.py
 """
 
 import spacy
