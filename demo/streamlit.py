@@ -51,7 +51,7 @@ augmenter = st.selectbox("Augmenter", augmenter_list, index=i)
 desc = augmenters[augmenter].__doc__.split("\n\n")[0]
 st.markdown(f"## Description: \n{desc}")
 
-level = st.slider("level", min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+level = st.slider("level", min_value=0.0, max_value=1.0, step=0.01, value=1.0)
 
 
 if augmenter == "per_replace.v1":
@@ -84,17 +84,17 @@ else:
     aug = augmenty.load(augmenter, level=level)
 
 st.markdown("## Augmented text")
+highlight = st.checkbox("Highlight changes", value=True)
 
 
 def is_diff(token, aug_token):
     if token.text != aug_token.text and highlight:
-        return (aug_token.text, "", "#fea")
+        return (aug_token.text, "", "#fd7c6e")
     return aug_token.text + aug_token.whitespace_
 
 
 def augment(example):
     doc = nlp(example)
-    docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp))
     return [(doc, aug_doc) for aug_doc in augmenty.docs([doc], augmenter=aug, nlp=nlp)]
 
 
@@ -103,6 +103,3 @@ for doc, aug_doc in augment(example):
     annotated_text(*aug_text)
 
 st.markdown(f"\n -------- \n Using augmenter: {augmenter}.")
-highlight = st.checkbox("Highlight changes", value=True)
-
-st.markdown("--------")
