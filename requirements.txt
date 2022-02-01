@@ -11,8 +11,8 @@ nltk >= 3.6.7,<3.7.0
 dacy >=1.1.1,<2.0.0
 
 # testing
-pytest>=6.2.0,<6.3.0
-pytest-cov>=3.0.0,<3.1.0
+pytest
+pytest-cov
 
 # small english model for testing
 https://huggingface.co/spacy/en_core_web_sm/resolve/main/en_core_web_sm-any-py3-none-any.whl
@@ -20,15 +20,15 @@ https://huggingface.co/spacy/en_core_web_md/resolve/main/en_core_web_md-any-py3-
 
 
 # documentation
-sphinx>=4.4.0<4.5.0
+sphinx
 furo
-sphinx-copybutton>=0.4.0,<0.5.0
-sphinxext-opengraph>=0.5.1,<0.6.0
-myst-parser>=0.16.1,<0.17.0
+sphinx-copybutton
+sphinxext-opengraph
+myst-parser
 
 # code style
-flake8>=4.0.1,<4.1.0
-black>=22.1.0,<22.2.0
+flake8
+black
 
 # streamlit
 st-annotated-text>=3.0.0,<3.1.0
