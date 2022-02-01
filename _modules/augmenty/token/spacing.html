@@ -275,7 +275,9 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">spacing_insertion_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">max_insertions</span><span class="o">=</span><span class="n">max_insertions</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">spacing_insertion_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">max_insertions</span><span class="o">=</span><span class="n">max_insertions</span>
+    <span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">spacing_insertion_augmenter</span><span class="p">(</span>

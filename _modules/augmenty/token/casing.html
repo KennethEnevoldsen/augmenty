@@ -252,7 +252,7 @@
 <div class="viewcode-block" id="create_conditional_token_casing_augmenter"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.casing.create_conditional_token_casing_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"conditional_token_casing.v1"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_conditional_token_casing_augmenter</span><span class="p">(</span>
     <span class="n">conditional</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">lower</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">upper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
@@ -269,7 +269,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; def is_pronoun(token):</span>
 <span class="sd">        ... if token.pos_ == "PRON":</span>
@@ -285,7 +285,9 @@
         <span class="n">upper</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">lower</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">upper</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">conditional_casing_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">upper</span><span class="p">,</span> <span class="n">conditional</span><span class="o">=</span><span class="n">conditional</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">conditional_casing_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">upper</span><span class="p">,</span> <span class="n">conditional</span><span class="o">=</span><span class="n">conditional</span>
+    <span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">starting_case_augmenter</span><span class="p">(</span>

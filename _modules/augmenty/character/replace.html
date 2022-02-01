@@ -236,7 +236,7 @@
 
 <div class="viewcode-block" id="create_char_random_augmenter"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_char_random_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"char_replace_random.v1"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_char_random_augmenter</span><span class="p">(</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">keyboard</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en_qwerty.v1"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Creates an augmenter that replaces a character with a random character from the</span>
@@ -277,7 +277,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; create_char_replace_augmenter(level=0.02, replace={"æ": ["ae"], "ß": ["ss"]})</span>
 <span class="sd">    """</span>

@@ -447,7 +447,7 @@
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Language</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Creates an augmenter which replaces a token based on a replace function.</span>
 
@@ -465,7 +465,9 @@
 <span class="sd">        &gt;&gt;&gt; nlp = spacy.load('en_core_web_lg')</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Token</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">embedding</span><span class="p">:</span> <span class="n">static_embedding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span>
+        <span class="n">t</span><span class="p">:</span> <span class="n">Token</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">embedding</span><span class="p">:</span> <span class="n">static_embedding</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">embedding</span><span class="o">.</span><span class="n">vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">embedding</span><span class="o">.</span><span class="n">update_from_vocab</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">embedding</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
@@ -473,7 +475,7 @@
                 <span class="s2">"Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="ow">in</span> <span class="n">embedding</span><span class="p">:</span>
-            <span class="n">rep</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">rep</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">rep</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">rep</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()][:</span><span class="n">n</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
@@ -482,7 +484,6 @@
                 <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
-    
     <span class="n">embedding</span> <span class="o">=</span> <span class="n">static_embedding</span><span class="o">.</span><span class="n">from_vocab</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">nlp</span> <span class="k">else</span> <span class="n">static_embedding</span><span class="p">()</span>
 
     <span class="n">__replace</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">replace</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">,</span> <span class="n">embedding</span><span class="o">=</span><span class="n">embedding</span><span class="p">)</span>
@@ -492,7 +493,6 @@
         <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
     <span class="p">)</span></div>
-
 </pre></div>
         </article>
       </div>

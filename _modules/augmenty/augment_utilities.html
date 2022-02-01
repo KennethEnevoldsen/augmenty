@@ -283,7 +283,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The repeated augmenter</span>
-<span class="sd">    </span>
+
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load("char_swap.v1", level=.02)</span>
 <span class="sd">        &gt;&gt;&gt; repeated_augmenter = augmenty.repeat(augmenter=aug, n=3)</span>
@@ -292,21 +292,20 @@
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">augmenter</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">e</span> 
+                <span class="k">yield</span> <span class="n">e</span>
 
     <span class="k">return</span> <span class="n">__augment</span></div>
 
 
 <div class="viewcode-block" id="yield_original"><a class="viewcode-back" href="../../augmenty.augment_utilities.html#augmenty.augment_utilities.yield_original">[docs]</a><span class="k">def</span> <span class="nf">yield_original</span><span class="p">(</span>
-    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>
-    <span class="n">doc_level</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span> <span class="n">doc_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
     <span class="sd">"""Wraps and augmented such that it yields both the original and augmented example.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters.</span>
 <span class="sd">        doc_level (float, optional): The percentage of documents the augmenter should be applied to.</span>
-<span class="sd">            Only yield the original when the original doc is augmented. </span>
+<span class="sd">            Only yield the original when the original doc is augmented.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now yields both the original and augmented example.</span>
