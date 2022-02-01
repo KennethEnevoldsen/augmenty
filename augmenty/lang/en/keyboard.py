@@ -1,5 +1,6 @@
 from ...util import registry
 
+
 @registry.keyboards("en_qwerty.v1")
 def create_qwerty_en():
     qwerty_en = {

@@ -70,7 +70,7 @@ def token_swap_augmenter(
             if min_i > i:
                 i, min_i = min_i, i  # make so that i is always the biggest
                 is_swapped.add(i)
-            if min_i < 0 or i == n_tok: # e.g. if n_tok == 1
+            if min_i < 0 or i == n_tok:  # e.g. if n_tok == 1
                 continue
 
             if respect_eos is True and (
@@ -124,7 +124,10 @@ def token_swap_augmenter(
                 ents = example_dict["doc_annotation"]["entities"]
                 ent1, ent2 = ents[min_i], ents[i]
                 if ent1 != "O" or ent2 != "O":
-                    ent1, ent2 = ent2[0] + ent1[1:], ent1[0] + ent2[1:]   # swap the BILOU tag
+                    ent1, ent2 = (
+                        ent2[0] + ent1[1:],
+                        ent1[0] + ent2[1:],
+                    )  # swap the BILOU tag
                 ents[i], ents[min_i] = ent1, ent2
     if respect_ents is False:
         example_dict["doc_annotation"].pop("entities")

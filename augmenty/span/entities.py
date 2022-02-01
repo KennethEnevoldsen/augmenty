@@ -28,7 +28,7 @@ def create_ent_augmenter(
             the desired entity replacement ["Kenneth", "Enevoldsen"].
         replace_consistency (bool, optional): Should an entity always be replaced with the same entity? Defaults to True.
         resolve_dependencies (bool, optional): Attempts to resolve the dependency tree by setting head of the original entitity as
-        the head of the first token in the new entity. The remainder is the passed as 
+        the head of the first token in the new entity. The remainder is the passed as
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
 
@@ -41,7 +41,7 @@ def create_ent_augmenter(
         level=level,
         ent_dict=ent_dict,
         replace_consistency=replace_consistency,
-        resolve_dependencies=resolve_dependencies
+        resolve_dependencies=resolve_dependencies,
     )
 
 
@@ -51,7 +51,7 @@ def ent_augmenter(
     level: float,
     ent_dict: Dict[str, Iterable[List[str]]],
     replace_consistency: bool,
-    resolve_dependencies: bool
+    resolve_dependencies: bool,
 ) -> Iterator[Example]:
     replaced_ents = {}
     example_dict = example.to_dict()
@@ -87,7 +87,9 @@ def ent_augmenter(
             tok_anno["MORPH"][i] = [""] * len_ent
             tok_anno["DEP"][i] = [tok_anno["DEP"][i][0]] + ["flat"] * (len_ent - 1)
 
-            tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (len_ent - 1)
+            tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (
+                len_ent - 1
+            )
             tok_anno["SPACY"][i] = [True] * (len_ent - 1) + (
                 tok_anno["SPACY"][i][-1:]  # set last spacing
             )
@@ -96,14 +98,13 @@ def ent_augmenter(
                 # Handle HEAD
                 offset_ = len_ent - (ent.end - ent.start)
 
-
                 head[head > ent.start + offset] += offset_
                 # keep first head correcting for changing entity size, set rest to refer to index of first name
                 head = np.concatenate(
                     [
                         np.array(head[: ent.start + offset]),  # before
                         np.array(
-                            [head[ent.root.i +  offset]]
+                            [head[ent.root.i + offset]]
                             + [ent.start + offset] * (len_ent - 1)
                         ),  # the entity
                         np.array(head[ent.end + offset :]),  # after
@@ -142,7 +143,7 @@ def create_per_replace_augmenter(
     names_p: Dict[str, List[float]] = {},
     patterns_p: Optional[List[float]] = None,
     replace_consistency: bool = True,
-    person_tag: str = "PERSON"
+    person_tag: str = "PERSON",
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.
 
@@ -266,7 +267,9 @@ def ent_format_augmenter(
                 new_ent += ent_ if i is None else [ent_.pop(i)]
 
             # format tokens
-            new_ent_ = [e.text if f is None else f(e) for e, f in zip(new_ent, formatter)]
+            new_ent_ = [
+                e.text if f is None else f(e) for e, f in zip(new_ent, formatter)
+            ]
 
             if len(new_ent_) < len(new_ent):
                 new_ent_ += [e.text for e in new_ent[len(new_ent_) :]]

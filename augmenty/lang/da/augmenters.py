@@ -41,9 +41,9 @@ def create_da_æøå_replace_augmenter(
 
 
 @spacy.registry.augmenters("da_historical_noun_casing.v1")
-def create_da_historical_noun_casing_augmenter(level: float) -> Callable[
-    [Language, Example], Iterator[Example]
-]:
+def create_da_historical_noun_casing_augmenter(
+    level: float,
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that capitalizes nouns.
 
     Args:
@@ -58,4 +58,6 @@ def create_da_historical_noun_casing_augmenter(level: float) -> Callable[
             return True
         return False
 
-    return create_conditional_token_casing_augmenter(conditional=conditional, upper=True, level=level)
+    return create_conditional_token_casing_augmenter(
+        conditional=conditional, upper=True, level=level
+    )

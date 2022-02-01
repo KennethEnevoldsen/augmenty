@@ -14,4 +14,3 @@ def test_Keyboard():
 
     for keyboard in augmenty.keyboards():
         kb = Keyboard.from_registry(keyboard)
-

@@ -20,7 +20,7 @@ from ..util import registry
 
 @spacy.registry.augmenters("char_replace_random.v1")
 def create_char_random_augmenter(
-    level: float, 
+    level: float,
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that replaces a character with a random character from the
@@ -61,7 +61,7 @@ def create_char_replace_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter function.
-    
+
     Example:
         >>> create_char_replace_augmenter(level=0.02, replace={"æ": ["ae"], "ß": ["ss"]})
     """

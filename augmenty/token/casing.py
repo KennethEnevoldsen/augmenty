@@ -36,7 +36,7 @@ def create_starting_case_augmenter(
 @spacy.registry.augmenters("conditional_token_casing.v1")
 def create_conditional_token_casing_augmenter(
     conditional: Callable,
-    level: float, 
+    level: float,
     lower: Optional[bool] = None,
     upper: Optional[bool] = None,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -53,7 +53,7 @@ def create_conditional_token_casing_augmenter(
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
-    
+
     Example:
         >>> def is_pronoun(token):
         ... if token.pos_ == "PRON":
@@ -69,7 +69,9 @@ def create_conditional_token_casing_augmenter(
         upper = False
     if lower is False:
         upper = True
-    return partial(conditional_casing_augmenter, level=level, upper=upper, conditional=conditional)
+    return partial(
+        conditional_casing_augmenter, level=level, upper=upper, conditional=conditional
+    )
 
 
 def starting_case_augmenter(

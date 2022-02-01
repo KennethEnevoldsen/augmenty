@@ -27,8 +27,6 @@ def test_combine(nlp):
     assert augmented_docs[0][0].text == "spaCy"
 
 
-
-
 def test_yield_original(nlp):
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
@@ -58,7 +56,7 @@ def test_set_doc_level(nlp):
 
     aug = augmenty.load("upper_case.v1", level=1)
 
-    aug = augmenty.set_doc_level(aug, level = 0.5)
+    aug = augmenty.set_doc_level(aug, level=0.5)
 
     # simply testing it it runs
     augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))

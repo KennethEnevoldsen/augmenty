@@ -1,5 +1,9 @@
 # import keyboard and augmenters
-from .da import create_qwerty_da, create_da_æøå_replace_augmenter, create_da_historical_noun_casing_augmenter
+from .da import (
+    create_qwerty_da,
+    create_da_æøå_replace_augmenter,
+    create_da_historical_noun_casing_augmenter,
+)
 from .de import create_qwerty_de
 from .el import create_qwerty_el
 from .en import create_qwerty_en

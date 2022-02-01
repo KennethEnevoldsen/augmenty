@@ -1,5 +1,4 @@
-
-from typing import  List, Optional
+from typing import List, Optional
 
 from spacy.vocab import Vocab
 
@@ -18,6 +17,7 @@ class static_embedding(BaseModel):
     Returns:
         static_embedding: An utility class for efficiently calculating static word embeddings.
     """
+
     class Config:
         arbitrary_types_allowed = True
 
@@ -48,12 +48,10 @@ class static_embedding(BaseModel):
                 return True
         return False
 
-
-
     @staticmethod
     def from_vocab(vocab: Vocab) -> "static_embedding":
         keys = list(vocab.vectors.keys())
-        
+
         vectors = vocab.vectors.data
         unit_vectors = vectors.copy()
         lengths = np.linalg.norm(unit_vectors, axis=-1)

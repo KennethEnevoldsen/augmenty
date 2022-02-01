@@ -59,7 +59,9 @@ def create_spacing_insertion_augmenter(
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
-    return partial(spacing_insertion_augmenter, level=level, max_insertions=max_insertions)
+    return partial(
+        spacing_insertion_augmenter, level=level, max_insertions=max_insertions
+    )
 
 
 def spacing_insertion_augmenter(

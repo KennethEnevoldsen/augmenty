@@ -22,7 +22,7 @@ from .token import (
     create_token_insert_random_augmenter,
     create_token_insert_augmenter,
     create_random_synonym_insertion_augmenter,
-    create_duplicate_token_augmenter
+    create_duplicate_token_augmenter,
 )
 from .span import (
     create_per_replace_augmenter,

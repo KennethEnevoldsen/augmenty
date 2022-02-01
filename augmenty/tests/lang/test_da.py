@@ -32,7 +32,7 @@ def test_create_da_historical_noun_casing_augmenter(nlp):
     spaces = [True, True, True, False]
     solution = "Jeg ejer en Hund"
 
-    doc = Doc(nlp.vocab, words=tokens, pos=pos, spaces = spaces)
+    doc = Doc(nlp.vocab, words=tokens, pos=pos, spaces=spaces)
 
     aug = create_da_historical_noun_casing_augmenter(level=1)
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)

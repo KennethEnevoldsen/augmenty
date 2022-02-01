@@ -172,6 +172,7 @@ def create_duplicate_token_augmenter(
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["one one two two three three"]
     """
+
     def __insert(t: Token, respect_ents=respect_ents) -> dict:
         insert_token = {
             "ORTH": t.text,
@@ -183,7 +184,6 @@ def create_duplicate_token_augmenter(
         if t.doc.has_annotation("ENT_TYPE") and respect_ents is False:
             insert_token["entities"] = t.ent_iob_ + t.ent_type_
         return insert_token
-
 
     return partial(
         token_insert_augmenter, level=level, respect_ents=respect_ents, insert=__insert
@@ -197,8 +197,8 @@ def create_random_synonym_insertion_augmenter(
     respect_ents: bool = True,
     pos_getter=lambda token: token.pos_,
     lang: Optional[str] = None,
-    context_window: Optional[int] = None, 
-    verbose: bool = True
+    context_window: Optional[int] = None,
+    verbose: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly inserts a synonym or from the tokens context.
     The synonyms are based on wordnet.
@@ -238,7 +238,9 @@ def create_random_synonym_insertion_augmenter(
         doc = t.doc
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
-                msg.warn("respect_pos is True, but the doc is not annotated for part of speech. Setting respect_pos to False.")
+                msg.warn(
+                    "respect_pos is True, but the doc is not annotated for part of speech. Setting respect_pos to False."
+                )
             respect_pos = False
 
         if lang is None:
@@ -247,11 +249,15 @@ def create_random_synonym_insertion_augmenter(
 
         rep = set()
         if context_window:
-            span = doc[max(0, t.i-context_window): min(len(doc), t.i+context_window)]
+            span = doc[
+                max(0, t.i - context_window) : min(len(doc), t.i + context_window)
+            ]
         elif doc.has_annotation("SENT_START"):
             span = t.sent
         else:
-            raise ValueError("context_window is None, but the document is not sentence segmented. Either use a nlp which include a sentencizer component or specify a context_window") 
+            raise ValueError(
+                "context_window is None, but the document is not sentence segmented. Either use a nlp which include a sentencizer component or specify a context_window"
+            )
         for t in span:
             word = t.lower_
             if respect_pos is True:

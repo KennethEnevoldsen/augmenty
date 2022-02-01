@@ -93,11 +93,14 @@ def test_create_per_replace(nlp):
         assert docs[0].text == e
 
     per_augmenter = augmenty.load(
-                "per_replace.v1",
-                level=1.00,
-                names={"firstname": ["Charles", "Jens"], "lastname": ["Kirkegaard", "Andersen"]},
-                patterns=[p],
-            )
+        "per_replace.v1",
+        level=1.00,
+        names={
+            "firstname": ["Charles", "Jens"],
+            "lastname": ["Kirkegaard", "Andersen"],
+        },
+        patterns=[p],
+    )
     text = "My name is Charlie."
     doc = nlp(text)
     docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp))

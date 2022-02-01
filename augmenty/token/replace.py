@@ -231,7 +231,7 @@ def create_word_embedding_augmenter(
     n: int = 10,
     nlp: Optional[Language] = None,
     keep_titlecase: bool = True,
-    ignore_casing: bool = True
+    ignore_casing: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which replaces a token based on a replace function.
 
@@ -249,7 +249,9 @@ def create_word_embedding_augmenter(
         >>> nlp = spacy.load('en_core_web_lg')
     """
 
-    def replace(t: Token, n: int, ignore_casing: bool, embedding: static_embedding) -> str:
+    def replace(
+        t: Token, n: int, ignore_casing: bool, embedding: static_embedding
+    ) -> str:
         if embedding.vocab is None:
             embedding.update_from_vocab(t.doc.vocab)
         if embedding.vocab.vectors.shape == (0, 0):
@@ -257,7 +259,7 @@ def create_word_embedding_augmenter(
                 "Vectors are empty. Typically this is due to using a transformer-based or small spaCy model. Specify nlp for the create_word_embedding_augmenter to a spaCy pipeline with static word embedding to avoid this issue."
             )
         if t.text in embedding:
-            rep = embedding.most_similar(t.text, n=n+2)
+            rep = embedding.most_similar(t.text, n=n + 2)
             if ignore_casing is True:
                 rep = [w for w in rep if w.lower() != t.text.lower()][:n]
             else:
@@ -266,7 +268,6 @@ def create_word_embedding_augmenter(
                 return random.choice(rep)
         return t.text
 
-    
     embedding = static_embedding.from_vocab(nlp.vocab) if nlp else static_embedding()
 
     __replace = partial(replace, n=n, ignore_casing=ignore_casing, embedding=embedding)
@@ -276,4 +277,3 @@ def create_word_embedding_augmenter(
         keep_titlecase=keep_titlecase,
         level=level,
     )
-

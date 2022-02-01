@@ -4,6 +4,7 @@ import spacy
 
 import pytest
 
+
 @pytest.fixture()
 def nlp():
     nlp = spacy.load("en_core_web_md")
@@ -20,4 +21,3 @@ def test_static_embedding_util(nlp):
     emb = static_embedding.from_vocab(nlp.vocab)
 
     assert "testing" in emb.most_similar("test", n=10)
-    
