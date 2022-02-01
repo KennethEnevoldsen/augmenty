@@ -10,12 +10,12 @@
   <meta property="og:description" content="The following tables list all the available augmenters in augmenty, along with a short description. It also contains list all of the labels which the augmenters respects. For instance, if you wish ..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Character-based" href="augmenty.character.html" /><link rel="prev" title="Creating and Contributing Augmenters" href="adding_an_augmenter.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.2.0, furo 2021.10.09"/>
-        <title>Overview of Augmenters - augmenty 0.0.9 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/>
+        <title>Overview of Augmenters - augmenty 0.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     
     
 
@@ -135,7 +135,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.9 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 0.0.10 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -224,7 +224,7 @@
 <p>The following tables list all the available augmenters in augmenty, along with a short description. It also contains list all of the labels which the augmenters respects. For instance, if you wish to train a named entity recognition pipeline you should not use augmenters which do not respect entity labels. Similarly, a hint is also given to whether the augmenter is recommended for training or evaluation. Lastly, the package includes a list of references to any data or packages used as well as references to example application of the augmenter in practice.</p>
 <div class="table-wrapper"><table class="colwidths-auto docutils align-default">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p>Augmenter name</p></th>
+<tr class="row-odd"><th class="text-center head"><p>Augmenter name</p></th>
 <th class="head"><p>Description</p></th>
 <th class="head"><p>Token</p></th>
 <th class="head"><p>Dependency parsing</p></th>
@@ -236,7 +236,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:center"><p><strong>char_replace.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>char_replace.v1</strong></p></td>
 <td><p>Creates an augmenter that replaces a character with a random character from replace dict</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -246,7 +246,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>char_replace_random.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>char_replace_random.v1</strong></p></td>
 <td><p>Creates an augmenter that replaces a character with a random character from the     keyboard.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -256,7 +256,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>char_swap.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>char_swap.v1</strong></p></td>
 <td><p>Creates an augmenter that swaps two neighbouring characters in a token with a given probability.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -266,7 +266,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>conditional_token_casing.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>conditional_token_casing.v1</strong></p></td>
 <td><p>Creates an augmenter that conditionally cases the first letter of a token based on the getter.     Either lower og upper needs to specifiedd as True.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -276,7 +276,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>da_historical_noun_casing.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>da_historical_noun_casing.v1</strong></p></td>
 <td><p>Creates an augmenter that capitalizes nouns.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -286,7 +286,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>da_æøå_replace.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>da_æøå_replace.v1</strong></p></td>
 <td><p>Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -296,7 +296,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>ents_format.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>ents_format.v1</strong></p></td>
 <td><p>Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -306,7 +306,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>ents_replace.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>ents_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces an entity based on a dictionary lookup.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -316,7 +316,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>grundtvigian_spacing_augmenter.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>grundtvigian_spacing_augmenter.v1</strong></p></td>
 <td><p>The Danish philosopher N.F.S. Grundtvig used letter spacing to add      e m p h a s i s  to words (Baunvig, Jarvis and Nielbo, 2020).      This augmenter randomly adds letter spacing emphasis to words.      This augmentation which are human readable, but which are clearly      challenging for systems using a white-space centric tokenization.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -326,7 +326,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>keystroke_error.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>keystroke_error.v1</strong></p></td>
 <td><p>Creates a augmenter which augments a text with plausible typos based on keyboard distance.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -336,7 +336,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>per_replace.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>per_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -346,7 +346,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>random_casing.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>random_casing.v1</strong></p></td>
 <td><p>Create an augment that randomly changes the casing of the document.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -356,7 +356,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>random_starting_case.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>random_starting_case.v1</strong></p></td>
 <td><p>Creates an augmenter which randomly cases the first letter in each token.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -366,7 +366,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>remove_spacing.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>remove_spacing.v1</strong></p></td>
 <td><p>Creates an augmenter that removes spacing with a given probability.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -376,7 +376,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>spacing_insertion.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>spacing_insertion.v1</strong></p></td>
 <td><p>Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -386,7 +386,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>spacy.lower_case.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>spacy.lower_case.v1</strong></p></td>
 <td><p>Create a data augmentation callback that converts documents to lowercase.     The callback can be added to a corpus or other data iterator during training.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -396,7 +396,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>spacy.orth_variants.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>spacy.orth_variants.v1</strong></p></td>
 <td><p>Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -406,7 +406,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>spongebob.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>spongebob.v1</strong></p></td>
 <td><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -416,7 +416,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>token_dict_replace.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_dict_replace.v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -426,7 +426,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>token_replace.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>token_replace.v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -436,7 +436,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>token_swap.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_swap.v1</strong></p></td>
 <td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -446,7 +446,7 @@
 <td><p>✅</p></td>
 <td><p>Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>upper_case.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>upper_case.v1</strong></p></td>
 <td><p>Create an augmenter that converts documents to uppercase.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -456,7 +456,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:center"><p><strong>word_embedding.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>word_embedding.v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -466,7 +466,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:center"><p><strong>wordnet_synonym.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>wordnet_synonym.v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -509,11 +509,9 @@
 
         <div class="related-information">
               Copyright &#169;  |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>. |
-            <a class="muted-link" href="_sources/augmenters_overview.md.txt"
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="_sources/augmenters_overview.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -531,7 +529,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
+    <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     </body>
