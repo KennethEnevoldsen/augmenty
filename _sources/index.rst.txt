@@ -25,6 +25,7 @@ The documentation is organized into three parts:
    introduction
    news
    adding_an_augmenter
+   faq
    
 .. toctree::
    :maxdepth: 3

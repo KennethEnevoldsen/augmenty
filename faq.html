@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="News and Changelog" />
+  <meta property="og:title" content="FAQ" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="news.html" />
-  <meta property="og:description" content="0.0.1 (03/08/21)- First version of augmenty launches 🎉- with more than 15 highly customizable augmenters,, A high-quality code-base (coverage of 96% and a codefactor A),, and utilities for easy app..." />
-  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Creating and Contributing Augmenters" href="adding_an_augmenter.html" /><link rel="prev" title="Using Augmenty" href="introduction.html" />
+  <meta property="og:url" content="faq.html" />
+  <meta property="og:description" content="How do I test the code and run the test suite?: Augmenty comes with an extensive test suite. To run the tests, you should clone the repository, then build augmenty from the source. This will also i..." />
+  <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Overview of Augmenters" href="augmenters_overview.html" /><link rel="prev" title="Creating and Contributing Augmenters" href="adding_an_augmenter.html" />
 
     <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.01.02"/>
-        <title>News and Changelog - augmenty 0.0.10 documentation</title>
+        <title>FAQ - augmenty 0.0.10 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -146,7 +146,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -173,9 +173,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Using Augmenty</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">News and Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="news.html">News and Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_an_augmenter.html">Creating and Contributing Augmenters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Augmenters</span></p>
 <ul>
@@ -214,28 +214,63 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="news-and-changelog">
-<h1>News and Changelog<a class="headerlink" href="#news-and-changelog" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>0.0.1 (03/08/21)</p>
-<ul>
-<li><p>First version of augmenty launches 🎉</p>
-<ul>
-<li><p>with more than 15 highly customizable augmenters,</p></li>
-<li><p>A high-quality code-base (coverage of 96% and a codefactor A),</p></li>
-<li><p>and utilities for easy application of augmenters to strings and spaCy Docs.</p></li>
-<li><p>Furthermore, it also includes a series of convenience functions for combining and moderating augmentations.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+          <section id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<section id="how-do-i-test-the-code-and-run-the-test-suite">
+<h2>How do I test the code and run the test suite?<a class="headerlink" href="#how-do-i-test-the-code-and-run-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p>Augmenty comes with an extensive test suite. To run the tests, you should clone the repository, then build augmenty from the source.
+This will also install the required development dependencies and test utilities defined in the requirements.txt.</p>
+<p>which will run all the test in the <cite>augmenty/tests</cite> folder.</p>
+<p>Specific tests can be run using:</p>
+<p>If you want to check code coverage you can run the following:</p>
+</section>
+<section id="does-augmenty-run-on-x">
+<h2>Does augmenty run on X?<a class="headerlink" href="#does-augmenty-run-on-x" title="Permalink to this headline">¶</a></h2>
+<p>Augmenty is intended to run on all major OS, this includes Windows (latest version), MacOS (Catalina) and the latest version of Linux (Ubuntu).
+Similarly it also tested on python 3.7, 3.8, and 3.9.
+Please note these are only the systems augmenty is being actively tested on, if you run on a similar system (e.g. an earlier version of Linux) augmenty
+will likely run there as well, if not please create an issue.</p>
+</section>
+<section id="how-is-the-documentation-generated">
+<h2>How is the documentation generated?<a class="headerlink" href="#how-is-the-documentation-generated" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>&lt;details&gt;</dt><dd><p>&lt;summary&gt;How is the documentation generated?&lt;/summary&gt;</p>
+</dd>
+</dl>
+<p>Augmenty uses <a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">sphinx</a> to generate documentation. It uses the <cite>Furo &lt;https://github.com/pradyunsg/furo&gt;</cite>-_ theme with custom styling.</p>
+<p>To make the documentation you can run:</p>
+</section>
+<section id="many-of-these-augmenters-are-completely-useless-for-training">
+<h2>Many of these augmenters are completely useless for training?<a class="headerlink" href="#many-of-these-augmenters-are-completely-useless-for-training" title="Permalink to this headline">¶</a></h2>
+<p>That is true, some of the augmenters are rarely something you would augment with during training. For instance, randomly adding or removing spacing.
+However, augmentation can also be used to test whether a model is robust to certain variations.</p>
+</section>
+<section id="can-i-use-augmenty-without-using-spacy">
+<h2>Can I use augmenty without using spaCy?<a class="headerlink" href="#can-i-use-augmenty-without-using-spacy" title="Permalink to this headline">¶</a></h2>
+<p>Indeed augmenty contains convenience functions for applying augmentation directly to raw texts.
+Check out the [getting started guide](<a class="reference external" href="https://kennethenevoldsen.github.io/augmenty/introduction.html">https://kennethenevoldsen.github.io/augmenty/introduction.html</a>) to learn how.
+However, augmenty still used spaCy in the background for this task.</p>
+</section>
+<section id="how-do-i-cite-this-work">
+<h2>How do i cite this work?<a class="headerlink" href="#how-do-i-cite-this-work" title="Permalink to this headline">¶</a></h2>
+<p>If you use this library in your research, we would appreciate if you would cite:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>bibtex
+@inproceedings{augmenty2021,</p>
+<blockquote>
+<div><p>title={Augmenty, the cherry on top of your NLP pipeline},
+author={Enevoldsen, Kenneth and Hansen, Lasse},
+year={2021}</p>
+</div></blockquote>
+<section id="id5">
+<h3>}<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
 </section>
 
         </article>
@@ -243,23 +278,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="adding_an_augmenter.html">
+          <a class="next-page" href="augmenters_overview.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Creating and Contributing Augmenters</div>
+                <div class="title">Overview of Augmenters</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="introduction.html">
+          <a class="prev-page" href="adding_an_augmenter.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Using Augmenty</div>
+                <div class="title">Creating and Contributing Augmenters</div>
                 
               </div>
             </a>
@@ -269,7 +304,7 @@
               Copyright &#169;  |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="_sources/news.rst.txt"
+            | <a class="muted-link" href="_sources/faq.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -277,8 +312,35 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FAQ</a><ul>
+<li><a class="reference internal" href="#how-do-i-test-the-code-and-run-the-test-suite">How do I test the code and run the test suite?</a></li>
+<li><a class="reference internal" href="#does-augmenty-run-on-x">Does augmenty run on X?</a></li>
+<li><a class="reference internal" href="#how-is-the-documentation-generated">How is the documentation generated?</a></li>
+<li><a class="reference internal" href="#many-of-these-augmenters-are-completely-useless-for-training">Many of these augmenters are completely useless for training?</a></li>
+<li><a class="reference internal" href="#can-i-use-augmenty-without-using-spacy">Can I use augmenty without using spaCy?</a></li>
+<li><a class="reference internal" href="#how-do-i-cite-this-work">How do i cite this work?</a><ul>
+<li><a class="reference internal" href="#id5">}</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
