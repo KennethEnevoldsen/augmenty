@@ -83,10 +83,7 @@ elif augmenter == "ents_replace.v1":
 else:
     aug = augmenty.load(augmenter, level=level)
 
-st.markdown(f"## Augmented text\n -------- \n Using augmenter: {augmenter}.")
-highlight = st.checkbox("Highlight changes", value=True)
-
-st.markdown("--------")
+st.markdown("## Augmented text")
 
 
 def is_diff(token, aug_token):
@@ -104,3 +101,8 @@ def augment(example):
 for doc, aug_doc in augment(example):
     aug_text = [is_diff(t, a_t) for t, a_t in zip(doc, aug_doc)]
     annotated_text(*aug_text)
+
+st.markdown(f"\n -------- \n Using augmenter: {augmenter}.")
+highlight = st.checkbox("Highlight changes", value=True)
+
+st.markdown("--------")
