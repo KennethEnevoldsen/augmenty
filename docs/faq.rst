@@ -42,8 +42,6 @@ will likely run there as well, if not please create an issue.
 
 How is the documentation generated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<details>
-  <summary>How is the documentation generated?</summary>
 
 Augmenty uses `sphinx <https://www.sphinx-doc.org/en/master/index.html>`__ to generate documentation. It uses the `Furo <https://github.com/pradyunsg/furo>`-_ theme with custom styling.
 
@@ -72,7 +70,7 @@ Check out the [getting started guide](https://kennethenevoldsen.github.io/augmen
 However, augmenty still used spaCy in the background for this task.
   
 
-How do i cite this work?
+How do I cite this work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you use this library in your research, we would appreciate if you would cite:
 
