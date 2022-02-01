@@ -4,12 +4,11 @@ thinc>=8.0.8,<8.1.0
 pydantic>=1.8.2,<1.9.0
 numpy>=1.15.0,<2.0.0
 
-# wordnet
+# Wordnet
 nltk >= 3.6.2,<3.7.0
 
 # Danish
-dacy >= 1.1.1,<2.0.0
-
+dacy >=1.1.1,<2.0.0
 
 # testing
 pytest
@@ -32,5 +31,5 @@ flake8
 black
 
 # streamlit
-st-annotated-text
-streamlit
+st-annotated-text>=3.0.0,<3.1.0
+streamlit>=1.5.0,<1.6.0
