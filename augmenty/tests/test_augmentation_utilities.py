@@ -1,16 +1,23 @@
-import spacy
-import augmenty
 import pytest
+
+import spacy
+from spacy.tokens import Doc, Span
+
+import augmenty
 
 
 @pytest.fixture()
 def nlp():
-    nlp = spacy.load("en_core_web_sm")
+    nlp = spacy.load("en_core_web_md")
     return nlp
 
 
 def test_combine(nlp):
-    texts = ["Augmenty is a wonderful tool for augmentation."]
+    words = ["Augmenty", "is", "a", "wonderful", "tool", "for", "augmentation", "."]
+    spaces = [True, True, True, True, True, True, False, False]
+    doc = Doc(nlp.vocab, words=words, spaces=spaces)
+    doc.set_ents([Span(doc, 0, 1, "ORG")])
+    docs = [doc]
 
     ent_augmenter = augmenty.load(
         "ents_replace.v1",
@@ -21,7 +28,6 @@ def test_combine(nlp):
 
     combined_aug = augmenty.combine([ent_augmenter, synonym_augmenter])
 
-    docs = nlp.pipe(texts)
     augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp))
 
     assert augmented_docs[0][0].text == "spaCy"
