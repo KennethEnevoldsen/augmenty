@@ -3,6 +3,10 @@ import sys
 sys.path.append(".")
 sys.path.append("..")
 
+import os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 from wasabi import MarkdownRenderer
 
 import augmenty

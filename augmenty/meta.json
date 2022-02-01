@@ -6,7 +6,9 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["training"]
+        "use": [
+            "training"
+        ]
     },
     "spacy.lower_case.v1": {
         "respects": [
@@ -15,7 +17,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "random_casing.v1": {
         "respects": [
@@ -24,7 +29,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "char_replace_random.v1": {
         "respects": [
@@ -33,7 +41,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "char_replace.v1": {
         "respects": [
@@ -42,7 +53,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "keystroke_error.v1": {
         "respects": [
@@ -51,7 +65,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "char_swap.v1": {
         "respects": [
@@ -60,7 +77,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "random_starting_case.v1": {
         "respects": [
@@ -69,7 +89,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "conditional_token_casing.v1": {
         "respects": [
@@ -78,7 +101,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "token_replace.v1": {
         "respects": [
@@ -87,7 +113,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "token_dict_replace.v1": {
         "respects": [
@@ -96,7 +125,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "wordnet_synonym.v1": {
         "respects": [
@@ -107,7 +139,7 @@
         ],
         "references": {
             "Data": {
-                "authors": "Miller (1998)",
+                "authors": "Miller",
                 "year": "1998",
                 "link": "https://www.google.com/books?hl=da&lr=&id=Rehu8OOzMIMC&oi=fnd&pg=PR11&dq=WordNet:+An+electronic+lexical+database&ots=IsieQmWUg8&sig=06asxxcQ1I3i9C1TcEcz7bv62Kw"
             },
@@ -124,7 +156,10 @@
                 }
             ]
         },
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "grundtvigian_spacing_augmenter.v1": {
         "respects": [
@@ -133,7 +168,9 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation"]
+        "use": [
+            "evaluation"
+        ]
     },
     "spacing_insertion.v1": {
         "respects": [
@@ -142,7 +179,9 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation"]
+        "use": [
+            "evaluation"
+        ]
     },
     "token_swap.v1": {
         "respects": [
@@ -160,7 +199,10 @@
                 }
             ]
         },
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "ents_replace.v1": {
         "respects": [
@@ -169,7 +211,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "per_replace.v1": {
         "respects": [
@@ -178,7 +223,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "ents_format.v1": {
         "respects": [
@@ -187,7 +235,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "upper_case.v1": {
         "respects": [
@@ -196,7 +247,9 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation"]
+        "use": [
+            "evaluation"
+        ]
     },
     "spongebob.v1": {
         "respects": [
@@ -205,7 +258,9 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation"]
+        "use": [
+            "evaluation"
+        ]
     },
     "da_æøå_replace.v1": {
         "respects": [
@@ -214,7 +269,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "remove_spacing.v1": {
         "respects": [
@@ -223,7 +281,9 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation"]
+        "use": [
+            "evaluation"
+        ]
     },
     "da_historical_noun_casing.v1": {
         "respects": [
@@ -232,7 +292,10 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["evaluation", "training"]
+        "use": [
+            "evaluation",
+            "training"
+        ]
     },
     "word_embedding.v1": {
         "respects": [
@@ -241,7 +304,52 @@
             "entity labels",
             "document labels"
         ],
-        "use": ["training"]
+        "use": [
+            "training"
+        ]
+    },
+    "duplicate_token.v1": {
+        "respects": [
+            "token labels",
+            "entity labels",
+            "document labels"
+        ],
+        "use": [
+            "training",
+            "evaluation"
+        ]
+    },
+    "token_insert.v1": {
+        "respects": [
+            "token labels",
+            "entity labels",
+            "document labels"
+        ],
+        "use": [
+            "training",
+            "evaluation"
+        ]
+    },
+    "random_synonym_insertion.v1": {
+        "respects": [
+            "token labels",
+            "entity labels",
+            "document labels"
+        ],
+        "use": [
+            "training",
+            "evaluation"
+        ]
+    },
+    "token_insert_random.v1": {
+        "respects": [
+            "token labels",
+            "entity labels",
+            "document labels"
+        ],
+        "use": [
+            "training",
+            "evaluation"
+        ]
     }
-
 }
