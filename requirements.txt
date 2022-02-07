@@ -26,6 +26,7 @@ furo
 sphinx-copybutton
 sphinxext-opengraph
 myst-parser
+nbsphinx
 
 # code style
 flake8

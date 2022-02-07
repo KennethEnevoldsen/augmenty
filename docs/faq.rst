@@ -75,6 +75,7 @@ How do I cite this work?
 If you use this library in your research, it would be much appreciated it if you would cite:
 
 .. code-block::
+   
    @inproceedings{augmenty2021,
       title={Augmenty, the cherry on top of your NLP pipeline},
       author={Enevoldsen, Kenneth and Hansen, Lasse},

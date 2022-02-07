@@ -27,7 +27,7 @@ jobs:
         pip install -r tutorials/requirements.txt
     - name: Convert to py
       run: |
-        jupyter nbconvert --to python ./tutorials/*.ipynb
+        jupyter nbconvert --to python ./docs/tutorials/*.ipynb
     - name: Run notebooks
       # run all python script in tutorials folder
       run: |
