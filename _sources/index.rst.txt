@@ -22,7 +22,7 @@ The documentation is organized into three parts:
    :caption: Getting started
 
    installation
-   introduction
+   tutorials/introduction
    news
    adding_an_augmenter
    faq
