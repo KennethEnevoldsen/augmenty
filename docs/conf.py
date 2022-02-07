@@ -41,7 +41,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx.ext.githubpages",
     "myst_parser",
-    "nbsphinx"
+    "nbsphinx",
 ]
 
 # autodoc_mock_imports = ["dacy"]
