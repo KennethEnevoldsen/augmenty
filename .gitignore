@@ -15,3 +15,7 @@ docs/_build/*
 .coverage
 dev/pytest-coverage/pytest-coverage.txt
 dev/fast_cosine_sim.py
+
+# build
+build/*
+*.egg-info/*
