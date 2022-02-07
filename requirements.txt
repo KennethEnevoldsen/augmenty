@@ -1,14 +1,15 @@
+# Danish
+dacy >=1.1.1,<2.0.0
+
+# Wordnet
+nltk >= 3.6.7,<3.7.0
+
+# Package general
 spacy>=3.2.0,<3.3.0
 catalogue>=2.0.4,<2.1.0
 thinc>=8.0.8,<8.1.0
 pydantic>=1.8.2,<1.9.0
 numpy>=1.15.0,<2.0.0
-
-# Wordnet
-nltk >= 3.6.7,<3.7.0
-
-# Danish
-dacy >=1.1.1,<2.0.0
 
 # testing
 pytest

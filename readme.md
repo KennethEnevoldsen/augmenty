@@ -37,14 +37,14 @@ The following shows a simple example of how you can quickly augment text using A
 import spacy
 import augmenty
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_md")
 
 docs = nlp.pipe(["Augmenty is a great tool for text augmentation"])
 
 entity_augmenter = augmenty.load("ents_replace.v1", 
-                                 ent_dict = {{"ORG": [["spaCy"], ["spaCy", "Universe"]]})
+                                 ent_dict = {"ORG": [["spaCy"], ["spaCy", "Universe"]]}, level=1)
 
-for doc in augmenty.docs(docs, augmenter=entity_augmenter)
+for doc in augmenty.docs(docs, augmenter=entity_augmenter, nlp=nlp):
     print(doc)
 ```
 
@@ -56,7 +56,7 @@ spaCy Universe is a great tool for text augmentation.
 
 | Documentation              |                                                                             |
 | -------------------------- | --------------------------------------------------------------------------- |
-| 📚 **[Usage Guides]**       | Guides and instructions on how to use augmenty and its features.             |
+| 📚 **[Usage Guides]**       | Guides and instructions on how to use augmenty and its features.            |
 | 📰 **[News and changelog]** | New additions, changes and version history.                                 |
 | 🎛 **[API References]**     | The detailed reference for augmenty's API. Including function documentation |
 | 🍒 **[Augmenters]**         | Contains a full list of current augmenters in augmenty.                     |
