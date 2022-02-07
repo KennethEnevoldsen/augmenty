@@ -1,6 +1,8 @@
 # python
 *.pyc
 __pycache__
+build/*
+*.egg-info
 
 # vs code
 .vscode/*

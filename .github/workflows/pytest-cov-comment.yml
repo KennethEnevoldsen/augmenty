@@ -31,8 +31,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run and write pytest
       run: |
-        echo "[run]\nomit =\n\taugmenty/tests/*" > .coveragerc
-        python -m  pytest --cov=augmenty --cov-config=.coveragerc --cov-report term-missing | tee pytest-coverage.txt
+        python -m  pytest --cov=augmenty --cov-report term-missing
 
   pytest-coverage:
     runs-on: ubuntu-latest
@@ -49,8 +48,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run and write pytest
       run: |
-        echo "[run]\nomit =\n\taugmenty/tests/*" > .coveragerc
-        python -m  pytest --cov=augmenty --cov-config=.coveragerc --cov-report term-missing | tee pytest-coverage.txt
+        python -m  pytest --cov=augmenty --cov-report term-missing | tee pytest-coverage.txt
     - name: Pytest coverage comment
       id: coverage-comment
       uses: MishaKav/pytest-coverage-comment@v1.1.17
