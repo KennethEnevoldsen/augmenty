@@ -2,7 +2,7 @@
 dacy >=1.1.1,<2.0.0
 
 # Wordnet
-nltk >= 3.6.7,<3.7.0
+nltk >= 3.6.7,< 3.8.0
 
 # Package general
 spacy>=3.2.0,<3.3.0
