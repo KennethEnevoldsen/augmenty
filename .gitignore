@@ -21,3 +21,6 @@ dev/fast_cosine_sim.py
 # build
 build/*
 *.egg-info/*
+
+# meta
+dev/publicity.md
