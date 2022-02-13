@@ -12,7 +12,8 @@ from ...token import create_conditional_token_casing_augmenter
 def create_da_æøå_replace_augmenter(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.
+    """Creates an augmenter that augments æ, ø, and å into their spelling variants ae,
+    oe, aa.
 
     Args:
         level (float): probability to augment æ, ø or å.

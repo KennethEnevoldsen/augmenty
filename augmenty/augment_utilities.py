@@ -15,7 +15,8 @@ def combine(
     """Combines a series of spaCy style augmenters.
 
     Args:
-        augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An list of spaCy augmenters.
+        augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An
+            list of spaCy augmenters.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The combined augmenter
@@ -38,7 +39,8 @@ def set_doc_level(
     """Set the percantage of examples that the augmenter should be applied to.
 
     Args:
-        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters which you only want to apply to a certain percentage of docs
+        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy
+            augmenters which you only want to apply to a certain percentage of docs
         level (float): The percentage of docs the which should be augmented.
 
     Returns:
@@ -87,12 +89,14 @@ def yield_original(
     """Wraps and augmented such that it yields both the original and augmented example.
 
     Args:
-        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters.
-        doc_level (float, optional): The percentage of documents the augmenter should be applied to.
-            Only yield the original when the original doc is augmented.
+        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy
+            augmenters.
+        doc_level (float, optional): The percentage of documents the augmenter should
+            be applied to. Only yield the original when the original doc is augmented.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now yields both the original and augmented example.
+        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now
+            yields both the original and augmented example.
     """
 
     def __augment(nlp: Language, example: Example, level: float):

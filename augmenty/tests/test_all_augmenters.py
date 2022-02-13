@@ -14,6 +14,7 @@ from .fixtures import (  # noqa
     nlp_en_md,
     books_w_annotations,
     books_without_annotations,
+    dane_test,
 )
 
 np.seterr(divide="raise", invalid="raise")
@@ -28,7 +29,12 @@ def is_pronoun(token):
 abbreviate = lambda token: token.text[0] + "."
 
 
-ignore = {"spacy.orth_variants.v1", "token_replace.v1", "token_insert.v1"}
+ignore = {
+    "spacy.orth_variants.v1",
+    "token_replace.v1",
+    "token_insert.v1",
+    "paragraph_subset_augmenter.v1",
+}
 
 augmenters_args = {
     "char_replace.v1": {"replace": {"ss": "ß"}},

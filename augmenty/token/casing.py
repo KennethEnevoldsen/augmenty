@@ -40,16 +40,16 @@ def create_conditional_token_casing_augmenter(
     lower: Optional[bool] = None,
     upper: Optional[bool] = None,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that conditionally cases the first letter of a token based on the getter.
-    Either lower og upper needs to specifiedd as True.
+    """Creates an augmenter that conditionally cases the first letter of a token based
+    on the getter. Either lower og upper needs to specifiedd as True.
 
     Args:
         level (float):
         conditional (Callable):
-        lower (Optional[bool], optional): If the conditional returns True should the casing the lowercased.
-            Default to None.
-        upper (Optional[bool], optional): If the conditional returns True should the casing the uppercased.
-            Default to None.
+        lower (Optional[bool], optional): If the conditional returns True should the
+            casing the lowercased. Default to None.
+        upper (Optional[bool], optional): If the conditional returns True should the
+            casing the uppercased. Default to None.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -59,11 +59,13 @@ def create_conditional_token_casing_augmenter(
         ... if token.pos_ == "PRON":
         ...    return True
         ... return False
-        >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True, conditional=is_pronoun)
+        >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True,
+        >>>                     conditional=is_pronoun)
     """
     if upper == lower or (upper is None and lower is None):
         raise ValueError(
-            "You need to specify the desired casing the token should get either using lower=True/False or upper=True/False."
+            "You need to specify the desired casing the token should get either using "
+            + "lower=True/False or upper=True/False."
         )
     if lower is True:
         upper = False

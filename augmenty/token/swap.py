@@ -20,12 +20,14 @@ def create_token_swap_augmenter(
 
     Args:
         level (float): The probability to swap two tokens.
-        respect_ents (bool, optional): Should the pipeline respect entities? Defaults to True. In which
-            case it will not swap a token inside an entity with a token outside the entity span, unless
-            it is a one word span. If false it will disregard correcting the entity labels.
-        respect_sentences (bool, optional): Should it respect end of sentence bounderies? Default to True, indicating
-            that it will not swap and end of sentence token. If False it will disregard correcting the sentence
-            start as this becomes arbitrary.
+        respect_ents (bool, optional): Should the pipeline respect entities? Defaults
+            to True. In which case it will not swap a token inside an entity with a
+            token outside the entity span, unless it is a one word span. If false it
+            will disregard correcting the entity labels.
+        respect_sentences (bool, optional): Should it respect end of sentence
+            bounderies? Default to True, indicating that it will not swap and end of
+            sentence token. If False it will disregard correcting the sentence start
+            as this becomes arbitrary.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
