@@ -24,7 +24,7 @@ def nlp_en_md():
 
 
 @pytest.fixture()
-def dane_test():
+def dane_test(nlp_da):
     return dane(splits=["test"])(nlp_da)
 
 

@@ -34,6 +34,7 @@ ignore = {
     "token_replace.v1",
     "token_insert.v1",
     "paragraph_subset_augmenter.v1",
+    "word_embedding.v1",
 }
 
 augmenters_args = {
@@ -78,7 +79,6 @@ augmenters_args = {
     },
     "token_swap.v1": {},
     "upper_case.v1": {},
-    "word_embedding.v1": {"nlp": pytest.lazy_fixture("nlp_en_md")},
     "wordnet_synonym.v1": {},
     "random_synonym_insertion.v1": {"context_window": 5, "verbose": False},
     "duplicate_token.v1": {},
