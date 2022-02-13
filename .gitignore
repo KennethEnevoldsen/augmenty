@@ -15,12 +15,10 @@ docs/_build/*
 
 # coverage report
 .coverage
-dev/pytest-coverage/pytest-coverage.txt
-dev/fast_cosine_sim.py
 
 # build
 build/*
 *.egg-info/*
 
 # meta
-dev/publicity.md
+publicity.md
