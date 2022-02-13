@@ -6,17 +6,12 @@ import augmenty
 
 import pytest
 
-
-@pytest.fixture()
-def nlp():
-    nlp = spacy.load("en_core_web_sm")
-    return nlp
+from .fixtures import nlp_en_md, nlp_en
 
 
-def test_create_ent_replace(nlp):
-    nlp_ = English()
+def test_create_ent_replace(nlp_en_md, nlp_en):
     doc = Doc(
-        nlp_.vocab,
+        nlp_en.vocab,
         words=[
             "Augmenty",
             "is",
@@ -35,7 +30,7 @@ def test_create_ent_replace(nlp):
         "ents_replace.v1", level=1.00, ent_dict={"ORG": [["SpaCy"]]}
     )
 
-    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_))
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
 
     assert docs[0].text == "SpaCy is a wonderful tool for augmentation."
 
@@ -43,7 +38,7 @@ def test_create_ent_replace(nlp):
         "ents_replace.v1", level=1.00, ent_dict={"ORG": [["The SpaCy Universe"]]}
     )
 
-    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_))
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
 
     assert docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."
 
@@ -53,15 +48,15 @@ def test_create_ent_replace(nlp):
         ent_dict={"PERSON": [["Kenneth"], ["Lasse", "Hansen"]]},
     )
 
-    doc = nlp("My name is Jack.")
-    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
+    doc = nlp_en_md("My name is Jack.")
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en_md))
 
     assert docs[0].text != "My name is Jack."
 
 
-def test_create_per_replace(nlp):
+def test_create_per_replace(nlp_en, nlp_en_md):
     doc = Doc(
-        nlp.vocab,
+        nlp_en.vocab,
         words=["My", "name", "is", "Kenneth", "Enevoldsen"],
         spaces=[True, True, True, True, False],
         ents=["O", "O", "O", "B-PERSON", "I-PERSON"],
@@ -88,7 +83,7 @@ def test_create_per_replace(nlp):
             patterns=[p],
         )
 
-        docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp))
+        docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp_en))
 
         assert docs[0].text == e
 
@@ -102,12 +97,12 @@ def test_create_per_replace(nlp):
         patterns=[p],
     )
     text = "My name is Charlie."
-    doc = nlp(text)
-    docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp))
+    doc = nlp_en_md(text)
+    docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp_en_md))
     assert docs[0] != text
 
 
-def test_create_ent_format_augmenter(nlp):
+def test_create_ent_format_augmenter(nlp_en_md):
     abbreviate = lambda token: token.text[0] + "."
 
     augmenter = augmenty.load(
@@ -119,5 +114,5 @@ def test_create_ent_format_augmenter(nlp):
     texts = ["my name is Kenneth Enevoldsen"]
     aug_text = "my name is Enevoldsen K."
 
-    aug_texts = list(augmenty.texts(texts, augmenter, nlp))
+    aug_texts = list(augmenty.texts(texts, augmenter, nlp_en_md))
     assert aug_texts[0] == aug_text

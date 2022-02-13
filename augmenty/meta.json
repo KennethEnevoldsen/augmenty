@@ -161,7 +161,7 @@
             "training"
         ]
     },
-    "grundtvigian_spacing_augmenter.v1": {
+    "letter_spacing_augmenter.v1": {
         "respects": [
             "token labels",
             "dependency parsing",

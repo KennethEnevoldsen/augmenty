@@ -1,9 +1,6 @@
-import spacy
-from spacy.lang.da import Danish
-from spacy.lang.en import English
-from spacy.training import Example
-
-from dacy.datasets import dane
+"""
+Pytest script for testing all augmenters in a variety of cases.
+"""
 
 import pytest
 
@@ -11,23 +8,15 @@ import augmenty
 
 import numpy as np
 
-from .books import BOOKS
+from .fixtures import (  # noqa
+    nlp_en,
+    nlp_da,
+    nlp_en_md,
+    books_w_annotations,
+    books_without_annotations,
+)
 
 np.seterr(divide="raise", invalid="raise")
-
-
-#### > should be import
-def texts_to_example(texts, nlp):
-    docs = nlp.pipe(texts)
-    for doc in docs:
-        yield Example(doc, doc)
-
-
-nlp_en_md = spacy.load("en_core_web_md")
-nlp_da = Danish()
-nlp_en = English()
-
-dane_test = dane(splits=["test"])(nlp_da)
 
 
 def is_pronoun(token):
@@ -59,7 +48,7 @@ augmenters_args = {
             "PERSON": [["Kenneth"], ["Lasse", "Hansen"]],
         }
     },
-    "grundtvigian_spacing_augmenter.v1": {},
+    "letter_spacing_augmenter.v1": {},
     "keystroke_error.v1": {},
     "per_replace.v1": {
         "names": {
@@ -83,7 +72,7 @@ augmenters_args = {
     },
     "token_swap.v1": {},
     "upper_case.v1": {},
-    "word_embedding.v1": {"nlp": nlp_en_md},
+    "word_embedding.v1": {"nlp": pytest.lazy_fixture("nlp_en_md")},
     "wordnet_synonym.v1": {},
     "random_synonym_insertion.v1": {"context_window": 5, "verbose": False},
     "duplicate_token.v1": {},
@@ -97,9 +86,12 @@ augmenters_args = {
 @pytest.mark.parametrize(
     "examples,nlp",
     [
-        (dane_test, nlp_da),
-        (list(texts_to_example(BOOKS, nlp=nlp_en)), nlp_en),
-        (list(texts_to_example(BOOKS, nlp=nlp_en_md)), nlp_en_md),
+        (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),
+        (
+            pytest.lazy_fixture("books_without_annotations"),
+            pytest.lazy_fixture("nlp_en"),
+        ),
+        (pytest.lazy_fixture("books_w_annotations"), pytest.lazy_fixture("nlp_en_md")),
     ],
 )
 def test_augmenters(aug, args, examples, nlp, level):
@@ -110,4 +102,4 @@ def test_augmenters(aug, args, examples, nlp, level):
 
 def test_check_untested():
     for aug_name in augmenty.augmenters():
-        assert aug_name in augmenters_args or aug_name in ignore
+        assert (aug_name in augmenters_args) or (aug_name in ignore)

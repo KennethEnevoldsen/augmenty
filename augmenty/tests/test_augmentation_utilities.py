@@ -1,21 +1,16 @@
 import pytest
 
-import spacy
 from spacy.tokens import Doc, Span
 
 import augmenty
 
-
-@pytest.fixture()
-def nlp():
-    nlp = spacy.load("en_core_web_md")
-    return nlp
+from .fixtures import nlp_en_md, nlp_en
 
 
-def test_combine(nlp):
+def test_combine(nlp_en_md):
     words = ["Augmenty", "is", "a", "wonderful", "tool", "for", "augmentation", "."]
     spaces = [True, True, True, True, True, True, False, False]
-    doc = Doc(nlp.vocab, words=words, spaces=spaces)
+    doc = Doc(nlp_en_md.vocab, words=words, spaces=spaces)
     doc.set_ents([Span(doc, 0, 1, "ORG")])
     docs = [doc]
 
@@ -28,36 +23,36 @@ def test_combine(nlp):
 
     combined_aug = augmenty.combine([ent_augmenter, synonym_augmenter])
 
-    augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp))
+    augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))
 
     assert augmented_docs[0][0].text == "spaCy"
 
 
-def test_yield_original(nlp):
+def test_yield_original(nlp_en):
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     aug = augmenty.load("upper_case.v1", level=1)
 
     aug = augmenty.yield_original(aug)
 
-    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
 
     assert len(augmented_docs) == 2
 
 
-def test_repeat(nlp):
+def test_repeat(nlp_en):
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     aug = augmenty.load("upper_case.v1", level=1)
 
     aug = augmenty.repeat(aug, n=3)
 
-    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
 
     assert len(augmented_docs) == 3
 
 
-def test_set_doc_level(nlp):
+def test_set_doc_level(nlp_en):
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     aug = augmenty.load("upper_case.v1", level=1)
@@ -65,4 +60,4 @@ def test_set_doc_level(nlp):
     aug = augmenty.set_doc_level(aug, level=0.5)
 
     # simply testing it it runs
-    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp))
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
