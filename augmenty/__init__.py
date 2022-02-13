@@ -1,9 +1,9 @@
-from .about import __version__, __download_url__, __title__
+from .about import __version__, __download_url__, __title__  # noqa
 
-from .util import augmenters, docs, texts, keyboards, load, meta
+from .util import augmenters, docs, texts, keyboards, load, meta  # noqa
 
 # import augmenters
-from .character import (
+from .character import (  # noqa
     create_char_replace_augmenter,
     create_char_swap_augmenter,
     create_char_random_augmenter,
@@ -11,11 +11,11 @@ from .character import (
     create_random_casing_augmenter,
     create_remove_spacing_augmenter,
 )
-from .token import (
+from .token import (  # noqa
     create_conditional_token_casing_augmenter,
     create_token_swap_augmenter,
     create_spacing_insertion_augmenter,
-    create_grundtvigian_spacing_augmenter,
+    create_letter_spacing_augmenter,
     create_wordnet_synonym_augmenter,
     create_token_replace_augmenter,
     create_starting_case_augmenter,
@@ -24,13 +24,17 @@ from .token import (
     create_random_synonym_insertion_augmenter,
     create_duplicate_token_augmenter,
 )
-from .span import (
+from .span import (  # noqa
     create_per_replace_augmenter,
     create_ent_format_augmenter,
     create_ent_augmenter,
 )
-from .doc import create_upper_casing_augmenter, create_spongebob_augmenter
-from .lang import (
+from .doc import (  # noqa
+    create_upper_casing_augmenter,
+    create_spongebob_augmenter,
+    create_paragraph_subset_augmenter_v1,
+)
+from .lang import (  # noqa
     create_ru,
     create_qwerty_ro,
     create_qwerty_pt,
@@ -50,4 +54,4 @@ from .lang import (
     create_qwerty_da,
 )
 
-from .augment_utilities import combine, set_doc_level, yield_original, repeat
+from .augment_utilities import combine, set_doc_level, yield_original, repeat  # noqa
