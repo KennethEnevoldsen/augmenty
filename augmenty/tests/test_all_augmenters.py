@@ -5,13 +5,13 @@ from spacy.training import Example
 
 from dacy.datasets import dane
 
+import pytest
+
 import augmenty
 
-import pytest
-from .books import BOOKS
-
-
 import numpy as np
+
+from .books import BOOKS
 
 np.seterr(divide="raise", invalid="raise")
 

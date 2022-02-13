@@ -351,5 +351,17 @@
             "training",
             "evaluation"
         ]
+    },
+    "paragraph_subset_augmenter.v1": {
+        "respects": [
+            "token labels",
+            "entity labels",
+            "dependency parsing",
+            "document labels"
+        ],
+        "use": [
+            "training",
+            "evaluation"
+        ]
     }
 }
