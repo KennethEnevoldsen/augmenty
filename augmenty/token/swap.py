@@ -7,13 +7,12 @@ import numpy as np
 import spacy
 from spacy.language import Language
 from spacy.training import Example
-from spacy.tokens import Token
 
 from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("token_swap.v1")
-def create_token_swap_augmenter(
+def create_token_swap_augmenter_v1(
     level: float, respect_ents: bool = True, respect_sentences: bool = True
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
@@ -33,14 +32,14 @@ def create_token_swap_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
     return partial(
-        token_swap_augmenter,
+        token_swap_augmenter_v1,
         level=level,
         respect_sentences=respect_sentences,
         respect_ents=respect_ents,
     )
 
 
-def token_swap_augmenter(
+def token_swap_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,

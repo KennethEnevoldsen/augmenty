@@ -13,7 +13,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("ents_replace.v1")
-def create_ent_augmenter(
+def create_ent_augmenter_v1(
     level: float,
     ent_dict: Dict[str, Iterable[List[str]]],
     replace_consistency: bool = True,
@@ -36,11 +36,13 @@ def create_ent_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter
 
     Example:
-        >>> ent_dict = {"ORG": [["Google"], ["Apple"]], "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}
-        >>> ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)  # augment 10% of names
+        >>> ent_dict = {"ORG": [["Google"], ["Apple"]],
+        >>>             "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}
+        >>> # augment 10% of names
+        >>> ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)
     """
     return partial(
-        ent_augmenter,
+        ent_augmenter_v1,
         level=level,
         ent_dict=ent_dict,
         replace_consistency=replace_consistency,
@@ -48,7 +50,7 @@ def create_ent_augmenter(
     )
 
 
-def ent_augmenter(
+def ent_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -102,7 +104,8 @@ def ent_augmenter(
                 offset_ = len_ent - (ent.end - ent.start)
 
                 head[head > ent.start + offset] += offset_
-                # keep first head correcting for changing entity size, set rest to refer to index of first name
+                # keep first head correcting for changing entity size, set rest to
+                # refer to index of first name
                 head = np.concatenate(
                     [
                         np.array(head[: ent.start + offset]),  # before
@@ -137,7 +140,7 @@ def ent_augmenter(
 
 
 @spacy.registry.augmenters("per_replace.v1")
-def create_per_replace_augmenter(
+def create_per_replace_augmenter_v1(
     names: Dict[
         str, List[str]
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
@@ -156,13 +159,13 @@ def create_per_replace_augmenter(
             These could for example include first name and last names.
         pattern (List[List[str]]): The pattern to create the names. This should be a
             list of patterns.
-            Where a pattern is a list of strings, where the string denote the list in the names
-            dictionary in which to sample from.
+            Where a pattern is a list of strings, where the string denote the list in
+            the names dictionary in which to sample from.
         level (float): The proportion of PER entities to replace.
         names_p (Dict[str, List[float]], optional): The probability to sample each name.
             Defaults to {}, indicating equal probability for each name.
-        patterns_p (Optional[List[float]], optional): The probability to sample each pattern.
-            Defaults to None, indicating equal probability for each pattern.
+        patterns_p (Optional[List[float]], optional): The probability to sample each
+            pattern. Defaults to None, indicating equal probability for each pattern.
         replace_consistency (bool, optional): Should the entity always be replaced with
             the same entity? Defaults to True.
         person_tag (str, optional) The tag of the person entity. Defaults to "PERSON".
@@ -181,7 +184,7 @@ def create_per_replace_augmenter(
 
     names_gen = generator_from_name_dict(names, patterns, names_p, patterns_p)
 
-    return create_ent_augmenter(
+    return create_ent_augmenter_v1(
         ent_dict={person_tag: names_gen},
         level=level,
         replace_consistency=replace_consistency,
@@ -210,7 +213,7 @@ def generator_from_name_dict(
 
 
 @spacy.registry.augmenters("ents_format.v1")
-def create_ent_format_augmenter(
+def create_ent_format_augmenter_v1(
     reordering: List[Union[int, None]],
     formatter: List[Union[Callable[[Token], str], None]],
     level: float,
@@ -251,7 +254,7 @@ def create_ent_format_augmenter(
         ["my name is Enevoldsen K."]
     """
     return partial(
-        ent_format_augmenter,
+        ent_format_augmenter_v1,
         reordering=reordering,
         formatter=formatter,
         level=level,
@@ -259,7 +262,7 @@ def create_ent_format_augmenter(
     )
 
 
-def ent_format_augmenter(
+def ent_format_augmenter_v1(
     nlp: Language,
     example: Example,
     reordering: List[Union[int, None]],
@@ -270,7 +273,6 @@ def ent_format_augmenter(
     example_dict = example.to_dict()
 
     tok_anno = example_dict["token_annotation"]
-    ents = example_dict["doc_annotation"]["entities"]
 
     for ent in example.y.ents:
         if (ent_types is None or ent.label_ in ent_types) and random.random() < level:

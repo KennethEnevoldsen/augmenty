@@ -10,7 +10,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("random_starting_case.v1")
-def create_starting_case_augmenter(
+def create_starting_case_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which randomly cases the first letter in each token.
@@ -30,11 +30,11 @@ def create_starting_case_augmenter(
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["one Two Three"]
     """
-    return partial(starting_case_augmenter, level=level)
+    return partial(starting_case_augmenter_v1, level=level)
 
 
 @spacy.registry.augmenters("conditional_token_casing.v1")
-def create_conditional_token_casing_augmenter(
+def create_conditional_token_casing_augmenter_v1(
     conditional: Callable,
     level: float,
     lower: Optional[bool] = None,
@@ -72,11 +72,14 @@ def create_conditional_token_casing_augmenter(
     if lower is False:
         upper = True
     return partial(
-        conditional_casing_augmenter, level=level, upper=upper, conditional=conditional
+        conditional_casing_augmenter_v1,
+        level=level,
+        upper=upper,
+        conditional=conditional,
     )
 
 
-def starting_case_augmenter(
+def starting_case_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -95,7 +98,7 @@ def starting_case_augmenter(
     yield example.from_dict(doc, example_dict)
 
 
-def conditional_casing_augmenter(
+def conditional_casing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,

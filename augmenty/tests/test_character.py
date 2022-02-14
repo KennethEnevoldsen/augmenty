@@ -1,17 +1,16 @@
 import spacy
 import augmenty
 
-from spacy.lang.da import Danish
-from spacy.lang.en import English
-
-
-import pytest
 
 from .fixtures import nlp_en, nlp_da
 
 
 def test_create_random_casing_augmenter(nlp_en):
-    text = "some of the cases here should not be lowercased. there is naturally a chance that it might not end up that way, but it should be very very very rare."
+    text = (
+        "some of the cases here should not be lowercased."
+        + " there is naturally a chance that it might not end up that way,"
+        + " but it should be very very very rare."
+    )
 
     aug = spacy.registry.augmenters.get("random_casing.v1")(level=1)
     doc = nlp_en(text)

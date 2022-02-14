@@ -15,7 +15,7 @@ from .wordnet_util import init_wordnet
 
 
 @spacy.registry.augmenters("token_insert.v1")
-def create_token_insert_augmenter(
+def create_token_insert_augmenter_v1(
     level: float,
     insert: Callable[[Token], Dict[str, str]],
     respect_ents: bool = True,
@@ -47,11 +47,11 @@ def create_token_insert_augmenter(
         ["This insert is a cat"]
     """
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=insert
+        token_insert_augmenter_v1, level=level, respect_ents=respect_ents, insert=insert
     )
 
 
-def token_insert_augmenter(
+def token_insert_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -108,7 +108,7 @@ def token_insert_augmenter(
 
 
 @spacy.registry.augmenters("token_insert_random.v1")
-def create_token_insert_random_augmenter(
+def create_token_insert_random_augmenter_v1(
     level: float,
     insert: Optional[List[Union[str, Dict[str, str]]]] = None,
     respect_ents: bool = True,
@@ -131,7 +131,7 @@ def create_token_insert_random_augmenter(
         >>> from spacy.lang.en import English
         >>> nlp = English()
         >>> aug = create_token_insert_random_augmenter(level = 0.30,
-        >>>                                            insert = ["words", "to", "insert"])
+        >>>                                    insert = ["words", "to", "insert"])
         >>> texts = ["one two three"]
         >>> list(augmenty.texts(texts, aug, nlp))
         ["one words two three"]
@@ -153,12 +153,15 @@ def create_token_insert_random_augmenter(
 
     __insert = partial(__insert, d=d)
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=__insert
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=__insert,
     )
 
 
 @spacy.registry.augmenters("duplicate_token.v1")
-def create_duplicate_token_augmenter(
+def create_duplicate_token_augmenter_v1(
     level: float,
     respect_ents: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -195,12 +198,15 @@ def create_duplicate_token_augmenter(
         return insert_token
 
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=__insert
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=__insert,
     )
 
 
 @spacy.registry.augmenters("random_synonym_insertion.v1")
-def create_random_synonym_insertion_augmenter(
+def create_random_synonym_insertion_augmenter_v1(
     level: float,
     respect_pos: bool = True,
     respect_ents: bool = True,
@@ -301,5 +307,5 @@ def create_random_synonym_insertion_augmenter(
 
     insert = partial(__insert, lang=lang, respect_pos=respect_pos, verbose=verbose)
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=insert
+        token_insert_augmenter_v1, level=level, respect_ents=respect_ents, insert=insert
     )

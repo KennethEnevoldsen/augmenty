@@ -16,7 +16,7 @@ from ..keyboard import Keyboard
 
 
 @spacy.registry.augmenters("char_replace_random.v1")
-def create_char_random_augmenter(
+def create_char_random_augmenter_v1(
     level: float,
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -45,11 +45,11 @@ def create_char_random_augmenter(
 
     kb = Keyboard.from_registry(keyboard)
     replace_dict = {k: list(kb.all_keys()) for k in kb.all_keys()}
-    return partial(char_replace_augmenter, replace=replace_dict, level=level)
+    return partial(char_replace_augmenter_v1, replace=replace_dict, level=level)
 
 
 @spacy.registry.augmenters("char_replace.v1")
-def create_char_replace_augmenter(
+def create_char_replace_augmenter_v1(
     level: float, replace: dict
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that replaces a character with a random character from
@@ -64,16 +64,17 @@ def create_char_replace_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter function.
 
     Example:
-        >>> create_char_replace_augmenter(level=0.02, replace={"æ": ["ae"], "ß": ["ss"]})
+        >>> create_char_replace_augmenter_v1(level=0.02,
+        >>>                                  replace={"æ": ["ae"], "ß": ["ss"]})
     """
     return partial(
-        char_replace_augmenter,
+        char_replace_augmenter_v1,
         level=level,
         replace=replace,
     )
 
 
-def char_replace_augmenter(
+def char_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -95,7 +96,7 @@ def char_replace_augmenter(
 
 
 @spacy.registry.augmenters("keystroke_error.v1")
-def create_keystroke_error_augmenter(
+def create_keystroke_error_augmenter_v1(
     level: float,
     distance: float = 1.5,
     keyboard: str = "en_qwerty.v1",
@@ -128,4 +129,4 @@ def create_keystroke_error_augmenter(
     """
     kb = Keyboard.from_registry(keyboard)
     replace_dict = kb.create_distance_dict(distance=distance)
-    return partial(char_replace_augmenter, replace=replace_dict, level=level)
+    return partial(char_replace_augmenter_v1, replace=replace_dict, level=level)

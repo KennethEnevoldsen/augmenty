@@ -10,7 +10,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("letter_spacing_augmenter.v1")
-def create_letter_spacing_augmenter(
+def create_letter_spacing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Typically casing is used to add emphasis to words, but letter spacing has also
@@ -46,7 +46,7 @@ def letter_spacing_augmenter_v1(
 
 
 @spacy.registry.augmenters("spacing_insertion.v1")
-def create_spacing_insertion_augmenter(
+def create_spacing_insertion_augmenter_v1(
     level: float,
     max_insertions: int = 1,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -61,11 +61,11 @@ def create_spacing_insertion_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
     return partial(
-        spacing_insertion_augmenter, level=level, max_insertions=max_insertions
+        spacing_insertion_augmenter_v1, level=level, max_insertions=max_insertions
     )
 
 
-def spacing_insertion_augmenter(
+def spacing_insertion_augmenter_v1(
     nlp: Language, example: Example, level: float, max_insertions: int
 ) -> Iterator[Example]:
     def __spacing(t):

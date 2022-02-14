@@ -13,7 +13,7 @@ from .static_embedding_util import static_embedding
 
 
 @spacy.registry.augmenters("token_dict_replace.v1")
-def create_token__dict_replace_augmenter(
+def create_token__dict_replace_augmenter_v1(
     level: float,
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
     ignore_casing: bool = True,
@@ -23,13 +23,17 @@ def create_token__dict_replace_augmenter(
     """Creates an augmenter swaps a token with its synonym based on a dictionary.
 
     Args:
-        level (float): Probability to replace token given that it is in synonym dictionary.
-        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A dictionary of
-            words and a list of their replacement (e.g. synonyms) or a dictionary denoting
-            replacement based on pos tag.
-        ignore_casing: When doing the lookup should the model ignore casing? Defaults to True.
-        getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
-        keep_titlecase (bool): Should the model keep the titlecase of the replaced word. Defaults to True.
+        level (float): Probability to replace token given that it is in synonym
+            dictionary.
+        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A
+            dictionary of words and a list of their replacement (e.g. synonyms) or a
+            dictionary denoting replacement based on pos tag.
+        ignore_casing(bool, optional): When doing the lookup should the model ignore
+            casing? Defaults to True.
+        getter (Callable[[Token], str], optional): A getter function to extract the
+            POS-tag.
+        keep_titlecase (bool): Should the model keep the titlecase of the replaced
+            word. Defaults to True.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -46,7 +50,7 @@ def create_token__dict_replace_augmenter(
             replace[k.lower()] = replace[k]
 
     return partial(
-        token_dict_replace_augmenter,
+        token_dict_replace_augmenter_v1,
         level=level,
         replace=replace,
         getter=getter,
@@ -55,7 +59,7 @@ def create_token__dict_replace_augmenter(
     )
 
 
-def token_dict_replace_augmenter(
+def token_dict_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -88,7 +92,7 @@ def token_dict_replace_augmenter(
 
 
 @spacy.registry.augmenters("wordnet_synonym.v1")
-def create_wordnet_synonym_augmenter(
+def create_wordnet_synonym_augmenter_v1(
     level: float,
     lang: Optional[str] = None,
     respect_pos: bool = True,
@@ -123,7 +127,7 @@ def create_wordnet_synonym_augmenter(
     from .wordnet_util import upos_wn_dict
     from .wordnet_util import lang_wn_dict
 
-    def wordnet_synonym_augmenter(
+    def wordnet_synonym_augmenter_v1(
         nlp: Language,
         example: Example,
         level: float,
@@ -167,7 +171,7 @@ def create_wordnet_synonym_augmenter(
     if lang:
         lang = lang_wn_dict[lang]
     return partial(
-        wordnet_synonym_augmenter,
+        wordnet_synonym_augmenter_v1,
         level=level,
         lang=lang,
         getter=getter,
@@ -176,7 +180,7 @@ def create_wordnet_synonym_augmenter(
     )
 
 
-def token_replace_augmenter(
+def token_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -204,7 +208,7 @@ def token_replace_augmenter(
 
 
 @spacy.registry.augmenters("token_replace.v1")
-def create_token_replace_augmenter(
+def create_token_replace_augmenter_v1(
     replace: Callable[[Token], str],
     keep_titlecase: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -229,12 +233,12 @@ def create_token_replace_augmenter(
         >>> aug = create_token_replace_augmenter(replace=remove_vowels, level=.10)
     """
     return partial(
-        token_replace_augmenter, replace=replace, keep_titlecase=keep_titlecase
+        token_replace_augmenter_v1, replace=replace, keep_titlecase=keep_titlecase
     )
 
 
 @spacy.registry.augmenters("word_embedding.v1")
-def create_word_embedding_augmenter(
+def create_word_embedding_augmenter_v1(
     level=float,
     n: int = 10,
     nlp: Optional[Language] = None,
@@ -289,7 +293,7 @@ def create_word_embedding_augmenter(
 
     __replace = partial(replace, n=n, ignore_casing=ignore_casing, embedding=embedding)
     return partial(
-        token_replace_augmenter,
+        token_replace_augmenter_v1,
         replace=__replace,
         keep_titlecase=keep_titlecase,
         level=level,

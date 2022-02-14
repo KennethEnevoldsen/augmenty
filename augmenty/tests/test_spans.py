@@ -1,10 +1,7 @@
-import spacy
 from spacy.tokens import Doc
-from spacy.lang.en import English
 
 import augmenty
 
-import pytest
 
 from .fixtures import nlp_en_md, nlp_en
 

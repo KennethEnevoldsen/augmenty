@@ -4,13 +4,17 @@ from spacy.tokens import Doc
 import augmenty
 
 from .books import BOOKS
-from augmenty.token.insert import create_token_insert_random_augmenter
+from augmenty.token.insert import create_token_insert_random_augmenter_v1
 
 from .fixtures import nlp_en_md, nlp_en, nlp_da
 
 
 def test_create_starting_case_augmenter(nlp_en):
-    text = "some of the start cases here should not be lowercased. There is naturally a chance that it might not end up that way, but it should be very very very rare."
+    text = (
+        "some of the start cases here should not be lowercased."
+        + " There is naturally a chance that it might not end up that way, but it"
+        + " should be very very very rare."
+    )
 
     aug = spacy.registry.augmenters.get("random_starting_case.v1")(level=1)
     doc = nlp_en(text)
@@ -182,12 +186,12 @@ def test_create_token_insert_augmenter(nlp_en):
 def test_create_token_insert_random_augmenter(nlp_en):
     texts = ["one two three"] * 3
     # w. word list
-    aug = create_token_insert_random_augmenter(
+    aug = create_token_insert_random_augmenter_v1(
         level=0.5, insert=["words", "to", "insert"]
     )
     list(augmenty.texts(texts, aug, nlp_en))
     # w. dict
-    aug = create_token_insert_random_augmenter(
+    aug = create_token_insert_random_augmenter_v1(
         level=0.5,
         insert=[
             {
@@ -202,7 +206,7 @@ def test_create_token_insert_random_augmenter(nlp_en):
     )
     list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
     # w. None (i.e. vocab)
-    aug = create_token_insert_random_augmenter(level=0.5)
+    aug = create_token_insert_random_augmenter_v1(level=0.5)
     list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
 
 

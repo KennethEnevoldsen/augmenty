@@ -1,8 +1,5 @@
 from augmenty.token.static_embedding_util import static_embedding
 
-import spacy
-
-import pytest
 
 from .fixtures import nlp_en_md
 
