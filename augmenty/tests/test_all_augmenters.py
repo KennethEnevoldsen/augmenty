@@ -92,7 +92,7 @@ augmenters_args = {
 @pytest.mark.parametrize(
     "examples,nlp",
     [
-        (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),
+        # (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),  # github actions block til due to as it open an unsafe connection
         (
             pytest.lazy_fixture("books_without_annotations"),
             pytest.lazy_fixture("nlp_en"),
