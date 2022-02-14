@@ -97,7 +97,7 @@ augmenters_args = {
             pytest.lazy_fixture("books_without_annotations"),
             pytest.lazy_fixture("nlp_en"),
         ),
-        # (pytest.lazy_fixture("books_w_annotations"), pytest.lazy_fixture("nlp_en_md")),
+        (pytest.lazy_fixture("books_w_annotations"), pytest.lazy_fixture("nlp_en_md")),
     ],
 )
 def test_augmenters(aug, args, examples, nlp, level):
