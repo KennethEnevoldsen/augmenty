@@ -191,7 +191,7 @@ def create_duplicate_token_augmenter_v1(
             "LEMMA": t.lemma_,
             "POS": t.pos_,
             "TAG": t.tag_,
-            "MORPH": t.morph,
+            "MORPH": str(t.morph),
         }
         if t.doc.has_annotation("ENT_TYPE") and respect_ents is False:
             insert_token["entities"] = t.ent_iob_ + t.ent_type_

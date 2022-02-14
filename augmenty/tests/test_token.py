@@ -210,7 +210,7 @@ def test_create_token_insert_random_augmenter(nlp_en):
     list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
 
 
-def test_create_duplicate_token_augmenter(nlp_en):
+def test_create_duplicate_token_augmenter(nlp_en, nlp_en_md):
     words = ["cat"]
     spaces = [False]
     doc = Doc(nlp_en.vocab, words=words, spaces=spaces)
@@ -219,6 +219,9 @@ def test_create_duplicate_token_augmenter(nlp_en):
     assert len(docs[0]) == 2
     assert docs[0][0].text == "cat"
     assert docs[0][1].text == "cat"
+    docs = list(
+        augmenty.docs(nlp_en_md("I am not happy"), augmenter=aug, nlp=nlp_en_md)
+    )
 
 
 def test_create_random_synonym_insertion_augmenter(nlp_en):
