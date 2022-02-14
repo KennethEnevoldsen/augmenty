@@ -12,7 +12,7 @@ augmenty.doc.casing
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: upper_casing_augmenter, spongebob_augmenter
+   :exclude-members: upper_casing_augmenter_v1, spongebob_augmenter_v1
 
 augmenty.doc.subset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

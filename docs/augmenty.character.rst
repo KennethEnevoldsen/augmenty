@@ -9,7 +9,7 @@ augmenty.character.casing
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: random_casing_augmenter
+   :exclude-members: random_casing_augmenter_v1
 
 augmenty.character.replace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,7 +18,7 @@ augmenty.character.replace
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: char_replace_augmenter
+   :exclude-members: char_replace_augmenter_v1
 
 augmenty.character.spacing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,7 +27,7 @@ augmenty.character.spacing
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: remove_spacing_augmenter
+   :exclude-members: remove_spacing_augmenter_v1
 
 augmenty.character.swap
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,5 +36,5 @@ augmenty.character.swap
    :members:
    :undoc-members:
    :show-inheritance:
-   :exclude-members: char_swap_augmenter
+   :exclude-members: char_swap_augmenter_v1
 
