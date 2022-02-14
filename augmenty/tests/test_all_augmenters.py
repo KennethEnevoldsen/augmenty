@@ -92,12 +92,12 @@ augmenters_args = {
 @pytest.mark.parametrize(
     "examples,nlp",
     [
-        # (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),
+        (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),
         (
             pytest.lazy_fixture("books_without_annotations"),
             pytest.lazy_fixture("nlp_en"),
         ),
-        (pytest.lazy_fixture("books_w_annotations"), pytest.lazy_fixture("nlp_en_md")),
+        # (pytest.lazy_fixture("books_w_annotations"), pytest.lazy_fixture("nlp_en_md")),
     ],
 )
 def test_augmenters(aug, args, examples, nlp, level):
