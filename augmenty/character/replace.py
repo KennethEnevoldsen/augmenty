@@ -27,7 +27,7 @@ def create_char_random_augmenter_v1(
         level (float): The probability to replace a character with a neightbouring
             character.
         keyboard (str, optional): A defined keyboard in the keyboard registry. To see a
-            list of all keyboard you can run `augmenty,keyboards.get_all()`. Defaults
+            list of all keyboard you can run `augmenty,keyboards()`. Defaults
             to "en_qwerty.v1".
 
     Returns:
