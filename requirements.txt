@@ -34,4 +34,4 @@ black
 
 # streamlit
 st-annotated-text>=3.0.0,<3.1.0
-streamlit>=1.5.0,<1.6.0
+streamlit>=1.5.0,<1.7.0
