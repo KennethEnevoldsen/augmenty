@@ -10,7 +10,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("random_casing.v1")
-def create_random_casing_augmenter(
+def create_random_casing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augment that randomly changes the casing of the document.
@@ -23,17 +23,17 @@ def create_random_casing_augmenter(
 
     Example:
         >>> import augmenty
-        >>> from spacy.lang.en import English
-        >>> nlp = English()
+        >>> from spacy
+        >>> nlp = spacy.blank("en")
         >>> random_casing_augmenter = augmenty.load("random_casing.v1", level=0.1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, random_casing_augmenter, nlp))
         ["A saMple texT"]
     """
-    return partial(random_casing_augmenter, level=level)
+    return partial(random_casing_augmenter_v1, level=level)
 
 
-def random_casing_augmenter(
+def random_casing_augmenter_v1(
     nlp: Language, example: Example, level: float
 ) -> Iterator[Example]:
     def __casing(c):

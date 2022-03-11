@@ -92,7 +92,8 @@ class Keyboard(BaseModel):
 
         Args:
             key (str): A keyboard key
-            distance (int, optional): The euclidian distance of neightbours. Defaults to 1.
+            distance (int, optional): The euclidian distance of neightbours.
+                Defaults to 1.
 
         Returns:
             Set[int]: The neighbours of a key with a specified distance.

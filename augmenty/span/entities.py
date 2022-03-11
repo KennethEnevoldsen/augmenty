@@ -13,7 +13,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("ents_replace.v1")
-def create_ent_augmenter(
+def create_ent_augmenter_v1(
     level: float,
     ent_dict: Dict[str, Iterable[List[str]]],
     replace_consistency: bool = True,
@@ -23,21 +23,26 @@ def create_ent_augmenter(
 
     Args:
         level (float): the percentage of entities to be augmented.
-        ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding the the entity type
-            you wish to replace (e.g. "PER") and a itarable of the replacements. A replacement is a list of string of
-            the desired entity replacement ["Kenneth", "Enevoldsen"].
-        replace_consistency (bool, optional): Should an entity always be replaced with the same entity? Defaults to True.
-        resolve_dependencies (bool, optional): Attempts to resolve the dependency tree by setting head of the original entitity as
+        ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding
+            the the entity type you wish to replace (e.g. "PER") and a itarable of the
+            replacements. A replacement is a list of string of the desired entity
+            replacement ["Kenneth", "Enevoldsen"].
+        replace_consistency (bool, optional): Should an entity always be replaced with
+            the same entity? Defaults to True.
+        resolve_dependencies (bool, optional): Attempts to resolve the dependency tree
+            by setting head of the original entitity as
         the head of the first token in the new entity. The remainder is the passed as
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
 
     Example:
-        >>> ent_dict = {"ORG": [["Google"], ["Apple"]], "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}
-        >>> ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)  # augment 10% of names
+        >>> ent_dict = {"ORG": [["Google"], ["Apple"]],
+        >>>             "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}
+        >>> # augment 10% of names
+        >>> ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)
     """
     return partial(
-        ent_augmenter,
+        ent_augmenter_v1,
         level=level,
         ent_dict=ent_dict,
         replace_consistency=replace_consistency,
@@ -45,7 +50,7 @@ def create_ent_augmenter(
     )
 
 
-def ent_augmenter(
+def ent_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -99,7 +104,8 @@ def ent_augmenter(
                 offset_ = len_ent - (ent.end - ent.start)
 
                 head[head > ent.start + offset] += offset_
-                # keep first head correcting for changing entity size, set rest to refer to index of first name
+                # keep first head correcting for changing entity size, set rest to
+                # refer to index of first name
                 head = np.concatenate(
                     [
                         np.array(head[: ent.start + offset]),  # before
@@ -134,7 +140,7 @@ def ent_augmenter(
 
 
 @spacy.registry.augmenters("per_replace.v1")
-def create_per_replace_augmenter(
+def create_per_replace_augmenter_v1(
     names: Dict[
         str, List[str]
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
@@ -145,34 +151,40 @@ def create_per_replace_augmenter(
     replace_consistency: bool = True,
     person_tag: str = "PERSON",
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.
+    """Create an augmenter which replaces a name (PER) with a news sampled from the
+    names dictionary.
 
     Args:
         names (Dict[str, List[str]]): A dictionary of list of names to sample from.
             These could for example include first name and last names.
-        pattern (List[List[str]]): The pattern to create the names. This should be a list of patterns.
-            Where a pattern is a list of strings, where the string denote the list in the names
-            dictionary in which to sample from.
+        pattern (List[List[str]]): The pattern to create the names. This should be a
+            list of patterns.
+            Where a pattern is a list of strings, where the string denote the list in
+            the names dictionary in which to sample from.
         level (float): The proportion of PER entities to replace.
         names_p (Dict[str, List[float]], optional): The probability to sample each name.
             Defaults to {}, indicating equal probability for each name.
-        patterns_p (Optional[List[float]], optional): The probability to sample each pattern.
-            Defaults to None, indicating equal probability for each pattern.
-        replace_consistency (bool, optional): Should the entity always be replaced with the same entity? Defaults to True.
+        patterns_p (Optional[List[float]], optional): The probability to sample each
+            pattern. Defaults to None, indicating equal probability for each pattern.
+        replace_consistency (bool, optional): Should the entity always be replaced with
+            the same entity? Defaults to True.
         person_tag (str, optional) The tag of the person entity. Defaults to "PERSON".
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
 
     Example:
-        >>> names = {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
-        >>> patterns = [["firstname"], ["firstname", "lastname"], ["firstname", "firstname", "lastname"]]
-        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1) # replace 10% of names
+        >>> names = {"firstname": ["Kenneth", "Lasse"],
+        >>>          "lastname": ["Enevoldsen", "Hansen"]}
+        >>> patterns = [["firstname"], ["firstname", "lastname"],
+        >>>             ["firstname", "firstname", "lastname"]]
+        >>> # replace 10% of names:
+        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1)
     """
 
     names_gen = generator_from_name_dict(names, patterns, names_p, patterns_p)
 
-    return create_ent_augmenter(
+    return create_ent_augmenter_v1(
         ent_dict={person_tag: names_gen},
         level=level,
         replace_consistency=replace_consistency,
@@ -186,9 +198,9 @@ def generator_from_name_dict(
     patterns_p: Optional[List[float]],
 ):
     """
-    A utility function for create_pers_replace_augmenter, which creates an infinite generator based on
-    a names dictionary and a list of patterns, where the string in the pattern correspond to the list
-    in the pattern.
+    A utility function for create_pers_replace_augmenter, which creates an infinite
+    generator based on a names dictionary and a list of patterns, where the string in
+    the pattern correspond to the list in the pattern.
     """
     lp = len(patterns)
 
@@ -201,24 +213,30 @@ def generator_from_name_dict(
 
 
 @spacy.registry.augmenters("ents_format.v1")
-def create_ent_format_augmenter(
+def create_ent_format_augmenter_v1(
     reordering: List[Union[int, None]],
     formatter: List[Union[Callable[[Token], str], None]],
     level: float,
     ent_types: Optional[List[str]] = None,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.
+    """Creates an augmenter which reorders and formats a entity according to reordering
+    and formatting functions.
 
     Args:
-        reordering (List[Union[int, None]]): A reordering consisting of a the desired order of the list of indices,
-            where None denotes the remainder. For instance if this function was solely used on names [-1, None]
-            indicate last name (the last token in the name) followed by the remainder of the name. Similarly one could more
-            use the reordering [3, 1, 2] e.g. indicating last name, first name, middle name. Note that if the entity only include two
+        reordering (List[Union[int, None]]): A reordering consisting of a the desired
+            order of the list of indices, where None denotes the remainder. For
+            instance if this function was solely used on names [-1, None] indicate last
+            name (the last token in the name) followed by the remainder of the name.
+            Similarly one could more use the reordering [3, 1, 2] e.g. indicating last
+            name, first name, middle name. Note that if the entity only include two
             tokens the 3 will be ignored producing the pattern [1, 2].
-        formatter (List[Union[Callable[[Token], str], None]]): A list of function taking in a spaCy Token returning the reformatted str.
-            E.g. the function `lambda token: token.text[0] + "."` would abbreviate the token and add punctuation. None corresponds to no augmentation.
+        formatter (List[Union[Callable[[Token], str], None]]): A list of function
+            taking in a spaCy Token returning the reformatted str. E.g. the function
+            `lambda token: token.text[0] + "."` would abbreviate the token and add
+            punctuation. None corresponds to no augmentation.
         level (float): The probability of an entities being augmented.
-        ent_types (Optional[Iterable[str]], optional):  The entity types which should be augmented. Defaults to None, indicating all entity types.
+        ent_types (Optional[Iterable[str]], optional):  The entity types which should
+            be augmented. Defaults to None, indicating all entity types.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
@@ -228,13 +246,15 @@ def create_ent_format_augmenter(
         >>> import spacy
         >>> nlp = spacy.load("en_core_web_sm")
         >>> abbreviate = lambda token: token.text[0] + "."
-        >>> augmenter = augmenty.load("ents_format.v1", reordering = [-1, None], formatter=[None, abbreviate], level=1, ent_types=["PER"])
+        >>> augmenter = augmenty.load("ents_format.v1", reordering = [-1, None],
+        >>>                           formatter=[None, abbreviate], level=1,
+        >>>                            ent_types=["PER"])
         >>> texts = ["my name is Kenneth Enevoldsen"]
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["my name is Enevoldsen K."]
     """
     return partial(
-        ent_format_augmenter,
+        ent_format_augmenter_v1,
         reordering=reordering,
         formatter=formatter,
         level=level,
@@ -242,7 +262,7 @@ def create_ent_format_augmenter(
     )
 
 
-def ent_format_augmenter(
+def ent_format_augmenter_v1(
     nlp: Language,
     example: Example,
     reordering: List[Union[int, None]],
@@ -253,7 +273,6 @@ def ent_format_augmenter(
     example_dict = example.to_dict()
 
     tok_anno = example_dict["token_annotation"]
-    ents = example_dict["doc_annotation"]["entities"]
 
     for ent in example.y.ents:
         if (ent_types is None or ent.label_ in ent_types) and random.random() < level:

@@ -15,38 +15,43 @@ from .wordnet_util import init_wordnet
 
 
 @spacy.registry.augmenters("token_insert.v1")
-def create_token_insert_augmenter(
+def create_token_insert_augmenter_v1(
     level: float,
     insert: Callable[[Token], Dict[str, str]],
     respect_ents: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that randomly inserts a token generated based on a insert function.
+    """Creates an augmenter that randomly inserts a token generated based on a insert
+    function.
 
     Args:
         level (float): The probability to insert a token.
-        insert (Callable[[Token], Dict[str, str]]): An insert function. The function takes in a spacy Token and return a
-            dictionary representing the new token to replace. The dictionary can contain the keys: "ORTH", "SPACY" (defaults to "True"),
-            "entities" (default to "O"), "POS" (defaults to "X"), "TAG" (defaults to "X"), "MORPH" (defaults to "X"), "LEMMA" (defaults to the ORTH token).
-            You can also specify "HEAD" and "DEP" if they are not specified they will get removed. If the function returns no word is inserted.
-        respect_ents (bool, optional): Should the augmentation respect entities? Defaults to True. In which
-            case it will not insert a token inside an entity.
+        insert (Callable[[Token], Dict[str, str]]): An insert function. The function
+            takes in a spacy Token and return a dictionary representing the new token
+            to replace. The dictionary can contain the keys: "ORTH", "SPACY" (defaults
+            to "True"), "entities" (default to "O"), "POS" (defaults to "X"), "TAG"
+            (defaults to "X"), "MORPH" (defaults to "X"), "LEMMA" (defaults to the ORTH
+            token). You can also specify "HEAD" and "DEP" if they are not specified
+            they will get removed. If the function returns no word is inserted.
+        respect_ents (bool, optional): Should the augmentation respect entities?
+            Defaults to True. In which case it will not insert a token inside an entity.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
 
     Example:
         >>> import random
-        >>> insert_fun = lambda t: random.choice([{"ORTH": "words"}, {"ORTH": "to"}, {"ORTH": "insert"}])
+        >>> insert_fun = lambda t: random.choice([{"ORTH": "words"}, {"ORTH": "to"},
+        >>>                                       {"ORTH": "insert"}])
         >>> aug = augmenty.load("token_insert.v1", level=0.2, insert=insert_fun)
         >>> list(augmenty.texts(["This is a cat"], aug))
         ["This insert is a cat"]
     """
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=insert
+        token_insert_augmenter_v1, level=level, respect_ents=respect_ents, insert=insert
     )
 
 
-def token_insert_augmenter(
+def token_insert_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -103,7 +108,7 @@ def token_insert_augmenter(
 
 
 @spacy.registry.augmenters("token_insert_random.v1")
-def create_token_insert_random_augmenter(
+def create_token_insert_random_augmenter_v1(
     level: float,
     insert: Optional[List[Union[str, Dict[str, str]]]] = None,
     respect_ents: bool = True,
@@ -112,10 +117,11 @@ def create_token_insert_random_augmenter(
 
     Args:
         level (float): The probability to insert a token.
-        insert (List[Union[str, Dict[str, str]]], optional): A list of string or a list of dictionaries representing a token. If None
-        it will sample from the vocabulary of the nlp pipeline.
-        respect_ents (bool, optional): Should the augmentation respect entities? Defaults to True. In which
-            case it will not insert a token inside an entity.
+        insert (List[Union[str, Dict[str, str]]], optional): A list of string or a list
+            of dictionaries representing a token. If None it will sample from the
+            vocabulary of the nlp pipeline.
+        respect_ents (bool, optional): Should the augmentation respect entities?
+            Defaults to True. In which case it will not insert a token inside an entity.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -124,12 +130,15 @@ def create_token_insert_random_augmenter(
         >>> import augmenty
         >>> from spacy.lang.en import English
         >>> nlp = English()
-        >>> augmenter = create_token_insert_random_augmenter(level = 0.30, insert = ["words", "to", "insert"])
+        >>> aug = create_token_insert_random_augmenter(level = 0.30,
+        >>>                                    insert = ["words", "to", "insert"])
         >>> texts = ["one two three"]
-        >>> list(augmenty.texts(texts, augmenter, nlp))
+        >>> list(augmenty.texts(texts, aug, nlp))
         ["one words two three"]
         >>> # You even to very detailed token replace:
-        >>> create_token_insert_random_augmenter(level = 0.5, insert = [{"ORTH": "replacements", "LEMMA": "replacement", "POS": "NOUN", "TAG": "NOUN", "entities": "O", "MORPH": "Number=Plur"}])
+        >>> insert = [{"ORTH": "replacements", "LEMMA": "replacement", "POS": "NOUN",
+        >>>            "TAG": "NOUN", "entities": "O", "MORPH": "Number=Plur"}]
+        >>> create_token_insert_random_augmenter(level = 0.5, insert = insert)
     """
 
     d = {"insert": insert}
@@ -144,12 +153,15 @@ def create_token_insert_random_augmenter(
 
     __insert = partial(__insert, d=d)
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=__insert
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=__insert,
     )
 
 
 @spacy.registry.augmenters("duplicate_token.v1")
-def create_duplicate_token_augmenter(
+def create_duplicate_token_augmenter_v1(
     level: float,
     respect_ents: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -157,8 +169,8 @@ def create_duplicate_token_augmenter(
 
     Args:
         level (float): The probability to dublicate a token.
-        respect_ents (bool, optional): Should the augmentation respect entities? Defaults to True. In which
-            case it will not insert a token inside an entity.
+        respect_ents (bool, optional): Should the augmentation respect entities?
+            Defaults to True. In which case it will not insert a token inside an entity.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -179,19 +191,22 @@ def create_duplicate_token_augmenter(
             "LEMMA": t.lemma_,
             "POS": t.pos_,
             "TAG": t.tag_,
-            "MORPH": t.morph,
+            "MORPH": str(t.morph),
         }
         if t.doc.has_annotation("ENT_TYPE") and respect_ents is False:
             insert_token["entities"] = t.ent_iob_ + t.ent_type_
         return insert_token
 
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=__insert
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=__insert,
     )
 
 
 @spacy.registry.augmenters("random_synonym_insertion.v1")
-def create_random_synonym_insertion_augmenter(
+def create_random_synonym_insertion_augmenter_v1(
     level: float,
     respect_pos: bool = True,
     respect_ents: bool = True,
@@ -205,16 +220,19 @@ def create_random_synonym_insertion_augmenter(
 
     Args:
         level (float): The probability to dublicate a token.
-        respect_ents (bool, optional): Should the augmentation respect entities? Defaults to True. In which
-            case it will not insert a token inside an entity.
-        respect_pos (bool, optional): Should POS-tag of the synonyms be respected? Defaults to True.
-        pos_getter (Callable[[Token], str], optional): A getter function to extract the POS-tag.
-        lang (Optional[str], optional): Language supplied a ISO 639-1 language code. Defaults to None,
-            in which case the lang is based on the language of the spacy nlp pipeline used.
-            Possible language codes include:
-            "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja", "nn", "no", "pl", "pt", "es", "th".
-        context_window (Optional[int], optional): Sets window in which synonyms can be generated from. If None the context
-        is set to the sentence.
+        respect_ents (bool, optional): Should the augmentation respect entities?
+            Defaults to True. In which case it will not insert a token inside an entity.
+        respect_pos (bool, optional): Should POS-tag of the synonyms be respected?
+            Defaults to True.
+        pos_getter (Callable[[Token], str], optional): A getter function to extract the
+            POS-tag.
+        lang (Optional[str], optional): Language supplied a ISO 639-1 language code.
+            Defaults to None, in which case the lang is based on the language of the
+            spacy nlp pipeline used. Possible language codes include:
+            "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja",
+            "nn", "no", "pl", "pt", "es", "th".
+        context_window (Optional[int], optional): Sets window in which synonyms can be
+        generated from. If None the context is set to the sentence.
         verbose (bool, optional): Toggle the verbosity of the function. Default to True.
 
     Returns:
@@ -239,7 +257,8 @@ def create_random_synonym_insertion_augmenter(
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
                 msg.warn(
-                    "respect_pos is True, but the doc is not annotated for part of speech. Setting respect_pos to False."
+                    "respect_pos is True, but the doc is not annotated for part "
+                    + "of speech. Setting respect_pos to False."
                 )
             respect_pos = False
 
@@ -256,7 +275,9 @@ def create_random_synonym_insertion_augmenter(
             span = t.sent
         else:
             raise ValueError(
-                "context_window is None, but the document is not sentence segmented. Either use a nlp which include a sentencizer component or specify a context_window"
+                "context_window is None, but the document is not sentence segmented. "
+                + "Either use a nlp which include a sentencizer component or specify "
+                + "a context_window"
             )
         for t in span:
             word = t.lower_
@@ -286,5 +307,5 @@ def create_random_synonym_insertion_augmenter(
 
     insert = partial(__insert, lang=lang, respect_pos=respect_pos, verbose=verbose)
     return partial(
-        token_insert_augmenter, level=level, respect_ents=respect_ents, insert=insert
+        token_insert_augmenter_v1, level=level, respect_ents=respect_ents, insert=insert
     )

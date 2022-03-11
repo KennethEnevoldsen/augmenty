@@ -1,1 +1,1 @@
-from .keyboard import create_mk
+from .keyboard import create_mk  # noqa
