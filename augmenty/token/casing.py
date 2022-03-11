@@ -10,7 +10,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("random_starting_case.v1")
-def create_starting_case_augmenter(
+def create_starting_case_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which randomly cases the first letter in each token.
@@ -30,26 +30,26 @@ def create_starting_case_augmenter(
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["one Two Three"]
     """
-    return partial(starting_case_augmenter, level=level)
+    return partial(starting_case_augmenter_v1, level=level)
 
 
 @spacy.registry.augmenters("conditional_token_casing.v1")
-def create_conditional_token_casing_augmenter(
+def create_conditional_token_casing_augmenter_v1(
     conditional: Callable,
     level: float,
     lower: Optional[bool] = None,
     upper: Optional[bool] = None,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that conditionally cases the first letter of a token based on the getter.
-    Either lower og upper needs to specifiedd as True.
+    """Creates an augmenter that conditionally cases the first letter of a token based
+    on the getter. Either lower og upper needs to specifiedd as True.
 
     Args:
         level (float):
         conditional (Callable):
-        lower (Optional[bool], optional): If the conditional returns True should the casing the lowercased.
-            Default to None.
-        upper (Optional[bool], optional): If the conditional returns True should the casing the uppercased.
-            Default to None.
+        lower (Optional[bool], optional): If the conditional returns True should the
+            casing the lowercased. Default to None.
+        upper (Optional[bool], optional): If the conditional returns True should the
+            casing the uppercased. Default to None.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
@@ -59,22 +59,27 @@ def create_conditional_token_casing_augmenter(
         ... if token.pos_ == "PRON":
         ...    return True
         ... return False
-        >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True, conditional=is_pronoun)
+        >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True,
+        >>>                     conditional=is_pronoun)
     """
     if upper == lower or (upper is None and lower is None):
         raise ValueError(
-            "You need to specify the desired casing the token should get either using lower=True/False or upper=True/False."
+            "You need to specify the desired casing the token should get either using "
+            + "lower=True/False or upper=True/False."
         )
     if lower is True:
         upper = False
     if lower is False:
         upper = True
     return partial(
-        conditional_casing_augmenter, level=level, upper=upper, conditional=conditional
+        conditional_casing_augmenter_v1,
+        level=level,
+        upper=upper,
+        conditional=conditional,
     )
 
 
-def starting_case_augmenter(
+def starting_case_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -93,7 +98,7 @@ def starting_case_augmenter(
     yield example.from_dict(doc, example_dict)
 
 
-def conditional_casing_augmenter(
+def conditional_casing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,

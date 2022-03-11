@@ -1,1 +1,1 @@
-from .keyboard import create_qwerty_el
+from .keyboard import create_qwerty_el  # noqa

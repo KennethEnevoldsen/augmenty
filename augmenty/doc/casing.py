@@ -8,7 +8,7 @@ from spacy.training import Example
 
 
 @spacy.registry.augmenters("upper_case.v1")
-def create_upper_casing_augmenter(
+def create_upper_casing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmenter that converts documents to uppercase.
@@ -21,18 +21,18 @@ def create_upper_casing_augmenter(
 
     Example:
         >>> import augmenty
-        >>> from spacy.lang.en import English
-        >>> nlp = English()
+        >>> import spacy
+        >>> nlp = spacy.blank("en")
         >>> upper_case_augmenter = augmenty.load("upper_case.v1", level=0.1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
         ["A SAMPLE TEXT"]
     """
-    return partial(upper_casing_augmenter, level=level)
+    return partial(upper_casing_augmenter_v1, level=level)
 
 
 @spacy.registry.augmenters("spongebob.v1")
-def create_spongebob_augmenter(
+def create_spongebob_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmneter that converts documents to SpOnGeBoB casing.
@@ -45,17 +45,17 @@ def create_spongebob_augmenter(
 
     Example:
         >>> import augmenty
-        >>> from spacy.lang.en import English
-        >>> nlp = English()
+        >>> import spacy
+        >>> nlp = spacy.blank("en")
         >>> spongebob_augmenter = augmenty.load("spongebob.v1", level=1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, spongebob_augmenter, nlp))
         ["A SaMpLe tExT"]
     """
-    return partial(spongebob_augmenter, level=level)
+    return partial(spongebob_augmenter_v1, level=level)
 
 
-def upper_casing_augmenter(
+def upper_casing_augmenter_v1(
     nlp: Language, example: Example, *, level: float
 ) -> Iterator[Example]:
     if random.random() >= level:
@@ -69,7 +69,7 @@ def upper_casing_augmenter(
         yield example.from_dict(doc, example_dict)
 
 
-def spongebob_augmenter(
+def spongebob_augmenter_v1(
     nlp: Language, example: Example, *, level: float
 ) -> Iterator[Example]:
     if random.random() >= level:

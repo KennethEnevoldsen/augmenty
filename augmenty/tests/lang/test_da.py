@@ -1,5 +1,5 @@
-from augmenty.lang.da import create_da_æøå_replace_augmenter
-from augmenty.lang.da import create_da_historical_noun_casing_augmenter
+from augmenty.lang.da import create_da_æøå_replace_augmenter_v1
+from augmenty.lang.da import create_da_historical_noun_casing_augmenter_v1
 
 import augmenty
 
@@ -19,7 +19,7 @@ def test_create_da_æøå_replace_augmenter(nlp):
     text = "æøå"
     aug_text = "aeoeaa"
 
-    aug = create_da_æøå_replace_augmenter(level=1)
+    aug = create_da_æøå_replace_augmenter_v1(level=1)
     doc = nlp(text)
 
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)
@@ -34,7 +34,7 @@ def test_create_da_historical_noun_casing_augmenter(nlp):
 
     doc = Doc(nlp.vocab, words=tokens, pos=pos, spaces=spaces)
 
-    aug = create_da_historical_noun_casing_augmenter(level=1)
+    aug = create_da_historical_noun_casing_augmenter_v1(level=1)
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)
 
     assert next(docs).text == solution

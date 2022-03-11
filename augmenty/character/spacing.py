@@ -2,7 +2,7 @@
 Augmenters for modyfing spacing
 """
 
-from typing import Callable, Dict, Iterator
+from typing import Callable, Iterator
 
 from functools import partial
 import random
@@ -15,7 +15,7 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("remove_spacing.v1")
-def create_remove_spacing_augmenter(
+def create_remove_spacing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that removes spacing with a given probability.
@@ -28,17 +28,17 @@ def create_remove_spacing_augmenter(
 
     Example:
         >>> import augmenty
-        >>> from spacy.lang.en import English
-        >>> nlp = English()
+        >>> import spacy
+        >>> nlp = spacy.blank("en")
         >>> remove_spacing_augmenter = augmenty.load("remove_spacing.v1", level=0.5)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, remove_spacing_augmenter, nlp))
         ["A sampletext"]
     """
-    return partial(remove_spacing_augmenter, level=level)
+    return partial(remove_spacing_augmenter_v1, level=level)
 
 
-def remove_spacing_augmenter(
+def remove_spacing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,

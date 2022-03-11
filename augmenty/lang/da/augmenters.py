@@ -4,15 +4,16 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
-from ...character import create_char_replace_augmenter
-from ...token import create_conditional_token_casing_augmenter
+from ...character import create_char_replace_augmenter_v1
+from ...token import create_conditional_token_casing_augmenter_v1
 
 
 @spacy.registry.augmenters("da_æøå_replace.v1")
-def create_da_æøå_replace_augmenter(
+def create_da_æøå_replace_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.
+    """Creates an augmenter that augments æ, ø, and å into their spelling variants ae,
+    oe, aa.
 
     Args:
         level (float): probability to augment æ, ø or å.
@@ -37,11 +38,11 @@ def create_da_æøå_replace_augmenter(
         "Ø": ["Oe"],
         "Å": ["Aa"],
     }
-    return create_char_replace_augmenter(replace=replace_dict, level=level)
+    return create_char_replace_augmenter_v1(replace=replace_dict, level=level)
 
 
 @spacy.registry.augmenters("da_historical_noun_casing.v1")
-def create_da_historical_noun_casing_augmenter(
+def create_da_historical_noun_casing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that capitalizes nouns.
@@ -58,6 +59,6 @@ def create_da_historical_noun_casing_augmenter(
             return True
         return False
 
-    return create_conditional_token_casing_augmenter(
+    return create_conditional_token_casing_augmenter_v1(
         conditional=conditional, upper=True, level=level
     )
