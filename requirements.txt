@@ -21,12 +21,13 @@ https://huggingface.co/spacy/en_core_web_md/resolve/main/en_core_web_md-any-py3-
 
 
 # documentation
-sphinx
+sphinx>=4.5.0
 furo
 sphinx-copybutton
 sphinxext-opengraph
 myst-parser
-nbsphinx==0.8.8
+nbsphinx>=0.8.8
+
 
 # code style
 flake8
