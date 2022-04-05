@@ -161,7 +161,7 @@
             "training"
         ]
     },
-    "grundtvigian_spacing_augmenter.v1": {
+    "letter_spacing_augmenter.v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -345,6 +345,18 @@
         "respects": [
             "token labels",
             "entity labels",
+            "document labels"
+        ],
+        "use": [
+            "training",
+            "evaluation"
+        ]
+    },
+    "paragraph_subset_augmenter.v1": {
+        "respects": [
+            "token labels",
+            "entity labels",
+            "dependency parsing",
             "document labels"
         ],
         "use": [

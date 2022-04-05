@@ -9,15 +9,15 @@ from spacy.training import Example
 from ..augment_utilities import make_text_from_orth
 
 
-@spacy.registry.augmenters("grundtvigian_spacing_augmenter.v1")
-def create_grundtvigian_spacing_augmenter(
+@spacy.registry.augmenters("letter_spacing_augmenter.v1")
+def create_letter_spacing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """The Danish philosopher N.F.S. Grundtvig used letter spacing to add
-     e m p h a s i s  to words (Baunvig, Jarvis and Nielbo, 2020).
-     This augmenter randomly adds letter spacing emphasis to words.
-     This augmentation which are human readable, but which are clearly
-     challenging for systems using a white-space centric tokenization.
+    """Typically casing is used to add emphasis to words, but letter spacing has also
+    been used to add e m p h a s i s  to words (e.g. by Grundtvig; Baunvig, Jarvis and
+    Nielbo, 2020). This augmenter randomly adds letter spacing emphasis to words. This
+    augmentation which are human readable, but which are clearly challenging for
+    systems using a white-space centric tokenization.
 
     Args:
         level (float): The probability add grundtvigian letter spacing emphasis.
@@ -25,10 +25,10 @@ def create_grundtvigian_spacing_augmenter(
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
-    return partial(grundtvigian_spacing_augmenter, level=level)
+    return partial(letter_spacing_augmenter_v1, level=level)
 
 
-def grundtvigian_spacing_augmenter(
+def letter_spacing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
@@ -46,11 +46,12 @@ def grundtvigian_spacing_augmenter(
 
 
 @spacy.registry.augmenters("spacing_insertion.v1")
-def create_spacing_insertion_augmenter(
+def create_spacing_insertion_augmenter_v1(
     level: float,
     max_insertions: int = 1,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.
+    """Creates and augmneter that randomly adds a space after a chara cter. Tokens are
+    kept the same.
 
     Args:
         level (float): The probability to add a space after a character.
@@ -60,11 +61,11 @@ def create_spacing_insertion_augmenter(
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
     return partial(
-        spacing_insertion_augmenter, level=level, max_insertions=max_insertions
+        spacing_insertion_augmenter_v1, level=level, max_insertions=max_insertions
     )
 
 
-def spacing_insertion_augmenter(
+def spacing_insertion_augmenter_v1(
     nlp: Language, example: Example, level: float, max_insertions: int
 ) -> Iterator[Example]:
     def __spacing(t):

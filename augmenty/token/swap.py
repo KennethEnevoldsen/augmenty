@@ -7,43 +7,44 @@ import numpy as np
 import spacy
 from spacy.language import Language
 from spacy.training import Example
-from spacy.tokens import Token
 
 from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("token_swap.v1")
-def create_token_swap_augmenter(
-    level: float, respect_ents: bool = True, respect_eos: bool = True
+def create_token_swap_augmenter_v1(
+    level: float, respect_ents: bool = True, respect_sentences: bool = True
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:
         level (float): The probability to swap two tokens.
-        respect_ents (bool, optional): Should the pipeline respect entities? Defaults to True. In which
-            case it will not swap a token inside an entity with a token outside the entity span, unless
-            it is a one word span. If false it will disregard correcting the entity labels.
-        respect_eos (bool, optional): Should it respect end of sentence bounderies? Default to True, indicating
-            that it will not swap and end of sentence token. If False it will disregard correcting the sentence
-            start as this becomes arbitrary.
+        respect_ents (bool, optional): Should the pipeline respect entities? Defaults
+            to True. In which case it will not swap a token inside an entity with a
+            token outside the entity span, unless it is a one word span. If false it
+            will disregard correcting the entity labels.
+        respect_sentences (bool, optional): Should it respect end of sentence
+            bounderies? Default to True, indicating that it will not swap and end of
+            sentence token. If False it will disregard correcting the sentence start
+            as this becomes arbitrary.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
     return partial(
-        token_swap_augmenter,
+        token_swap_augmenter_v1,
         level=level,
-        respect_eos=respect_eos,
+        respect_sentences=respect_sentences,
         respect_ents=respect_ents,
     )
 
 
-def token_swap_augmenter(
+def token_swap_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
     respect_ents: bool,
-    respect_eos: bool,
+    respect_sentences: bool,
 ) -> Iterator[Example]:
 
     example_dict = example.to_dict()
@@ -73,7 +74,7 @@ def token_swap_augmenter(
             if min_i < 0 or i == n_tok:  # e.g. if n_tok == 1
                 continue
 
-            if respect_eos is True and (
+            if respect_sentences is True and (
                 example.y[i].is_sent_end is True or example.y[min_i].is_sent_end is True
             ):
                 continue

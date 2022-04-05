@@ -1,6 +1,15 @@
 News and Changelog
 ==============================
 
+* 1.0.0 (05/04/22)
+
+  - Added new augmenters
+  
+    * paragraph subset augmenter
+ 
+  - Renamed all augmenters to include versioning (e.g. v1) for their create functions.
+  - restructured tests to be cleaner and notably run faster
+
 * 0.0.1 (03/08/21)
 
   - First version of augmenty launches 🎉
