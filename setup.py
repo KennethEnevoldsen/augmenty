@@ -11,7 +11,7 @@ with open(path) as f:
 
 
 def setup_package():
-    setup(__version__)
+    setup(version=__version__)
 
 
 if __name__ == "__main__":
