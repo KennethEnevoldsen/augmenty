@@ -7,7 +7,8 @@ def init_wordnet():
     except ModuleNotFoundError as e:
         print(e)
         raise ModuleNotFoundError(
-            "This augmenter requires NLTK. Use `pip install nltk` or `pip install augmenty[all]`"
+            "This augmenter requires NLTK. Use `pip install nltk` or"
+            + " `pip install augmenty[all]`"
         )
 
 
