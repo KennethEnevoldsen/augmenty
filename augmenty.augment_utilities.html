@@ -4,16 +4,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Augmentation Utilities" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="augmenty.augment_utilities.html" />
-  <meta property="og:description" content="Augmentation utilities include functions for combining and moderating augmentations. augmenty.augment_utilities: Utility functions used for augmentation." />
+<meta property="og:title" content="Augmentation Utilities" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="augmenty.augment_utilities.html" />
+  
+<meta property="og:description" content="Augmentation utilities include functions for combining and moderating augmentations. augmenty.augment_utilities: Utility functions used for augmentation." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Utilities" href="augmenty.util.html" /><link rel="prev" title="Language-specific" href="augmenty.lang.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>Augmentation Utilities - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>Augmentation Utilities - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -28,20 +31,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -131,7 +136,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -202,6 +207,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -228,7 +239,8 @@
 <dd><p>Combines a series of spaCy style augmenters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>augmenters</strong> (<em>Iterable</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em><em>]</em>) – An list of spaCy augmenters.</p>
+<dd class="field-odd"><p><strong>augmenters</strong> (<em>Iterable</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em><em>]</em>) – An
+list of spaCy augmenters.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The combined augmenter</p>
@@ -269,7 +281,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – A spaCy augmenters which you only want to apply to a certain percentage of docs</p></li>
+<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – A spaCy
+augmenters which you only want to apply to a certain percentage of docs</p></li>
 <li><p><strong>level</strong> (<em>float</em>) – The percentage of docs the which should be augmented.</p></li>
 </ul>
 </dd>
@@ -288,13 +301,18 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – A spaCy augmenters.</p></li>
-<li><p><strong>doc_level</strong> (<em>float</em><em>, </em><em>optional</em>) – The percentage of documents the augmenter should be applied to.
-Only yield the original when the original doc is augmented.</p></li>
+<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – A spaCy
+augmenters.</p></li>
+<li><p><strong>doc_level</strong> (<em>float</em><em>, </em><em>optional</em>) – The percentage of documents the augmenter should
+be applied to. Only yield the original when the original doc is augmented.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The augmenter, which now yields both the original and augmented example.</p>
+<dd class="field-even"><p><dl class="simple">
+<dt>The augmenter, which now</dt><dd><p>yields both the original and augmented example.</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>

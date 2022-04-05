@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>augmenty.character.replace - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>augmenty.character.replace - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -22,20 +22,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -125,7 +127,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,6 +198,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -228,11 +236,8 @@
 <span class="kn">from</span> <span class="nn">..keyboard</span> <span class="kn">import</span> <span class="n">Keyboard</span>
 
 
-<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">registry</span>
-
-
-<div class="viewcode-block" id="create_char_random_augmenter"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_char_random_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"char_replace_random.v1"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_char_random_augmenter</span><span class="p">(</span>
+<div class="viewcode-block" id="create_char_random_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_char_random_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"char_replace_random.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_char_random_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">keyboard</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en_qwerty.v1"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
@@ -240,9 +245,11 @@
 <span class="sd">    keyboard.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to replace a character with a neightbouring character.</span>
-<span class="sd">        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty.keyboards()`.</span>
-<span class="sd">            Defaults to "en_qwerty.v1".</span>
+<span class="sd">        level (float): The probability to replace a character with a neightbouring</span>
+<span class="sd">            character.</span>
+<span class="sd">        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a</span>
+<span class="sd">            list of all keyboard you can run `augmenty,keyboards()`. Defaults</span>
+<span class="sd">            to "en_qwerty.v1".</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter function.</span>
@@ -259,33 +266,36 @@
 
     <span class="n">kb</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">from_registry</span><span class="p">(</span><span class="n">keyboard</span><span class="p">)</span>
     <span class="n">replace_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">kb</span><span class="o">.</span><span class="n">all_keys</span><span class="p">())</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kb</span><span class="o">.</span><span class="n">all_keys</span><span class="p">()}</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">char_replace_augmenter</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace_dict</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">char_replace_augmenter_v1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace_dict</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="create_char_replace_augmenter"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_char_replace_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"char_replace.v1"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_char_replace_augmenter</span><span class="p">(</span>
+<div class="viewcode-block" id="create_char_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_char_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"char_replace.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_char_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">replace</span><span class="p">:</span> <span class="nb">dict</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter that replaces a character with a random character from replace dict</span>
+    <span class="sd">"""Creates an augmenter that replaces a character with a random character from</span>
+<span class="sd">    replace dict</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): probability to augment character, if document is augmented.</span>
-<span class="sd">        replace (dict): A dictionary denoting which characters denote potentials replace for each character.</span>
+<span class="sd">        replace (dict): A dictionary denoting which characters denote potentials</span>
+<span class="sd">            replace for each character.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter function.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; create_char_replace_augmenter(level=0.02, replace={"æ": ["ae"], "ß": ["ss"]})</span>
+<span class="sd">        &gt;&gt;&gt; create_char_replace_augmenter_v1(level=0.02,</span>
+<span class="sd">        &gt;&gt;&gt;                                  replace={"æ": ["ae"], "ß": ["ss"]})</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
-        <span class="n">char_replace_augmenter</span><span class="p">,</span>
+        <span class="n">char_replace_augmenter_v1</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
         <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">char_replace_augmenter</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">char_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -306,19 +316,23 @@
     <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_keystroke_error_augmenter"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_keystroke_error_augmenter">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"keystroke_error.v1"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_keystroke_error_augmenter</span><span class="p">(</span>
+<div class="viewcode-block" id="create_keystroke_error_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.replace.create_keystroke_error_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"keystroke_error.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_keystroke_error_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
     <span class="n">keyboard</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en_qwerty.v1"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates a augmenter which augments a text with plausible typos based on keyboard distance.</span>
+    <span class="sd">"""Creates a augmenter which augments a text with plausible typos based on keyboard</span>
+<span class="sd">    distance.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to replace a character with a neightbouring character.</span>
-<span class="sd">        distance (float, optional): keyboard distance. Defaults to 1.5 corresponding to neighbouring keys including diagonals.</span>
-<span class="sd">        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty,keyboards.get_all()`.</span>
-<span class="sd">            Defaults to "en_qwerty.v1".</span>
+<span class="sd">        level (float): The probability to replace a character with a neightbouring</span>
+<span class="sd">            character.</span>
+<span class="sd">        distance (float, optional): keyboard distance. Defaults to 1.5 corresponding to</span>
+<span class="sd">            neighbouring keys including diagonals.</span>
+<span class="sd">        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a</span>
+<span class="sd">            list of all keyboard you can run `augmenty,keyboards.get_all()`. Defaults</span>
+<span class="sd">            to "en_qwerty.v1".</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmentation function</span>
@@ -327,14 +341,16 @@
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
 <span class="sd">        &gt;&gt;&gt; from spacy.lang.en import English</span>
 <span class="sd">        &gt;&gt;&gt; nlp = English()</span>
-<span class="sd">        &gt;&gt;&gt; keystroke_error_augmenter = augmenty.load("keystroke_error.v1", level=0.1, keyboard="en_qwerty.v1")</span>
+<span class="sd">        &gt;&gt;&gt; keystroke_error_augmenter = augmenty.load("keystroke_error.v1",</span>
+<span class="sd">        &gt;&gt;&gt;                                           level=0.1,</span>
+<span class="sd">        &gt;&gt;&gt;                                           keyboard="en_qwerty.v1")</span>
 <span class="sd">        &gt;&gt;&gt; texts = ["A sample text"]</span>
 <span class="sd">        &gt;&gt;&gt; list(augmenty.texts(texts, keystroke_error_augmenter, nlp))</span>
 <span class="sd">        ["A sajple texr"]</span>
 <span class="sd">    """</span>
     <span class="n">kb</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">from_registry</span><span class="p">(</span><span class="n">keyboard</span><span class="p">)</span>
     <span class="n">replace_dict</span> <span class="o">=</span> <span class="n">kb</span><span class="o">.</span><span class="n">create_distance_dict</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">char_replace_augmenter</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace_dict</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">char_replace_augmenter_v1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace_dict</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>augmenty.augment_utilities - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>augmenty.augment_utilities - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -22,20 +22,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -125,7 +127,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="../../index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -196,6 +198,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -228,7 +236,8 @@
     <span class="sd">"""Combines a series of spaCy style augmenters.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An list of spaCy augmenters.</span>
+<span class="sd">        augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An</span>
+<span class="sd">            list of spaCy augmenters.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The combined augmenter</span>
@@ -251,7 +260,8 @@
     <span class="sd">"""Set the percantage of examples that the augmenter should be applied to.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters which you only want to apply to a certain percentage of docs</span>
+<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy</span>
+<span class="sd">            augmenters which you only want to apply to a certain percentage of docs</span>
 <span class="sd">        level (float): The percentage of docs the which should be augmented.</span>
 
 <span class="sd">    Returns:</span>
@@ -300,12 +310,14 @@
     <span class="sd">"""Wraps and augmented such that it yields both the original and augmented example.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy augmenters.</span>
-<span class="sd">        doc_level (float, optional): The percentage of documents the augmenter should be applied to.</span>
-<span class="sd">            Only yield the original when the original doc is augmented.</span>
+<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy</span>
+<span class="sd">            augmenters.</span>
+<span class="sd">        doc_level (float, optional): The percentage of documents the augmenter should</span>
+<span class="sd">            be applied to. Only yield the original when the original doc is augmented.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now yields both the original and augmented example.</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now</span>
+<span class="sd">            yields both the original and augmented example.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>

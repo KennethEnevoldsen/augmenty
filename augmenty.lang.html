@@ -4,16 +4,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Language-specific" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="augmenty.lang.html" />
-  <meta property="og:description" content="Do note that some augmentations such as the wordnet_synonym.v1 is a language-specific augmentation, but as it is not implemented independently for each language it is not listed here. Danish: augme..." />
+<meta property="og:title" content="Language-specific" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="augmenty.lang.html" />
+  
+<meta property="og:description" content="Do note that some augmentations such as the wordnet_synonym.v1 is a language-specific augmentation, but as it is not implemented independently for each language it is not listed here. Danish: augme..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Augmentation Utilities" href="augmenty.augment_utilities.html" /><link rel="prev" title="Document-based" href="augmenty.doc.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>Language-specific - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>Language-specific - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -28,20 +31,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -131,7 +136,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -202,6 +207,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -224,8 +235,8 @@
 <section id="module-augmenty.lang.da.augmenters">
 <span id="augmenty-lang-da-augmenters"></span><h3>augmenty.lang.da.augmenters<a class="headerlink" href="#module-augmenty.lang.da.augmenters" title="Permalink to this headline">#</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.lang.da.augmenters.</span></span><span class="sig-name descname"><span class="pre">create_da_historical_noun_casing_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/lang/da/augmenters.html#create_da_historical_noun_casing_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.lang.da.augmenters.</span></span><span class="sig-name descname"><span class="pre">create_da_historical_noun_casing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/lang/da/augmenters.html#create_da_historical_noun_casing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that capitalizes nouns.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,9 +251,10 @@
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.lang.da.augmenters.create_da_aeoa_replace_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.lang.da.augmenters.</span></span><span class="sig-name descname"><span class="pre">create_da_æøå_replace_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/lang/da/augmenters.html#create_da_æøå_replace_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.lang.da.augmenters.create_da_aeoa_replace_augmenter" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates an augmenter that augments æ, ø, and å into their spelling variants ae, oe, aa.</p>
+<dt class="sig sig-object py" id="augmenty.lang.da.augmenters.create_da_aeoa_replace_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.lang.da.augmenters.</span></span><span class="sig-name descname"><span class="pre">create_da_æøå_replace_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/lang/da/augmenters.html#create_da_æøå_replace_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.lang.da.augmenters.create_da_aeoa_replace_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates an augmenter that augments æ, ø, and å into their spelling variants ae,
+oe, aa.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – probability to augment æ, ø or å.</p>

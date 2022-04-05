@@ -4,16 +4,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Token-based" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="augmenty.token.html" />
-  <meta property="og:description" content="augmenty.token.casing: augmenty.token.replace: augmenty.token.spacing: augmenty.token.swap:" />
+<meta property="og:title" content="Token-based" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="augmenty.token.html" />
+  
+<meta property="og:description" content="augmenty.token.casing: augmenty.token.replace: augmenty.token.spacing: augmenty.token.swap:" />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Span-based" href="augmenty.span.html" /><link rel="prev" title="Character-based" href="augmenty.character.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>Token-based - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>Token-based - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -28,20 +31,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -131,7 +136,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -202,6 +207,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -221,19 +232,19 @@
 <section id="module-augmenty.token.casing">
 <span id="augmenty-token-casing"></span><h2>augmenty.token.casing<a class="headerlink" href="#module-augmenty.token.casing" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.casing.create_conditional_token_casing_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.casing.</span></span><span class="sig-name descname"><span class="pre">create_conditional_token_casing_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/casing.html#create_conditional_token_casing_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.casing.create_conditional_token_casing_augmenter" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates an augmenter that conditionally cases the first letter of a token based on the getter.
-Either lower og upper needs to specifiedd as True.</p>
+<dt class="sig sig-object py" id="augmenty.token.casing.create_conditional_token_casing_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.casing.</span></span><span class="sig-name descname"><span class="pre">create_conditional_token_casing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/casing.html#create_conditional_token_casing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.casing.create_conditional_token_casing_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates an augmenter that conditionally cases the first letter of a token based
+on the getter. Either lower og upper needs to specifiedd as True.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> (<em>float</em>) – </p></li>
 <li><p><strong>conditional</strong> (<em>Callable</em>) – </p></li>
-<li><p><strong>lower</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – If the conditional returns True should the casing the lowercased.
-Default to None.</p></li>
-<li><p><strong>upper</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – If the conditional returns True should the casing the uppercased.
-Default to None.</p></li>
+<li><p><strong>lower</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – If the conditional returns True should the
+casing the lowercased. Default to None.</p></li>
+<li><p><strong>upper</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – If the conditional returns True should the
+casing the uppercased. Default to None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -248,13 +259,14 @@ Default to None.</p></li>
 <span class="gp">... </span><span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="o">==</span> <span class="s2">"PRON"</span><span class="p">:</span>
 <span class="gp">... </span>   <span class="k">return</span> <span class="kc">True</span>
 <span class="gp">... </span><span class="k">return</span> <span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"conditional_token_casing.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">conditional</span><span class="o">=</span><span class="n">is_pronoun</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"conditional_token_casing.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                    <span class="n">conditional</span><span class="o">=</span><span class="n">is_pronoun</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.casing.create_starting_case_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.casing.</span></span><span class="sig-name descname"><span class="pre">create_starting_case_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/casing.html#create_starting_case_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.casing.create_starting_case_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.token.casing.create_starting_case_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.casing.</span></span><span class="sig-name descname"><span class="pre">create_starting_case_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/casing.html#create_starting_case_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.casing.create_starting_case_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter which randomly cases the first letter in each token.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -282,19 +294,23 @@ Default to None.</p></li>
 <section id="module-augmenty.token.replace">
 <span id="augmenty-token-replace"></span><h2>augmenty.token.replace<a class="headerlink" href="#module-augmenty.token.replace" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.replace.create_token__dict_replace_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_token__dict_replace_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">level:</span> <span class="pre">float,</span> <span class="pre">replace:</span> <span class="pre">typing.Union[typing.Dict[str,</span> <span class="pre">typing.List[str]],</span> <span class="pre">typing.Dict[str,</span> <span class="pre">typing.Dict[str,</span> <span class="pre">typing.List[str]]]],</span> <span class="pre">ignore_casing:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">getter:</span> <span class="pre">typing.Callable[[spacy.tokens.token.Token],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">keep_titlecase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_token__dict_replace_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_token__dict_replace_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.token.replace.create_token__dict_replace_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_token__dict_replace_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">level:</span> <span class="pre">float,</span> <span class="pre">replace:</span> <span class="pre">typing.Union[typing.Dict[str,</span> <span class="pre">typing.List[str]],</span> <span class="pre">typing.Dict[str,</span> <span class="pre">typing.Dict[str,</span> <span class="pre">typing.List[str]]]],</span> <span class="pre">ignore_casing:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">getter:</span> <span class="pre">typing.Callable[[spacy.tokens.token.Token],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">keep_titlecase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_token__dict_replace_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_token__dict_replace_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym dictionary.</p></li>
-<li><p><strong>replace</strong> (<em>Union</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em><em>]</em>) – A dictionary of
-words and a list of their replacement (e.g. synonyms) or a dictionary denoting
-replacement based on pos tag.</p></li>
-<li><p><strong>ignore_casing</strong> – When doing the lookup should the model ignore casing? Defaults to True.</p></li>
-<li><p><strong>getter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – A getter function to extract the POS-tag.</p></li>
-<li><p><strong>keep_titlecase</strong> (<em>bool</em>) – Should the model keep the titlecase of the replaced word. Defaults to True.</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym
+dictionary.</p></li>
+<li><p><strong>replace</strong> (<em>Union</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em><em>]</em>) – A
+dictionary of words and a list of their replacement (e.g. synonyms) or a
+dictionary denoting replacement based on pos tag.</p></li>
+<li><p><strong>ignore_casing</strong> (<em>bool</em><em>, </em><em>optional</em>) – When doing the lookup should the model ignore
+casing? Defaults to True.</p></li>
+<li><p><strong>getter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – A getter function to extract the
+POS-tag.</p></li>
+<li><p><strong>keep_titlecase</strong> (<em>bool</em>) – Should the model keep the titlecase of the replaced
+word. Defaults to True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -314,15 +330,18 @@ replacement based on pos tag.</p></li>
 </div>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.replace.create_token_replace_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_token_replace_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.tokens.token.Token</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_titlecase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_token_replace_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_token_replace_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.token.replace.create_token_replace_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_token_replace_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.tokens.token.Token</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_titlecase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_token_replace_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_token_replace_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter which replaces a token based on a replace function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym dictionary.</p></li>
-<li><p><strong>replace</strong> (<em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em>) – A callable which takes a spaCy Token as input and returns the replaces word as a string.</p></li>
-<li><p><strong>keep_titlecase</strong> (<em>bool</em><em>, </em><em>optional</em>) – If original text was uppercased cased should replaces text also be? Defaults to True.</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym
+dictionary.</p></li>
+<li><p><strong>replace</strong> (<em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em>) – A callable which takes a spaCy Token as input
+and returns the replaces word as a string.</p></li>
+<li><p><strong>keep_titlecase</strong> (<em>bool</em><em>, </em><em>optional</em>) – If original text was uppercased cased should
+replaces text also be? Defaults to True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -337,22 +356,28 @@ replacement based on pos tag.</p></li>
 <span class="gp">... </span>   <span class="n">vowels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'e'</span><span class="p">,</span><span class="s1">'i'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">]</span>
 <span class="gp">... </span>   <span class="n">non_vowels</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">token</span><span class="o">.</span><span class="n">text</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">]</span>
 <span class="gp">... </span>   <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">non_vowels</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_vowel_augmenter</span> <span class="o">=</span> <span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">remove_vowels</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">.10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span> <span class="o">=</span> <span class="n">create_token_replace_augmenter</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">remove_vowels</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">.10</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.replace.create_word_embedding_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_word_embedding_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level=&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlp:</span> <span class="pre">typing.Optional[spacy.language.Language]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_titlecase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_casing:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_word_embedding_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_word_embedding_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.token.replace.create_word_embedding_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_word_embedding_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level=&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlp:</span> <span class="pre">typing.Optional[spacy.language.Language]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_titlecase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_casing:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_word_embedding_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_word_embedding_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter which replaces a token based on a replace function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym dictionary.</p></li>
-<li><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of most similar word vectors to sample from</p></li>
-<li><p><strong>nlp</strong> (<em>Optional</em><em>[</em><em>Language</em><em>]</em><em>, </em><em>optional</em>) – A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn’t contain word vectors.</p></li>
-<li><p><strong>keep_titlecase</strong> (<em>bool</em><em>, </em><em>optional</em>) – If original text was uppercased cased should replaces text also be? Defaults to True.</p></li>
-<li><p><strong>ignore_case</strong> (<em>bool</em><em>, </em><em>optional</em>) – The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing? Default to True.</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym
+dictionary.</p></li>
+<li><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of most similar word vectors to sample from nlp
+(Optional[Language], optional): A spaCy text-processing pipeline used for
+supplying the word vectors if the nlp model supplies doesn’t contain word
+vectors.</p></li>
+<li><p><strong>keep_titlecase</strong> (<em>bool</em><em>, </em><em>optional</em>) – If original text was uppercased cased should
+replaces text also be? Defaults to True.</p></li>
+<li><p><strong>ignore_case</strong> (<em>bool</em><em>, </em><em>optional</em>) – The word embedding augmenter does not replace a
+word with the same word. Should this operation ignore casing? Default to
+True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -368,20 +393,24 @@ replacement based on pos tag.</p></li>
 </div>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.replace.create_wordnet_synonym_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_wordnet_synonym_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang:</span> <span class="pre">typing.Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_pos:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getter:</span> <span class="pre">typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_titlecase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_wordnet_synonym_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_wordnet_synonym_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.token.replace.create_wordnet_synonym_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.replace.</span></span><span class="sig-name descname"><span class="pre">create_wordnet_synonym_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang:</span> <span class="pre">typing.Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_pos:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getter:</span> <span class="pre">typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_titlecase:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/replace.html#create_wordnet_synonym_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.replace.create_wordnet_synonym_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Language supplied a ISO 639-1 language code. Defaults to None,
-in which case the lang is based on the language of the spacy nlp pipeline used.
-Possible language codes include:
-“da”, “ca”, “en”, “eu”, “fa”, “fi”, “fr”, “gl”, “he”, “id”, “it”, “ja”, “nn”, “no”, “pl”, “pt”, “es”, “th”.</p></li>
-<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym dictionary.</p></li>
+<li><p><strong>lang</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Language supplied a ISO 639-1 language code.
+Defaults to None, in which case the lang is based on the language of the
+spacy nlp pipeline used. Possible language codes include:
+“da”, “ca”, “en”, “eu”, “fa”, “fi”, “fr”, “gl”, “he”, “id”, “it”, “ja”,
+“nn”, “no”, “pl”, “pt”, “es”, “th”.</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – Probability to replace token given that it is in synonym
+dictionary.</p></li>
 <li><p><strong>respect_pos</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should POS-tag be respected? Defaults to True.</p></li>
-<li><p><strong>getter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – A getter function to extract the POS-tag.</p></li>
-<li><p><strong>keep_titlecase</strong> (<em>bool</em>) – Should the model keep the titlecase of the replaced word. Defaults to True.</p></li>
+<li><p><strong>getter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – A getter function to extract the
+POS-tag.</p></li>
+<li><p><strong>keep_titlecase</strong> (<em>bool</em>) – Should the model keep the titlecase of the replaced
+word. Defaults to True.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -392,7 +421,8 @@ Possible language codes include:
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">english_synonym_augmenter</span> <span class="o">=</span> <span class="n">create_wordnet_synonym_augmenter</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">english_synonym_augmenter</span> <span class="o">=</span> <span class="n">create_wordnet_synonym_augmenter</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                                             <span class="n">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -400,15 +430,13 @@ Possible language codes include:
 <section id="module-augmenty.token.spacing">
 <span id="augmenty-token-spacing"></span><h2>augmenty.token.spacing<a class="headerlink" href="#module-augmenty.token.spacing" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.spacing.create_grundtvigian_spacing_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.spacing.</span></span><span class="sig-name descname"><span class="pre">create_grundtvigian_spacing_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/spacing.html#create_grundtvigian_spacing_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.spacing.create_grundtvigian_spacing_augmenter" title="Permalink to this definition">#</a></dt>
-<dd><dl class="simple">
-<dt>The Danish philosopher N.F.S. Grundtvig used letter spacing to add</dt><dd><p>e m p h a s i s  to words (Baunvig, Jarvis and Nielbo, 2020).
-This augmenter randomly adds letter spacing emphasis to words.
-This augmentation which are human readable, but which are clearly
-challenging for systems using a white-space centric tokenization.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="augmenty.token.spacing.create_letter_spacing_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.spacing.</span></span><span class="sig-name descname"><span class="pre">create_letter_spacing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/spacing.html#create_letter_spacing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.spacing.create_letter_spacing_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<dd><p>Typically casing is used to add emphasis to words, but letter spacing has also
+been used to add e m p h a s i s  to words (e.g. by Grundtvig; Baunvig, Jarvis and
+Nielbo, 2020). This augmenter randomly adds letter spacing emphasis to words. This
+augmentation which are human readable, but which are clearly challenging for
+systems using a white-space centric tokenization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The probability add grundtvigian letter spacing emphasis.</p>
@@ -422,9 +450,10 @@ challenging for systems using a white-space centric tokenization.</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.spacing.create_spacing_insertion_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.spacing.</span></span><span class="sig-name descname"><span class="pre">create_spacing_insertion_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_insertions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/spacing.html#create_spacing_insertion_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.spacing.create_spacing_insertion_augmenter" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.</p>
+<dt class="sig sig-object py" id="augmenty.token.spacing.create_spacing_insertion_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.spacing.</span></span><span class="sig-name descname"><span class="pre">create_spacing_insertion_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_insertions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/spacing.html#create_spacing_insertion_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.spacing.create_spacing_insertion_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates and augmneter that randomly adds a space after a chara cter. Tokens are
+kept the same.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -444,19 +473,21 @@ challenging for systems using a white-space centric tokenization.</p>
 <section id="module-augmenty.token.swap">
 <span id="augmenty-token-swap"></span><h2>augmenty.token.swap<a class="headerlink" href="#module-augmenty.token.swap" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.token.swap.create_token_swap_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.token.swap.</span></span><span class="sig-name descname"><span class="pre">create_token_swap_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_ents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_eos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/swap.html#create_token_swap_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.swap.create_token_swap_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.token.swap.create_token_swap_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.token.swap.</span></span><span class="sig-name descname"><span class="pre">create_token_swap_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_ents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_sentences</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/token/swap.html#create_token_swap_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.token.swap.create_token_swap_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> (<em>float</em>) – The probability to swap two tokens.</p></li>
-<li><p><strong>respect_ents</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the pipeline respect entities? Defaults to True. In which
-case it will not swap a token inside an entity with a token outside the entity span, unless
-it is a one word span. If false it will disregard correcting the entity labels.</p></li>
-<li><p><strong>respect_eos</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should it respect end of sentence bounderies? Default to True, indicating
-that it will not swap and end of sentence token. If False it will disregard correcting the sentence
-start as this becomes arbitrary.</p></li>
+<li><p><strong>respect_ents</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the pipeline respect entities? Defaults
+to True. In which case it will not swap a token inside an entity with a
+token outside the entity span, unless it is a one word span. If false it
+will disregard correcting the entity labels.</p></li>
+<li><p><strong>respect_sentences</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should it respect end of sentence
+bounderies? Default to True, indicating that it will not swap and end of
+sentence token. If False it will disregard correcting the sentence start
+as this becomes arbitrary.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

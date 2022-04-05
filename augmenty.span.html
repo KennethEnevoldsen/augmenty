@@ -4,16 +4,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Span-based" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="augmenty.span.html" />
-  <meta property="og:description" content="augmenty.span.entities:" />
+<meta property="og:title" content="Span-based" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="augmenty.span.html" />
+  
+<meta property="og:description" content="augmenty.span.entities:" />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Document-based" href="augmenty.doc.html" /><link rel="prev" title="Token-based" href="augmenty.token.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>Span-based - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>Span-based - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -28,20 +31,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -131,7 +136,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -202,6 +207,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -221,18 +232,21 @@
 <section id="module-augmenty.span.entities">
 <span id="augmenty-span-entities"></span><h2>augmenty.span.entities<a class="headerlink" href="#module-augmenty.span.entities" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.span.entities.create_ent_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_ent_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ent_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_consistency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve_dependencies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_ent_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_ent_augmenter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="augmenty.span.entities.create_ent_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_ent_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ent_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_consistency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve_dependencies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_ent_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_ent_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Create an augmenter which replaces an entity based on a dictionary lookup.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> (<em>float</em>) – the percentage of entities to be augmented.</p></li>
-<li><p><strong>ent_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Iterable</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary with keys corresponding the the entity type
-you wish to replace (e.g. “PER”) and a itarable of the replacements. A replacement is a list of string of
-the desired entity replacement [“Kenneth”, “Enevoldsen”].</p></li>
-<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should an entity always be replaced with the same entity? Defaults to True.</p></li>
-<li><p><strong>resolve_dependencies</strong> (<em>bool</em><em>, </em><em>optional</em>) – Attempts to resolve the dependency tree by setting head of the original entitity as</p></li>
+<li><p><strong>ent_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Iterable</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary with keys corresponding
+the the entity type you wish to replace (e.g. “PER”) and a itarable of the
+replacements. A replacement is a list of string of the desired entity
+replacement [“Kenneth”, “Enevoldsen”].</p></li>
+<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should an entity always be replaced with
+the same entity? Defaults to True.</p></li>
+<li><p><strong>resolve_dependencies</strong> (<em>bool</em><em>, </em><em>optional</em>) – Attempts to resolve the dependency tree
+by setting head of the original entitity as</p></li>
 <li><p><strong>as</strong> (<em>the head of the first token in the new entity. The remainder is the passed</em>) – </p></li>
 </ul>
 </dd>
@@ -244,27 +258,35 @@ the desired entity replacement [“Kenneth”, “Enevoldsen”].</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ent_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ORG"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"Google"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Apple"</span><span class="p">]],</span> <span class="s2">"PERSON"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"Kenneth"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Lasse"</span><span class="p">,</span> <span class="s2">"Hansen"</span><span class="p">]]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">create_ent_augmenter</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># augment 10% of names</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ent_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ORG"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"Google"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Apple"</span><span class="p">]],</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="s2">"PERSON"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"Kenneth"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"Lasse"</span><span class="p">,</span> <span class="s2">"Hansen"</span><span class="p">]]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># augment 10% of names</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">create_ent_augmenter</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.span.entities.create_ent_format_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_ent_format_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reordering</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.tokens.token.Token</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ent_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_ent_format_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_ent_format_augmenter" title="Permalink to this definition">#</a></dt>
-<dd><p>Creates an augmenter which reorders and formats a entity according to reordering and formatting functions.</p>
+<dt class="sig sig-object py" id="augmenty.span.entities.create_ent_format_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_ent_format_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reordering</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.tokens.token.Token</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ent_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_ent_format_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_ent_format_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates an augmenter which reorders and formats a entity according to reordering
+and formatting functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>reordering</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A reordering consisting of a the desired order of the list of indices,
-where None denotes the remainder. For instance if this function was solely used on names [-1, None]
-indicate last name (the last token in the name) followed by the remainder of the name. Similarly one could more
-use the reordering [3, 1, 2] e.g. indicating last name, first name, middle name. Note that if the entity only include two
+<li><p><strong>reordering</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A reordering consisting of a the desired
+order of the list of indices, where None denotes the remainder. For
+instance if this function was solely used on names [-1, None] indicate last
+name (the last token in the name) followed by the remainder of the name.
+Similarly one could more use the reordering [3, 1, 2] e.g. indicating last
+name, first name, middle name. Note that if the entity only include two
 tokens the 3 will be ignored producing the pattern [1, 2].</p></li>
-<li><p><strong>formatter</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A list of function taking in a spaCy Token returning the reformatted str.
-E.g. the function <cite>lambda token: token.text[0] + “.”</cite> would abbreviate the token and add punctuation. None corresponds to no augmentation.</p></li>
+<li><p><strong>formatter</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A list of function
+taking in a spaCy Token returning the reformatted str. E.g. the function
+<cite>lambda token: token.text[0] + “.”</cite> would abbreviate the token and add
+punctuation. None corresponds to no augmentation.</p></li>
 <li><p><strong>level</strong> (<em>float</em>) – The probability of an entities being augmented.</p></li>
-<li><p><strong>ent_types</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The entity types which should be augmented. Defaults to None, indicating all entity types.</p></li>
+<li><p><strong>ent_types</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The entity types which should
+be augmented. Defaults to None, indicating all entity types.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -279,7 +301,9 @@ E.g. the function <cite>lambda token: token.text[0] + “.”</cite> would abbre
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">spacy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"en_core_web_sm"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">abbreviate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"."</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"ents_format.v1"</span><span class="p">,</span> <span class="n">reordering</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">formatter</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">abbreviate</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ent_types</span><span class="o">=</span><span class="p">[</span><span class="s2">"PER"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"ents_format.v1"</span><span class="p">,</span> <span class="n">reordering</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                          <span class="n">formatter</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">abbreviate</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                           <span class="n">ent_types</span><span class="o">=</span><span class="p">[</span><span class="s2">"PER"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"my name is Kenneth Enevoldsen"</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
 <span class="go">["my name is Enevoldsen K."]</span>
@@ -287,23 +311,26 @@ E.g. the function <cite>lambda token: token.text[0] + “.”</cite> would abbre
 </div>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="augmenty.span.entities.create_per_replace_augmenter">
-<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_per_replace_augmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_consistency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'PERSON'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_per_replace_augmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_per_replace_augmenter" title="Permalink to this definition">#</a></dt>
-<dd><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p>
+<dt class="sig sig-object py" id="augmenty.span.entities.create_per_replace_augmenter_v1">
+<span class="sig-prename descclassname"><span class="pre">augmenty.span.entities.</span></span><span class="sig-name descname"><span class="pre">create_per_replace_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_consistency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person_tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'PERSON'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/span/entities.html#create_per_replace_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.span.entities.create_per_replace_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an augmenter which replaces a name (PER) with a news sampled from the
+names dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>names</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary of list of names to sample from.
 These could for example include first name and last names.</p></li>
-<li><p><strong>pattern</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – The pattern to create the names. This should be a list of patterns.
-Where a pattern is a list of strings, where the string denote the list in the names
-dictionary in which to sample from.</p></li>
+<li><p><strong>pattern</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – The pattern to create the names. This should be a
+list of patterns.
+Where a pattern is a list of strings, where the string denote the list in
+the names dictionary in which to sample from.</p></li>
 <li><p><strong>level</strong> (<em>float</em>) – The proportion of PER entities to replace.</p></li>
 <li><p><strong>names_p</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each name.
 Defaults to {}, indicating equal probability for each name.</p></li>
-<li><p><strong>patterns_p</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each pattern.
-Defaults to None, indicating equal probability for each pattern.</p></li>
-<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the entity always be replaced with the same entity? Defaults to True.</p></li>
+<li><p><strong>patterns_p</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each
+pattern. Defaults to None, indicating equal probability for each pattern.</p></li>
+<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the entity always be replaced with
+the same entity? Defaults to True.</p></li>
 <li><p><strong>person_tag</strong> (<em>str</em><em>, </em><em>optional</em>) – </p></li>
 </ul>
 </dd>
@@ -315,9 +342,12 @@ Defaults to None, indicating equal probability for each pattern.</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"firstname"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Kenneth"</span><span class="p">,</span> <span class="s2">"Lasse"</span><span class="p">],</span> <span class="s2">"lastname"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Enevoldsen"</span><span class="p">,</span> <span class="s2">"Hansen"</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">"firstname"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"lastname"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"lastname"</span><span class="p">]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">per_augmenter</span> <span class="o">=</span> <span class="n">create_per_replace_augmenter</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1"># replace 10% of names</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"firstname"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Kenneth"</span><span class="p">,</span> <span class="s2">"Lasse"</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>         <span class="s2">"lastname"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Enevoldsen"</span><span class="p">,</span> <span class="s2">"Hansen"</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">"firstname"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"lastname"</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="p">[</span><span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"firstname"</span><span class="p">,</span> <span class="s2">"lastname"</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># replace 10% of names:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">per_augmenter</span> <span class="o">=</span> <span class="n">create_per_replace_augmenter</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

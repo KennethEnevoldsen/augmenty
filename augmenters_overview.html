@@ -4,16 +4,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta property="og:title" content="Overview of Augmenters" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="augmenters_overview.html" />
-  <meta property="og:description" content="The following tables list all the available augmenters in augmenty, along with a short description. It also contains list all of the labels which the augmenters respects. For instance, if you wish ..." />
+<meta property="og:title" content="Overview of Augmenters" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="augmenters_overview.html" />
+  
+<meta property="og:description" content="The following tables list all the available augmenters in augmenty, along with a short description. It also contains list all of the labels which the augmenters respects. For instance, if you wish ..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Character-based" href="augmenty.character.html" /><link rel="prev" title="FAQ" href="faq.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
-        <title>Overview of Augmenters - augmenty 0.0.13 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
+        <title>Overview of Augmenters - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
@@ -28,20 +31,22 @@
   --color-brand-content: #ff7575;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #ff8f8f;
-  --color-brand-content: #ff8f8f;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   --color-brand-primary: #ff8f8f;
   --color-brand-content: #ff8f8f;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
     }
   }
 </style></head>
@@ -131,7 +136,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 0.0.13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.0.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -202,6 +207,12 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
@@ -343,7 +354,17 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>per_replace.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>paragraph_subset_augmenter.v1</strong></p></td>
+<td><p>Create an augmenter that extracts a subset of a document.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>per_replace.v1</strong></p></td>
 <td><p>Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -353,7 +374,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>random_casing.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>random_casing.v1</strong></p></td>
 <td><p>Create an augment that randomly changes the casing of the document.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -363,7 +384,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>random_starting_case.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>random_starting_case.v1</strong></p></td>
 <td><p>Creates an augmenter which randomly cases the first letter in each token.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -373,7 +394,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>random_synonym_insertion.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>random_synonym_insertion.v1</strong></p></td>
 <td><p>Creates an augmenter that randomly inserts a synonym or from the tokens context.     The synonyms are based on wordnet.</p></td>
 <td><p>✅</p></td>
 <td><p>❌</p></td>
@@ -383,7 +404,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>remove_spacing.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>remove_spacing.v1</strong></p></td>
 <td><p>Creates an augmenter that removes spacing with a given probability.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -393,7 +414,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>spacing_insertion.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>spacing_insertion.v1</strong></p></td>
 <td><p>Creates and augmneter that randomly adds a space after a chara cter. Tokens are kept the same.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -403,7 +424,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>spacy.lower_case.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>spacy.lower_case.v1</strong></p></td>
 <td><p>Create a data augmentation callback that converts documents to lowercase.     The callback can be added to a corpus or other data iterator during training.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -413,7 +434,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>spacy.orth_variants.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>spacy.orth_variants.v1</strong></p></td>
 <td><p>Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -423,7 +444,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>spongebob.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>spongebob.v1</strong></p></td>
 <td><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -433,7 +454,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>token_dict_replace.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>token_dict_replace.v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -443,7 +464,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>token_insert.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_insert.v1</strong></p></td>
 <td><p>Creates an augmenter that randomly inserts a token generated based on a insert function.</p></td>
 <td><p>✅</p></td>
 <td><p>❌</p></td>
@@ -453,7 +474,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>token_insert_random.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>token_insert_random.v1</strong></p></td>
 <td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
 <td><p>✅</p></td>
 <td><p>❌</p></td>
@@ -463,7 +484,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>token_replace.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_replace.v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -473,7 +494,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>token_swap.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>token_swap.v1</strong></p></td>
 <td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -483,7 +504,7 @@
 <td><p>✅</p></td>
 <td><p>Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>upper_case.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>upper_case.v1</strong></p></td>
 <td><p>Create an augmenter that converts documents to uppercase.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -493,7 +514,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>word_embedding.v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>word_embedding.v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -503,7 +524,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>wordnet_synonym.v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>wordnet_synonym.v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>

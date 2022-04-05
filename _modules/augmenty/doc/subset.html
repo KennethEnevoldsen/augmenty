@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.03.04"/>
-        <title>augmenty.character.spacing - augmenty 1.0.1 documentation</title>
+        <title>augmenty.doc.subset - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -218,31 +218,37 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for augmenty.character.spacing</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
-<span class="sd">Augmenters for modyfing spacing</span>
-<span class="sd">"""</span>
-
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span>
-
+          <h1>Source code for augmenty.doc.subset</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">spacy</span>
 <span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
 <span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
+<span class="kn">from</span> <span class="nn">augmenty.augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 
-
-<div class="viewcode-block" id="create_remove_spacing_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.spacing.create_remove_spacing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"remove_spacing.v1"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_remove_spacing_augmenter_v1</span><span class="p">(</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<div class="viewcode-block" id="create_paragraph_subset_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.doc.html#augmenty.doc.subset.create_paragraph_subset_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"paragraph_subset_augmenter.v1"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_paragraph_subset_augmenter_v1</span><span class="p">(</span>
+    <span class="n">min_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span>
+    <span class="n">respect_sentences</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter that removes spacing with a given probability.</span>
+    <span class="sd">"""Create an augmenter that extracts a subset of a document.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to remove a space.</span>
+<span class="sd">        min_paragraph (Union[float, int]): An float indicating the min percentage of the</span>
+<span class="sd">            document to include or a float indicating the minimum number of paragraps</span>
+<span class="sd">            to include (tokens in respect sentences is False). Defaults to 1,</span>
+<span class="sd">            indicating at least one sentence.</span>
+<span class="sd">        max_paragraph (Union[float, int]): An float indicating the max percentage of the</span>
+<span class="sd">            document to include or a float indicating the maximum number of paragraps</span>
+<span class="sd">            to include (tokens in respect sentences is False). Defaults to 1.00</span>
+<span class="sd">            indicating 100%.</span>
+<span class="sd">        respect_sentences (bool): should the augmenter respect sentence bounderies?</span>
+<span class="sd">            Defaults to True.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
@@ -251,31 +257,77 @@
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
 <span class="sd">        &gt;&gt;&gt; import spacy</span>
 <span class="sd">        &gt;&gt;&gt; nlp = spacy.blank("en")</span>
-<span class="sd">        &gt;&gt;&gt; remove_spacing_augmenter = augmenty.load("remove_spacing.v1", level=0.5)</span>
-<span class="sd">        &gt;&gt;&gt; texts = ["A sample text"]</span>
-<span class="sd">        &gt;&gt;&gt; list(augmenty.texts(texts, remove_spacing_augmenter, nlp))</span>
-<span class="sd">        ["A sampletext"]</span>
+<span class="sd">        &gt;&gt;&gt; nlp.add_pipe("sentencizer")</span>
+<span class="sd">        &gt;&gt;&gt; upper_case_augmenter = augmenty.load("sent_subset.v1", level=0.7)</span>
+<span class="sd">        &gt;&gt;&gt; text = "Augmenty is a wonderful tool for augmentation. " +</span>
+<span class="sd">        &gt;&gt;&gt;   "It have tons of different augmenters. " +</span>
+<span class="sd">        &gt;&gt;&gt;   " Augmenty is developed using spaCy."</span>
+<span class="sd">        &gt;&gt;&gt; list(augmenty.texts([text], upper_case_augmenter, nlp))</span>
+<span class="sd">        ["Augmenty is a wonderful tool for augmentation. Augmenty is developed using spaCy."]</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">remove_spacing_augmenter_v1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">paragraph_subset_augmenter_v1</span><span class="p">,</span>
+        <span class="n">respect_sentences</span><span class="o">=</span><span class="n">respect_sentences</span><span class="p">,</span>
+        <span class="n">min_paragraph</span><span class="o">=</span><span class="n">min_paragraph</span><span class="p">,</span>
+        <span class="n">max_paragraph</span><span class="o">=</span><span class="n">max_paragraph</span><span class="p">,</span>
+    <span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">remove_spacing_augmenter_v1</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">paragraph_subset_augmenter_v1</span><span class="p">(</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">min_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">max_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">respect_sentences</span><span class="p">:</span> <span class="nb">bool</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
-    <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="n">s</span>
-
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"SPACY"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">__replace</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"SPACY"</span><span class="p">]</span>
-    <span class="p">]</span>
+    <span class="n">token_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">]</span>
+    <span class="n">doc_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"doc_annotation"</span><span class="p">]</span>
+
+    <span class="n">doc_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">respect_sentences</span><span class="p">:</span>
+        <span class="n">sents</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">sents</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sents</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">doc_len</span>
+
+    <span class="n">min_n</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">min_paragraph</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_paragraph</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">min_paragraph</span>
+    <span class="p">)</span>
+    <span class="n">max_n</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">max_paragraph</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_paragraph</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">max_paragraph</span>
+    <span class="p">)</span>
+    <span class="n">n_to_keep</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">min_n</span><span class="p">,</span> <span class="n">max_n</span><span class="p">)</span>
+    <span class="n">start_n</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">n_to_keep</span><span class="p">)</span>
+    <span class="n">end_n</span> <span class="o">=</span> <span class="n">start_n</span> <span class="o">+</span> <span class="n">n_to_keep</span>
+
+    <span class="k">if</span> <span class="n">respect_sentences</span><span class="p">:</span>
+        <span class="n">sents</span> <span class="o">=</span> <span class="n">sents</span><span class="p">[</span><span class="n">start_n</span><span class="p">:</span><span class="n">end_n</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">sents</span><span class="p">:</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">sents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">sents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">start_n</span><span class="p">,</span> <span class="n">end_n</span>
+
+    <span class="c1"># Respect entity spans</span>
+    <span class="k">while</span> <span class="n">start</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">ent_iob_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">""</span><span class="p">}:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">while</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">doc_len</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ent_iob_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">""</span><span class="p">}:</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">token_anno</span><span class="p">:</span>
+        <span class="n">token_anno</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_anno</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+    <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"entities"</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"entities"</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">):</span>
+        <span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">])</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">])))</span>
+
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
     <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">Example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>

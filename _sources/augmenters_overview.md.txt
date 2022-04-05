@@ -15,6 +15,7 @@ The following tables list all the available augmenters in augmenty, along with a
 | **ents_replace.v1** | Create an augmenter which replaces an entity based on a dictionary lookup. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | **grundtvigian_spacing_augmenter.v1** | The Danish philosopher N.F.S. Grundtvig used letter spacing to add      e m p h a s i s  to words (Baunvig, Jarvis and Nielbo, 2020).      This augmenter randomly adds letter spacing emphasis to words.      This augmentation which are human readable, but which are clearly      challenging for systems using a white-space centric tokenization. | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
 | **keystroke_error.v1** | Creates a augmenter which augments a text with plausible typos based on keyboard distance. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
+| **paragraph_subset_augmenter.v1** | Create an augmenter that extracts a subset of a document. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | **per_replace.v1** | Create an augmenter which replaces a name (PER) with a news sampled from the names dictionary. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | **random_casing.v1** | Create an augment that randomly changes the casing of the document. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | **random_starting_case.v1** | Creates an augmenter which randomly cases the first letter in each token. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |

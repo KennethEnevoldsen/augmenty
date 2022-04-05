@@ -14,3 +14,4 @@ augmenty.lang.da.augmenters
    :members:
    :undoc-members:
    :show-inheritance:
+   :exclude-members: 
