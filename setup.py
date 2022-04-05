@@ -9,6 +9,7 @@ with open(path) as f:
         if line.startswith("__version__"):
             __version__ = line.split('"')[-2]
 
+
 def setup_package():
     setup(__version__)
 
