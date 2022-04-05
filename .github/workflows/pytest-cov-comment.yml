@@ -51,7 +51,7 @@ jobs:
         python -m  pytest --cov=augmenty --cov-report term-missing | tee pytest-coverage.txt
     - name: Pytest coverage comment
       id: coverage-comment
-      uses: MishaKav/pytest-coverage-comment@v1.1.21
+      uses: MishaKav/pytest-coverage-comment@v1.1.24
       with:
         pytest-coverage-path: ./pytest-coverage.txt
 
@@ -60,7 +60,7 @@ jobs:
         echo "Coverage Report - ${{ steps.coverage-comment.outputs.coverage }}"
         echo "Coverage Color - ${{ steps.coverage-comment.outputs.color }}"
     - name: Create the Badge
-      uses: schneegans/dynamic-badges-action@v1.1.0
+      uses: schneegans/dynamic-badges-action@v1.2.0
       with:
         auth: ${{ secrets.PYTEST_COVERAGE }}
         gistID: 2d5c14e682c3560240fe05cc7c9f4d2d
