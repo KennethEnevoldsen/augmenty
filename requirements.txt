@@ -27,7 +27,7 @@ sphinx-copybutton
 sphinxext-opengraph
 myst-parser
 nbsphinx>=0.8.8
-
+MarkupSafe==2.0.1
 
 # code style
 flake8
