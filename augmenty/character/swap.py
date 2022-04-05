@@ -3,7 +3,7 @@ Augmenters for swapping characters
 """
 
 
-from typing import Callable, Dict, Iterator
+from typing import Callable, Iterator
 
 from functools import partial
 import random
@@ -16,10 +16,11 @@ from ..augment_utilities import make_text_from_orth
 
 
 @spacy.registry.augmenters("char_swap.v1")
-def create_char_swap_augmenter(
+def create_char_swap_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that swaps two neighbouring characters in a token with a given probability.
+    """Creates an augmenter that swaps two neighbouring characters in a token with a
+    given probability.
 
     Args:
         level (float): probability to replace a character.
@@ -36,10 +37,10 @@ def create_char_swap_augmenter(
         >>> list(augmenty.texts(texts, char_swap_augmenter, nlp))
         ["A smaple txet"]
     """
-    return partial(char_swap_augmenter, level=level)
+    return partial(char_swap_augmenter_v1, level=level)
 
 
-def char_swap_augmenter(nlp: Language, example: Example, level) -> Iterator[Example]:
+def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[Example]:
     def __replace(t):
         for i, c in enumerate(t.text[:-1]):
             if random.random() < level:

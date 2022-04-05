@@ -10,6 +10,7 @@ This will also install the required development dependencies and test utilities 
 
 
 .. code-block::
+   
    pip install -r requirements.txt
    pip install pytest
 
@@ -21,12 +22,14 @@ which will run all the test in the :code:`augmenty/tests` folder.
 Specific tests can be run using:
 
 .. code-block::
+
    python -m pytest augmenty/tests/desired_test.py
 
 
 If you want to check code coverage you can run the following:
 
 .. code-block::
+
    pip install pytest-cov
 
    python -m pytest --cov=.
@@ -48,6 +51,7 @@ Augmenty uses `sphinx <https://www.sphinx-doc.org/en/master/index.html>`__ to ge
 To make the documentation you can run:
 
 .. code-block::
+
   # install sphinx, themes and extensions
   pip install sphinx furo sphinx-copybutton sphinxext-opengraph
 

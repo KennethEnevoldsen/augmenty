@@ -1,1 +1,1 @@
-from .keyboard import create_ru
+from .keyboard import create_ru  # noqa

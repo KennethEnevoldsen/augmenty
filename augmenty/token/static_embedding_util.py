@@ -7,7 +7,8 @@ import numpy as np
 
 
 class static_embedding(BaseModel):
-    """A utility function for computing most similar word vectors using precomputed normalized vectors
+    """A utility function for computing most similar word vectors using precomputed
+    normalized vectors
 
     Args:
         unit_vectors (Optional[np.ndarray]): The normalized word vectors
@@ -15,7 +16,8 @@ class static_embedding(BaseModel):
         vocab (Optional[Vocab]): A SpaCy vocabulary
 
     Returns:
-        static_embedding: An utility class for efficiently calculating static word embeddings.
+        static_embedding: An utility class for efficiently calculating static word
+            embeddings.
     """
 
     class Config:
