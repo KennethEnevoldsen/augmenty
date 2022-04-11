@@ -51,11 +51,12 @@ jobs:
         python -m  pytest --cov=augmenty --cov-report term-missing | tee pytest-coverage.txt
     - name: Pytest coverage comment
       id: coverage-comment
-      uses: MishaKav/pytest-coverage-comment@v1.1.24
+      uses: MishaKav/pytest-coverage-comment@v1.1.25
       with:
         pytest-coverage-path: ./pytest-coverage.txt
 
     - name: Check the output coverage
+      if: ${{ github.event_name == 'push' }}
       run: |
         echo "Coverage Report - ${{ steps.coverage-comment.outputs.coverage }}"
         echo "Coverage Color - ${{ steps.coverage-comment.outputs.color }}"
