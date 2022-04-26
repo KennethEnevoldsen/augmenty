@@ -55,7 +55,7 @@ jobs:
       uses: MishaKav/pytest-coverage-comment@v1.1.26
       with:
         pytest-coverage-path: ./pytest-coverage.txt
-        github_token: ${{ secrets.SPHINX_DOCUMENTATION }}
+        github-token: ${{ secrets.SPHINX_DOCUMENTATION }}
 
     - name: Check the output coverage
       if: ${{ github.event_name == 'push' }}
