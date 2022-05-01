@@ -5,7 +5,7 @@ dacy >=1.1.1,<2.0.0
 nltk >= 3.6.7,< 3.8.0
 
 # Package general
-spacy>=3.2.0,<3.3.0
+spacy>=3.2.0,<3.4.0
 catalogue>=2.0.4,<2.1.0
 thinc>=8.0.8,<8.1.0
 pydantic>=1.8.2,<1.10.0
