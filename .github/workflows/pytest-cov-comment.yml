@@ -14,9 +14,6 @@ jobs:
         matrix:
             os: [macos-latest, windows-latest, ubuntu-latest]
             python-version: ['3.9', '3.8', '3.7']
-            exclude:
-              - os: ubuntu-latest
-                python-version: '3.9'
 
     steps:
     - uses: actions/checkout@v3
@@ -35,6 +32,7 @@ jobs:
 
   pytest-coverage:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
