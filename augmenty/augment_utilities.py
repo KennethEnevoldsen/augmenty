@@ -2,15 +2,14 @@
 
 import random
 from functools import partial
-from typing import Callable, Iterable, Iterator, List
+from typing import Callable, Iterable, Iterator
 
 from spacy.language import Language
-from spacy.tokens import Doc
 from spacy.training import Example
 
 
 def combine(
-    augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]]
+    augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]],
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Combines a series of spaCy style augmenters.
 
@@ -84,7 +83,8 @@ def repeat(
 
 
 def yield_original(
-    augmenter: Callable[[Language, Example], Iterator[Example]], doc_level: float = 1.0
+    augmenter: Callable[[Language, Example], Iterator[Example]],
+    doc_level: float = 1.0,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Wraps and augmented such that it yields both the original and augmented example.
 

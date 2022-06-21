@@ -1,6 +1,6 @@
 import random
 from functools import partial
-from typing import Iterator, Callable
+from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language

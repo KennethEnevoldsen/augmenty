@@ -1,5 +1,6 @@
-from setuptools import setup
 import os
+
+from setuptools import setup
 
 path = os.path.join("augmenty", "about.py")
 

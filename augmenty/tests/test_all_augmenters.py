@@ -2,20 +2,14 @@
 Pytest script for testing all augmenters in a variety of cases.
 """
 
+import numpy as np
 import pytest
 
 import augmenty
 
-import numpy as np
-
-from .fixtures import (  # noqa
-    nlp_en,
-    nlp_da,
-    nlp_en_md,
-    books_w_annotations,
-    books_without_annotations,
-    dane_test,
-)
+from .fixtures import books_without_annotations  # noqa
+from .fixtures import nlp_en  # noqa
+from .fixtures import books_w_annotations, dane_test, nlp_da, nlp_en_md  # noqa
 
 np.seterr(divide="raise", invalid="raise")
 
@@ -54,7 +48,7 @@ augmenters_args = {
         "ent_dict": {
             "ORG": [["Google"], ["Apple"]],
             "PERSON": [["Kenneth"], ["Lasse", "Hansen"]],
-        }
+        },
     },
     "letter_spacing_augmenter.v1": {},
     "keystroke_error.v1": {},
@@ -76,7 +70,7 @@ augmenters_args = {
     "spacy.lower_case.v1": {},
     "spongebob.v1": {},
     "token_dict_replace.v1": {
-        "replace": {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}
+        "replace": {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}},
     },
     "token_swap.v1": {},
     "upper_case.v1": {},
@@ -98,13 +92,14 @@ augmenters_args = {
             pytest.lazy_fixture("books_without_annotations"),
             pytest.lazy_fixture("nlp_en"),
         ),
-        # (pytest.lazy_fixture("books_w_annotations"), pytest.lazy_fixture("nlp_en_md")),
     ],
 )
 def test_augmenters(aug, args, examples, nlp, level):
     args["level"] = level
     aug = augmenty.load(aug, **args)
-    augmented_examples = [e for ex in examples for e in aug(nlp=nlp, example=ex)]
+    augmented_examples = [  # noqa
+        e for ex in examples for e in aug(nlp=nlp, example=ex)
+    ]
 
 
 def test_check_untested():

@@ -1,13 +1,12 @@
 import random
 from functools import partial
-from typing import Callable, Dict, Iterable, Iterator, List, Optional, Union, Generator
+from typing import Callable, Dict, Generator, Iterable, Iterator, List, Optional, Union
 
 import numpy as np
-
 import spacy
 from spacy.language import Language
-from spacy.training import Example
 from spacy.tokens import Token
+from spacy.training import Example
 
 from ..augment_utilities import make_text_from_orth
 
@@ -111,10 +110,10 @@ def ent_augmenter_v1(
                         np.array(head[: ent.start + offset]),  # before
                         np.array(
                             [head[ent.root.i + offset]]
-                            + [ent.start + offset] * (len_ent - 1)
+                            + [ent.start + offset] * (len_ent - 1),
                         ),  # the entity
                         np.array(head[ent.end + offset :]),  # after
-                    ]
+                    ],
                 )
                 offset += offset_
 
@@ -142,7 +141,8 @@ def ent_augmenter_v1(
 @spacy.registry.augmenters("per_replace.v1")
 def create_per_replace_augmenter_v1(
     names: Dict[
-        str, List[str]
+        str,
+        List[str],
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
     patterns: List[List[str]],  # ["firstname", "firstname", "lastname"]
     level: float,

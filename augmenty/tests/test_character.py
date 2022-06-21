@@ -1,8 +1,8 @@
 import spacy
+
 import augmenty
 
-
-from .fixtures import nlp_en, nlp_da
+from .fixtures import nlp_da, nlp_en  # noqa
 
 
 def test_create_random_casing_augmenter(nlp_en):
@@ -31,7 +31,8 @@ def test_create_char_replace_random_augmenter(nlp_en):
 
 def test_create_char_replace_augmenter(nlp_en):
     aug = spacy.registry.augmenters.get("char_replace.v1")(
-        level=1, replace={"b": ["p"], "q": ["a", "b"]}
+        level=1,
+        replace={"b": ["p"], "q": ["a", "b"]},
     )
 
     doc = nlp_en("The augmented version of this should be the same")
@@ -49,7 +50,8 @@ def test_create_keystroke_error_augmenter(nlp_da):
     text = "q"
 
     aug = spacy.registry.augmenters.get("keystroke_error.v1")(
-        level=1, keyboard="da_qwerty.v1"
+        level=1,
+        keyboard="da_qwerty.v1",
     )
     doc = nlp_da(text)
 

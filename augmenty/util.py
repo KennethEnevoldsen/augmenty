@@ -1,16 +1,13 @@
 """Utility functions for the package."""
 
-import thinc
-import catalogue
-
-from spacy.language import Language
-from spacy.training import Example
-
-from spacy.tokens import Doc
-import spacy
-
-
 from typing import Callable, Dict, Iterable, Iterator, List
+
+import catalogue
+import spacy
+import thinc
+from spacy.language import Language
+from spacy.tokens import Doc
+from spacy.training import Example
 
 
 class registry(thinc.registry):
@@ -138,8 +135,8 @@ def meta() -> Dict[str, dict]:
     >>> metadata["token_swap.v1"]
     """
     import json
-    import pathlib
     import os
+    import pathlib
 
     p = pathlib.Path(__file__).parent.resolve()
     p = os.path.join(p, "meta.json")

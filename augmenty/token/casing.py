@@ -1,6 +1,6 @@
 import random
 from functools import partial
-from typing import Iterator, Callable, Optional
+from typing import Callable, Iterator, Optional
 
 import spacy
 from spacy.language import Language
@@ -65,7 +65,7 @@ def create_conditional_token_casing_augmenter_v1(
     if upper == lower or (upper is None and lower is None):
         raise ValueError(
             "You need to specify the desired casing the token should get either using "
-            + "lower=True/False or upper=True/False."
+            + "lower=True/False or upper=True/False.",
         )
     if lower is True:
         upper = False

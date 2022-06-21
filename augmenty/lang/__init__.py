@@ -1,9 +1,6 @@
 # import keyboard and augmenters
-from .da import (  # noqa
-    create_qwerty_da,
-    create_da_æøå_replace_augmenter_v1,
-    create_da_historical_noun_casing_augmenter_v1,
-)
+from .da import create_da_historical_noun_casing_augmenter_v1  # noqa
+from .da import create_da_æøå_replace_augmenter_v1, create_qwerty_da  # noqa
 from .de import create_qwerty_de  # noqa
 from .el import create_qwerty_el  # noqa
 from .en import create_qwerty_en  # noqa

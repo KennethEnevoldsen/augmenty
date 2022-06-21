@@ -1,6 +1,6 @@
 import random
 from functools import partial
-from typing import Iterator, Callable
+from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
@@ -61,12 +61,17 @@ def create_spacing_insertion_augmenter_v1(
         Callable[[Language, Example], Iterator[Example]]: The augmenter.
     """
     return partial(
-        spacing_insertion_augmenter_v1, level=level, max_insertions=max_insertions
+        spacing_insertion_augmenter_v1,
+        level=level,
+        max_insertions=max_insertions,
     )
 
 
 def spacing_insertion_augmenter_v1(
-    nlp: Language, example: Example, level: float, max_insertions: int
+    nlp: Language,
+    example: Example,
+    level: float,
+    max_insertions: int,
 ) -> Iterator[Example]:
     def __spacing(t):
         insertions = 0

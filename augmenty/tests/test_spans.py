@@ -2,8 +2,7 @@ from spacy.tokens import Doc
 
 import augmenty
 
-
-from .fixtures import nlp_en_md, nlp_en
+from .fixtures import nlp_en, nlp_en_md  # noqa
 
 
 def test_create_ent_replace(nlp_en_md, nlp_en):
@@ -24,7 +23,9 @@ def test_create_ent_replace(nlp_en_md, nlp_en):
     )
 
     ent_augmenter = augmenty.load(
-        "ents_replace.v1", level=1.00, ent_dict={"ORG": [["SpaCy"]]}
+        "ents_replace.v1",
+        level=1.00,
+        ent_dict={"ORG": [["SpaCy"]]},
     )
 
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
@@ -32,7 +33,9 @@ def test_create_ent_replace(nlp_en_md, nlp_en):
     assert docs[0].text == "SpaCy is a wonderful tool for augmentation."
 
     ent_augmenter = augmenty.load(
-        "ents_replace.v1", level=1.00, ent_dict={"ORG": [["The SpaCy Universe"]]}
+        "ents_replace.v1",
+        level=1.00,
+        ent_dict={"ORG": [["The SpaCy Universe"]]},
     )
 
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))

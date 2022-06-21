@@ -1,10 +1,8 @@
-import pytest
-
 from spacy.tokens import Doc, Span
 
 import augmenty
 
-from .fixtures import nlp_en_md, nlp_en
+from .fixtures import nlp_en, nlp_en_md  # noqa
 
 
 def test_combine(nlp_en_md):
@@ -60,4 +58,4 @@ def test_set_doc_level(nlp_en):
     aug = augmenty.set_doc_level(aug, level=0.5)
 
     # simply testing it it runs
-    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
+    augmented_docs = list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))  # noqa
