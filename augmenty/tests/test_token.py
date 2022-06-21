@@ -147,29 +147,29 @@ def test_create_word_embedding_augmenter(nlp_en_md):
     doc = nlp_en_md(text)
 
     rep = [
+        "cat",  # as "cat" != "Cat"
         "cats",
-        "Cats",
         "kitten",
-        "Dog",
-        "dog",
         "kitty",
-        "Kitty",
-        "pet",
-        "Pet",
+        "dog",
         "puppy",
+        "puppies",
+        "poodles",
+        "pet",
+        "breeds",
     ]
 
     aug = augmenty.load("word_embedding.v1", level=1)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp_en_md))
-    assert docs[0].text in rep
+    assert docs[0].text.lower() in rep
 
     aug = augmenty.load("word_embedding.v1", level=1, ignore_casing=False)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp_en_md))
-    assert docs[0].text in rep + ["Cat"]
+    assert docs[0].text.lower() in rep
 
     aug = augmenty.load("word_embedding.v1", level=1, nlp=nlp_en_md)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp_en_md))
-    assert docs[0].text in rep
+    assert docs[0].text.lower() in rep
 
 
 def test_create_token_insert_augmenter(nlp_en):

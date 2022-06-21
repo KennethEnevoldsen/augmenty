@@ -35,6 +35,7 @@ ignore = {
     "token_insert.v1",
     "paragraph_subset_augmenter.v1",
     "word_embedding.v1",
+    "spacy.combined_augmenter.v1"
 }
 
 augmenters_args = {
