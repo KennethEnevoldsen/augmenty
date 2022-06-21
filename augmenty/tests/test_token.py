@@ -2,11 +2,10 @@ import spacy
 from spacy.tokens import Doc
 
 import augmenty
-
-from .books import BOOKS
 from augmenty.token.insert import create_token_insert_random_augmenter_v1
 
-from .fixtures import nlp_en_md, nlp_en, nlp_da
+from .books import BOOKS
+from .fixtures import nlp_da, nlp_en, nlp_en_md  # noqa
 
 
 def test_create_starting_case_augmenter(nlp_en):
@@ -37,7 +36,9 @@ def test_create_conditional_token_casing_augmenter(nlp_en):
         return False
 
     aug = spacy.registry.augmenters.get("conditional_token_casing.v1")(
-        level=1, lower=True, conditional=conditional
+        level=1,
+        lower=True,
+        conditional=conditional,
     )
 
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_en)
@@ -47,7 +48,9 @@ def test_create_conditional_token_casing_augmenter(nlp_en):
 def test_create_token_dict_replace_augmenter(nlp_en):
 
     doc1 = Doc(
-        nlp_en.vocab, words=["I", "am", "happy", "!"], spaces=[True, True, False, False]
+        nlp_en.vocab,
+        words=["I", "am", "happy", "!"],
+        spaces=[True, True, False, False],
     )
     doc2 = Doc(
         nlp_en.vocab,
@@ -73,7 +76,9 @@ def test_create_wordnet_synonym_augmenter(nlp_en, nlp_da):
     text = "Skal jeg pande dig en?"
 
     aug = spacy.registry.augmenters.get("wordnet_synonym.v1")(
-        level=1, lang="da", respect_pos=False
+        level=1,
+        lang="da",
+        respect_pos=False,
     )
     doc = nlp_da(text)
 
@@ -188,7 +193,8 @@ def test_create_token_insert_random_augmenter(nlp_en):
     texts = ["one two three"] * 3
     # w. word list
     aug = create_token_insert_random_augmenter_v1(
-        level=0.5, insert=["words", "to", "insert"]
+        level=0.5,
+        insert=["words", "to", "insert"],
     )
     list(augmenty.texts(texts, aug, nlp_en))
     # w. dict
@@ -202,7 +208,7 @@ def test_create_token_insert_random_augmenter(nlp_en):
                 "TAG": "NOUN",
                 "entities": "O",
                 "MORPH": "Number=Plur",
-            }
+            },
         ],
     )
     list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
@@ -221,7 +227,7 @@ def test_create_duplicate_token_augmenter(nlp_en, nlp_en_md):
     assert docs[0][0].text == "cat"
     assert docs[0][1].text == "cat"
     docs = list(
-        augmenty.docs(nlp_en_md("I am not happy"), augmenter=aug, nlp=nlp_en_md)
+        augmenty.docs(nlp_en_md("I am not happy"), augmenter=aug, nlp=nlp_en_md),
     )
 
 
@@ -234,9 +240,3 @@ def test_create_random_synonym_insertion_augmenter(nlp_en):
     assert len(docs[0]) == 2
     assert docs[0][1].text == "cat"
     assert docs[0][1].pos_ == "NOUN"
-
-
-
-
-
-
