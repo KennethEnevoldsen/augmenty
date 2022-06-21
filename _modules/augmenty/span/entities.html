@@ -224,14 +224,13 @@
           <h1>Source code for augmenty.span.entities</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Generator</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
 <span class="kn">import</span> <span class="nn">spacy</span>
 <span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
-<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
 <span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
 
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 
@@ -335,10 +334,10 @@
                         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">head</span><span class="p">[:</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]),</span>  <span class="c1"># before</span>
                         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
                             <span class="p">[</span><span class="n">head</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]]</span>
-                            <span class="o">+</span> <span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
                         <span class="p">),</span>  <span class="c1"># the entity</span>
                         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">+</span> <span class="n">offset</span> <span class="p">:]),</span>  <span class="c1"># after</span>
-                    <span class="p">]</span>
+                    <span class="p">],</span>
                 <span class="p">)</span>
                 <span class="n">offset</span> <span class="o">+=</span> <span class="n">offset_</span>
 
@@ -366,7 +365,8 @@
 <div class="viewcode-block" id="create_per_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;per_replace.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_per_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span>
-        <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+        <span class="nb">str</span><span class="p">,</span>
+        <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="p">],</span>  <span class="c1"># {&quot;firstname&quot;: [&quot;Kenneth&quot;, &quot;Lasse&quot;], &quot;lastname&quot;: [&quot;Enevoldsen&quot;, &quot;Hansen&quot;]}</span>
     <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>  <span class="c1"># [&quot;firstname&quot;, &quot;firstname&quot;, &quot;lastname&quot;]</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
