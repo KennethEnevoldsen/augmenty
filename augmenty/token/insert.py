@@ -287,11 +287,17 @@ def create_random_synonym_insertion_augmenter_v1(
                 if pos in upos_wn_dict:
                     syns = wordnet.synsets(word, pos=upos_wn_dict[pos], lang=lang)
                     rep = rep.union(
-                        {(l, pos) for syn in syns for l in syn.lemma_names(lang=lang)},
+                        {
+                            (lem, pos)
+                            for syn in syns
+                            for lem in syn.lemma_names(lang=lang)
+                        },
                     )
             else:
                 syns = wordnet.synsets(word, lang=lang)
-                rep = rep.union({l for syn in syns for l in syn.lemma_names(lang=lang)})
+                rep = rep.union(
+                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},
+                )
 
         if rep:
             text = random.sample(rep, k=1)[0]
