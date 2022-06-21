@@ -80,8 +80,10 @@ If you use this library in your research, it would be much appreciated it if you
 
 .. code-block::
    
-   @inproceedings{augmenty2021,
-      title={Augmenty, the cherry on top of your NLP pipeline},
-      author={Enevoldsen, Kenneth and Hansen, Lasse},
-      year={2021}
+   @software{enevoldsen_augmenty_2021,
+      author = {Enevoldsen, Kenneth},
+      doi = {10.5281/zenodo.6675315},
+      title = {{Augmenty: The cherry on top of your NLP pipeline}},
+      url = {https://github.com/KennethEnevoldsen/augmenty},
+      version = {1.0.1}
    }
