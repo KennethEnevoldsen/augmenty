@@ -157,6 +157,7 @@ def test_create_word_embedding_augmenter(nlp_en_md):
         "poodles",
         "pet",
         "breeds",
+        "breed",
     ]
 
     aug = augmenty.load("word_embedding.v1", level=1)
