@@ -1,14 +1,12 @@
 import random
 from functools import partial
-from typing import Dict, Iterator, Callable, List, Optional, Union
+from typing import Callable, Dict, Iterator, List, Optional, Union
 
 import spacy
 from spacy.language import Language
-from spacy.training import Example
 from spacy.tokens import Token
-
+from spacy.training import Example
 from wasabi import msg
-
 
 from ..augment_utilities import make_text_from_orth
 from .wordnet_util import init_wordnet
@@ -47,7 +45,10 @@ def create_token_insert_augmenter_v1(
         ["This insert is a cat"]
     """
     return partial(
-        token_insert_augmenter_v1, level=level, respect_ents=respect_ents, insert=insert
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=insert,
     )
 
 
@@ -249,8 +250,8 @@ def create_random_synonym_insertion_augmenter_v1(
     """
     init_wordnet()
     from nltk.corpus import wordnet
-    from .wordnet_util import upos_wn_dict
-    from .wordnet_util import lang_wn_dict
+
+    from .wordnet_util import lang_wn_dict, upos_wn_dict
 
     def __insert(t: Token, lang: str, respect_pos: bool, verbose: bool) -> dict:
         doc = t.doc
@@ -258,7 +259,7 @@ def create_random_synonym_insertion_augmenter_v1(
             if verbose:
                 msg.warn(
                     "respect_pos is True, but the doc is not annotated for part "
-                    + "of speech. Setting respect_pos to False."
+                    + "of speech. Setting respect_pos to False.",
                 )
             respect_pos = False
 
@@ -277,7 +278,7 @@ def create_random_synonym_insertion_augmenter_v1(
             raise ValueError(
                 "context_window is None, but the document is not sentence segmented. "
                 + "Either use a nlp which include a sentencizer component or specify "
-                + "a context_window"
+                + "a context_window",
             )
         for t in span:
             word = t.lower_
@@ -286,11 +287,17 @@ def create_random_synonym_insertion_augmenter_v1(
                 if pos in upos_wn_dict:
                     syns = wordnet.synsets(word, pos=upos_wn_dict[pos], lang=lang)
                     rep = rep.union(
-                        {(l, pos) for syn in syns for l in syn.lemma_names(lang=lang)}
+                        {
+                            (lem, pos)
+                            for syn in syns
+                            for lem in syn.lemma_names(lang=lang)
+                        },
                     )
             else:
                 syns = wordnet.synsets(word, lang=lang)
-                rep = rep.union({l for syn in syns for l in syn.lemma_names(lang=lang)})
+                rep = rep.union(
+                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},
+                )
 
         if rep:
             text = random.sample(rep, k=1)[0]
@@ -307,5 +314,8 @@ def create_random_synonym_insertion_augmenter_v1(
 
     insert = partial(__insert, lang=lang, respect_pos=respect_pos, verbose=verbose)
     return partial(
-        token_insert_augmenter_v1, level=level, respect_ents=respect_ents, insert=insert
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=insert,
     )

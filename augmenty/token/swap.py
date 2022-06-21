@@ -1,9 +1,8 @@
 import random
 from functools import partial
-from typing import Iterator, Callable
+from typing import Callable, Iterator
 
 import numpy as np
-
 import spacy
 from spacy.language import Language
 from spacy.training import Example
@@ -13,7 +12,9 @@ from ..augment_utilities import make_text_from_orth
 
 @spacy.registry.augmenters("token_swap.v1")
 def create_token_swap_augmenter_v1(
-    level: float, respect_ents: bool = True, respect_sentences: bool = True
+    level: float,
+    respect_ents: bool = True,
+    respect_sentences: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 

@@ -3,10 +3,9 @@ Augmenters for swapping characters
 """
 
 
-from typing import Callable, Iterator
-
-from functools import partial
 import random
+from functools import partial
+from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language

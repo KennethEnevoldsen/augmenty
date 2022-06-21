@@ -60,5 +60,7 @@ def create_da_historical_noun_casing_augmenter_v1(
         return False
 
     return create_conditional_token_casing_augmenter_v1(
-        conditional=conditional, upper=True, level=level
+        conditional=conditional,
+        upper=True,
+        level=level,
     )

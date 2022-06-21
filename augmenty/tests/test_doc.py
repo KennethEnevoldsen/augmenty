@@ -1,8 +1,8 @@
-import augmenty
-
 from spacy.tokens import Span
 
-from .fixtures import nlp_en
+import augmenty
+
+from .fixtures import nlp_en  # noqa
 
 
 def test_create_spongebob_augmenter(nlp_en):
@@ -35,14 +35,16 @@ def test_paragraph_subset_augmenter(nlp_en):
             Span(doc, 3, 5, label="person"),
             Span(doc, 6, 7, label="ORG"),
             Span(doc, 21, 22, label="ORG"),
-        ]
+        ],
     )
 
     for t in doc:
         t.is_sent_start = True if t.text == "." else False
 
     p_subset_aug = augmenty.load(
-        "paragraph_subset_augmenter.v1", min_paragraph=1, max_paragraph=1.00
+        "paragraph_subset_augmenter.v1",
+        min_paragraph=1,
+        max_paragraph=1.00,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
     assert aug_docs[0].text
@@ -54,14 +56,18 @@ def test_paragraph_subset_augmenter(nlp_en):
 
     # full length
     p_subset_aug = augmenty.load(
-        "paragraph_subset_augmenter.v1", min_paragraph=1.0, max_paragraph=1.0
+        "paragraph_subset_augmenter.v1",
+        min_paragraph=1.0,
+        max_paragraph=1.0,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
     assert aug_docs[0].text == text
 
     # zero length
     p_subset_aug = augmenty.load(
-        "paragraph_subset_augmenter.v1", min_paragraph=0.0, max_paragraph=0.0
+        "paragraph_subset_augmenter.v1",
+        min_paragraph=0.0,
+        max_paragraph=0.0,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
     assert aug_docs[0].text == ""

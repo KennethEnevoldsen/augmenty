@@ -1,6 +1,6 @@
 import random
 from functools import partial
-from typing import Iterator, Callable
+from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
@@ -34,7 +34,9 @@ def create_random_casing_augmenter_v1(
 
 
 def random_casing_augmenter_v1(
-    nlp: Language, example: Example, level: float
+    nlp: Language,
+    example: Example,
+    level: float,
 ) -> Iterator[Example]:
     def __casing(c):
         if random.random() < level:

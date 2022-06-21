@@ -1,4 +1,5 @@
 """
+A small streamlit demo
 
 pip install streamlit
 pip install st-annotated-text
@@ -6,24 +7,21 @@ pip install st-annotated-text
 streamlit run demo/streamlit.py
 """
 
-import spacy
 import json
-import sys
+import random
 
-sys.path.append(".")
-sys.path.append("..")
-
-import augmenty
+import spacy
 import streamlit as st
 from annotated_text import annotated_text
 
-import random
+import augmenty
 
 random.seed(1)
 
 st.title("Augmentation using 🍒 Augmenty")
 st.markdown(
-    "Not all augmenters are included as some require external sources. This demo uses the SpaCy model `en_core_web_md` for tagging and named entity recognition."
+    "Not all augmenters are included as some require external sources. This demo uses"
+    + " the SpaCy model `en_core_web_md` for tagging and named entity recognition.",
 )
 
 not_relevant = {
@@ -35,10 +33,13 @@ not_relevant = {
     "wordnet_synonym.v1",
 }
 augmenters = augmenty.augmenters()
-augmenter_list = sorted([a for a in augmenters if a not in not_relevant])
+augmenter_list = sorted(a for a in augmenters if a not in not_relevant)
 nlp = spacy.load("en_core_web_md")
 
-default = "Write the text you wish augmented here! it could for example include names such as Sara."
+default = (
+    "Write the text you wish augmented here! it could for example include names"
+    + " such as Sara."
+)
 example = st.text_area("Example:", default)
 
 st.markdown("## Choose your augmenter\n --------")
@@ -60,7 +61,8 @@ if augmenter == "per_replace.v1":
         '{"firstname": ["Charles", "Jens"], "lastname": ["Kirkegaard", "Andersen"]}',
     )
     st.markdown(
-        'Sampling names using `pattern=[["firstname"], ["firstname", "lastname"], ["firstname", "lastname", "lastname"]].`'
+        'Sampling names using `pattern=[["firstname"], ["firstname", "lastname"],'
+        + ' ["firstname", "lastname", "lastname"]].`',
     )
     names = json.loads(json_)
     aug = augmenty.load(
@@ -76,7 +78,8 @@ if augmenter == "per_replace.v1":
 elif augmenter == "ents_replace.v1":
     json_ = st.text_input(
         "replace dict:",
-        '{"ORG": [["Google"], ["Apple"]], "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}',
+        '{"ORG": [["Google"], ["Apple"]],'
+        + ' "PERSON": [["Kenneth"], ["Lasse", "Hansen"]]}',
     )
     ent_dict = json.loads(json_)
     aug = augmenty.load(augmenter, ent_dict=ent_dict, level=level)

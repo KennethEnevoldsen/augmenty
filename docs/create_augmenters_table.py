@@ -1,15 +1,10 @@
-import sys
-
-sys.path.append(".")
-sys.path.append("..")
-
 import os
-
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from wasabi import MarkdownRenderer
 
 import augmenty
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 md = MarkdownRenderer()
 meta = augmenty.meta()
@@ -46,23 +41,27 @@ for aug, f in sorted(augmenty.augmenters().items()):
             for ref_dict in r:
                 ref = f"{ref}: "
                 ref += md.link(
-                    f"{ref_dict['authors']} ({ref_dict['year']})", ref_dict["link"]
+                    f"{ref_dict['authors']} ({ref_dict['year']})",
+                    ref_dict["link"],
                 )
                 aug_refs_strings.append(ref)
 
     # Augmenter name, description, respects, references
     table_list.append(
-        (md.bold(aug), desc, *respects_, *use_, ", ".join(aug_refs_strings))
+        (md.bold(aug), desc, *respects_, *use_, ", ".join(aug_refs_strings)),
     )
 
 
 md.add(md.title(1, "Overview of Augmenters"))
 md.add(
-    "The following tables list all the available augmenters in augmenty, along with a short description. \
-It also contains list all of the labels which the augmenters respects. For instance, if you wish to train a named \
-entity recognition pipeline you should not use augmenters which do not respect entity labels. \
-Similarly, a hint is also given to whether the augmenter is recommended for training or evaluation. Lastly, \
-the package includes a list of references to any data or packages used as well as references to example application of the augmenter in practice."
+    "The following tables list all the available augmenters in augmenty, along with a "
+    + "short description. It also contains list all of the labels which the augmenters"
+    + "respects. For instance, if you wish to train a named entity recognition pipeline"
+    + " you should not use augmenters which do not respect entity labels. Similarly, a"
+    + " hint is also given to whether the augmenter is recommended for training or "
+    + "evaluation. Lastly, the package includes a list of references to any data or "
+    + "packages used as well as references to example application of the augmenter in "
+    "practice.",
 )
 
 table = md.table(

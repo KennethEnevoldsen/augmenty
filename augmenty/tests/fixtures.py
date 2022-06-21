@@ -1,11 +1,10 @@
 import pytest
-
 import spacy
+from dacy.datasets import dane
 from spacy.training import Example
 
-from dacy.datasets import dane
-
 from .books import BOOKS
+
 
 # pipelines
 @pytest.fixture()

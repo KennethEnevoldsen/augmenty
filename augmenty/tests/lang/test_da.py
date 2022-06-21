@@ -1,12 +1,12 @@
-from augmenty.lang.da import create_da_æøå_replace_augmenter_v1
-from augmenty.lang.da import create_da_historical_noun_casing_augmenter_v1
-
-import augmenty
-
+import pytest
 from spacy.lang.da import Danish
 from spacy.tokens import Doc
 
-import pytest
+import augmenty
+from augmenty.lang.da import (
+    create_da_historical_noun_casing_augmenter_v1,
+    create_da_æøå_replace_augmenter_v1,
+)
 
 
 @pytest.fixture()

@@ -50,7 +50,8 @@ def create_char_random_augmenter_v1(
 
 @spacy.registry.augmenters("char_replace.v1")
 def create_char_replace_augmenter_v1(
-    level: float, replace: dict
+    level: float,
+    replace: dict,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that replaces a character with a random character from
     replace dict

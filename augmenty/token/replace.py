@@ -1,15 +1,15 @@
 import random
 from functools import partial
-from typing import Dict, Iterator, Callable, List, Optional, Union
+from typing import Callable, Dict, Iterator, List, Optional, Union
 
 import spacy
 from spacy.language import Language
-from spacy.training import Example
 from spacy.tokens import Token
+from spacy.training import Example
 
 from ..augment_utilities import make_text_from_orth
-from .wordnet_util import init_wordnet
 from .static_embedding_util import static_embedding
+from .wordnet_util import init_wordnet
 
 
 @spacy.registry.augmenters("token_dict_replace.v1")
@@ -124,8 +124,8 @@ def create_wordnet_synonym_augmenter_v1(
     """
     init_wordnet()
     from nltk.corpus import wordnet
-    from .wordnet_util import upos_wn_dict
-    from .wordnet_util import lang_wn_dict
+
+    from .wordnet_util import lang_wn_dict, upos_wn_dict
 
     def wordnet_synonym_augmenter_v1(
         nlp: Language,
@@ -233,7 +233,9 @@ def create_token_replace_augmenter_v1(
         >>> aug = create_token_replace_augmenter(replace=remove_vowels, level=.10)
     """
     return partial(
-        token_replace_augmenter_v1, replace=replace, keep_titlecase=keep_titlecase
+        token_replace_augmenter_v1,
+        replace=replace,
+        keep_titlecase=keep_titlecase,
     )
 
 
@@ -268,7 +270,10 @@ def create_word_embedding_augmenter_v1(
     """
 
     def replace(
-        t: Token, n: int, ignore_casing: bool, embedding: static_embedding
+        t: Token,
+        n: int,
+        ignore_casing: bool,
+        embedding: static_embedding,
     ) -> str:
         if embedding.vocab is None:
             embedding.update_from_vocab(t.doc.vocab)
@@ -277,7 +282,7 @@ def create_word_embedding_augmenter_v1(
                 "Vectors are empty. Typically this is due to using a transformer-based "
                 + "or small spaCy model. Specify nlp for the "
                 + "create_word_embedding_augmenter to a spaCy pipeline with static word"
-                + " embedding to avoid this issue."
+                + " embedding to avoid this issue.",
             )
         if t.text in embedding:
             rep = embedding.most_similar(t.text, n=n + 2)

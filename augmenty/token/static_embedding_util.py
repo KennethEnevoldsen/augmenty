@@ -1,9 +1,8 @@
 from typing import List, Optional
 
-from spacy.vocab import Vocab
-
-from pydantic import BaseModel
 import numpy as np
+from pydantic import BaseModel
+from spacy.vocab import Vocab
 
 
 class static_embedding(BaseModel):
