@@ -7,7 +7,7 @@ repos:
       - id: isort
         name: isort (python)
         args: ["--profile", "black", "--filter-files"]
-  
+
   - repo: https://github.com/asottile/add-trailing-comma
     rev: v2.2.3
     hooks:
