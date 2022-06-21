@@ -1,8 +1,8 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
 <meta property="og:title" content="FAQ" />
   
@@ -13,10 +13,10 @@
 <meta property="og:description" content="How do I test the code and run the test suite?: Augmenty comes with an extensive test suite. To run the tests, you should clone the repository, then build augmenty from the source. This will also i..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Overview of Augmenters" href="augmenters_overview.html" /><link rel="prev" title="Creating and Contributing Augmenters" href="adding_an_augmenter.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>FAQ - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -215,7 +215,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -230,9 +231,9 @@
         </div>
         <article role="main">
           <section id="faq">
-<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">#</a></h1>
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this heading">#</a></h1>
 <section id="how-do-i-test-the-code-and-run-the-test-suite">
-<h2>How do I test the code and run the test suite?<a class="headerlink" href="#how-do-i-test-the-code-and-run-the-test-suite" title="Permalink to this headline">#</a></h2>
+<h2>How do I test the code and run the test suite?<a class="headerlink" href="#how-do-i-test-the-code-and-run-the-test-suite" title="Permalink to this heading">#</a></h2>
 <p>Augmenty comes with an extensive test suite. To run the tests, you should clone the repository, then build augmenty from the source.
 This will also install the required development dependencies and test utilities defined in the requirements.txt.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
@@ -254,14 +255,14 @@ This will also install the required development dependencies and test utilities 
 </div>
 </section>
 <section id="does-augmenty-run-on-x">
-<h2>Does augmenty run on X?<a class="headerlink" href="#does-augmenty-run-on-x" title="Permalink to this headline">#</a></h2>
+<h2>Does augmenty run on X?<a class="headerlink" href="#does-augmenty-run-on-x" title="Permalink to this heading">#</a></h2>
 <p>Augmenty is intended to run on all major OS, this includes Windows (latest version), MacOS (Catalina) and the latest version of Linux (Ubuntu).
 Similarly it also tested on python 3.7, 3.8, and 3.9.
 Please note these are only the systems augmenty is being actively tested on, if you run on a similar system (e.g. an earlier version of Linux) augmenty
 will likely run there as well, if not please create an issue.</p>
 </section>
 <section id="how-is-the-documentation-generated">
-<h2>How is the documentation generated?<a class="headerlink" href="#how-is-the-documentation-generated" title="Permalink to this headline">#</a></h2>
+<h2>How is the documentation generated?<a class="headerlink" href="#how-is-the-documentation-generated" title="Permalink to this heading">#</a></h2>
 <p>Augmenty uses <a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">sphinx</a> to generate documentation. It uses the <a class="reference external" href="https://github.com/pradyunsg/furo">Furo</a> theme with custom styling.</p>
 <p>To make the documentation you can run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># install sphinx, themes and extensions</span>
@@ -274,18 +275,18 @@ will likely run there as well, if not please create an issue.</p>
 </div>
 </section>
 <section id="many-of-these-augmenters-are-completely-useless-for-training">
-<h2>Many of these augmenters are completely useless for training?<a class="headerlink" href="#many-of-these-augmenters-are-completely-useless-for-training" title="Permalink to this headline">#</a></h2>
+<h2>Many of these augmenters are completely useless for training?<a class="headerlink" href="#many-of-these-augmenters-are-completely-useless-for-training" title="Permalink to this heading">#</a></h2>
 <p>That is true, some of the augmenters are rarely something you would augment with during training. For instance, randomly adding or removing spacing.
 However, augmentation can also be used to test whether a model is robust to certain variations.</p>
 </section>
 <section id="can-i-use-augmenty-without-using-spacy">
-<h2>Can I use augmenty without using spaCy?<a class="headerlink" href="#can-i-use-augmenty-without-using-spacy" title="Permalink to this headline">#</a></h2>
+<h2>Can I use augmenty without using spaCy?<a class="headerlink" href="#can-i-use-augmenty-without-using-spacy" title="Permalink to this heading">#</a></h2>
 <p>Indeed augmenty contains convenience functions for applying augmentation directly to raw texts.
 Check out the <a class="reference external" href="https://kennethenevoldsen.github.io/augmenty/introduction.html">getting started guide</a> to learn how.
 However, augmenty still used spaCy in the background for this task.</p>
 </section>
 <section id="how-do-i-cite-this-work">
-<h2>How do I cite this work?<a class="headerlink" href="#how-do-i-cite-this-work" title="Permalink to this headline">#</a></h2>
+<h2>How do I cite this work?<a class="headerlink" href="#how-do-i-cite-this-work" title="Permalink to this heading">#</a></h2>
 <p>If you use this library in your research, it would be much appreciated it if you would cite:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="n">augmenty2021</span><span class="p">,</span>
    <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">Augmenty</span><span class="p">,</span> <span class="n">the</span> <span class="n">cherry</span> <span class="n">on</span> <span class="n">top</span> <span class="n">of</span> <span class="n">your</span> <span class="n">NLP</span> <span class="n">pipeline</span><span class="p">},</span>
@@ -375,6 +376,7 @@ However, augmenty still used spaCy in the background for this task.</p>
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>

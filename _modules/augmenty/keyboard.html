@@ -1,13 +1,13 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>augmenty.keyboard - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -206,7 +206,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -221,9 +222,9 @@
         </div>
         <article role="main">
           <h1>Source code for augmenty.keyboard</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Function for defining and handling keyboard layouts.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -232,54 +233,54 @@
 
 
 <div class="viewcode-block" id="Keyboard"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard">[docs]</a><span class="k">class</span> <span class="nc">Keyboard</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="sd">"""A Pydantic dataclass object for constructing Keyboard setup.</span>
+    <span class="sd">&quot;&quot;&quot;A Pydantic dataclass object for constructing Keyboard setup.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        keyboard_array (Dict[str, str]): An array corresponding to a keyboard.</span>
-<span class="sd">            This should include two keys a "default" and a "shift". Each containing</span>
+<span class="sd">            This should include two keys a &quot;default&quot; and a &quot;shift&quot;. Each containing</span>
 <span class="sd">            an array of non-shifted and shifted keys respectively.</span>
 <span class="sd">        shift_distance (int): The distance given by the shift operator. Defaults to 3.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Keyboard: a Keyboard object</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">keyboard_array</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span>
     <span class="n">shift_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
 
 <div class="viewcode-block" id="Keyboard.coordinate"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.coordinate">[docs]</a>    <span class="k">def</span> <span class="nf">coordinate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-        <span class="sd">"""get coordinate for key</span>
+        <span class="sd">&quot;&quot;&quot;get coordinate for key</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (str): keyboard key</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple[int, int]: key coordinate on keyboard</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">]):</span>
                 <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
                         <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> was not found in keyboard array"</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> was not found in keyboard array&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Keyboard.is_shifted"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.is_shifted">[docs]</a>    <span class="k">def</span> <span class="nf">is_shifted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">"""is the key shifted?</span>
+        <span class="sd">&quot;&quot;&quot;is the key shifted?</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (str): keyboard key</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: a boolean indicating whether key is shifted.</span>
-<span class="sd">        """</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="s2">"shift"</span><span class="p">]:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="s2">&quot;shift&quot;</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Keyboard.euclidian_distance"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.euclidian_distance">[docs]</a>    <span class="k">def</span> <span class="nf">euclidian_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key_b</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">"""Returns euclidian distance between two keys</span>
+        <span class="sd">&quot;&quot;&quot;Returns euclidian distance between two keys</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key_a (str): keyboard key</span>
@@ -287,7 +288,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            int: The euclidian distance between two keyboard keys.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate</span><span class="p">(</span><span class="n">key_a</span><span class="p">)</span>
         <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate</span><span class="p">(</span><span class="n">key_b</span><span class="p">)</span>
 
@@ -300,18 +301,18 @@
         <span class="k">return</span> <span class="p">((</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">shift_cost</span></div>
 
 <div class="viewcode-block" id="Keyboard.all_keys"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.all_keys">[docs]</a>    <span class="k">def</span> <span class="nf">all_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">"""yields all keys in keyboard.</span>
+        <span class="sd">&quot;&quot;&quot;yields all keys in keyboard.</span>
 
 <span class="sd">        Yields:</span>
 <span class="sd">            all keys in keyboard.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">]):</span>
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">][</span><span class="n">x</span><span class="p">]:</span>
                     <span class="k">yield</span> <span class="n">k</span></div>
 
 <div class="viewcode-block" id="Keyboard.get_neighbours"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.get_neighbours">[docs]</a>    <span class="k">def</span> <span class="nf">get_neighbours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="sd">"""gets the neighbours of a key with a specified distance.</span>
+        <span class="sd">&quot;&quot;&quot;gets the neighbours of a key with a specified distance.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (str): A keyboard key</span>
@@ -320,7 +321,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Set[int]: The neighbours of a key with a specified distance.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_keys</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
@@ -333,8 +334,8 @@
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_neighbours</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_keys</span><span class="p">()}</span></div>
 
 <div class="viewcode-block" id="Keyboard.from_registry"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.from_registry">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_registry</span><span class="p">(</span><span class="n">entry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">shift_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Keyboard"</span><span class="p">:</span>
-        <span class="sd">"""Creates a keyboard from a registry"""</span>
+    <span class="k">def</span> <span class="nf">from_registry</span><span class="p">(</span><span class="n">entry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">shift_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Keyboard&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a keyboard from a registry&quot;&quot;&quot;</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">keyboards</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entry</span><span class="p">)()</span>
         <span class="k">return</span> <span class="n">Keyboard</span><span class="p">(</span><span class="n">keyboard_array</span><span class="o">=</span><span class="n">array</span><span class="p">,</span> <span class="n">shift_distance</span><span class="o">=</span><span class="n">shift_distance</span><span class="p">)</span></div></div>
 </pre></div>
@@ -374,6 +375,7 @@
 </div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/furo.js"></script>
     <script src="../../_static/clipboard.min.js"></script>

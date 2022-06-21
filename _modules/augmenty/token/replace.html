@@ -1,13 +1,13 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>augmenty.token.replace - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -206,7 +206,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -235,7 +236,7 @@
 <span class="kn">from</span> <span class="nn">.static_embedding_util</span> <span class="kn">import</span> <span class="n">static_embedding</span>
 
 
-<div class="viewcode-block" id="create_token__dict_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token__dict_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"token_dict_replace.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_token__dict_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token__dict_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;token_dict_replace.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_token__dict_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">replace</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]],</span>
@@ -243,7 +244,7 @@
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
+    <span class="sd">&quot;&quot;&quot;Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
@@ -262,12 +263,12 @@
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; replace = {"act": ["perform", "move", "action"], }</span>
+<span class="sd">        &gt;&gt;&gt; replace = {&quot;act&quot;: [&quot;perform&quot;, &quot;move&quot;, &quot;action&quot;], }</span>
 <span class="sd">        &gt;&gt;&gt; create_token_dict_replace_augmenter(replace=replace, level=.10)</span>
 <span class="sd">        &gt;&gt;&gt; # or</span>
-<span class="sd">        &gt;&gt;&gt; replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}</span>
+<span class="sd">        &gt;&gt;&gt; replace = {&quot;act&quot;: {&quot;VERB&quot;: [&quot;perform&quot;, &quot;move&quot;], &quot;NOUN&quot;: [&quot;action&quot;, &quot;deed&quot;]}}</span>
 <span class="sd">        &gt;&gt;&gt; create_token_dict_replace_augmenter(replace=replace, level=.10)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
             <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
@@ -308,13 +309,13 @@
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span><span class="p">]</span>
+    <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;ORTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span><span class="p">]</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
     <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_wordnet_synonym_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_wordnet_synonym_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"wordnet_synonym.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_wordnet_synonym_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_wordnet_synonym_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;wordnet_synonym.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_wordnet_synonym_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -322,14 +323,14 @@
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
+    <span class="sd">&quot;&quot;&quot;Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        lang (Optional[str], optional): Language supplied a ISO 639-1 language code.</span>
 <span class="sd">            Defaults to None, in which case the lang is based on the language of the</span>
 <span class="sd">            spacy nlp pipeline used. Possible language codes include:</span>
-<span class="sd">            "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja",</span>
-<span class="sd">            "nn", "no", "pl", "pt", "es", "th".</span>
+<span class="sd">            &quot;da&quot;, &quot;ca&quot;, &quot;en&quot;, &quot;eu&quot;, &quot;fa&quot;, &quot;fi&quot;, &quot;fr&quot;, &quot;gl&quot;, &quot;he&quot;, &quot;id&quot;, &quot;it&quot;, &quot;ja&quot;,</span>
+<span class="sd">            &quot;nn&quot;, &quot;no&quot;, &quot;pl&quot;, &quot;pt&quot;, &quot;es&quot;, &quot;th&quot;.</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
 <span class="sd">            dictionary.</span>
 <span class="sd">        respect_pos (bool, optional): Should POS-tag be respected? Defaults to True.</span>
@@ -343,8 +344,8 @@
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1,</span>
-<span class="sd">        &gt;&gt;&gt;                                                              lang="en")</span>
-<span class="sd">    """</span>
+<span class="sd">        &gt;&gt;&gt;                                                              lang=&quot;en&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">init_wordnet</span><span class="p">()</span>
     <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
     <span class="kn">from</span> <span class="nn">.wordnet_util</span> <span class="kn">import</span> <span class="n">upos_wn_dict</span>
@@ -384,7 +385,7 @@
             <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
         <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-        <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;ORTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span>
         <span class="p">]</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
@@ -422,7 +423,7 @@
         <span class="n">__replace</span> <span class="o">=</span> <span class="n">replace</span>
 
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;ORTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="k">else</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span>
     <span class="p">]</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
@@ -430,12 +431,12 @@
     <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_token_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"token_replace.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_token_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_token_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;token_replace.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_token_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">replace</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter which replaces a token based on a replace function.</span>
+    <span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
@@ -450,17 +451,17 @@
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; def remove_vowels(token):</span>
-<span class="sd">        ...    vowels = ['a','e','i','o','u', 'y']</span>
+<span class="sd">        ...    vowels = [&#39;a&#39;,&#39;e&#39;,&#39;i&#39;,&#39;o&#39;,&#39;u&#39;, &#39;y&#39;]</span>
 <span class="sd">        ...    non_vowels = [c for c in token.text if c.lower() not in vowels]</span>
-<span class="sd">        ...    return ''.join(non_vowels)</span>
+<span class="sd">        ...    return &#39;&#39;.join(non_vowels)</span>
 <span class="sd">        &gt;&gt;&gt; aug = create_token_replace_augmenter(replace=remove_vowels, level=.10)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">token_replace_augmenter_v1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span> <span class="n">keep_titlecase</span><span class="o">=</span><span class="n">keep_titlecase</span>
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="create_word_embedding_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_word_embedding_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"word_embedding.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_word_embedding_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.replace.create_word_embedding_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;word_embedding.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_word_embedding_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
@@ -468,14 +469,14 @@
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter which replaces a token based on a replace function.</span>
+    <span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
 <span class="sd">            dictionary.</span>
 <span class="sd">        n (int, optional): Number of most similar word vectors to sample from nlp</span>
 <span class="sd">            (Optional[Language], optional): A spaCy text-processing pipeline used for</span>
-<span class="sd">            supplying the word vectors if the nlp model supplies doesn't contain word</span>
+<span class="sd">            supplying the word vectors if the nlp model supplies doesn&#39;t contain word</span>
 <span class="sd">            vectors.</span>
 <span class="sd">        keep_titlecase (bool, optional): If original text was uppercased cased should</span>
 <span class="sd">            replaces text also be? Defaults to True.</span>
@@ -487,8 +488,8 @@
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; nlp = spacy.load('en_core_web_lg')</span>
-<span class="sd">    """</span>
+<span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&#39;en_core_web_lg&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span>
         <span class="n">t</span><span class="p">:</span> <span class="n">Token</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">embedding</span><span class="p">:</span> <span class="n">static_embedding</span>
@@ -497,10 +498,10 @@
             <span class="n">embedding</span><span class="o">.</span><span class="n">update_from_vocab</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">embedding</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">"Vectors are empty. Typically this is due to using a transformer-based "</span>
-                <span class="o">+</span> <span class="s2">"or small spaCy model. Specify nlp for the "</span>
-                <span class="o">+</span> <span class="s2">"create_word_embedding_augmenter to a spaCy pipeline with static word"</span>
-                <span class="o">+</span> <span class="s2">" embedding to avoid this issue."</span>
+                <span class="s2">&quot;Vectors are empty. Typically this is due to using a transformer-based &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;or small spaCy model. Specify nlp for the &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;create_word_embedding_augmenter to a spaCy pipeline with static word&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; embedding to avoid this issue.&quot;</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="ow">in</span> <span class="n">embedding</span><span class="p">:</span>
             <span class="n">rep</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
@@ -558,6 +559,7 @@
 </div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>

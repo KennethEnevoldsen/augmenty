@@ -1,13 +1,13 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>augmenty.token.spacing - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -206,7 +206,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -232,11 +233,11 @@
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 
 
-<div class="viewcode-block" id="create_letter_spacing_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.spacing.create_letter_spacing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"letter_spacing_augmenter.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_letter_spacing_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.spacing.create_letter_spacing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;letter_spacing_augmenter.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_letter_spacing_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Typically casing is used to add emphasis to words, but letter spacing has also</span>
+    <span class="sd">&quot;&quot;&quot;Typically casing is used to add emphasis to words, but letter spacing has also</span>
 <span class="sd">    been used to add e m p h a s i s  to words (e.g. by Grundtvig; Baunvig, Jarvis and</span>
 <span class="sd">    Nielbo, 2020). This augmenter randomly adds letter spacing emphasis to words. This</span>
 <span class="sd">    augmentation which are human readable, but which are clearly challenging for</span>
@@ -247,7 +248,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">letter_spacing_augmenter_v1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 
 
@@ -258,22 +259,22 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="k">def</span> <span class="nf">__spacing</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">])</span>
+            <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__spacing</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
+    <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;ORTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__spacing</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
     <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_spacing_insertion_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.spacing.create_spacing_insertion_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"spacing_insertion.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_spacing_insertion_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.spacing.create_spacing_insertion_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;spacing_insertion.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_spacing_insertion_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">max_insertions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates and augmneter that randomly adds a space after a chara cter. Tokens are</span>
+    <span class="sd">&quot;&quot;&quot;Creates and augmneter that randomly adds a space after a chara cter. Tokens are</span>
 <span class="sd">    kept the same.</span>
 
 <span class="sd">    Args:</span>
@@ -282,7 +283,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">spacing_insertion_augmenter_v1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">max_insertions</span><span class="o">=</span><span class="n">max_insertions</span>
     <span class="p">)</span></div>
@@ -294,16 +295,16 @@
     <span class="k">def</span> <span class="nf">__spacing</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="n">insertions</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">text</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># can't put a space at the end</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># can&#39;t put a space at the end</span>
             <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="n">insertions</span> <span class="o">&lt;</span> <span class="n">max_insertions</span><span class="p">:</span>
                 <span class="n">insertions</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+                <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
         <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__spacing</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
+    <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;ORTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">__spacing</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
     <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
@@ -344,6 +345,7 @@
 </div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>

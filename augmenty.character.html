@@ -1,8 +1,8 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
 <meta property="og:title" content="Character-based" />
   
@@ -13,10 +13,10 @@
 <meta property="og:description" content="augmenty.character.casing: augmenty.character.replace: Augmenters for randomly or semi-randomly replacing characters augmenty.character.spacing: Augmenters for modyfing spacing augmenty.character.s..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Token-based" href="augmenty.token.html" /><link rel="prev" title="Overview of Augmenters" href="augmenters_overview.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>Character-based - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -215,7 +215,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -230,46 +231,47 @@
         </div>
         <article role="main">
           <section id="character-based">
-<h1>Character-based<a class="headerlink" href="#character-based" title="Permalink to this headline">#</a></h1>
+<h1>Character-based<a class="headerlink" href="#character-based" title="Permalink to this heading">#</a></h1>
 <section id="module-augmenty.character.casing">
-<span id="augmenty-character-casing"></span><h2>augmenty.character.casing<a class="headerlink" href="#module-augmenty.character.casing" title="Permalink to this headline">#</a></h2>
+<span id="augmenty-character-casing"></span><h2>augmenty.character.casing<a class="headerlink" href="#module-augmenty.character.casing" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.casing.create_random_casing_augmenter_v1">
-<span class="sig-prename descclassname"><span class="pre">augmenty.character.casing.</span></span><span class="sig-name descname"><span class="pre">create_random_casing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/casing.html#create_random_casing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.casing.create_random_casing_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.character.casing.</span></span><span class="sig-name descname"><span class="pre">create_random_casing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/casing.html#create_random_casing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.casing.create_random_casing_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Create an augment that randomly changes the casing of the document.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The percentage of character that will have its casing changed.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">"en"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">random_casing_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"random_casing.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random_casing_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;random_casing.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A sample text&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">random_casing_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A saMple texT"]</span>
+<span class="go">[&quot;A saMple texT&quot;]</span>
 </pre></div>
 </div>
 </dd></dl>
+
 </section>
 <section id="module-augmenty.character.replace">
-<span id="augmenty-character-replace"></span><h2>augmenty.character.replace<a class="headerlink" href="#module-augmenty.character.replace" title="Permalink to this headline">#</a></h2>
+<span id="augmenty-character-replace"></span><h2>augmenty.character.replace<a class="headerlink" href="#module-augmenty.character.replace" title="Permalink to this heading">#</a></h2>
 <p>Augmenters for randomly or semi-randomly replacing characters</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.replace.create_char_random_augmenter_v1">
-<span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_char_random_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyboard</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'en_qwerty.v1'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_char_random_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_char_random_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_char_random_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyboard</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'en_qwerty.v1'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_char_random_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_char_random_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that replaces a character with a random character from the
 keyboard.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> (<em>float</em>) – The probability to replace a character with a neightbouring
 character.</p></li>
@@ -278,10 +280,10 @@ list of all keyboard you can run <cite>augmenty,keyboards()</cite>. Defaults
 to “en_qwerty.v1”.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter function.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
@@ -289,46 +291,48 @@ to “en_qwerty.v1”.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="kn">import</span> <span class="n">English</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">char_random_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"char_replace_random.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">char_random_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;char_replace_random.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A sample text&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">char_random_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A sabple tex3"]</span>
+<span class="go">[&quot;A sabple tex3&quot;]</span>
 </pre></div>
 </div>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.replace.create_char_replace_augmenter_v1">
-<span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_char_replace_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_char_replace_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_char_replace_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_char_replace_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_char_replace_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_char_replace_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that replaces a character with a random character from
 replace dict</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> (<em>float</em>) – probability to augment character, if document is augmented.</p></li>
 <li><p><strong>replace</strong> (<em>dict</em>) – A dictionary denoting which characters denote potentials
 replace for each character.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter function.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_char_replace_augmenter_v1</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                 <span class="n">replace</span><span class="o">=</span><span class="p">{</span><span class="s2">"æ"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"ae"</span><span class="p">],</span> <span class="s2">"ß"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"ss"</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span>                                 <span class="n">replace</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;æ&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ae&quot;</span><span class="p">],</span> <span class="s2">&quot;ß&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ss&quot;</span><span class="p">]})</span>
 </pre></div>
 </div>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.replace.create_keystroke_error_augmenter_v1">
-<span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_keystroke_error_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyboard</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'en_qwerty.v1'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_keystroke_error_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_keystroke_error_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_keystroke_error_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyboard</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'en_qwerty.v1'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_keystroke_error_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_keystroke_error_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates a augmenter which augments a text with plausible typos based on keyboard
 distance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> (<em>float</em>) – The probability to replace a character with a neightbouring
 character.</p></li>
@@ -339,10 +343,10 @@ list of all keyboard you can run <cite>augmenty,keyboards.get_all()</cite>. Defa
 to “en_qwerty.v1”.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmentation function</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
@@ -350,62 +354,64 @@ to “en_qwerty.v1”.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="kn">import</span> <span class="n">English</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">keystroke_error_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"keystroke_error.v1"</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keystroke_error_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;keystroke_error.v1&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                                          <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                          <span class="n">keyboard</span><span class="o">=</span><span class="s2">"en_qwerty.v1"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>                                          <span class="n">keyboard</span><span class="o">=</span><span class="s2">&quot;en_qwerty.v1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A sample text&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">keystroke_error_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A sajple texr"]</span>
+<span class="go">[&quot;A sajple texr&quot;]</span>
 </pre></div>
 </div>
 </dd></dl>
+
 </section>
 <section id="module-augmenty.character.spacing">
-<span id="augmenty-character-spacing"></span><h2>augmenty.character.spacing<a class="headerlink" href="#module-augmenty.character.spacing" title="Permalink to this headline">#</a></h2>
+<span id="augmenty-character-spacing"></span><h2>augmenty.character.spacing<a class="headerlink" href="#module-augmenty.character.spacing" title="Permalink to this heading">#</a></h2>
 <p>Augmenters for modyfing spacing</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.spacing.create_remove_spacing_augmenter_v1">
-<span class="sig-prename descclassname"><span class="pre">augmenty.character.spacing.</span></span><span class="sig-name descname"><span class="pre">create_remove_spacing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/spacing.html#create_remove_spacing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.spacing.create_remove_spacing_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.character.spacing.</span></span><span class="sig-name descname"><span class="pre">create_remove_spacing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/spacing.html#create_remove_spacing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.spacing.create_remove_spacing_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that removes spacing with a given probability.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The probability to remove a space.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">spacy</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">"en"</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_spacing_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"remove_spacing.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_spacing_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;remove_spacing.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A sample text&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">remove_spacing_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A sampletext"]</span>
+<span class="go">[&quot;A sampletext&quot;]</span>
 </pre></div>
 </div>
 </dd></dl>
+
 </section>
 <section id="module-augmenty.character.swap">
-<span id="augmenty-character-swap"></span><h2>augmenty.character.swap<a class="headerlink" href="#module-augmenty.character.swap" title="Permalink to this headline">#</a></h2>
+<span id="augmenty-character-swap"></span><h2>augmenty.character.swap<a class="headerlink" href="#module-augmenty.character.swap" title="Permalink to this heading">#</a></h2>
 <p>Augmenters for swapping characters</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.swap.create_char_swap_augmenter_v1">
-<span class="sig-prename descclassname"><span class="pre">augmenty.character.swap.</span></span><span class="sig-name descname"><span class="pre">create_char_swap_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.language.Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">spacy.training.example.Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/swap.html#create_char_swap_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.swap.create_char_swap_augmenter_v1" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.character.swap.</span></span><span class="sig-name descname"><span class="pre">create_char_swap_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/swap.html#create_char_swap_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.swap.create_char_swap_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that swaps two neighbouring characters in a token with a
 given probability.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – probability to replace a character.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
@@ -413,13 +419,14 @@ given probability.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">augmenty</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="kn">import</span> <span class="n">English</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">char_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"char_swap.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A sample text"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">char_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;char_swap.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A sample text&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">char_swap_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">))</span>
-<span class="go">["A smaple txet"]</span>
+<span class="go">[&quot;A smaple txet&quot;]</span>
 </pre></div>
 </div>
 </dd></dl>
+
 </section>
 </section>
 
@@ -499,6 +506,7 @@ given probability.</p>
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>

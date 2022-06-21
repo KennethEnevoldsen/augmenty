@@ -1,8 +1,8 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
 <meta property="og:title" content="Creating and Contributing Augmenters" />
   
@@ -13,10 +13,10 @@
 <meta property="og:description" content="After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter per_replace.v1, which rep..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="FAQ" href="faq.html" /><link rel="prev" title="News and Changelog" href="news.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>Creating and Contributing Augmenters - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -215,7 +215,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -230,7 +231,7 @@
         </div>
         <article role="main">
           <section id="creating-and-contributing-augmenters">
-<h1>Creating and Contributing Augmenters<a class="headerlink" href="#creating-and-contributing-augmenters" title="Permalink to this headline">#</a></h1>
+<h1>Creating and Contributing Augmenters<a class="headerlink" href="#creating-and-contributing-augmenters" title="Permalink to this heading">#</a></h1>
 <p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter <code class="code docutils literal notranslate"><span class="pre">per_replace.v1</span></code>,
 which replaces names in a text is a special case of the augmenter <code class="code docutils literal notranslate"><span class="pre">ents_replace.v1</span></code> with better handling of first and last names.
 If you want to create an augmenter from scratch following spaCy’s guide on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well.
@@ -241,7 +242,7 @@ If you find yourself in trouble feel free to ask in the augmenty <a class="refer
 <li><p>Add the augmenter.</p></li>
 <li><p>Add a create function for the augmenter.</p>
 <ul>
-<li><p>You should also add this to the spacy augmenters registry. You can do this easily using the decorator <code class="code docutils literal notranslate"><span class="pre">@spacy.registry.augmenters("name_of_your_augmenter.v1")</span></code>. This allows the function to be fetchable using <code class="code docutils literal notranslate"><span class="pre">augmenty.load</span></code>.</p></li>
+<li><p>You should also add this to the spacy augmenters registry. You can do this easily using the decorator <code class="code docutils literal notranslate"><span class="pre">&#64;spacy.registry.augmenters(&quot;name_of_your_augmenter.v1&quot;)</span></code>. This allows the function to be fetchable using <code class="code docutils literal notranslate"><span class="pre">augmenty.load</span></code>.</p></li>
 <li><p>This is also the function that should contain the documentation. Which we recommend includes at least one example of usage.</p></li>
 </ul>
 </li>
@@ -310,6 +311,7 @@ If you find yourself in trouble feel free to ask in the augmenty <a class="refer
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>

@@ -1,13 +1,13 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>augmenty.lang.da.augmenters - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -206,7 +206,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -231,11 +232,11 @@
 <span class="kn">from</span> <span class="nn">...token</span> <span class="kn">import</span> <span class="n">create_conditional_token_casing_augmenter_v1</span>
 
 
-<div class="viewcode-block" id="create_da_æøå_replace_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_æøå_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"da_æøå_replace.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_da_æøå_replace_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_æøå_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;da_æøå_replace.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_da_æøå_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter that augments æ, ø, and å into their spelling variants ae,</span>
+    <span class="sd">&quot;&quot;&quot;Creates an augmenter that augments æ, ø, and å into their spelling variants ae,</span>
 <span class="sd">    oe, aa.</span>
 
 <span class="sd">    Args:</span>
@@ -248,37 +249,37 @@
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
 <span class="sd">        &gt;&gt;&gt; from spacy.lang.en import English</span>
 <span class="sd">        &gt;&gt;&gt; nlp = English()</span>
-<span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load("da_æøå_replace.v1", level=0.1)</span>
-<span class="sd">        &gt;&gt;&gt; texts = ["æ ø Å"]</span>
+<span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load(&quot;da_æøå_replace.v1&quot;, level=0.1)</span>
+<span class="sd">        &gt;&gt;&gt; texts = [&quot;æ ø Å&quot;]</span>
 <span class="sd">        &gt;&gt;&gt; list(augmenty.texts(texts, augmenter, nlp))</span>
-<span class="sd">        ["ae oe Aa"]</span>
-<span class="sd">    """</span>
+<span class="sd">        [&quot;ae oe Aa&quot;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">replace_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"æ"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"ae"</span><span class="p">],</span>
-        <span class="s2">"ø"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"oe"</span><span class="p">],</span>
-        <span class="s2">"å"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"aa"</span><span class="p">],</span>
-        <span class="s2">"Æ"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Ae"</span><span class="p">],</span>
-        <span class="s2">"Ø"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Oe"</span><span class="p">],</span>
-        <span class="s2">"Å"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Aa"</span><span class="p">],</span>
+        <span class="s2">&quot;æ&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ae&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;ø&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;oe&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;å&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;aa&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Æ&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Ae&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Ø&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Oe&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Å&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aa&quot;</span><span class="p">],</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">create_char_replace_augmenter_v1</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">replace_dict</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="create_da_historical_noun_casing_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"da_historical_noun_casing.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_da_historical_noun_casing_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;da_historical_noun_casing.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_da_historical_noun_casing_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Creates an augmenter that capitalizes nouns.</span>
+    <span class="sd">&quot;&quot;&quot;Creates an augmenter that capitalizes nouns.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): The probabiliy to upper case a noun.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">conditional</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="o">==</span> <span class="s2">"NOUN"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="o">==</span> <span class="s2">&quot;NOUN&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
 
@@ -322,6 +323,7 @@
 </div><script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
     <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../../_static/doctools.js"></script>
     <script src="../../../../_static/scripts/furo.js"></script>
     <script src="../../../../_static/clipboard.min.js"></script>

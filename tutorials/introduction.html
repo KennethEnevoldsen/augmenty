@@ -1,8 +1,8 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
 <meta property="og:title" content="Getting Started" />
   
@@ -13,10 +13,10 @@
 <meta property="og:description" content="image0 Augmenty is an augmentation library based on spaCy for augmenting texts. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the token, sentence and d..." />
   <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="News and Changelog" href="../news.html" /><link rel="prev" title="Installation" href="../installation.html" />
 
-    <link rel="shortcut icon" href="../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>Getting Started - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -215,7 +215,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -444,6 +445,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -452,10 +454,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -467,34 +473,37 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
 <section id="Getting-Started">
-<h1>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">#</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/master/docs/tutorials/introduction.ipynn"><img alt="image0" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<h1>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/github/kennethenevoldsen/augmenty/blob/master/docs/tutorials/introduction.ipynn"><img alt="image0" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>Augmenty is an augmentation library based on spaCy for augmenting texts. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the token, sentence and document labels under the augmentation.</p>
 <section id="Installation">
-<h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this headline">#</a></h2>
+<h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this heading">#</a></h2>
 <p>Before we get ahead of ourselves let us just install the required packages:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install augmenty
 <span class="c1"># install the spacy pipeline</span>
-python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_md
 </pre></div>
 </div>
 </section>
 <section id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">#</a></h2>
+<h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this heading">#</a></h2>
 <p>Augmenty is an augmentation library for spaCy, consisting of many different augmenters. To get an idea of all the available augmenters you can always try out the use:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">augmenty</span>
@@ -521,33 +530,40 @@ remove_spacing.v1
 char_swap.v1
 random_starting_case.v1
 conditional_token_casing.v1
-token_replace.v1
+token_dict_replace.v1
 wordnet_synonym.v1
-grundtvigian_spacing_augmenter.v1
+token_replace.v1
+word_embedding.v1
+letter_spacing_augmenter.v1
 spacing_insertion.v1
 token_swap.v1
+token_insert.v1
+token_insert_random.v1
+duplicate_token.v1
+random_synonym_insertion.v1
 ents_replace.v1
 per_replace.v1
 ents_format.v1
 upper_case.v1
 spongebob.v1
+paragraph_subset_augmenter.v1
 da_æøå_replace.v1
 da_historical_noun_casing.v1
 </pre></div></div>
 </div>
-<p>To get get more information about an individual augmenter you can always simply use <code class="docutils literal notranslate"><span class="pre">help</span></code> for instance let is say you want to know more about the upper case augmenter you could run: <code class="docutils literal notranslate"><span class="pre">help(augmenters["upper_case.v1"])</span></code>.</p>
+<p>To get get more information about an individual augmenter you can always simply use <code class="docutils literal notranslate"><span class="pre">help</span></code> for instance let is say you want to know more about the upper case augmenter you could run: <code class="docutils literal notranslate"><span class="pre">help(augmenters[&quot;upper_case.v1&quot;])</span></code>.</p>
 <p>After you have an idea about the augmenter you wish to use loading in augmenters in augmenty is made easy using the <code class="docutils literal notranslate"><span class="pre">load</span></code> command given and given the arguments:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upper_case_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"upper_case.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">)</span>  <span class="c1"># 100% uppercase</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upper_case_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;upper_case.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">)</span>  <span class="c1"># 100% uppercase</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Applying-the-augmentation">
-<h2>Applying the augmentation<a class="headerlink" href="#Applying-the-augmentation" title="Permalink to this headline">#</a></h2>
+<h2>Applying the augmentation<a class="headerlink" href="#Applying-the-augmentation" title="Permalink to this heading">#</a></h2>
 <p>Augmenters in augmenty always take in a spaCy <a class="reference external" href="https://spacy.io/api/language">Language pipeline</a> and an spaCy <a class="reference external" href="https://spacy.io/api/example">Example</a> so that it can be easily used while training workflows, however, augmenty also allows for easy application of augmenters to raw text and spaCy <a class="reference external" href="https://spacy.io/api/doc">Docs</a>.</p>
 <div class="admonition note">
 <p class="admonition-title"><strong>Why examples and not just raw text?</strong></p>
@@ -555,18 +571,18 @@ da_historical_noun_casing.v1
 corresponding labels as well. When swapping tokens augmenty even respect entities and sentences as to not split an entity or swap tokens across sentence borders. You can naturally turn this of if you wish to.</p>
 </div>
 <section id="Applying-augmentations-on-Docs">
-<h3>Applying augmentations on Docs<a class="headerlink" href="#Applying-augmentations-on-Docs" title="Permalink to this headline">#</a></h3>
+<h3>Applying augmentations on Docs<a class="headerlink" href="#Applying-augmentations-on-Docs" title="Permalink to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
 
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"en_core_web_sm"</span><span class="p">)</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_lg&quot;</span><span class="p">)</span>
 <span class="n">docs</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span>
     <span class="p">[</span>
-        <span class="s2">"Augmentation is a wonderful tool for obtaining higher performance on limited data."</span><span class="p">,</span>
-        <span class="s2">"You can also use it to see how robust your model is to changes."</span><span class="p">,</span>
+        <span class="s2">&quot;Augmentation is a wonderful tool for obtaining higher performance on limited data.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;You can also use it to see how robust your model is to changes.&quot;</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">)</span>
 
@@ -588,16 +604,18 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </section>
 <section id="Applying-augmentations-on-text">
-<h3>Applying augmentations on text<a class="headerlink" href="#Applying-augmentations-on-text" title="Permalink to this headline">#</a></h3>
-<p>We can also try it out on text. Let us also try out a new augmenter for replacing entities. Remember you can always use <code class="docutils literal notranslate"><span class="pre">help(augmenters["ents_replace.v1"])</span></code> to figure out which inputs the augmenter takes and see and example.</p>
+<h3>Applying augmentations on text<a class="headerlink" href="#Applying-augmentations-on-text" title="Permalink to this heading">#</a></h3>
+<p>We can also try it out on text. Let us also try out a new augmenter for replacing entities. Remember you can always use <code class="docutils literal notranslate"><span class="pre">help(augmenters[&quot;ents_replace.v1&quot;])</span></code> to figure out which inputs the augmenter takes and see and example.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Augmenty is a wonderful tool for augmentation."</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Augmenty is a wonderful tool for augmentation which is made using SpaCy developed by Explosion.&quot;</span>
+<span class="p">]</span>
 
 <span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="s2">"ents_replace.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">"ORG"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"SpaCy"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"The SpaCy Universe"</span><span class="p">]]}</span>
+    <span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ORG&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;The SpaCy Universe&quot;</span><span class="p">]]}</span>
 <span class="p">)</span>
 
 <span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
@@ -612,29 +630,29 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-The SpaCy Universe is a wonderful tool for augmentation.
+Augmenty is a wonderful tool for augmentation which is made using SpaCy developed by The SpaCy Universe.
 </pre></div></div>
 </div>
 </section>
 </section>
 <section id="Customizing-augmenters">
-<h2>Customizing augmenters<a class="headerlink" href="#Customizing-augmenters" title="Permalink to this headline">#</a></h2>
+<h2>Customizing augmenters<a class="headerlink" href="#Customizing-augmenters" title="Permalink to this heading">#</a></h2>
 <p>Augmenty is more than a list of augmenters and also contains utilities for dealing with augmenters such as combining and moderating augmenters.</p>
 <section id="Combining-augmenters">
-<h3>Combining augmenters<a class="headerlink" href="#Combining-augmenters" title="Permalink to this headline">#</a></h3>
+<h3>Combining augmenters<a class="headerlink" href="#Combining-augmenters" title="Permalink to this heading">#</a></h3>
 <p>We can start of by combing the entity augmenter with an augmenter which replaces words with their synonym based on wordnet.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"wordnet_synonym.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wordnet_synonym.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
 
 <span class="n">combined_aug</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">combine</span><span class="p">([</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">synonym_augmenter</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">combined_aug</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
@@ -649,19 +667,19 @@ The SpaCy Universe is a wonderful tool for augmentation.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-The SpaCy Universe is a tremendous instrument for augmentation.
+Augmenty is a fantastic shaft for augmentation.
 </pre></div></div>
 </div>
 </section>
 <section id="Moderating-Augmenters">
-<h3>Moderating Augmenters<a class="headerlink" href="#Moderating-Augmenters" title="Permalink to this headline">#</a></h3>
+<h3>Moderating Augmenters<a class="headerlink" href="#Moderating-Augmenters" title="Permalink to this heading">#</a></h3>
 <p>Certain augmenters apply augmentation at different levels. For instance the augmenter <code class="docutils literal notranslate"><span class="pre">keystroke_error.v1</span></code> augments examples based on keyboard distances, where each character has a chance to be replaced with a neightbouring character. However, we might wish to apply this augmentation to 5% of characters, but only apply it 50% of the training samples. Using <code class="docutils literal notranslate"><span class="pre">augmenty.set_doc_level</span></code> we can add this last part to any augmenter, thus allowing for more flexibility when using the model.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keystroke_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="s2">"keystroke_error.v1"</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">=</span><span class="s2">"en_qwerty.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.05</span>
+    <span class="s2">&quot;keystroke_error.v1&quot;</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">=</span><span class="s2">&quot;en_qwerty.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.05</span>
 <span class="p">)</span>  <span class="c1"># 5% if characters</span>
 
 <span class="n">keystroke_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">set_doc_level</span><span class="p">(</span>
@@ -671,13 +689,13 @@ The SpaCy Universe is a tremendous instrument for augmentation.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"Augmenty is a wonderful tool for augmentation."</span><span class="p">,</span>
-    <span class="s2">"Augmentation is a wonderful tool for obtaining higher performance on limited data."</span><span class="p">,</span>
-    <span class="s2">"You can also use it to see how robust your model is to changes."</span><span class="p">,</span>
+    <span class="s2">&quot;Augmenty is a wonderful tool for augmentation.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Augmentation is a wonderful tool for obtaining higher performance on limited data.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;You can also use it to see how robust your model is to changes.&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">keystroke_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
@@ -692,17 +710,17 @@ The SpaCy Universe is a tremendous instrument for augmentation.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Aug,enty is a wonxerful tool for augmentation.
-Augmentatlon is a wonderful yool for obtaib8ng higher performance on lihited dwta.
-You can also use it to see how robust your model is to changes.
+Augmenty is a wonderful tool for augmentation.
+Augmentation is q wonderful tool for obtain6ng higher performance on li,ited data.
+You cxn also use it to see how robush your model is to changes.
 </pre></div></div>
 </div>
 <p>Similarly one might wish the augment to instead of simply yielding the augmented example also yield the original, such that the trained model always see the actual data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"token_swap.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.20</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;token_swap.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.20</span><span class="p">)</span>
 <span class="n">token_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">yield_original</span><span class="p">(</span>
     <span class="n">token_swap_augmenter</span>
 <span class="p">)</span>  <span class="c1"># yield both the augmented and original example</span>
@@ -719,18 +737,18 @@ You can also use it to see how robust your model is to changes.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Augmenty a is tool wonderful augmentation for.
+Augmenty is a tool wonderful for augmentation.
 Augmenty is a wonderful tool for augmentation.
-is Augmentation wonderful a tool for obtaining higher performance on data limited.
+is Augmentation wonderful a tool obtaining for higher performance on limited data.
 Augmentation is a wonderful tool for obtaining higher performance on limited data.
-You can also use it to see robust how model your is to changes.
+You can also use it to see how robust your is model to changes.
 You can also use it to see how robust your model is to changes.
 </pre></div></div>
 </div>
 </section>
 </section>
 <section id="Applying-augmentation-to-Examples-or-a-Corpus">
-<h2>Applying augmentation to Examples or a Corpus<a class="headerlink" href="#Applying-augmentation-to-Examples-or-a-Corpus" title="Permalink to this headline">#</a></h2>
+<h2>Applying augmentation to Examples or a Corpus<a class="headerlink" href="#Applying-augmentation-to-Examples-or-a-Corpus" title="Permalink to this heading">#</a></h2>
 <p>Examples consists of two docs, one containing the predictions of the model, the other containing the gold labelled document. For this example we will load the DaNE dataset. DaNE includes the Danish dependency treebank additionally tagged for named entities. Here we will use synonym replacement to augment a corpus.</p>
 <p>To load the corpus we will use <a class="reference external" href="https://centre-for-humanities-computing.github.io/DaCy/">DaCy</a> which we will install using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dacy
@@ -739,24 +757,83 @@ You can also use it to see how robust your model is to changes.
 <p>And then we can apply the methods:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dacy</span> <span class="kn">import</span> <span class="n">datasets</span>
 
-<span class="n">train</span><span class="p">,</span> <span class="n">dev</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">dane</span><span class="p">(</span><span class="n">splits</span><span class="o">=</span><span class="p">[</span><span class="s2">"train"</span><span class="p">,</span> <span class="s2">"dev"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">])</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">dev</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">dane</span><span class="p">(</span><span class="n">splits</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">])</span>
 
 <span class="kn">from</span> <span class="nn">spacy.lang.da</span> <span class="kn">import</span> <span class="n">Danish</span>
 
 <span class="n">nlp_da</span> <span class="o">=</span> <span class="n">Danish</span><span class="p">()</span>
 
-<span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"wordnet_synonym.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"da"</span><span class="p">)</span>
+<span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wordnet_synonym.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;da&quot;</span><span class="p">)</span>
 <span class="n">augmented_corpus</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">e</span> <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">test</span><span class="p">(</span><span class="n">nlp_da</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">synonym_augmenter</span><span class="p">(</span><span class="n">nlp_da</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 </section>
+<section id="Using-Faker-for-entity-replacing">
+<h2>Using Faker for entity replacing<a class="headerlink" href="#Using-Faker-for-entity-replacing" title="Permalink to this heading">#</a></h2>
+<p>Augmenty allow for easy integrations of existing libraries such as <a class="reference external" href="https://faker.readthedocs.io/en/master/index.html">Faker</a>. Faker is an open-source python library which can generate various entities such as names. It is compatibile with multiple languages and has a lot of language-specific entity generators.</p>
+<p>To install Faker:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install faker
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">faker</span> <span class="kn">import</span> <span class="n">Faker</span>
+
+<span class="n">nlp_en</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_lg&quot;</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="s2">&quot;my name is Kenneth Enevoldsen&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp_en</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="c1"># entity replace augmenter takes a generator returning list of strings</span>
+<span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">faker_name</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">fake</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+
+<span class="n">ent_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERSON&quot;</span><span class="p">:</span> <span class="n">faker_name</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="n">ent_dict</span><span class="p">)</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">docs</span><span class="p">([</span><span class="n">doc</span><span class="p">],</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp_en</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+my name is Leah White
+</pre></div></div>
+</div>
+</section>
 <section id="Creating-and-Contributing-Augmenters">
-<h2>Creating and Contributing Augmenters<a class="headerlink" href="#Creating-and-Contributing-Augmenters" title="Permalink to this headline">#</a></h2>
+<h2>Creating and Contributing Augmenters<a class="headerlink" href="#Creating-and-Contributing-Augmenters" title="Permalink to this heading">#</a></h2>
 <p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance the augmenter <code class="docutils literal notranslate"><span class="pre">per_replace.v1</span></code>, which replaces names in a text is a spacial case of the augmenter <code class="docutils literal notranslate"><span class="pre">ents_replace.v1</span></code> with better handling of first and last names. If you want to create an augmenter from scratch following spaCy’s <a class="reference external" href="https://spacy.io/usage/training#data-augmentation-custom">guide</a> on creating custom augmenters is a good
 start. You can always use augmenters from augmenty as inspiration as well. If you find yourself in troubles feel free to ask in the <a class="reference external" href="missing">augmenty forums</a>.</p>
 <p>When you are satisfied with your augmenter feel free submit a <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/pulls">pull request</a> to add the augmenter to augmenty.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -831,6 +908,7 @@ start. You can always use augmenters from augmenty as inspiration as well. If yo
 </ul>
 </li>
 <li><a class="reference internal" href="#Applying-augmentation-to-Examples-or-a-Corpus">Applying augmentation to Examples or a Corpus</a></li>
+<li><a class="reference internal" href="#Using-Faker-for-entity-replacing">Using Faker for entity replacing</a></li>
 <li><a class="reference internal" href="#Creating-and-Contributing-Augmenters">Creating and Contributing Augmenters</a></li>
 </ul>
 </li>
@@ -846,6 +924,7 @@ start. You can always use augmenters from augmenty as inspiration as well. If yo
 </div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/furo.js"></script>
     <script src="../_static/clipboard.min.js"></script>

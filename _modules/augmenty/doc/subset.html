@@ -1,13 +1,13 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.04.1"/>
         <title>augmenty.doc.subset - augmenty 1.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -206,7 +206,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -232,13 +233,13 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="create_paragraph_subset_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.doc.html#augmenty.doc.subset.create_paragraph_subset_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">"paragraph_subset_augmenter.v1"</span><span class="p">)</span>
+<div class="viewcode-block" id="create_paragraph_subset_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.doc.html#augmenty.doc.subset.create_paragraph_subset_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;paragraph_subset_augmenter.v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_paragraph_subset_augmenter_v1</span><span class="p">(</span>
     <span class="n">min_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">max_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.00</span><span class="p">,</span>
     <span class="n">respect_sentences</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">"""Create an augmenter that extracts a subset of a document.</span>
+    <span class="sd">&quot;&quot;&quot;Create an augmenter that extracts a subset of a document.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        min_paragraph (Union[float, int]): An float indicating the min percentage of the</span>
@@ -258,15 +259,15 @@
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
 <span class="sd">        &gt;&gt;&gt; import spacy</span>
-<span class="sd">        &gt;&gt;&gt; nlp = spacy.blank("en")</span>
-<span class="sd">        &gt;&gt;&gt; nlp.add_pipe("sentencizer")</span>
-<span class="sd">        &gt;&gt;&gt; upper_case_augmenter = augmenty.load("sent_subset.v1", level=0.7)</span>
-<span class="sd">        &gt;&gt;&gt; text = "Augmenty is a wonderful tool for augmentation. " +</span>
-<span class="sd">        &gt;&gt;&gt;   "It have tons of different augmenters. " +</span>
-<span class="sd">        &gt;&gt;&gt;   " Augmenty is developed using spaCy."</span>
+<span class="sd">        &gt;&gt;&gt; nlp = spacy.blank(&quot;en&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; nlp.add_pipe(&quot;sentencizer&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; upper_case_augmenter = augmenty.load(&quot;sent_subset.v1&quot;, level=0.7)</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;Augmenty is a wonderful tool for augmentation. &quot; +</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;It have tons of different augmenters. &quot; +</span>
+<span class="sd">        &gt;&gt;&gt;   &quot; Augmenty is developed using spaCy.&quot;</span>
 <span class="sd">        &gt;&gt;&gt; list(augmenty.texts([text], upper_case_augmenter, nlp))</span>
-<span class="sd">        ["Augmenty is a wonderful tool for augmentation. Augmenty is developed using spaCy."]</span>
-<span class="sd">    """</span>
+<span class="sd">        [&quot;Augmenty is a wonderful tool for augmentation. Augmenty is developed using spaCy.&quot;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">paragraph_subset_augmenter_v1</span><span class="p">,</span>
         <span class="n">respect_sentences</span><span class="o">=</span><span class="n">respect_sentences</span><span class="p">,</span>
@@ -284,8 +285,8 @@
     <span class="n">respect_sentences</span><span class="p">:</span> <span class="nb">bool</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">token_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">]</span>
-    <span class="n">doc_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"doc_annotation"</span><span class="p">]</span>
+    <span class="n">token_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">]</span>
+    <span class="n">doc_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;doc_annotation&quot;</span><span class="p">]</span>
 
     <span class="n">doc_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">respect_sentences</span><span class="p">:</span>
@@ -314,18 +315,18 @@
         <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">start_n</span><span class="p">,</span> <span class="n">end_n</span>
 
     <span class="c1"># Respect entity spans</span>
-    <span class="k">while</span> <span class="n">start</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">ent_iob_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">""</span><span class="p">}:</span>
+    <span class="k">while</span> <span class="n">start</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">ent_iob_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">}:</span>
         <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">doc_len</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ent_iob_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">""</span><span class="p">}:</span>
+    <span class="k">while</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">doc_len</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ent_iob_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">}:</span>
         <span class="n">end</span> <span class="o">=</span> <span class="o">+</span><span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">token_anno</span><span class="p">:</span>
         <span class="n">token_anno</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_anno</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
-    <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"entities"</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"entities"</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">"HEAD"</span><span class="p">):</span>
-        <span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">])</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">doc_anno</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc_anno</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">&quot;HEAD&quot;</span><span class="p">):</span>
+        <span class="n">token_anno</span><span class="p">[</span><span class="s2">&quot;HEAD&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">token_anno</span><span class="p">[</span><span class="s2">&quot;HEAD&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">token_anno</span><span class="p">[</span><span class="s2">"HEAD"</span><span class="p">])))</span>
+        <span class="n">token_anno</span><span class="p">[</span><span class="s2">&quot;HEAD&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">token_anno</span><span class="p">[</span><span class="s2">&quot;HEAD&quot;</span><span class="p">])))</span>
 
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
     <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -367,6 +368,7 @@
 </div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
