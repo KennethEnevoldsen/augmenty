@@ -15,6 +15,7 @@ numpy>=1.15.0,<2.0.0
 pytest
 pytest-cov
 pytest-lazy-fixture~=0.6.3
+pytest-timeout>=2.1.0,<2.2.0
 
 # english model for testing
 https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.3.0/en_core_web_md-3.3.0-py3-none-any.whl
