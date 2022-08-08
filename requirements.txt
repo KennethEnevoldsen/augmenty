@@ -1,5 +1,5 @@
 # Danish
-dacy >=1.1.1,<2.0.0
+dacy >=1.1.1,<2.1.0
 
 # Wordnet
 nltk >= 3.6.7,< 3.8.0
@@ -18,7 +18,7 @@ pytest-lazy-fixture~=0.6.3
 pytest-timeout>=2.1.0,<2.2.0
 
 # english model for testing
-https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.3.0/en_core_web_md-3.3.0-py3-none-any.whl
+https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.4.0/en_core_web_md-3.4.0-py3-none-any.whl
 
 
 # documentation
