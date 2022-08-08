@@ -506,12 +506,12 @@ python -m spacy download en_core_web_md
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">augmenty</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import augmenty
 
-<span class="n">augmenters</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">augmenters</span><span class="p">()</span>
+augmenters = augmenty.augmenters()
 
-<span class="k">for</span> <span class="n">augmenter</span> <span class="ow">in</span> <span class="n">augmenters</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">augmenter</span><span class="p">)</span>
+for augmenter in augmenters:
+    print(augmenter)
 </pre></div>
 </div>
 </div>
@@ -557,7 +557,7 @@ da_historical_noun_casing.v1
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upper_case_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;upper_case.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">)</span>  <span class="c1"># 100% uppercase</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>upper_case_augmenter = augmenty.load(&quot;upper_case.v1&quot;, level=1.00)  # 100% uppercase
 </pre></div>
 </div>
 </div>
@@ -576,20 +576,20 @@ corresponding labels as well. When swapping tokens augmenty even respect entitie
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import spacy
 
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_lg&quot;</span><span class="p">)</span>
-<span class="n">docs</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="s2">&quot;Augmentation is a wonderful tool for obtaining higher performance on limited data.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;You can also use it to see how robust your model is to changes.&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-<span class="p">)</span>
+nlp = spacy.load(&quot;en_core_web_lg&quot;)
+docs = nlp.pipe(
+    [
+        &quot;Augmentation is a wonderful tool for obtaining higher performance on limited data.&quot;,
+        &quot;You can also use it to see how robust your model is to changes.&quot;,
+    ]
+)
 
-<span class="n">augmented_docs</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">docs</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">upper_case_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+augmented_docs = augmenty.docs(docs, augmenter=upper_case_augmenter, nlp=nlp)
 
-<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">augmented_docs</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+for doc in augmented_docs:
+    print(doc)
 </pre></div>
 </div>
 </div>
@@ -610,18 +610,18 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Augmenty is a wonderful tool for augmentation which is made using SpaCy developed by Explosion.&quot;</span>
-<span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>texts = [
+    &quot;Augmenty is a wonderful tool for augmentation which is made using SpaCy developed by Explosion.&quot;
+]
 
-<span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ORG&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;The SpaCy Universe&quot;</span><span class="p">]]}</span>
-<span class="p">)</span>
+ent_augmenter = augmenty.load(
+    &quot;ents_replace.v1&quot;, level=1.00, ent_dict={&quot;ORG&quot;: [[&quot;The SpaCy Universe&quot;]]}
+)
 
-<span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+augmented_texts = augmenty.texts(texts, augmenter=ent_augmenter, nlp=nlp)
 
-<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+for text in augmented_texts:
+    print(text)
 </pre></div>
 </div>
 </div>
@@ -645,9 +645,9 @@ Augmenty is a wonderful tool for augmentation which is made using SpaCy develope
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wordnet_synonym.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>synonym_augmenter = augmenty.load(&quot;wordnet_synonym.v1&quot;, level=1, lang=&quot;en&quot;)
 
-<span class="n">combined_aug</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">combine</span><span class="p">([</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">synonym_augmenter</span><span class="p">])</span>
+combined_aug = augmenty.combine([ent_augmenter, synonym_augmenter])
 </pre></div>
 </div>
 </div>
@@ -655,10 +655,10 @@ Augmenty is a wonderful tool for augmentation which is made using SpaCy develope
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">combined_aug</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>augmented_texts = augmenty.texts(texts, augmenter=combined_aug, nlp=nlp)
 
-<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+for text in augmented_texts:
+    print(text)
 </pre></div>
 </div>
 </div>
@@ -678,13 +678,13 @@ Augmenty is a fantastic shaft for augmentation.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keystroke_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="s2">&quot;keystroke_error.v1&quot;</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">=</span><span class="s2">&quot;en_qwerty.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.05</span>
-<span class="p">)</span>  <span class="c1"># 5% if characters</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>keystroke_augmenter = augmenty.load(
+    &quot;keystroke_error.v1&quot;, keyboard=&quot;en_qwerty.v1&quot;, level=0.05
+)  # 5% if characters
 
-<span class="n">keystroke_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">set_doc_level</span><span class="p">(</span>
-    <span class="n">keystroke_augmenter</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="p">)</span>  <span class="c1"># 50% of texts</span>
+keystroke_augmenter = augmenty.set_doc_level(
+    keystroke_augmenter, level=0.5
+)  # 50% of texts
 </pre></div>
 </div>
 </div>
@@ -692,16 +692,16 @@ Augmenty is a fantastic shaft for augmentation.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Augmenty is a wonderful tool for augmentation.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Augmentation is a wonderful tool for obtaining higher performance on limited data.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;You can also use it to see how robust your model is to changes.&quot;</span><span class="p">,</span>
-<span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>texts = [
+    &quot;Augmenty is a wonderful tool for augmentation.&quot;,
+    &quot;Augmentation is a wonderful tool for obtaining higher performance on limited data.&quot;,
+    &quot;You can also use it to see how robust your model is to changes.&quot;,
+]
 
-<span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">keystroke_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+augmented_texts = augmenty.texts(texts, augmenter=keystroke_augmenter, nlp=nlp)
 
-<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+for text in augmented_texts:
+    print(text)
 </pre></div>
 </div>
 </div>
@@ -720,15 +720,15 @@ You cxn also use it to see how robush your model is to changes.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;token_swap.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.20</span><span class="p">)</span>
-<span class="n">token_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">yield_original</span><span class="p">(</span>
-    <span class="n">token_swap_augmenter</span>
-<span class="p">)</span>  <span class="c1"># yield both the augmented and original example</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>token_swap_augmenter = augmenty.load(&quot;token_swap.v1&quot;, level=0.20)
+token_swap_augmenter = augmenty.yield_original(
+    token_swap_augmenter
+)  # yield both the augmented and original example
 
-<span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">token_swap_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+augmented_texts = augmenty.texts(texts, augmenter=token_swap_augmenter, nlp=nlp)
 
-<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+for text in augmented_texts:
+    print(text)
 </pre></div>
 </div>
 </div>
@@ -781,23 +781,23 @@ You can also use it to see how robust your model is to changes.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
-<span class="kn">from</span> <span class="nn">faker</span> <span class="kn">import</span> <span class="n">Faker</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import spacy
+from faker import Faker
 
-<span class="n">nlp_en</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_lg&quot;</span><span class="p">)</span>
-<span class="n">texts</span> <span class="o">=</span> <span class="s2">&quot;my name is Kenneth Enevoldsen&quot;</span>
-<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp_en</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+nlp_en = spacy.load(&quot;en_core_web_lg&quot;)
+texts = &quot;my name is Kenneth Enevoldsen&quot;
+doc = nlp_en(texts)
 
-<span class="c1"># entity replace augmenter takes a generator returning list of strings</span>
-<span class="n">fake</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">faker_name</span><span class="p">():</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="n">fake</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+# entity replace augmenter takes a generator returning list of strings
+fake = Faker()
 
 
-<span class="n">ent_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERSON&quot;</span><span class="p">:</span> <span class="n">faker_name</span><span class="p">()}</span>
+def faker_name():
+    while True:
+        yield fake.name().split()
+
+
+ent_dict = {&quot;PERSON&quot;: faker_name()}
 </pre></div>
 </div>
 </div>
@@ -805,10 +805,10 @@ You can also use it to see how robust your model is to changes.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="n">ent_dict</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ent_augmenter = augmenty.load(&quot;ents_replace.v1&quot;, level=1.00, ent_dict=ent_dict)
 
-<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">augmenty</span><span class="o">.</span><span class="n">docs</span><span class="p">([</span><span class="n">doc</span><span class="p">],</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp_en</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
+print(docs[0])
 </pre></div>
 </div>
 </div>
