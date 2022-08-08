@@ -152,17 +152,18 @@ def test_create_word_embedding_augmenter(nlp_en_md):
     doc = nlp_en_md(text)
 
     rep = [
-        "cat",  # as "cat" != "Cat"
-        "cats",
-        "kitten",
-        "kitty",
+        "cat",
         "dog",
-        "puppy",
-        "puppies",
-        "poodles",
+        "cats",
+        "kitty",
         "pet",
-        "breeds",
-        "breed",
+        "puppy",
+        "dogs",
+        "rabbit",
+        "squirrel",
+        "fox",
+        "bunny",
+        "rabbits",
     ]
 
     aug = augmenty.load("word_embedding.v1", level=1)
