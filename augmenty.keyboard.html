@@ -13,7 +13,7 @@
 <meta property="og:description" content="Keyboard is a custom class for implementing keyboard layout and is required for augmenters such as keystroke_error.v1, and char_replace_random.v1. augmenty.keyboard: Function for defining and handl..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Utilities" href="augmenty.util.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.1.1, furo 2022.09.15"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.1, furo 2022.09.15"/>
         <title>Keyboard - augmenty 1.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
@@ -233,10 +233,10 @@
           <section id="keyboard">
 <h1>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this heading">#</a></h1>
 <p>Keyboard is a custom class for implementing keyboard layout and is required for augmenters such as <a class="reference external" href="missing">keystroke_error.v1</a>, and <a class="reference external" href="missing">char_replace_random.v1</a>.</p>
-<section id="module-augmenty.keyboard">
-<span id="augmenty-keyboard"></span><h2>augmenty.keyboard<a class="headerlink" href="#module-augmenty.keyboard" title="Permalink to this heading">#</a></h2>
+<section id="augmenty-keyboard">
+<h2>augmenty.keyboard<a class="headerlink" href="#augmenty-keyboard" title="Permalink to this heading">#</a></h2>
 <p>Function for defining and handling keyboard layouts.</p>
-<dl class="py class">
+<span class="target" id="module-augmenty.keyboard"></span><dl class="py class">
 <dt class="sig sig-object py" id="augmenty.keyboard.Keyboard">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">augmenty.keyboard.</span></span><span class="sig-name descname"><span class="pre">Keyboard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyboard_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/augmenty/keyboard.html#Keyboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.keyboard.Keyboard" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
@@ -419,7 +419,21 @@ Defaults to 1.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Keyboard</a><ul>
-<li><a class="reference internal" href="#module-augmenty.keyboard">augmenty.keyboard</a></li>
+<li><a class="reference internal" href="#augmenty-keyboard">augmenty.keyboard</a><ul>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard"><code class="docutils literal notranslate"><span class="pre">Keyboard</span></code></a><ul>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.all_keys"><code class="docutils literal notranslate"><span class="pre">Keyboard.all_keys()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.coordinate"><code class="docutils literal notranslate"><span class="pre">Keyboard.coordinate()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.create_distance_dict"><code class="docutils literal notranslate"><span class="pre">Keyboard.create_distance_dict()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.euclidian_distance"><code class="docutils literal notranslate"><span class="pre">Keyboard.euclidian_distance()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.from_registry"><code class="docutils literal notranslate"><span class="pre">Keyboard.from_registry()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.get_neighbours"><code class="docutils literal notranslate"><span class="pre">Keyboard.get_neighbours()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.is_shifted"><code class="docutils literal notranslate"><span class="pre">Keyboard.is_shifted()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.keyboard_array"><code class="docutils literal notranslate"><span class="pre">Keyboard.keyboard_array</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.keyboard.Keyboard.shift_distance"><code class="docutils literal notranslate"><span class="pre">Keyboard.shift_distance</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -436,6 +450,7 @@ Defaults to 1.</p></li>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>

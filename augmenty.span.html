@@ -13,7 +13,7 @@
 <meta property="og:description" content="augmenty.span.entities:" />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Document-based" href="augmenty.doc.html" /><link rel="prev" title="Token-based" href="augmenty.token.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.1.1, furo 2022.09.15"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.1, furo 2022.09.15"/>
         <title>Span-based - augmenty 1.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
@@ -250,7 +250,7 @@ replacement [“Kenneth”, “Enevoldsen”].</p></li>
 the same entity? Defaults to True.</p></li>
 <li><p><strong>resolve_dependencies</strong> (<em>bool</em><em>, </em><em>optional</em>) – Attempts to resolve the dependency tree
 by setting head of the original entitity as</p></li>
-<li><p><strong>as</strong> (<em>the head of the first token in the new entity. The remainder is the passed</em>) – </p></li>
+<li><p><strong>as</strong> (<em>the head</em><em> of </em><em>the first token in the new entity. The remainder is the passed</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -418,7 +418,12 @@ the same entity? Defaults to True.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Span-based</a><ul>
-<li><a class="reference internal" href="#module-augmenty.span.entities">augmenty.span.entities</a></li>
+<li><a class="reference internal" href="#module-augmenty.span.entities">augmenty.span.entities</a><ul>
+<li><a class="reference internal" href="#augmenty.span.entities.create_ent_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_ent_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.span.entities.create_ent_format_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_ent_format_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.span.entities.create_per_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_per_replace_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -435,6 +440,7 @@ the same entity? Defaults to True.</p></li>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>

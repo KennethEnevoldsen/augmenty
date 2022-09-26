@@ -13,7 +13,7 @@
 <meta property="og:description" content="Augmenty is an augmentation library based on spaCy for augmenting texts. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the token, sentence and document..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Installation" href="installation.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.1.1, furo 2022.09.15"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.1, furo 2022.09.15"/>
         <title>augmenty 1.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
@@ -286,26 +286,69 @@ sentence and document labels under the augmentation.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="augmenters_overview.html">Overview of Augmenters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.character.html">Character-based</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#module-augmenty.character.casing">augmenty.character.casing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#module-augmenty.character.replace">augmenty.character.replace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#module-augmenty.character.spacing">augmenty.character.spacing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#module-augmenty.character.swap">augmenty.character.swap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#module-augmenty.character.casing">augmenty.character.casing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.character.html#augmenty.character.casing.create_random_casing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_random_casing_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#augmenty-character-replace">augmenty.character.replace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.character.html#augmenty.character.replace.create_char_random_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_char_random_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.character.html#augmenty.character.replace.create_char_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_char_replace_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.character.html#augmenty.character.replace.create_keystroke_error_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_keystroke_error_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#augmenty-character-spacing">augmenty.character.spacing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.character.html#augmenty.character.spacing.create_remove_spacing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_remove_spacing_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.character.html#augmenty-character-swap">augmenty.character.swap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.character.html#augmenty.character.swap.create_char_swap_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_char_swap_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.token.html">Token-based</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.casing">augmenty.token.casing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.replace">augmenty.token.replace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.spacing">augmenty.token.spacing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.swap">augmenty.token.swap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.casing">augmenty.token.casing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.casing.create_conditional_token_casing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_conditional_token_casing_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.casing.create_starting_case_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_starting_case_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.replace">augmenty.token.replace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.replace.create_token__dict_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_token__dict_replace_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.replace.create_token_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_token_replace_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.replace.create_word_embedding_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_word_embedding_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.replace.create_wordnet_synonym_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_wordnet_synonym_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.spacing">augmenty.token.spacing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.spacing.create_letter_spacing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_letter_spacing_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.spacing.create_spacing_insertion_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_spacing_insertion_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.token.html#module-augmenty.token.swap">augmenty.token.swap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.token.html#augmenty.token.swap.create_token_swap_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_token_swap_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.span.html">Span-based</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.span.html#module-augmenty.span.entities">augmenty.span.entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.span.html#module-augmenty.span.entities">augmenty.span.entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.span.html#augmenty.span.entities.create_ent_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_ent_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.span.html#augmenty.span.entities.create_ent_format_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_ent_format_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_per_replace_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.doc.html">Document-based</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.doc.html#module-augmenty.doc.casing">augmenty.doc.casing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.doc.html#module-augmenty.doc.subset">augmenty.doc.subset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.doc.html#module-augmenty.doc.casing">augmenty.doc.casing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.doc.html#augmenty.doc.casing.create_spongebob_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_spongebob_augmenter_v1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.doc.html#augmenty.doc.casing.create_upper_casing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_upper_casing_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.doc.html#module-augmenty.doc.subset">augmenty.doc.subset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.doc.html#augmenty.doc.subset.create_paragraph_subset_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_paragraph_subset_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.lang.html">Language-specific</a><ul>
@@ -316,7 +359,13 @@ sentence and document labels under the augmentation.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.augment_utilities.html">Augmentation Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.augment_utilities.html#module-augmenty.augment_utilities">augmenty.augment_utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.augment_utilities.html#augmenty-augment-utilities">augmenty.augment_utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.augment_utilities.html#augmenty.augment_utilities.combine"><code class="docutils literal notranslate"><span class="pre">combine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.augment_utilities.html#augmenty.augment_utilities.repeat"><code class="docutils literal notranslate"><span class="pre">repeat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.augment_utilities.html#augmenty.augment_utilities.set_doc_level"><code class="docutils literal notranslate"><span class="pre">set_doc_level()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.augment_utilities.html#augmenty.augment_utilities.yield_original"><code class="docutils literal notranslate"><span class="pre">yield_original()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -325,11 +374,22 @@ sentence and document labels under the augmentation.</p>
 <p class="caption" role="heading"><span class="caption-text">API references</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.util.html">Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.util.html#module-augmenty.util">augmenty.span.util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.util.html#augmenty-span-util">augmenty.span.util</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.util.html#augmenty.util.augmenters"><code class="docutils literal notranslate"><span class="pre">augmenters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.util.html#augmenty.util.docs"><code class="docutils literal notranslate"><span class="pre">docs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.util.html#augmenty.util.keyboards"><code class="docutils literal notranslate"><span class="pre">keyboards()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.util.html#augmenty.util.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.util.html#augmenty.util.meta"><code class="docutils literal notranslate"><span class="pre">meta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.util.html#augmenty.util.texts"><code class="docutils literal notranslate"><span class="pre">texts()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="augmenty.keyboard.html">Keyboard</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="augmenty.keyboard.html#module-augmenty.keyboard">augmenty.keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmenty.keyboard.html#augmenty-keyboard">augmenty.keyboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="augmenty.keyboard.html#augmenty.keyboard.Keyboard"><code class="docutils literal notranslate"><span class="pre">Keyboard</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -417,6 +477,7 @@ sentence and document labels under the augmentation.</p>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>

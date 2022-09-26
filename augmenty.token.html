@@ -13,7 +13,7 @@
 <meta property="og:description" content="augmenty.token.casing: augmenty.token.replace: augmenty.token.spacing: augmenty.token.swap:" />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Span-based" href="augmenty.span.html" /><link rel="prev" title="Character-based" href="augmenty.character.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.1.1, furo 2022.09.15"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.1, furo 2022.09.15"/>
         <title>Token-based - augmenty 1.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
@@ -571,10 +571,27 @@ as this becomes arbitrary.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Token-based</a><ul>
-<li><a class="reference internal" href="#module-augmenty.token.casing">augmenty.token.casing</a></li>
-<li><a class="reference internal" href="#module-augmenty.token.replace">augmenty.token.replace</a></li>
-<li><a class="reference internal" href="#module-augmenty.token.spacing">augmenty.token.spacing</a></li>
-<li><a class="reference internal" href="#module-augmenty.token.swap">augmenty.token.swap</a></li>
+<li><a class="reference internal" href="#module-augmenty.token.casing">augmenty.token.casing</a><ul>
+<li><a class="reference internal" href="#augmenty.token.casing.create_conditional_token_casing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_conditional_token_casing_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.token.casing.create_starting_case_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_starting_case_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-augmenty.token.replace">augmenty.token.replace</a><ul>
+<li><a class="reference internal" href="#augmenty.token.replace.create_token__dict_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_token__dict_replace_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.token.replace.create_token_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_token_replace_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.token.replace.create_word_embedding_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_word_embedding_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.token.replace.create_wordnet_synonym_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_wordnet_synonym_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-augmenty.token.spacing">augmenty.token.spacing</a><ul>
+<li><a class="reference internal" href="#augmenty.token.spacing.create_letter_spacing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_letter_spacing_augmenter_v1()</span></code></a></li>
+<li><a class="reference internal" href="#augmenty.token.spacing.create_spacing_insertion_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_spacing_insertion_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-augmenty.token.swap">augmenty.token.swap</a><ul>
+<li><a class="reference internal" href="#augmenty.token.swap.create_token_swap_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_token_swap_augmenter_v1()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -591,6 +608,7 @@ as this becomes arbitrary.</p></li>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
