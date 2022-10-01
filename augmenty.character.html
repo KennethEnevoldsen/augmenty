@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
 <meta property="og:title" content="Character-based" />
   
@@ -13,10 +13,10 @@
 <meta property="og:description" content="augmenty.character.casing: augmenty.character.replace: Augmenters for randomly or semi-randomly replacing characters augmenty.character.spacing: Augmenters for modyfing spacing augmenty.character.s..." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Token-based" href="augmenty.token.html" /><link rel="prev" title="Overview of Augmenters" href="augmenters_overview.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.1, furo 2022.09.15"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
         <title>Character-based - augmenty 1.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -216,7 +216,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -262,10 +263,10 @@
 </dd></dl>
 
 </section>
-<section id="augmenty-character-replace">
-<h2>augmenty.character.replace<a class="headerlink" href="#augmenty-character-replace" title="Permalink to this heading">#</a></h2>
+<section id="module-augmenty.character.replace">
+<span id="augmenty-character-replace"></span><h2>augmenty.character.replace<a class="headerlink" href="#module-augmenty.character.replace" title="Permalink to this heading">#</a></h2>
 <p>Augmenters for randomly or semi-randomly replacing characters</p>
-<span class="target" id="module-augmenty.character.replace"></span><dl class="py function">
+<dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.replace.create_char_random_augmenter_v1">
 <span class="sig-prename descclassname"><span class="pre">augmenty.character.replace.</span></span><span class="sig-name descname"><span class="pre">create_char_random_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyboard</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'en_qwerty.v1'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/replace.html#create_char_random_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.replace.create_char_random_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that replaces a character with a random character from the
@@ -365,10 +366,10 @@ to “en_qwerty.v1”.</p></li>
 </dd></dl>
 
 </section>
-<section id="augmenty-character-spacing">
-<h2>augmenty.character.spacing<a class="headerlink" href="#augmenty-character-spacing" title="Permalink to this heading">#</a></h2>
+<section id="module-augmenty.character.spacing">
+<span id="augmenty-character-spacing"></span><h2>augmenty.character.spacing<a class="headerlink" href="#module-augmenty.character.spacing" title="Permalink to this heading">#</a></h2>
 <p>Augmenters for modyfing spacing</p>
-<span class="target" id="module-augmenty.character.spacing"></span><dl class="py function">
+<dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.spacing.create_remove_spacing_augmenter_v1">
 <span class="sig-prename descclassname"><span class="pre">augmenty.character.spacing.</span></span><span class="sig-name descname"><span class="pre">create_remove_spacing_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/spacing.html#create_remove_spacing_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.spacing.create_remove_spacing_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that removes spacing with a given probability.</p>
@@ -396,10 +397,10 @@ to “en_qwerty.v1”.</p></li>
 </dd></dl>
 
 </section>
-<section id="augmenty-character-swap">
-<h2>augmenty.character.swap<a class="headerlink" href="#augmenty-character-swap" title="Permalink to this heading">#</a></h2>
+<section id="module-augmenty.character.swap">
+<span id="augmenty-character-swap"></span><h2>augmenty.character.swap<a class="headerlink" href="#module-augmenty.character.swap" title="Permalink to this heading">#</a></h2>
 <p>Augmenters for swapping characters</p>
-<span class="target" id="module-augmenty.character.swap"></span><dl class="py function">
+<dl class="py function">
 <dt class="sig sig-object py" id="augmenty.character.swap.create_char_swap_augmenter_v1">
 <span class="sig-prename descclassname"><span class="pre">augmenty.character.swap.</span></span><span class="sig-name descname"><span class="pre">create_char_swap_augmenter_v1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/character/swap.html#create_char_swap_augmenter_v1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.character.swap.create_char_swap_augmenter_v1" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates an augmenter that swaps two neighbouring characters in a token with a
@@ -492,17 +493,17 @@ given probability.</p>
 <li><a class="reference internal" href="#augmenty.character.casing.create_random_casing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_random_casing_augmenter_v1()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#augmenty-character-replace">augmenty.character.replace</a><ul>
+<li><a class="reference internal" href="#module-augmenty.character.replace">augmenty.character.replace</a><ul>
 <li><a class="reference internal" href="#augmenty.character.replace.create_char_random_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_char_random_augmenter_v1()</span></code></a></li>
 <li><a class="reference internal" href="#augmenty.character.replace.create_char_replace_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_char_replace_augmenter_v1()</span></code></a></li>
 <li><a class="reference internal" href="#augmenty.character.replace.create_keystroke_error_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_keystroke_error_augmenter_v1()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#augmenty-character-spacing">augmenty.character.spacing</a><ul>
+<li><a class="reference internal" href="#module-augmenty.character.spacing">augmenty.character.spacing</a><ul>
 <li><a class="reference internal" href="#augmenty.character.spacing.create_remove_spacing_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_remove_spacing_augmenter_v1()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#augmenty-character-swap">augmenty.character.swap</a><ul>
+<li><a class="reference internal" href="#module-augmenty.character.swap">augmenty.character.swap</a><ul>
 <li><a class="reference internal" href="#augmenty.character.swap.create_char_swap_augmenter_v1"><code class="docutils literal notranslate"><span class="pre">create_char_swap_augmenter_v1()</span></code></a></li>
 </ul>
 </li>

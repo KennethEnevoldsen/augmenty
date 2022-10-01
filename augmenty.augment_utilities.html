@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
 <meta property="og:title" content="Augmentation Utilities" />
   
@@ -13,10 +13,10 @@
 <meta property="og:description" content="Augmentation utilities include functions for combining and moderating augmentations. augmenty.augment_utilities: Utility functions used for augmentation." />
   <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Utilities" href="augmenty.util.html" /><link rel="prev" title="Language-specific" href="augmenty.lang.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.1, furo 2022.09.15"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><meta name="generator" content="sphinx-5.2.3, furo 2022.09.29"/>
         <title>Augmentation Utilities - augmenty 1.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=9ec31e2665bf879c1d47d93a8ec4893870ee1e45" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -216,7 +216,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -233,10 +234,10 @@
           <section id="augmentation-utilities">
 <h1>Augmentation Utilities<a class="headerlink" href="#augmentation-utilities" title="Permalink to this heading">#</a></h1>
 <p>Augmentation utilities include functions for combining and moderating augmentations.</p>
-<section id="augmenty-augment-utilities">
-<h2>augmenty.augment_utilities<a class="headerlink" href="#augmenty-augment-utilities" title="Permalink to this heading">#</a></h2>
+<section id="module-augmenty.augment_utilities">
+<span id="augmenty-augment-utilities"></span><h2>augmenty.augment_utilities<a class="headerlink" href="#module-augmenty.augment_utilities" title="Permalink to this heading">#</a></h2>
 <p>Utility functions used for augmentation.</p>
-<span class="target" id="module-augmenty.augment_utilities"></span><dl class="py function">
+<dl class="py function">
 <dt class="sig sig-object py" id="augmenty.augment_utilities.combine">
 <span class="sig-prename descclassname"><span class="pre">augmenty.augment_utilities.</span></span><span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">augmenters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/augment_utilities.html#combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.augment_utilities.combine" title="Permalink to this definition">#</a></dt>
 <dd><p>Combines a series of spaCy style augmenters.</p>
@@ -387,7 +388,7 @@ be applied to. Only yield the original when the original doc is augmented.</p></
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Augmentation Utilities</a><ul>
-<li><a class="reference internal" href="#augmenty-augment-utilities">augmenty.augment_utilities</a><ul>
+<li><a class="reference internal" href="#module-augmenty.augment_utilities">augmenty.augment_utilities</a><ul>
 <li><a class="reference internal" href="#augmenty.augment_utilities.combine"><code class="docutils literal notranslate"><span class="pre">combine()</span></code></a></li>
 <li><a class="reference internal" href="#augmenty.augment_utilities.repeat"><code class="docutils literal notranslate"><span class="pre">repeat()</span></code></a></li>
 <li><a class="reference internal" href="#augmenty.augment_utilities.set_doc_level"><code class="docutils literal notranslate"><span class="pre">set_doc_level()</span></code></a></li>
