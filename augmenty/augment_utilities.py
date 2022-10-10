@@ -25,8 +25,7 @@ def combine(
         examples = [example]
         for aug in augmenters:
             examples = [e for example in examples for e in aug(nlp, example)]
-        for e in examples:
-            yield e
+        yield from examples
 
     return apply_multiple_augmenters
 
@@ -50,8 +49,7 @@ def set_doc_level(
         if random.random() > level:
             yield example
         else:
-            for e in augmenter(nlp, example):
-                yield e
+            yield from augmenter(nlp, example)
 
     return __augment
 
@@ -76,8 +74,7 @@ def repeat(
 
     def __augment(nlp: Language, example: Example):
         for i in range(n):
-            for e in augmenter(nlp, example):
-                yield e
+            yield from augmenter(nlp, example)
 
     return __augment
 
@@ -101,8 +98,7 @@ def yield_original(
 
     def __augment(nlp: Language, example: Example, level: float):
         if random.random() < level:
-            for e in augmenter(nlp, example):
-                yield e
+            yield from augmenter(nlp, example)
         yield example
 
     return partial(__augment, level=doc_level)
