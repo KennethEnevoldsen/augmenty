@@ -1,6 +1,10 @@
 News and Changelog
 ==============================
 
+* 1.0.4 (11/10/22):
+   
+  - Hungarian keyboard was added (by `qeterme <https://github.com/qeterme>`__)
+
 * 1.0.0 (05/04/22)
 
   - Added new augmenters
