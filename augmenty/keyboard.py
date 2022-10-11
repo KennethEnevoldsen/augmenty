@@ -84,8 +84,7 @@ class Keyboard(BaseModel):
         """
         for arr in self.keyboard_array:
             for x, _ in enumerate(self.keyboard_array[arr]):
-                for k in self.keyboard_array[arr][x]:
-                    yield k
+                yield from self.keyboard_array[arr][x]
 
     def get_neighbours(self, key: str, distance: int = 1) -> Set[int]:
         """gets the neighbours of a key with a specified distance.
