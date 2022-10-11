@@ -24,6 +24,7 @@ from .lang import (  # noqa
     create_qwerty_en,
     create_qwerty_es,
     create_qwerty_fr,
+    create_qwerty_hu,
     create_qwerty_it,
     create_qwerty_lt,
     create_qwerty_nb,

@@ -6,6 +6,7 @@ from .el import create_qwerty_el  # noqa
 from .en import create_qwerty_en  # noqa
 from .es import create_qwerty_es  # noqa
 from .fr import create_qwerty_fr  # noqa
+from .hu import create_qwerty_hu  # noqa
 from .it import create_qwerty_it  # noqa
 from .lt import create_qwerty_lt  # noqa
 from .mk import create_mk  # noqa
