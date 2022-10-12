@@ -50,7 +50,7 @@ jobs:
         pytest --cov=augmenty --cov-report term-missing | tee pytest-coverage.txt
     - name: Pytest coverage comment
       id: coverage-comment
-      uses: MishaKav/pytest-coverage-comment@v1.1.35
+      uses: MishaKav/pytest-coverage-comment@v1.1.36
       with:
         pytest-coverage-path: ./pytest-coverage.txt
         github-token: ${{ secrets.SPHINX_DOCUMENTATION }}
