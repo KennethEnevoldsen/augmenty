@@ -61,7 +61,7 @@ jobs:
         echo "Coverage Report - ${{ steps.coverage-comment.outputs.coverage }}"
         echo "Coverage Color - ${{ steps.coverage-comment.outputs.color }}"
     - name: Create the Badge
-      uses: schneegans/dynamic-badges-action@v1.5.0
+      uses: schneegans/dynamic-badges-action@v1.6.0
       with:
         auth: ${{ secrets.PYTEST_COVERAGE }}
         gistID: 2d5c14e682c3560240fe05cc7c9f4d2d
