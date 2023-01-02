@@ -244,7 +244,7 @@
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
@@ -323,7 +323,7 @@
     <span class="n">getter</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter swaps a token with its synonym based on a dictionary.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        lang (Optional[str], optional): Language supplied a ISO 639-1 language code.</span>
@@ -436,7 +436,7 @@
     <span class="n">replace</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
@@ -471,7 +471,7 @@
     <span class="n">keep_titlecase</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): Probability to replace token given that it is in synonym</span>

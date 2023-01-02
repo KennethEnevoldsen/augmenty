@@ -242,7 +242,7 @@
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Create an augmenter which replaces an entity based on a dictionary lookup.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces an entity based on a dictionary lookup.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level (float): the percentage of entities to be augmented.</span>
@@ -375,7 +375,7 @@
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">person_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;PERSON&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Create an augmenter which replaces a name (PER) with a news sampled from the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces a name (PER) with a news sampled from the</span>
 <span class="sd">    names dictionary.</span>
 
 <span class="sd">    Args:</span>
@@ -421,7 +421,7 @@
     <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
     <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A utility function for create_pers_replace_augmenter, which creates an infinite</span>
 <span class="sd">    generator based on a names dictionary and a list of patterns, where the string in</span>
 <span class="sd">    the pattern correspond to the list in the pattern.</span>
@@ -443,7 +443,7 @@
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Creates an augmenter which reorders and formats a entity according to reordering</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which reorders and formats a entity according to reordering</span>
 <span class="sd">    and formatting functions.</span>
 
 <span class="sd">    Args:</span>

@@ -493,9 +493,9 @@ div.rendered_html tbody tr:hover {
 <section id="Installation">
 <h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this heading">#</a></h2>
 <p>Before we get ahead of ourselves let us just install the required packages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install augmenty
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>augmenty
 <span class="c1"># install the spacy pipeline</span>
-python -m spacy download en_core_web_md
+python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>download<span class="w"> </span>en_core_web_md
 </pre></div>
 </div>
 </section>
@@ -751,7 +751,7 @@ You can also use it to see how robust your model is to changes.
 <h2>Applying augmentation to Examples or a Corpus<a class="headerlink" href="#Applying-augmentation-to-Examples-or-a-Corpus" title="Permalink to this heading">#</a></h2>
 <p>Examples consists of two docs, one containing the predictions of the model, the other containing the gold labelled document. For this example we will load the DaNE dataset. DaNE includes the Danish dependency treebank additionally tagged for named entities. Here we will use synonym replacement to augment a corpus.</p>
 <p>To load the corpus we will use <a class="reference external" href="https://centre-for-humanities-computing.github.io/DaCy/">DaCy</a> which we will install using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dacy
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>dacy
 </pre></div>
 </div>
 <p>And then we can apply the methods:</p>
@@ -774,7 +774,7 @@ You can also use it to see how robust your model is to changes.
 <h2>Using Faker for entity replacing<a class="headerlink" href="#Using-Faker-for-entity-replacing" title="Permalink to this heading">#</a></h2>
 <p>Augmenty allow for easy integrations of existing libraries such as <a class="reference external" href="https://faker.readthedocs.io/en/master/index.html">Faker</a>. Faker is an open-source python library which can generate various entities such as names. It is compatibile with multiple languages and has a lot of language-specific entity generators.</p>
 <p>To install Faker:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install faker
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>faker
 </pre></div>
 </div>
 <div class="nbinput nblast docutils container">

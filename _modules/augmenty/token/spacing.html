@@ -237,7 +237,7 @@
 <span class="k">def</span> <span class="nf">create_letter_spacing_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Typically casing is used to add emphasis to words, but letter spacing has also</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Typically casing is used to add emphasis to words, but letter spacing has also</span>
 <span class="sd">    been used to add e m p h a s i s  to words (e.g. by Grundtvig; Baunvig, Jarvis and</span>
 <span class="sd">    Nielbo, 2020). This augmenter randomly adds letter spacing emphasis to words. This</span>
 <span class="sd">    augmentation which are human readable, but which are clearly challenging for</span>
@@ -274,7 +274,7 @@
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">max_insertions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Creates and augmneter that randomly adds a space after a chara cter. Tokens are</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates and augmneter that randomly adds a space after a chara cter. Tokens are</span>
 <span class="sd">    kept the same.</span>
 
 <span class="sd">    Args:</span>
