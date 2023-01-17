@@ -1,5 +1,5 @@
 {
-    "spacy.orth_variants_v1": {
+    "spacy.orth_variants.v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -10,19 +10,7 @@
             "training"
         ]
     },
-    "spacy.lower_case_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "random_casing_v1": {
+    "pacy.combined_augmenter.v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -34,334 +22,359 @@
             "training"
         ]
     },
-    "char_replace_random_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "char_replace_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "keystroke_error_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "char_swap_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "random_starting_case_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "conditional_token_casing_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "token_replace_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "token_dict_replace_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "wordnet_synonym_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "references": {
-            "Data": {
-                "authors": "Miller",
-                "year": "1998",
-                "link": "https://www.google.com/books?hl=da&lr=&id=Rehu8OOzMIMC&oi=fnd&pg=PR11&dq=WordNet:+An+electronic+lexical+database&ots=IsieQmWUg8&sig=06asxxcQ1I3i9C1TcEcz7bv62Kw"
-            },
-            "Package": {
-                "authors": "Steven",
-                "year": "2006",
-                "link": "https://www.nltk.org"
-            },
-            "Usage": [
-                {
-                    "authors": "Wei and Zau",
-                    "year": "2019",
-                    "link": "https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&utm_medium=email&utm_source=Revue%20newsletter"
-                }
-            ]
+}
+    "spacy.lower_case.v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"random_casing_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"char_replace_random_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"char_replace_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"keystroke_error_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"char_swap_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"random_starting_case_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"conditional_token_casing_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"token_replace_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"token_dict_replace_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"wordnet_synonym_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "references": {
+        "Data": {
+            "authors": "Miller",
+            "year": "1998",
+            "link": "https://www.google.com/books?hl=da&lr=&id=Rehu8OOzMIMC&oi=fnd&pg=PR11&dq=WordNet:+An+electronic+lexical+database&ots=IsieQmWUg8&sig=06asxxcQ1I3i9C1TcEcz7bv62Kw"
         },
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "letter_spacing_augmenter_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation"
-        ]
-    },
-    "spacing_insertion_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation"
-        ]
-    },
-    "token_swap_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "references": {
-            "Usage": [
-                {
-                    "authors": "Wei and Zau",
-                    "year": "2019",
-                    "link": "https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&utm_medium=email&utm_source=Revue%20newsletter"
-                }
-            ]
+        "Package": {
+            "authors": "Steven",
+            "year": "2006",
+            "link": "https://www.nltk.org"
         },
-        "use": [
-            "evaluation",
-            "training"
+        "Usage": [
+            {
+                "authors": "Wei and Zau",
+                "year": "2019",
+                "link": "https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&utm_medium=email&utm_source=Revue%20newsletter"
+            }
         ]
     },
-    "ents_replace_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"letter_spacing_augmenter_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation"
+    ]
+},
+"spacing_insertion_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation"
+    ]
+},
+"token_swap_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "references": {
+        "Usage": [
+            {
+                "authors": "Wei and Zau",
+                "year": "2019",
+                "link": "https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&utm_medium=email&utm_source=Revue%20newsletter"
+            }
         ]
     },
-    "per_replace_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "ents_format_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "upper_case_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation"
-        ]
-    },
-    "spongebob_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation"
-        ]
-    },
-    "da_æøå_replace_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "remove_spacing_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation"
-        ]
-    },
-    "da_historical_noun_casing_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "word_embedding_v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "training"
-        ]
-    },
-    "duplicate_token_v1": {
-        "respects": [
-            "token labels",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "training",
-            "evaluation"
-        ]
-    },
-    "token_insert_v1": {
-        "respects": [
-            "token labels",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "training",
-            "evaluation"
-        ]
-    },
-    "random_synonym_insertion_v1": {
-        "respects": [
-            "token labels",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "training",
-            "evaluation"
-        ]
-    },
-    "token_insert_random_v1": {
-        "respects": [
-            "token labels",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "training",
-            "evaluation"
-        ]
-    },
-    "paragraph_subset_augmenter_v1": {
-        "respects": [
-            "token labels",
-            "entity labels",
-            "dependency parsing",
-            "document labels"
-        ],
-        "use": [
-            "training",
-            "evaluation"
-        ]
-    }
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"ents_replace_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"per_replace_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"ents_format_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"upper_case_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation"
+    ]
+},
+"spongebob_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation"
+    ]
+},
+"da_æøå_replace_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"remove_spacing_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation"
+    ]
+},
+"da_historical_noun_casing_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "evaluation",
+        "training"
+    ]
+},
+"word_embedding_v1": {
+    "respects": [
+        "token labels",
+        "dependency parsing",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "training"
+    ]
+},
+"duplicate_token_v1": {
+    "respects": [
+        "token labels",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "training",
+        "evaluation"
+    ]
+},
+"token_insert_v1": {
+    "respects": [
+        "token labels",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "training",
+        "evaluation"
+    ]
+},
+"random_synonym_insertion_v1": {
+    "respects": [
+        "token labels",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "training",
+        "evaluation"
+    ]
+},
+"token_insert_random_v1": {
+    "respects": [
+        "token labels",
+        "entity labels",
+        "document labels"
+    ],
+    "use": [
+        "training",
+        "evaluation"
+    ]
+},
+"paragraph_subset_augmenter_v1": {
+    "respects": [
+        "token labels",
+        "entity labels",
+        "dependency parsing",
+        "document labels"
+    ],
+    "use": [
+        "training",
+        "evaluation"
+    ]
+}
 }
