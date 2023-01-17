@@ -7,8 +7,6 @@
 [![Code style: black](https://img.shields.io/badge/Code%20Style-Black-black)](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
 [![github actions pytest](https://github.com/kennethenevoldsen/augmenty/actions/workflows/tests.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions)
 [![github actions docs](https://github.com/kennethenevoldsen/augmenty/actions/workflows/documentation.yml/badge.svg)](https://kennethenevoldsen.github.io/augmenty/)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/kennethenevoldsen/augmenty/demo/streamlit.py)
-<!-- [![pip downloads](https://img.shields.io/pypi/dm/augmenty.svg)](https://pypi.org/project/augmenty/) -->
 
 
 Augmenty is an augmentation library based on spaCy for augmenting texts. Besides a wide array of highly flexible augmenters, Augmenty provides a series of tools for working with augmenters, including combining and moderating augmenters. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the assigned labels under the augmentation, thus making many of the augmenters valid for training in a wider range of tasks.
@@ -58,7 +56,6 @@ spaCy Universe is a great tool for text augmentation.
 | 📰 **[News and changelog]** | New additions, changes and version history.                                 |
 | 🎛 **[API References]**     | The detailed reference for augmenty's API. Including function documentation |
 | 🍒 **[Augmenters]**         | Contains a full list of current augmenters in augmenty.                     |
-| 😎 **[Demo]**               | A simple Streamlit demo to try out the augmenters.                          |
 | 🙋 **[FAQ]**                | Frequently asked question regarding augmenty                                |
 
 [usage guides]: https://kennethenevoldsen.github.io/augmenty/tutorials/introduction.html
