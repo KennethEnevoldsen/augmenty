@@ -78,6 +78,10 @@ docs = [
     "sphinx_design>=0.3.0,<0.3.1",
      "myst-nb>=0.6.0,<1.17.0",
 ]
+tutorials = [
+    "jupyter>=1.0.0,<1.1.0",
+    "faker==13.13.0"
+]
 
 
 [build-system]
