@@ -56,7 +56,7 @@ name = "MIT"
 
 
 [project.optional-dependencies]
-da = ["dacy>=1.1.1,<2.1.0"]
+da = ["dacy>=1.1.1,<2.4.0"]
 all = ["nltk>=3.6.7,<3.8.0"]
 style = [
     "black==22.12.0",
