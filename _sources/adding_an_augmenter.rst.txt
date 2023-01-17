@@ -17,7 +17,7 @@ When adding an new augmenter to Augmenty you should:
   * This is also the function that should contain the documentation. Which we recommend includes at least one example of usage.
 
 - Add at least one test of the function.
-- Add an entry to the file `meta.json <https://github.com/KennethEnevoldsen/augmenty/blob/master/augmenty/meta.json>`__. This entry is used for generating the augmenters overview and can contain:
+- Add an entry to the file `meta.json <https://github.com/KennethEnevoldsen/augmenty/blob/main/augmenty/meta.json>`__. This entry is used for generating the augmenters overview and can contain:
 
   * "description": An optional short description, if there isn't any it is extracted from the function documentation.
   * "respects": What label the augmentation respects.
