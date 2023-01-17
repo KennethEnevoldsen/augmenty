@@ -44,35 +44,36 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "spacy.combined_augmenter.v1\n",
       "spacy.orth_variants.v1\n",
       "spacy.lower_case.v1\n",
-      "random_casing.v1\n",
-      "char_replace_random.v1\n",
-      "char_replace.v1\n",
-      "keystroke_error.v1\n",
-      "remove_spacing.v1\n",
-      "char_swap.v1\n",
-      "random_starting_case.v1\n",
-      "conditional_token_casing.v1\n",
-      "token_dict_replace.v1\n",
-      "wordnet_synonym.v1\n",
-      "token_replace.v1\n",
-      "word_embedding.v1\n",
-      "letter_spacing_augmenter.v1\n",
-      "spacing_insertion.v1\n",
-      "token_swap.v1\n",
-      "token_insert.v1\n",
-      "token_insert_random.v1\n",
-      "duplicate_token.v1\n",
-      "random_synonym_insertion.v1\n",
-      "ents_replace.v1\n",
-      "per_replace.v1\n",
-      "ents_format.v1\n",
-      "upper_case.v1\n",
-      "spongebob.v1\n",
-      "paragraph_subset_augmenter.v1\n",
-      "da_æøå_replace.v1\n",
-      "da_historical_noun_casing.v1\n"
+      "random_casing_v1\n",
+      "char_replace_random_v1\n",
+      "char_replace_v1\n",
+      "keystroke_error_v1\n",
+      "remove_spacing_v1\n",
+      "char_swap_v1\n",
+      "upper_case_v1\n",
+      "spongebob_v1\n",
+      "paragraph_subset_augmenter_v1\n",
+      "random_starting_case_v1\n",
+      "conditional_token_casing_v1\n",
+      "token_insert_v1\n",
+      "token_insert_random_v1\n",
+      "duplicate_token_v1\n",
+      "random_synonym_insertion_v1\n",
+      "token_dict_replace_v1\n",
+      "wordnet_synonym_v1\n",
+      "token_replace_v1\n",
+      "word_embedding_v1\n",
+      "letter_spacing_augmenter_v1\n",
+      "spacing_insertion_v1\n",
+      "token_swap_v1\n",
+      "da_æøå_replace_v1\n",
+      "da_historical_noun_casing_v1\n",
+      "ents_replace_v1\n",
+      "per_replace_v1\n",
+      "ents_format_v1\n"
      ]
     }
    ],
@@ -86,10 +87,11 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "To get get more information about an individual augmenter you can always simply use `help` for instance let is say you want to know more about the upper case augmenter you could run: `help(augmenters[\"upper_case.v1\"])`."
+    "To get get more information about an individual augmenter you can always simply use `help` for instance let is say you want to know more about the upper case augmenter you could run: `help(augmenters[\"upper_case_v1\"])`."
    ]
   },
   {
@@ -105,7 +107,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "upper_case_augmenter = augmenty.load(\"upper_case.v1\", level=1.00)  # 100% uppercase"
+    "upper_case_augmenter = augmenty.load(\"upper_case_v1\", level=1.00)  # 100% uppercase"
    ]
   },
   {
@@ -217,7 +219,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "synonym_augmenter = augmenty.load(\"wordnet_synonym.v1\", level=1, lang=\"en\")\n",
+    "synonym_augmenter = augmenty.load(\"wordnet_synonym_v1\", level=1, lang=\"en\")\n",
     "\n",
     "combined_aug = augmenty.combine([ent_augmenter, synonym_augmenter])"
    ]
@@ -257,7 +259,7 @@
    "outputs": [],
    "source": [
     "keystroke_augmenter = augmenty.load(\n",
-    "    \"keystroke_error.v1\", keyboard=\"en_qwerty.v1\", level=0.05\n",
+    "    \"keystroke_error_v1\", keyboard=\"en_qwerty_v1\", level=0.05\n",
     ")  # 5% if characters\n",
     "\n",
     "keystroke_augmenter = augmenty.set_doc_level(\n",
@@ -319,7 +321,7 @@
     }
    ],
    "source": [
-    "token_swap_augmenter = augmenty.load(\"token_swap.v1\", level=0.20)\n",
+    "token_swap_augmenter = augmenty.load(\"token_swap_v1\", level=0.20)\n",
     "token_swap_augmenter = augmenty.yield_original(\n",
     "    token_swap_augmenter\n",
     ")  # yield both the augmented and original example\n",
@@ -414,19 +416,20 @@
     }
    ],
    "source": [
-    "ent_augmenter = augmenty.load(\"ents_replace.v1\", level=1.00, ent_dict=ent_dict)\n",
+    "ent_augmenter = augmenty.load(\"ents_replace_v1\", level=1.00, ent_dict=ent_dict)\n",
     "\n",
     "docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))\n",
     "print(docs[0])"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
     "## Creating and Contributing Augmenters\n",
     "\n",
-    "After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance the augmenter `per_replace.v1`, which replaces names in a text is a spacial case of the augmenter `ents_replace.v1` with better handling of first and last names. If you want to create an augmenter from scratch following spaCy's [guide](https://spacy.io/usage/training#data-augmentation-custom) on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well. If you find yourself in troubles feel free to ask in the [augmenty forums](missing). \n",
+    "After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance the augmenter `per_replace_v1`, which replaces names in a text is a spacial case of the augmenter `ents_replace_v1` with better handling of first and last names. If you want to create an augmenter from scratch following spaCy's [guide](https://spacy.io/usage/training#data-augmentation-custom) on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well. If you find yourself in troubles feel free to ask in the [augmenty forums](missing). \n",
     "\n",
     "When you are satisfied with your augmenter feel free submit a [pull request](https://github.com/KennethEnevoldsen/augmenty/pulls) to add the augmenter to augmenty."
    ]
@@ -455,7 +458,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.8.15 (default, Oct 11 2022, 21:31:25) \n[Clang 14.0.0 (clang-1400.0.29.102)]"
+   "version": "3.8.15"
   },
   "vscode": {
    "interpreter": {

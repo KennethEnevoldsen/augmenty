@@ -17,13 +17,31 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-upper_case_augmenter = augmenty.load("upper_case.v1", level=1.00)  # 100% uppercase
+texts = [
+    "Augmenty is a wonderful tool for augmentation which is made using SpaCy developed by Explosion."
+]
+
+ent_augmenter = augmenty.load(
+    "ents_replace.v1", level=1.00, ent_dict={"ORG": [["The SpaCy Universe"]]}
+)
+
+augmented_texts = augmenty.texts(texts, augmenter=ent_augmenter, nlp=nlp)
+
+for text in augmented_texts:
+    print(text)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mRegistryError[0m                             Traceback (most recent call last)
-Cell [0;32mIn[2], line 1[0m
-[0;32m----> 1[0m upper_case_augmenter [38;5;241m=[39m [43maugmenty[49m[38;5;241;43m.[39;49m[43mload[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mupper_case.v1[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mlevel[49m[38;5;241;43m=[39;49m[38;5;241;43m1.00[39;49m[43m)[49m  [38;5;66;03m# 100% uppercase[39;00m
+Cell [0;32mIn[4], line 5[0m
+[1;32m      1[0m texts [38;5;241m=[39m [
+[1;32m      2[0m     [38;5;124m"[39m[38;5;124mAugmenty is a wonderful tool for augmentation which is made using SpaCy developed by Explosion.[39m[38;5;124m"[39m
+[1;32m      3[0m ]
+[0;32m----> 5[0m ent_augmenter [38;5;241m=[39m [43maugmenty[49m[38;5;241;43m.[39;49m[43mload[49m[43m([49m
+[1;32m      6[0m [43m    [49m[38;5;124;43m"[39;49m[38;5;124;43ments_replace.v1[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mlevel[49m[38;5;241;43m=[39;49m[38;5;241;43m1.00[39;49m[43m,[49m[43m [49m[43ment_dict[49m[38;5;241;43m=[39;49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43mORG[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m[[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mThe SpaCy Universe[39;49m[38;5;124;43m"[39;49m[43m][49m[43m][49m[43m}[49m
+[1;32m      7[0m [43m)[49m
+[1;32m      9[0m augmented_texts [38;5;241m=[39m augmenty[38;5;241m.[39mtexts(texts, augmenter[38;5;241m=[39ment_augmenter, nlp[38;5;241m=[39mnlp)
+[1;32m     11[0m [38;5;28;01mfor[39;00m text [38;5;129;01min[39;00m augmented_texts:
 
 File [0;32m~/.local/lib/python3.10/site-packages/augmenty/util.py:109[0m, in [0;36mload[0;34m(augmenter, **kwargs)[0m
 [1;32m     95[0m [38;5;28;01mdef[39;00m [38;5;21mload[39m(augmenter[38;5;241m=[39m[38;5;28mstr[39m, [38;5;241m*[39m[38;5;241m*[39mkwargs) [38;5;241m-[39m[38;5;241m>[39m Callable:
@@ -44,6 +62,6 @@ File [0;32m~/.local/lib/python3.10/site-packages/catalogue/__init__.py:105[0m,
 [1;32m    107[0m     )
 [1;32m    108[0m [38;5;28;01mreturn[39;00m _get(namespace)
 
-[0;31mRegistryError[0m: Cant't find 'upper_case.v1' in registry spacy -> augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
-RegistryError: Cant't find 'upper_case.v1' in registry spacy -> augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
+[0;31mRegistryError[0m: Cant't find 'ents_replace.v1' in registry spacy -> augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
+RegistryError: Cant't find 'ents_replace.v1' in registry spacy -> augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
 
