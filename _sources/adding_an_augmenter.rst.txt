@@ -13,7 +13,7 @@ When adding an new augmenter to Augmenty you should:
 - Add the augmenter.
 - Add a create function for the augmenter.
 
-  * You should also add this to the spacy augmenters registry. You can do this easily using the decorator :code:`@spacy.registry.augmenters("name_of_your_augmenter.v1")`. This allows the function to be fetchable using :code:`augmenty.load`.
+  * You should also add this to the spacy augmenters registry. You can do this easily using the decorator :code:`@spacy.registry.augmenters("name_of_your_augmenter_v1")`. This allows the function to be fetchable using :code:`augmenty.load`.
   * This is also the function that should contain the documentation. Which we recommend includes at least one example of usage.
 
 - Add at least one test of the function.

@@ -1,6 +1,10 @@
 News and Changelog
 ==============================
 
+* 1.1.0 (17/01/23):
+
+  - Added support for SpaCy 3.4.0, this requires refactoring the names of all augmenters from ``{augmenter-name}.v1`` to `{augmenter-name}_v1`` as the ``.`` is no longer allowed in SpaCy component names.
+
 * 1.0.4 (11/10/22):
    
   - Hungarian keyboard was added (by `qeterme <https://github.com/qeterme>`__)

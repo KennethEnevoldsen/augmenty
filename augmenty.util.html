@@ -11,11 +11,13 @@
 <meta name="description" content="Utilities include convenience functions for working with augmenters. augmenty.span.util: Utility functions for the package." />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Keyboard" href="augmenty.keyboard.html" /><link rel="prev" title="Augmentation Utilities" href="augmenty.augment_utilities.html" />
 
-    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>Utilities - augmenty 1.0.4 documentation</title>
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>Utilities - augmenty 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -136,7 +138,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 1.0.4 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -238,7 +240,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.augmenters">
 <span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">augmenters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#augmenters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.augmenters" title="Permalink to this definition">#</a></dt>
-<dd><p>A utility function to get an overview of all augmenters</p>
+<dd><p>A utility function to get an overview of all augmenters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dictionary of all augmenters</p>
@@ -249,14 +251,14 @@
 </dl>
 <p>Example:
 &gt;&gt;&gt; augmenters = augmenty.augmenters()
-&gt;&gt;&gt; “upper_case.v1” in augmenters
+&gt;&gt;&gt; “upper_case_v1” in augmenters
 True</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.docs">
 <span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">docs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Doc</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augmenter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Language</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Doc</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#docs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.docs" title="Permalink to this definition">#</a></dt>
-<dd><p>Augments an iterable of spaCy Doc</p>
+<dd><p>Augments an iterable of spaCy Doc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -280,7 +282,7 @@ True</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="kn">import</span> <span class="n">English</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Doc</span><span class="p">(</span><span class="n">words</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Fine&quot;</span><span class="p">,</span> <span class="s2">&quot;by&quot;</span><span class="p">,</span> <span class="s2">&quot;me&quot;</span><span class="p">])]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;upper_case.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;upper_case_v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">augmented_docs</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">docs</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -289,7 +291,7 @@ True</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.keyboards">
 <span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">keyboards</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#keyboards"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.keyboards" title="Permalink to this definition">#</a></dt>
-<dd><p>A utility function to get an overview of all keyboards</p>
+<dd><p>A utility function to get an overview of all keyboards.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all keyboards</p>
@@ -305,7 +307,7 @@ True</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.load">
 <span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">augmenter=&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="_modules/augmenty/util.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.load" title="Permalink to this definition">#</a></dt>
-<dd><p>A utility functionload an augmenter</p>
+<dd><p>A utility functionload an augmenter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dictionary of all augmenters</p>
@@ -317,7 +319,7 @@ True</p>
 <p>Example:
 &gt;&gt;&gt; from spacy.lang.en import English
 &gt;&gt;&gt; nlp = English()
-&gt;&gt;&gt; upper_case_augmenter = augmenty.load(“upper_case.v1”, level = 1)
+&gt;&gt;&gt; upper_case_augmenter = augmenty.load(“upper_case_v1”, level = 1)
 &gt;&gt;&gt; texts = [“hello there!”]
 &gt;&gt;&gt; list(augmenty.texts(texts, upper_case_augmenter, nlp))
 [“HELLO THERE!”]</p>
@@ -337,13 +339,13 @@ True</p>
 </dl>
 <p>Example:
 &gt;&gt;&gt; metadata = augmenty.meta()
-&gt;&gt;&gt; metadata[“token_swap.v1”]</p>
+&gt;&gt;&gt; metadata[“token_swap_v1”]</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.texts">
 <span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">texts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augmenter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Language</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#texts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.texts" title="Permalink to this definition">#</a></dt>
-<dd><p>Augments an list of texts</p>
+<dd><p>Augments an list of texts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -444,14 +446,11 @@ True</p>
     </aside>
   </div>
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/design-tabs.js"></script>
     </body>
 </html>

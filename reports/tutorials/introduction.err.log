@@ -1,0 +1,49 @@
+Traceback (most recent call last):
+  File "/home/runner/.local/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+upper_case_augmenter = augmenty.load("upper_case.v1", level=1.00)  # 100% uppercase
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mRegistryError[0m                             Traceback (most recent call last)
+Cell [0;32mIn[2], line 1[0m
+[0;32m----> 1[0m upper_case_augmenter [38;5;241m=[39m [43maugmenty[49m[38;5;241;43m.[39;49m[43mload[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mupper_case.v1[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mlevel[49m[38;5;241;43m=[39;49m[38;5;241;43m1.00[39;49m[43m)[49m  [38;5;66;03m# 100% uppercase[39;00m
+
+File [0;32m~/.local/lib/python3.10/site-packages/augmenty/util.py:109[0m, in [0;36mload[0;34m(augmenter, **kwargs)[0m
+[1;32m     95[0m [38;5;28;01mdef[39;00m [38;5;21mload[39m(augmenter[38;5;241m=[39m[38;5;28mstr[39m, [38;5;241m*[39m[38;5;241m*[39mkwargs) [38;5;241m-[39m[38;5;241m>[39m Callable:
+[1;32m     96[0m [38;5;250m    [39m[38;5;124;03m"""A utility functionload an augmenter.[39;00m
+[1;32m     97[0m 
+[1;32m     98[0m [38;5;124;03m    Returns:[39;00m
+[0;32m   (...)[0m
+[1;32m    107[0m [38;5;124;03m    ["HELLO THERE!"][39;00m
+[1;32m    108[0m [38;5;124;03m    """[39;00m
+[0;32m--> 109[0m     aug [38;5;241m=[39m [43mspacy[49m[38;5;241;43m.[39;49m[43mregistry[49m[38;5;241;43m.[39;49m[43maugmenters[49m[38;5;241;43m.[39;49m[43mget[49m[43m([49m[43maugmenter[49m[43m)[49m
+[1;32m    110[0m     [38;5;28;01mreturn[39;00m aug([38;5;241m*[39m[38;5;241m*[39mkwargs)
+
+File [0;32m~/.local/lib/python3.10/site-packages/catalogue/__init__.py:105[0m, in [0;36mRegistry.get[0;34m(self, name)[0m
+[1;32m    103[0m     current_namespace [38;5;241m=[39m [38;5;124m"[39m[38;5;124m -> [39m[38;5;124m"[39m[38;5;241m.[39mjoin([38;5;28mself[39m[38;5;241m.[39mnamespace)
+[1;32m    104[0m     available [38;5;241m=[39m [38;5;124m"[39m[38;5;124m, [39m[38;5;124m"[39m[38;5;241m.[39mjoin([38;5;28msorted[39m([38;5;28mself[39m[38;5;241m.[39mget_all()[38;5;241m.[39mkeys())) [38;5;129;01mor[39;00m [38;5;124m"[39m[38;5;124mnone[39m[38;5;124m"[39m
+[0;32m--> 105[0m     [38;5;28;01mraise[39;00m RegistryError(
+[1;32m    106[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mCant[39m[38;5;124m'[39m[38;5;124mt find [39m[38;5;124m'[39m[38;5;132;01m{[39;00mname[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m in registry [39m[38;5;132;01m{[39;00mcurrent_namespace[38;5;132;01m}[39;00m[38;5;124m. Available names: [39m[38;5;132;01m{[39;00mavailable[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m    107[0m     )
+[1;32m    108[0m [38;5;28;01mreturn[39;00m _get(namespace)
+
+[0;31mRegistryError[0m: Cant't find 'upper_case.v1' in registry spacy -> augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
+RegistryError: Cant't find 'upper_case.v1' in registry spacy -> augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
+

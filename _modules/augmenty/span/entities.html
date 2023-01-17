@@ -4,11 +4,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>augmenty.span.entities - augmenty 1.0.4 documentation</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
+        <title>augmenty.span.entities - augmenty 1.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -129,7 +131,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">augmenty 1.0.4 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">augmenty 1.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -235,44 +237,6 @@
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 
 
-<div class="viewcode-block" id="create_ent_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_ent_augmenter_v1</span><span class="p">(</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
-    <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces an entity based on a dictionary lookup.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        level (float): the percentage of entities to be augmented.</span>
-<span class="sd">        ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding</span>
-<span class="sd">            the the entity type you wish to replace (e.g. &quot;PER&quot;) and a itarable of the</span>
-<span class="sd">            replacements. A replacement is a list of string of the desired entity</span>
-<span class="sd">            replacement [&quot;Kenneth&quot;, &quot;Enevoldsen&quot;].</span>
-<span class="sd">        replace_consistency (bool, optional): Should an entity always be replaced with</span>
-<span class="sd">            the same entity? Defaults to True.</span>
-<span class="sd">        resolve_dependencies (bool, optional): Attempts to resolve the dependency tree</span>
-<span class="sd">            by setting head of the original entitity as</span>
-<span class="sd">        the head of the first token in the new entity. The remainder is the passed as</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; ent_dict = {&quot;ORG&quot;: [[&quot;Google&quot;], [&quot;Apple&quot;]],</span>
-<span class="sd">        &gt;&gt;&gt;             &quot;PERSON&quot;: [[&quot;Kenneth&quot;], [&quot;Lasse&quot;, &quot;Hansen&quot;]]}</span>
-<span class="sd">        &gt;&gt;&gt; # augment 10% of names</span>
-<span class="sd">        &gt;&gt;&gt; ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
-        <span class="n">ent_augmenter_v1</span><span class="p">,</span>
-        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
-        <span class="n">ent_dict</span><span class="o">=</span><span class="n">ent_dict</span><span class="p">,</span>
-        <span class="n">replace_consistency</span><span class="o">=</span><span class="n">replace_consistency</span><span class="p">,</span>
-        <span class="n">resolve_dependencies</span><span class="o">=</span><span class="n">resolve_dependencies</span><span class="p">,</span>
-    <span class="p">)</span></div>
-
-
 <span class="k">def</span> <span class="nf">ent_augmenter_v1</span><span class="p">(</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
@@ -281,7 +245,7 @@
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
-    <span class="n">replaced_ents</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">replaced_ents</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict[str, List[str]]</span>
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
@@ -297,9 +261,11 @@
                 <span class="n">new_ent</span> <span class="o">=</span> <span class="n">replaced_ents</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">],</span> <span class="n">Generator</span><span class="p">):</span>
-                    <span class="n">new_ent</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">])</span>
+                    <span class="n">new_ent</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">new_ent</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">new_ent</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">ent_dict</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span>  <span class="c1"># type: ignore</span>
+                        <span class="mi">0</span>
+                    <span class="p">]</span>
                 <span class="k">if</span> <span class="n">replace_consistency</span><span class="p">:</span>
                     <span class="n">replaced_ents</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
 
@@ -362,7 +328,65 @@
     <span class="k">yield</span> <span class="n">Example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_per_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;per_replace.v1&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="create_ent_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_replace_v1&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_ent_augmenter_v1</span><span class="p">(</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces an entity based on a dictionary</span>
+<span class="sd">    lookup.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        level (float): the percentage of entities to be augmented.</span>
+<span class="sd">        ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding</span>
+<span class="sd">            the the entity type you wish to replace (e.g. &quot;PER&quot;) and a itarable of the</span>
+<span class="sd">            replacements. A replacement is a list of string of the desired entity</span>
+<span class="sd">            replacement [&quot;Kenneth&quot;, &quot;Enevoldsen&quot;].</span>
+<span class="sd">        replace_consistency (bool, optional): Should an entity always be replaced with</span>
+<span class="sd">            the same entity? Defaults to True.</span>
+<span class="sd">        resolve_dependencies (bool, optional): Attempts to resolve the dependency tree</span>
+<span class="sd">            by setting head of the original entitity as</span>
+<span class="sd">        the head of the first token in the new entity. The remainder is the passed as</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; ent_dict = {&quot;ORG&quot;: [[&quot;Google&quot;], [&quot;Apple&quot;]],</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;PERSON&quot;: [[&quot;Kenneth&quot;], [&quot;Lasse&quot;, &quot;Hansen&quot;]]}</span>
+<span class="sd">        &gt;&gt;&gt; # augment 10% of names</span>
+<span class="sd">        &gt;&gt;&gt; ent_augmenter = create_ent_augmenter(ent_dict, level = 0.1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">ent_augmenter_v1</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+        <span class="n">ent_dict</span><span class="o">=</span><span class="n">ent_dict</span><span class="p">,</span>
+        <span class="n">replace_consistency</span><span class="o">=</span><span class="n">replace_consistency</span><span class="p">,</span>
+        <span class="n">resolve_dependencies</span><span class="o">=</span><span class="n">resolve_dependencies</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">generator_from_name_dict</span><span class="p">(</span>
+    <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
+    <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A utility function for create_pers_replace_augmenter, which creates an</span>
+<span class="sd">    infinite generator based on a names dictionary and a list of patterns,</span>
+<span class="sd">    where the string in the pattern correspond to the list in the pattern.&quot;&quot;&quot;</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">patterns</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">patterns_p</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">yield</span> <span class="p">[</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">names_p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="p">]</span>
+
+
+<div class="viewcode-block" id="create_per_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;per_replace_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_per_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
@@ -375,8 +399,8 @@
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">person_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;PERSON&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces a name (PER) with a news sampled from the</span>
-<span class="sd">    names dictionary.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces a name (PER) with a news sampled from</span>
+<span class="sd">    the names dictionary.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        names (Dict[str, List[str]]): A dictionary of list of names to sample from.</span>
@@ -412,77 +436,6 @@
         <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="n">person_tag</span><span class="p">:</span> <span class="n">names_gen</span><span class="p">},</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
         <span class="n">replace_consistency</span><span class="o">=</span><span class="n">replace_consistency</span><span class="p">,</span>
-    <span class="p">)</span></div>
-
-
-<span class="k">def</span> <span class="nf">generator_from_name_dict</span><span class="p">(</span>
-    <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
-    <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
-    <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
-    <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A utility function for create_pers_replace_augmenter, which creates an infinite</span>
-<span class="sd">    generator based on a names dictionary and a list of patterns, where the string in</span>
-<span class="sd">    the pattern correspond to the list in the pattern.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">patterns</span><span class="p">)</span>
-
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">lp</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">patterns_p</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">yield</span> <span class="p">[</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">names_p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="p">]</span>
-
-
-<div class="viewcode-block" id="create_ent_format_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_format_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_format.v1&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_ent_format_augmenter_v1</span><span class="p">(</span>
-    <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>
-    <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>
-    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which reorders and formats a entity according to reordering</span>
-<span class="sd">    and formatting functions.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        reordering (List[Union[int, None]]): A reordering consisting of a the desired</span>
-<span class="sd">            order of the list of indices, where None denotes the remainder. For</span>
-<span class="sd">            instance if this function was solely used on names [-1, None] indicate last</span>
-<span class="sd">            name (the last token in the name) followed by the remainder of the name.</span>
-<span class="sd">            Similarly one could more use the reordering [3, 1, 2] e.g. indicating last</span>
-<span class="sd">            name, first name, middle name. Note that if the entity only include two</span>
-<span class="sd">            tokens the 3 will be ignored producing the pattern [1, 2].</span>
-<span class="sd">        formatter (List[Union[Callable[[Token], str], None]]): A list of function</span>
-<span class="sd">            taking in a spaCy Token returning the reformatted str. E.g. the function</span>
-<span class="sd">            `lambda token: token.text[0] + &quot;.&quot;` would abbreviate the token and add</span>
-<span class="sd">            punctuation. None corresponds to no augmentation.</span>
-<span class="sd">        level (float): The probability of an entities being augmented.</span>
-<span class="sd">        ent_types (Optional[Iterable[str]], optional):  The entity types which should</span>
-<span class="sd">            be augmented. Defaults to None, indicating all entity types.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; import augmenty</span>
-<span class="sd">        &gt;&gt;&gt; import spacy</span>
-<span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; abbreviate = lambda token: token.text[0] + &quot;.&quot;</span>
-<span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load(&quot;ents_format.v1&quot;, reordering = [-1, None],</span>
-<span class="sd">        &gt;&gt;&gt;                           formatter=[None, abbreviate], level=1,</span>
-<span class="sd">        &gt;&gt;&gt;                            ent_types=[&quot;PER&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; texts = [&quot;my name is Kenneth Enevoldsen&quot;]</span>
-<span class="sd">        &gt;&gt;&gt; list(augmenty.texts(texts, augmenter, nlp))</span>
-<span class="sd">        [&quot;my name is Enevoldsen K.&quot;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
-        <span class="n">ent_format_augmenter_v1</span><span class="p">,</span>
-        <span class="n">reordering</span><span class="o">=</span><span class="n">reordering</span><span class="p">,</span>
-        <span class="n">formatter</span><span class="o">=</span><span class="n">formatter</span><span class="p">,</span>
-        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
-        <span class="n">ent_types</span><span class="o">=</span><span class="n">ent_types</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -524,6 +477,56 @@
 
     <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">Example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="create_ent_format_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_format_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_format_v1&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_ent_format_augmenter_v1</span><span class="p">(</span>
+    <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>
+    <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which reorders and formats a entity according to</span>
+<span class="sd">    reordering and formatting functions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reordering (List[Union[int, None]]): A reordering consisting of a the desired</span>
+<span class="sd">            order of the list of indices, where None denotes the remainder. For</span>
+<span class="sd">            instance if this function was solely used on names [-1, None] indicate last</span>
+<span class="sd">            name (the last token in the name) followed by the remainder of the name.</span>
+<span class="sd">            Similarly one could more use the reordering [3, 1, 2] e.g. indicating last</span>
+<span class="sd">            name, first name, middle name. Note that if the entity only include two</span>
+<span class="sd">            tokens the 3 will be ignored producing the pattern [1, 2].</span>
+<span class="sd">        formatter (List[Union[Callable[[Token], str], None]]): A list of function</span>
+<span class="sd">            taking in a spaCy Token returning the reformatted str. E.g. the function</span>
+<span class="sd">            `lambda token: token.text[0] + &quot;.&quot;` would abbreviate the token and add</span>
+<span class="sd">            punctuation. None corresponds to no augmentation.</span>
+<span class="sd">        level (float): The probability of an entities being augmented.</span>
+<span class="sd">        ent_types (Optional[Iterable[str]], optional):  The entity types which should</span>
+<span class="sd">            be augmented. Defaults to None, indicating all entity types.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import augmenty</span>
+<span class="sd">        &gt;&gt;&gt; import spacy</span>
+<span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; abbreviate = lambda token: token.text[0] + &quot;.&quot;</span>
+<span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load(&quot;ents_format_v1&quot;, reordering = [-1, None],</span>
+<span class="sd">        &gt;&gt;&gt;                           formatter=[None, abbreviate], level=1,</span>
+<span class="sd">        &gt;&gt;&gt;                            ent_types=[&quot;PER&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; texts = [&quot;my name is Kenneth Enevoldsen&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; list(augmenty.texts(texts, augmenter, nlp))</span>
+<span class="sd">        [&quot;my name is Enevoldsen K.&quot;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+        <span class="n">ent_format_augmenter_v1</span><span class="p">,</span>
+        <span class="n">reordering</span><span class="o">=</span><span class="n">reordering</span><span class="p">,</span>
+        <span class="n">formatter</span><span class="o">=</span><span class="n">formatter</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+        <span class="n">ent_types</span><span class="o">=</span><span class="n">ent_types</span><span class="p">,</span>
+    <span class="p">)</span></div>
 </pre></div>
         </article>
       </div>
@@ -557,14 +560,11 @@
     </aside>
   </div>
 </div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/scripts/furo.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
     </body>
 </html>
