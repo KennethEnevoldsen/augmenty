@@ -249,7 +249,7 @@ def create_random_synonym_insertion_augmenter_v1(
         ["I kitten saw a cat"]
     """
     init_wordnet()
-    from nltk.corpus import wordnet
+    from nltk.corpus import wordnet  # type: ignore
 
     from .wordnet_util import lang_wn_dict, upos_wn_dict
 
@@ -305,7 +305,7 @@ def create_random_synonym_insertion_augmenter_v1(
                 )
 
         if rep:
-            text = random.sample(rep, k=1)[0]
+            text = random.sample(rep, k=1)[0]  # type: ignore
             if isinstance(text, tuple):
                 return {
                     "ORTH": text[0],
