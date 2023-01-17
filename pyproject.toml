@@ -1,7 +1,7 @@
 
 [project]
 name = "augmenty"
-version = "1.1.0"
+version = "1.2.0"
 description = "An augmentation library based on SpaCy for joint augmentation of text and labels."
 authors = [{name = "Kenneth Enevoldsen", email = "kennethcenevoldsen@gmail.com"}]
 classifiers = [
