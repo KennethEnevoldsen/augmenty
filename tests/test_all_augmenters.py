@@ -22,12 +22,12 @@ abbreviate = lambda token: token.text[0] + "."  # noqa: E731
 
 
 ignore = {
-    "spacy.orth_variants_v1",
+    "spacy.orth_variants.v1",
     "token_replace_v1",
     "token_insert_v1",
     "paragraph_subset_augmenter_v1",
     "word_embedding_v1",
-    "spacy.combined_augmenter_v1",
+    "spacy.combined_augmenter.v1",
 }
 
 augmenters_args = {
@@ -65,7 +65,7 @@ augmenters_args = {
     "random_starting_case_v1": {},
     "remove_spacing_v1": {},
     "spacing_insertion_v1": {},
-    "spacy.lower_case_v1": {},
+    "spacy.lower_case.v1": {},
     "spongebob_v1": {},
     "token_dict_replace_v1": {
         "replace": {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}},
