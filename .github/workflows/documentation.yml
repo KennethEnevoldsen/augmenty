@@ -29,6 +29,11 @@ jobs:
             pip install -r ./docs/requirements.txt
           fi
 
+      - name: Create augmenters table
+        shell: bash
+        run: |
+          python ./docs/create_augmenters_table.py
+
       - name: Build and Commit
         uses: sphinx-notes/pages@2.1
         with:
