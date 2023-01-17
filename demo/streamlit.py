@@ -24,7 +24,7 @@ st.markdown(
 )
 
 not_relevant = {
-    "spacy.orth_variants_v1",
+    "spacy.orth_variants.v1",
     "char_replace_v1",
     "conditional_token_casing_v1",
     "ents_format_v1",
