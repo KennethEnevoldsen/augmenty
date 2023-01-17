@@ -31,7 +31,7 @@ def starting_case_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_starting_case.v1")
+@spacy.registry.augmenters("random_starting_case_v1")
 def create_starting_case_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -48,7 +48,7 @@ def create_starting_case_augmenter_v1(
         >>> import augmenty
         >>> from spacy.lang.en import English
         >>> nlp = English()
-        >>> augmenter = augmenty.load("random_starting_case.v1", level=0.5)
+        >>> augmenter = augmenty.load("random_starting_case_v1", level=0.5)
         >>> texts = ["one two three"]
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["one Two Three"]
@@ -77,7 +77,7 @@ def conditional_casing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("conditional_token_casing.v1")
+@spacy.registry.augmenters("conditional_token_casing_v1")
 def create_conditional_token_casing_augmenter_v1(
     conditional: Callable,
     level: float,
@@ -104,7 +104,7 @@ def create_conditional_token_casing_augmenter_v1(
         ... if token.pos_ == "PRON":
         ...    return True
         ... return False
-        >>> aug = augmenty.load("conditional_token_casing.v1", level=1, lower=True,
+        >>> aug = augmenty.load("conditional_token_casing_v1", level=1, lower=True,
         >>>                     conditional=is_pronoun)
     """
     if upper == lower or (upper is None and lower is None):

@@ -1,5 +1,5 @@
 {
-    "spacy.orth_variants.v1": {
+    "spacy.orth_variants_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -10,19 +10,7 @@
             "training"
         ]
     },
-    "spacy.lower_case.v1": {
-        "respects": [
-            "token labels",
-            "dependency parsing",
-            "entity labels",
-            "document labels"
-        ],
-        "use": [
-            "evaluation",
-            "training"
-        ]
-    },
-    "random_casing.v1": {
+    "spacy.lower_case_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -34,7 +22,7 @@
             "training"
         ]
     },
-    "char_replace_random.v1": {
+    "random_casing_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -46,7 +34,7 @@
             "training"
         ]
     },
-    "char_replace.v1": {
+    "char_replace_random_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -58,7 +46,7 @@
             "training"
         ]
     },
-    "keystroke_error.v1": {
+    "char_replace_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -70,7 +58,7 @@
             "training"
         ]
     },
-    "char_swap.v1": {
+    "keystroke_error_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -82,7 +70,7 @@
             "training"
         ]
     },
-    "random_starting_case.v1": {
+    "char_swap_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -94,7 +82,7 @@
             "training"
         ]
     },
-    "conditional_token_casing.v1": {
+    "random_starting_case_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -106,7 +94,7 @@
             "training"
         ]
     },
-    "token_replace.v1": {
+    "conditional_token_casing_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -118,7 +106,7 @@
             "training"
         ]
     },
-    "token_dict_replace.v1": {
+    "token_replace_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -130,7 +118,19 @@
             "training"
         ]
     },
-    "wordnet_synonym.v1": {
+    "token_dict_replace_v1": {
+        "respects": [
+            "token labels",
+            "dependency parsing",
+            "entity labels",
+            "document labels"
+        ],
+        "use": [
+            "evaluation",
+            "training"
+        ]
+    },
+    "wordnet_synonym_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -161,7 +161,7 @@
             "training"
         ]
     },
-    "letter_spacing_augmenter.v1": {
+    "letter_spacing_augmenter_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -172,7 +172,7 @@
             "evaluation"
         ]
     },
-    "spacing_insertion.v1": {
+    "spacing_insertion_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -183,7 +183,7 @@
             "evaluation"
         ]
     },
-    "token_swap.v1": {
+    "token_swap_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -204,7 +204,7 @@
             "training"
         ]
     },
-    "ents_replace.v1": {
+    "ents_replace_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -216,7 +216,7 @@
             "training"
         ]
     },
-    "per_replace.v1": {
+    "per_replace_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -228,7 +228,7 @@
             "training"
         ]
     },
-    "ents_format.v1": {
+    "ents_format_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -240,7 +240,7 @@
             "training"
         ]
     },
-    "upper_case.v1": {
+    "upper_case_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -251,7 +251,7 @@
             "evaluation"
         ]
     },
-    "spongebob.v1": {
+    "spongebob_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -262,7 +262,7 @@
             "evaluation"
         ]
     },
-    "da_æøå_replace.v1": {
+    "da_æøå_replace_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -274,7 +274,7 @@
             "training"
         ]
     },
-    "remove_spacing.v1": {
+    "remove_spacing_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -285,7 +285,7 @@
             "evaluation"
         ]
     },
-    "da_historical_noun_casing.v1": {
+    "da_historical_noun_casing_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -297,7 +297,7 @@
             "training"
         ]
     },
-    "word_embedding.v1": {
+    "word_embedding_v1": {
         "respects": [
             "token labels",
             "dependency parsing",
@@ -308,7 +308,7 @@
             "training"
         ]
     },
-    "duplicate_token.v1": {
+    "duplicate_token_v1": {
         "respects": [
             "token labels",
             "entity labels",
@@ -319,7 +319,7 @@
             "evaluation"
         ]
     },
-    "token_insert.v1": {
+    "token_insert_v1": {
         "respects": [
             "token labels",
             "entity labels",
@@ -330,7 +330,7 @@
             "evaluation"
         ]
     },
-    "random_synonym_insertion.v1": {
+    "random_synonym_insertion_v1": {
         "respects": [
             "token labels",
             "entity labels",
@@ -341,7 +341,7 @@
             "evaluation"
         ]
     },
-    "token_insert_random.v1": {
+    "token_insert_random_v1": {
         "respects": [
             "token labels",
             "entity labels",
@@ -352,7 +352,7 @@
             "evaluation"
         ]
     },
-    "paragraph_subset_augmenter.v1": {
+    "paragraph_subset_augmenter_v1": {
         "respects": [
             "token labels",
             "entity labels",

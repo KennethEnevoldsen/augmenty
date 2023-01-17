@@ -8,7 +8,7 @@ from ...character import create_char_replace_augmenter_v1
 from ...token import create_conditional_token_casing_augmenter_v1
 
 
-@spacy.registry.augmenters("da_æøå_replace.v1")
+@spacy.registry.augmenters("da_æøå_replace_v1")
 def create_da_æøå_replace_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -25,7 +25,7 @@ def create_da_æøå_replace_augmenter_v1(
         >>> import augmenty
         >>> from spacy.lang.en import English
         >>> nlp = English()
-        >>> augmenter = augmenty.load("da_æøå_replace.v1", level=0.1)
+        >>> augmenter = augmenty.load("da_æøå_replace_v1", level=0.1)
         >>> texts = ["æ ø Å"]
         >>> list(augmenty.texts(texts, augmenter, nlp))
         ["ae oe Aa"]
@@ -41,7 +41,7 @@ def create_da_æøå_replace_augmenter_v1(
     return create_char_replace_augmenter_v1(replace=replace_dict, level=level)
 
 
-@spacy.registry.augmenters("da_historical_noun_casing.v1")
+@spacy.registry.augmenters("da_historical_noun_casing_v1")
 def create_da_historical_noun_casing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:

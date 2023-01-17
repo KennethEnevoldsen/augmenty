@@ -13,11 +13,11 @@ def test_combine(nlp_en_md):  # noqa F811
     docs = [doc]
 
     ent_augmenter = augmenty.load(
-        "ents_replace.v1",
+        "ents_replace_v1",
         level=1.00,
         ent_dict={"ORG": [["spaCy"]]},
     )
-    synonym_augmenter = augmenty.load("wordnet_synonym.v1", level=1, lang="en")
+    synonym_augmenter = augmenty.load("wordnet_synonym_v1", level=1, lang="en")
 
     combined_aug = augmenty.combine([ent_augmenter, synonym_augmenter])
 
@@ -29,7 +29,7 @@ def test_combine(nlp_en_md):  # noqa F811
 def test_yield_original(nlp_en):  # noqa F811
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
-    aug = augmenty.load("upper_case.v1", level=1)
+    aug = augmenty.load("upper_case_v1", level=1)
 
     aug = augmenty.yield_original(aug)
 
@@ -41,7 +41,7 @@ def test_yield_original(nlp_en):  # noqa F811
 def test_repeat(nlp_en):  # noqa F811
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
-    aug = augmenty.load("upper_case.v1", level=1)
+    aug = augmenty.load("upper_case_v1", level=1)
 
     aug = augmenty.repeat(aug, n=3)
 
@@ -53,7 +53,7 @@ def test_repeat(nlp_en):  # noqa F811
 def test_set_doc_level(nlp_en):  # noqa F811
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
-    aug = augmenty.load("upper_case.v1", level=1)
+    aug = augmenty.load("upper_case_v1", level=1)
 
     aug = augmenty.set_doc_level(aug, level=0.5)
 

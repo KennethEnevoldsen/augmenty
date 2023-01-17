@@ -44,7 +44,7 @@ def token_dict_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_dict_replace.v1")
+@spacy.registry.augmenters("token_dict_replace_v1")
 def create_token__dict_replace_augmenter_v1(
     level: float,
     replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
@@ -92,7 +92,7 @@ def create_token__dict_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("wordnet_synonym.v1")
+@spacy.registry.augmenters("wordnet_synonym_v1")
 def create_wordnet_synonym_augmenter_v1(
     level: float,
     lang: Optional[str] = None,
@@ -213,7 +213,7 @@ def token_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_replace.v1")
+@spacy.registry.augmenters("token_replace_v1")
 def create_token_replace_augmenter_v1(
     replace: Callable[[Token], str],
     keep_titlecase: bool = True,
@@ -245,7 +245,7 @@ def create_token_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("word_embedding.v1")
+@spacy.registry.augmenters("word_embedding_v1")
 def create_word_embedding_augmenter_v1(
     level=float,
     n: int = 10,

@@ -67,7 +67,7 @@ def paragraph_subset_augmenter_v1(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("paragraph_subset_augmenter.v1")
+@spacy.registry.augmenters("paragraph_subset_augmenter_v1")
 def create_paragraph_subset_augmenter_v1(
     min_paragraph: Union[float, int] = 1,
     max_paragraph: Union[float, int] = 1.00,
@@ -95,7 +95,7 @@ def create_paragraph_subset_augmenter_v1(
         >>> import spacy
         >>> nlp = spacy.blank("en")
         >>> nlp.add_pipe("sentencizer")
-        >>> upper_case_augmenter = augmenty.load("sent_subset.v1", level=0.7)
+        >>> upper_case_augmenter = augmenty.load("sent_subset_v1", level=0.7)
         >>> text = "Augmenty is a wonderful tool for augmentation. " +
         >>>   "It have tons of different augmenters. " +
         >>>   " Augmenty is developed using spaCy."

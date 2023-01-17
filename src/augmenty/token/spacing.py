@@ -26,7 +26,7 @@ def letter_spacing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("letter_spacing_augmenter.v1")
+@spacy.registry.augmenters("letter_spacing_augmenter_v1")
 def create_letter_spacing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -70,7 +70,7 @@ def spacing_insertion_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("spacing_insertion.v1")
+@spacy.registry.augmenters("spacing_insertion_v1")
 def create_spacing_insertion_augmenter_v1(
     level: float,
     max_insertions: int = 1,

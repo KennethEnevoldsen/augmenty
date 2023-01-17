@@ -37,7 +37,7 @@ def docs(
         >>> from spacy.lang.en import English
         >>> nlp = English()
         >>> docs = [Doc(words=["Fine", "by", "me"])]
-        >>> augmenter = augmenty.load("upper_case.v1", level=1)
+        >>> augmenter = augmenty.load("upper_case_v1", level=1)
         >>> augmented_docs = augmenty.docs(docs, augmenter, nlp)
     """
     if isinstance(docs, Doc):
@@ -86,7 +86,7 @@ def augmenters() -> Dict[str, Callable]:
 
     Example:
     >>> augmenters = augmenty.augmenters()
-    >>> "upper_case.v1" in augmenters
+    >>> "upper_case_v1" in augmenters
     True
     """
     return spacy.registry.augmenters.get_all()
@@ -101,7 +101,7 @@ def load(augmenter=str, **kwargs) -> Callable:
     Example:
     >>> from spacy.lang.en import English
     >>> nlp = English()
-    >>> upper_case_augmenter = augmenty.load("upper_case.v1", level = 1)
+    >>> upper_case_augmenter = augmenty.load("upper_case_v1", level = 1)
     >>> texts = ["hello there!"]
     >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
     ["HELLO THERE!"]
@@ -130,7 +130,7 @@ def meta() -> Dict[str, dict]:
 
     Example:
     >>> metadata = augmenty.meta()
-    >>> metadata["token_swap.v1"]
+    >>> metadata["token_swap_v1"]
     """
     import json
     import os

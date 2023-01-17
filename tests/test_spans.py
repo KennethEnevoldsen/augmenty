@@ -23,7 +23,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
     )
 
     ent_augmenter = augmenty.load(
-        "ents_replace.v1",
+        "ents_replace_v1",
         level=1.00,
         ent_dict={"ORG": [["SpaCy"]]},
     )
@@ -33,7 +33,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
     assert docs[0].text == "SpaCy is a wonderful tool for augmentation."
 
     ent_augmenter = augmenty.load(
-        "ents_replace.v1",
+        "ents_replace_v1",
         level=1.00,
         ent_dict={"ORG": [["The SpaCy Universe"]]},
     )
@@ -43,7 +43,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
     assert docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."
 
     ent_augmenter = augmenty.load(
-        "ents_replace.v1",
+        "ents_replace_v1",
         level=1.00,
         ent_dict={"PERSON": [["Kenneth"], ["Lasse", "Hansen"]]},
     )
@@ -77,7 +77,7 @@ def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
     for p, e in zip(patterns, expected):
 
         per_augmenter = augmenty.load(
-            "per_replace.v1",
+            "per_replace_v1",
             level=1.00,
             names=names,
             patterns=[p],
@@ -88,7 +88,7 @@ def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
         assert docs[0].text == e
 
     per_augmenter = augmenty.load(
-        "per_replace.v1",
+        "per_replace_v1",
         level=1.00,
         names={
             "firstname": ["Charles", "Jens"],
@@ -106,7 +106,7 @@ def test_create_ent_format_augmenter(nlp_en_md):  # noqa F811
     abbreviate = lambda token: token.text[0] + "."  # noqa: E731
 
     augmenter = augmenty.load(
-        "ents_format.v1",
+        "ents_format_v1",
         reordering=[-1, None],
         formatter=[None, abbreviate],
         level=1.00,

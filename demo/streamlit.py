@@ -24,12 +24,12 @@ st.markdown(
 )
 
 not_relevant = {
-    "spacy.orth_variants.v1",
-    "char_replace.v1",
-    "conditional_token_casing.v1",
-    "ents_format.v1",
-    "token_replace.v1",
-    "wordnet_synonym.v1",
+    "spacy.orth_variants_v1",
+    "char_replace_v1",
+    "conditional_token_casing_v1",
+    "ents_format_v1",
+    "token_replace_v1",
+    "wordnet_synonym_v1",
 }
 augmenters = augmenty.augmenters()
 augmenter_list = sorted(a for a in augmenters if a not in not_relevant)
@@ -43,7 +43,7 @@ example = st.text_area("Example:", default)
 
 st.markdown("## Choose your augmenter\n --------")
 
-def_aug = "per_replace.v1"
+def_aug = "per_replace_v1"
 for i, _ in enumerate(augmenter_list):
     if _ == def_aug:
         break
@@ -54,7 +54,7 @@ st.markdown(f"## Description: \n{desc}")
 level = st.slider("level", min_value=0.0, max_value=1.0, step=0.01, value=1.0)
 
 
-if augmenter == "per_replace.v1":
+if augmenter == "per_replace_v1":
     json_ = st.text_input(
         "replace dict:",
         '{"firstname": ["Charles", "Jens"], "lastname": ["Kirkegaard", "Andersen"]}',
@@ -74,7 +74,7 @@ if augmenter == "per_replace.v1":
             ["firstname", "lastname", "lastname"],
         ],
     )
-elif augmenter == "ents_replace.v1":
+elif augmenter == "ents_replace_v1":
     json_ = st.text_input(
         "replace dict:",
         '{"ORG": [["Google"], ["Apple"]],'

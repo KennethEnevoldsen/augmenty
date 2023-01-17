@@ -28,7 +28,7 @@ def random_casing_augmenter_v1(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_casing.v1")
+@spacy.registry.augmenters("random_casing_v1")
 def create_random_casing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -44,7 +44,7 @@ def create_random_casing_augmenter_v1(
         >>> import augmenty
         >>> from spacy
         >>> nlp = spacy.blank("en")
-        >>> random_casing_augmenter = augmenty.load("random_casing.v1", level=0.1)
+        >>> random_casing_augmenter = augmenty.load("random_casing_v1", level=0.1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, random_casing_augmenter, nlp))
         ["A saMple texT"]

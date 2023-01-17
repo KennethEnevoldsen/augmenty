@@ -30,7 +30,7 @@ def remove_spacing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("remove_spacing.v1")
+@spacy.registry.augmenters("remove_spacing_v1")
 def create_remove_spacing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -46,7 +46,7 @@ def create_remove_spacing_augmenter_v1(
         >>> import augmenty
         >>> import spacy
         >>> nlp = spacy.blank("en")
-        >>> remove_spacing_augmenter = augmenty.load("remove_spacing.v1", level=0.5)
+        >>> remove_spacing_augmenter = augmenty.load("remove_spacing_v1", level=0.5)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, remove_spacing_augmenter, nlp))
         ["A sampletext"]

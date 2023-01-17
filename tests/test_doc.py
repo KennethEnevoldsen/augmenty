@@ -6,7 +6,7 @@ from .fixtures import nlp_en  # noqa
 
 
 def test_create_spongebob_augmenter(nlp_en):  # noqa F811
-    spongebob_augmenter = augmenty.load("spongebob.v1", level=1)
+    spongebob_augmenter = augmenty.load("spongebob_v1", level=1)
     texts = ["A sample text"]
     aug_text = "A SaMpLe tExT"
 
@@ -15,7 +15,7 @@ def test_create_spongebob_augmenter(nlp_en):  # noqa F811
 
 
 def test_create_upper_case_augmenter(nlp_en):  # noqa F811
-    spongebob_augmenter = augmenty.load("upper_case.v1", level=1)
+    spongebob_augmenter = augmenty.load("upper_case_v1", level=1)
     texts = ["A sample text"]
     aug_text = "A SAMPLE TEXT"
 
@@ -42,7 +42,7 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
         t.is_sent_start = True if t.text == "." else False
 
     p_subset_aug = augmenty.load(
-        "paragraph_subset_augmenter.v1",
+        "paragraph_subset_augmenter_v1",
         min_paragraph=1,
         max_paragraph=1.00,
     )
@@ -56,7 +56,7 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
 
     # full length
     p_subset_aug = augmenty.load(
-        "paragraph_subset_augmenter.v1",
+        "paragraph_subset_augmenter_v1",
         min_paragraph=1.0,
         max_paragraph=1.0,
     )
@@ -65,7 +65,7 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
 
     # zero length
     p_subset_aug = augmenty.load(
-        "paragraph_subset_augmenter.v1",
+        "paragraph_subset_augmenter_v1",
         min_paragraph=0.0,
         max_paragraph=0.0,
     )

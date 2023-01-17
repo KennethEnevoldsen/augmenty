@@ -15,6 +15,20 @@ You can install these additional dependencies by running the following command:
    pip install augmenty[all]
 
 
+Language specific augmentations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+augmenty supports language specific augmentations, which are not installed by default. To install these augmentations, run the following command:
+
+.. code-block::
+
+   pip install augmenty[{lang}]
+
+
+Where valid values for {lang} are:
+
+- ``da``: Danish
+
 Development Installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -1,7 +1,7 @@
 from ...util import registry
 
 
-@registry.keyboards("mk.v1")
+@registry.keyboards("mk_v1")
 def create_mk():
     mk = {
         "default": [

@@ -3,7 +3,7 @@ from augmenty.keyboard import Keyboard
 
 
 def test_Keyboard():
-    kb = Keyboard.from_registry("da_qwerty.v1")
+    kb = Keyboard.from_registry("da_qwerty_v1")
 
     assert kb.coordinate("q") == (1, 0)
     assert kb.is_shifted("q") is False

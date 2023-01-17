@@ -21,7 +21,7 @@ def upper_casing_augmenter_v1(
         yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("upper_case.v1")
+@spacy.registry.augmenters("upper_case_v1")
 def create_upper_casing_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -37,7 +37,7 @@ def create_upper_casing_augmenter_v1(
         >>> import augmenty
         >>> import spacy
         >>> nlp = spacy.blank("en")
-        >>> upper_case_augmenter = augmenty.load("upper_case.v1", level=0.1)
+        >>> upper_case_augmenter = augmenty.load("upper_case_v1", level=0.1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
         ["A SAMPLE TEXT"]
@@ -60,7 +60,7 @@ def spongebob_augmenter_v1(
         yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("spongebob.v1")
+@spacy.registry.augmenters("spongebob_v1")
 def create_spongebob_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -76,7 +76,7 @@ def create_spongebob_augmenter_v1(
         >>> import augmenty
         >>> import spacy
         >>> nlp = spacy.blank("en")
-        >>> spongebob_augmenter = augmenty.load("spongebob.v1", level=1)
+        >>> spongebob_augmenter = augmenty.load("spongebob_v1", level=1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, spongebob_augmenter, nlp))
         ["A SaMpLe tExT"]

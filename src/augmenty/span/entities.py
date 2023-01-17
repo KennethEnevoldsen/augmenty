@@ -102,7 +102,7 @@ def ent_augmenter_v1(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("ents_replace.v1")
+@spacy.registry.augmenters("ents_replace_v1")
 def create_ent_augmenter_v1(
     level: float,
     ent_dict: Dict[str, Iterable[List[str]]],
@@ -160,7 +160,7 @@ def generator_from_name_dict(
         ]
 
 
-@spacy.registry.augmenters("per_replace.v1")
+@spacy.registry.augmenters("per_replace_v1")
 def create_per_replace_augmenter_v1(
     names: Dict[
         str,
@@ -253,7 +253,7 @@ def ent_format_augmenter_v1(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("ents_format.v1")
+@spacy.registry.augmenters("ents_format_v1")
 def create_ent_format_augmenter_v1(
     reordering: List[Union[int, None]],
     formatter: List[Union[Callable[[Token], str], None]],
@@ -287,7 +287,7 @@ def create_ent_format_augmenter_v1(
         >>> import spacy
         >>> nlp = spacy.load("en_core_web_sm")
         >>> abbreviate = lambda token: token.text[0] + "."
-        >>> augmenter = augmenty.load("ents_format.v1", reordering = [-1, None],
+        >>> augmenter = augmenty.load("ents_format_v1", reordering = [-1, None],
         >>>                           formatter=[None, abbreviate], level=1,
         >>>                            ent_types=["PER"])
         >>> texts = ["my name is Kenneth Enevoldsen"]

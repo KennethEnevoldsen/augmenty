@@ -22,35 +22,35 @@ abbreviate = lambda token: token.text[0] + "."  # noqa: E731
 
 
 ignore = {
-    "spacy.orth_variants.v1",
-    "token_replace.v1",
-    "token_insert.v1",
-    "paragraph_subset_augmenter.v1",
-    "word_embedding.v1",
-    "spacy.combined_augmenter.v1",
+    "spacy.orth_variants_v1",
+    "token_replace_v1",
+    "token_insert_v1",
+    "paragraph_subset_augmenter_v1",
+    "word_embedding_v1",
+    "spacy.combined_augmenter_v1",
 }
 
 augmenters_args = {
-    "char_replace.v1": {"replace": {"ss": "ß"}},
-    "char_replace_random.v1": {},
-    "char_swap.v1": {},
-    "conditional_token_casing.v1": {"conditional": is_pronoun, "lower": False},
-    "da_historical_noun_casing.v1": {},
-    "da_æøå_replace.v1": {},
-    "ents_format.v1": {
+    "char_replace_v1": {"replace": {"ss": "ß"}},
+    "char_replace_random_v1": {},
+    "char_swap_v1": {},
+    "conditional_token_casing_v1": {"conditional": is_pronoun, "lower": False},
+    "da_historical_noun_casing_v1": {},
+    "da_æøå_replace_v1": {},
+    "ents_format_v1": {
         "reordering": [-1, None],
         "formatter": [None, abbreviate],
         "ent_types": ["PER"],
     },
-    "ents_replace.v1": {
+    "ents_replace_v1": {
         "ent_dict": {
             "ORG": [["Google"], ["Apple"]],
             "PERSON": [["Kenneth"], ["Lasse", "Hansen"]],
         },
     },
-    "letter_spacing_augmenter.v1": {},
-    "keystroke_error.v1": {},
-    "per_replace.v1": {
+    "letter_spacing_augmenter_v1": {},
+    "keystroke_error_v1": {},
+    "per_replace_v1": {
         "names": {
             "firstname": ["Kenneth", "Lasse"],
             "lastname": ["Enevoldsen", "Hansen"],
@@ -61,21 +61,21 @@ augmenters_args = {
             ["firstname", "firstname", "lastname"],
         ],
     },
-    "random_casing.v1": {},
-    "random_starting_case.v1": {},
-    "remove_spacing.v1": {},
-    "spacing_insertion.v1": {},
-    "spacy.lower_case.v1": {},
-    "spongebob.v1": {},
-    "token_dict_replace.v1": {
+    "random_casing_v1": {},
+    "random_starting_case_v1": {},
+    "remove_spacing_v1": {},
+    "spacing_insertion_v1": {},
+    "spacy.lower_case_v1": {},
+    "spongebob_v1": {},
+    "token_dict_replace_v1": {
         "replace": {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}},
     },
-    "token_swap.v1": {},
-    "upper_case.v1": {},
-    "wordnet_synonym.v1": {},
-    "random_synonym_insertion.v1": {"context_window": 5, "verbose": False},
-    "duplicate_token.v1": {},
-    "token_insert_random.v1": {},
+    "token_swap_v1": {},
+    "upper_case_v1": {},
+    "wordnet_synonym_v1": {},
+    "random_synonym_insertion_v1": {"context_window": 5, "verbose": False},
+    "duplicate_token_v1": {},
+    "token_insert_random_v1": {},
 }
 
 

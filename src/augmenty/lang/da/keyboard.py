@@ -1,7 +1,7 @@
 from ...util import registry
 
 
-@registry.keyboards("da_qwerty.v1")
+@registry.keyboards("da_qwerty_v1")
 def create_qwerty_da():
     qwerty_da = {
         "default": [

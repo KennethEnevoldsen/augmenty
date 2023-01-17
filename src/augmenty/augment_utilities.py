@@ -68,7 +68,7 @@ def repeat(
         Callable[[Language, Example], Iterator[Example]]: The repeated augmenter
 
     Example:
-        >>> augmenter = augmenty.load("char_swap.v1", level=.02)
+        >>> augmenter = augmenty.load("char_swap_v1", level=.02)
         >>> repeated_augmenter = augmenty.repeat(augmenter=aug, n=3)
     """
 

@@ -68,7 +68,7 @@ def token_insert_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_insert.v1")
+@spacy.registry.augmenters("token_insert_v1")
 def create_token_insert_augmenter_v1(
     level: float,
     insert: Callable[[Token], Dict[str, str]],
@@ -96,7 +96,7 @@ def create_token_insert_augmenter_v1(
         >>> import random
         >>> insert_fun = lambda t: random.choice([{"ORTH": "words"}, {"ORTH": "to"},
         >>>                                       {"ORTH": "insert"}])
-        >>> aug = augmenty.load("token_insert.v1", level=0.2, insert=insert_fun)
+        >>> aug = augmenty.load("token_insert_v1", level=0.2, insert=insert_fun)
         >>> list(augmenty.texts(["This is a cat"], aug))
         ["This insert is a cat"]
     """
@@ -108,7 +108,7 @@ def create_token_insert_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("token_insert_random.v1")
+@spacy.registry.augmenters("token_insert_random_v1")
 def create_token_insert_random_augmenter_v1(
     level: float,
     insert: Optional[List[Union[str, Dict[str, str]]]] = None,
@@ -161,7 +161,7 @@ def create_token_insert_random_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("duplicate_token.v1")
+@spacy.registry.augmenters("duplicate_token_v1")
 def create_duplicate_token_augmenter_v1(
     level: float,
     respect_ents: bool = True,
@@ -206,7 +206,7 @@ def create_duplicate_token_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("random_synonym_insertion.v1")
+@spacy.registry.augmenters("random_synonym_insertion_v1")
 def create_random_synonym_insertion_augmenter_v1(
     level: float,
     respect_pos: bool = True,

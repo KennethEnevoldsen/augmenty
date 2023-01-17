@@ -108,7 +108,7 @@ def token_swap_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_swap.v1")
+@spacy.registry.augmenters("token_swap_v1")
 def create_token_swap_augmenter_v1(
     level: float,
     respect_ents: bool = True,

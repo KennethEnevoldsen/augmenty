@@ -26,7 +26,7 @@ def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[E
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("char_swap.v1")
+@spacy.registry.augmenters("char_swap_v1")
 def create_char_swap_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
@@ -43,7 +43,7 @@ def create_char_swap_augmenter_v1(
         >>> import augmenty
         >>> from spacy.lang.en import English
         >>> nlp = English()
-        >>> char_swap_augmenter = augmenty.load("char_swap.v1", level=0.1)
+        >>> char_swap_augmenter = augmenty.load("char_swap_v1", level=0.1)
         >>> texts = ["A sample text"]
         >>> list(augmenty.texts(texts, char_swap_augmenter, nlp))
         ["A smaple txet"]
