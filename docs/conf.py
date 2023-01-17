@@ -67,7 +67,7 @@ html_context = {
     "display_github": True,  # Add 'Edit on Github' link instead of 'View page source'
     "github_user": "KennethEnevoldsen",
     "github_repo": project,
-    "github_version": "master",
+    "github_version": "main",
     "conf_py_path": "/docs/",
 }
 

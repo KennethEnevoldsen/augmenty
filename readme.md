@@ -1,4 +1,4 @@
-<a href="https://github.com/kennethenevoldsen/augmenty"><img src="https://github.com/KennethEnevoldsen/augmenty/blob/master/img/icon.png?raw=true" width="200" align="right" /></a>
+<a href="https://github.com/kennethenevoldsen/augmenty"><img src="https://github.com/KennethEnevoldsen/augmenty/blob/main/img/icon.png?raw=true" width="200" align="right" /></a>
 # Augmenty: The cherry on top of your NLP pipeline
 
 

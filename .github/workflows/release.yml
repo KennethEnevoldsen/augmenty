@@ -5,7 +5,7 @@ on:
   # however it is faster and can be used for testing
   push:
     branches:
-      - master
+      - main
   # uncomment the following to only release on a successful workflow run
   # this is recommended as it will only release if the tests pass
   # this however cause you to test twice which might be not be ideal
