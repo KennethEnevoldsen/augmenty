@@ -349,7 +349,7 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 <span class="p">]</span>
 
 <span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ORG&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;The SpaCy Universe&quot;</span><span class="p">]]}</span>
+    <span class="s2">&quot;ents_replace_v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ORG&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;The SpaCy Universe&quot;</span><span class="p">]]}</span>
 <span class="p">)</span>
 
 <span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
@@ -360,38 +360,7 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RegistryError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="s2">&quot;Augmenty is a wonderful tool for augmentation which is made using SpaCy developed by Explosion.&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">ent_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s2">&quot;ents_replace.v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">ent_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ORG&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;The SpaCy Universe&quot;</span><span class="p">]]}</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">ent_augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
-
-<span class="nn">File ~/.local/lib/python3.10/site-packages/augmenty/util.py:109,</span> in <span class="ni">load</span><span class="nt">(augmenter, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span> <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">augmenter</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;A utility functionload an augmenter.</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="sd">     Returns:</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span><span class="sd">     [&quot;HELLO THERE!&quot;]</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">109</span>     <span class="n">aug</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">augmenter</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span>     <span class="k">return</span> <span class="n">aug</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/.local/lib/python3.10/site-packages/catalogue/__init__.py:105,</span> in <span class="ni">Registry.get</span><span class="nt">(self, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="n">current_namespace</span> <span class="o">=</span> <span class="s2">&quot; -&gt; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span> <span class="ow">or</span> <span class="s2">&quot;none&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">105</span>     <span class="k">raise</span> <span class="n">RegistryError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="sa">f</span><span class="s2">&quot;Cant&#39;t find &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; in registry </span><span class="si">{</span><span class="n">current_namespace</span><span class="si">}</span><span class="s2">. Available names: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">return</span> <span class="n">_get</span><span class="p">(</span><span class="n">namespace</span><span class="p">)</span>
-
-<span class="ne">RegistryError</span>: Cant&#39;t find &#39;ents_replace.v1&#39; in registry spacy -&gt; augmenters. Available names: char_replace_random_v1, char_replace_v1, char_swap_v1, conditional_token_casing_v1, da_historical_noun_casing_v1, da_æøå_replace_v1, duplicate_token_v1, ents_format_v1, ents_replace_v1, keystroke_error_v1, letter_spacing_augmenter_v1, paragraph_subset_augmenter_v1, per_replace_v1, random_casing_v1, random_starting_case_v1, random_synonym_insertion_v1, remove_spacing_v1, spacing_insertion_v1, spacy.combined_augmenter.v1, spacy.lower_case.v1, spacy.orth_variants.v1, spongebob_v1, token_dict_replace_v1, token_insert_random_v1, token_insert_v1, token_replace_v1, token_swap_v1, upper_case_v1, word_embedding_v1, wordnet_synonym_v1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The SpaCy Universe is a wonderful tool for augmentation which is made using The SpaCy Universe developed by Explosion.
 </pre></div>
 </div>
 </div>
@@ -423,7 +392,7 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a fantastic shaft for augmentation.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The SpaCy Universe is a fantastic dick for augmentation which is stimulate habituate The SpaCy Universe educate by Blowup.
 </pre></div>
 </div>
 </div>
@@ -462,8 +431,8 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a wonderful tool for augmentation.
-Augmentation is q wonderful tool for obtain6ng higher performance on li,ited data.
-You cxn also use it to see how robush your model is to changes.
+Augmentation is a wonderful tool for obtaining higher performance on limited data.
+You can also use it to see how robust your model is to changes.
 </pre></div>
 </div>
 </div>
@@ -484,11 +453,11 @@ You cxn also use it to see how robush your model is to changes.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a tool wonderful for augmentation.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>is Augmenty a tool wonderful for augmentation.
 Augmenty is a wonderful tool for augmentation.
-is Augmentation wonderful a tool obtaining for higher performance on limited data.
+Augmentation a is wonderful tool for obtaining higher performance on limited data.
 Augmentation is a wonderful tool for obtaining higher performance on limited data.
-You can also use it to see how robust your is model to changes.
+You can use also to it see how robust your model is changes to.
 You can also use it to see how robust your model is to changes.
 </pre></div>
 </div>
@@ -561,7 +530,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Leah White
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Sonia Robertson
 </pre></div>
 </div>
 </div>
