@@ -1,6 +1,4 @@
-"""
-Pytest script for testing all augmenters in a variety of cases.
-"""
+"""Pytest script for testing all augmenters in a variety of cases."""
 
 import numpy as np
 import pytest
@@ -20,7 +18,7 @@ def is_pronoun(token):
     return False
 
 
-abbreviate = lambda token: token.text[0] + "."
+abbreviate = lambda token: token.text[0] + "."  # noqa: E731
 
 
 ignore = {

@@ -1,31 +1,39 @@
 default_stages: [commit, push]
 
 repos:
-  - repo: https://github.com/pycqa/isort
-    rev: 5.10.1
-    hooks:
-      - id: isort
-        name: isort (python)
-        args: ["--profile", "black", "--filter-files"]
-
-  - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.3.0
-    hooks:
-      - id: add-trailing-comma
-
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.3.1
     hooks:
       - id: pyupgrade
 
+  - repo: https://github.com/bwhmather/ssort
+    rev: v0.11.6
+    hooks:
+      - id: ssort
+
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: v2.4.0
+    hooks:
+      - id: add-trailing-comma
+
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.5.1
+    hooks:
+      - id: docformatter
+        args: [--in-place]
+
   - repo: https://github.com/psf/black
     rev: 22.12.0
     hooks:
       - id: black
-        language_version: python3.8
+        args: [--line-length, "88"]
 
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.206
     hooks:
-      - id: flake8
-        args: [--config, setup.cfg]
+      - id: ruff
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.991
+    hooks:
+      - id: mypy

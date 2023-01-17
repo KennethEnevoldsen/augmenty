@@ -1,6 +1,4 @@
-"""
-Augmenters for randomly or semi-randomly replacing characters
-"""
+"""Augmenters for randomly or semi-randomly replacing characters."""
 
 
 import random
@@ -15,13 +13,34 @@ from ..augment_utilities import make_text_from_orth
 from ..keyboard import Keyboard
 
 
+def char_replace_augmenter_v1(
+    nlp: Language,
+    example: Example,
+    level: float,
+    replace: dict,
+) -> Iterator[Example]:
+    def __replace(t):
+        t_ = []
+        for i, c in enumerate(t.text):
+            if random.random() < level and c in replace:
+                c = random.choice(replace[c])
+            t_.append(c)
+        return "".join(t_)
+
+    example_dict = example.to_dict()
+    example_dict["token_annotation"]["ORTH"] = [__replace(t) for t in example.reference]
+    text = make_text_from_orth(example_dict)
+    doc = nlp.make_doc(text)
+    yield example.from_dict(doc, example_dict)
+
+
 @spacy.registry.augmenters("char_replace_random.v1")
 def create_char_random_augmenter_v1(
     level: float,
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that replaces a character with a random character from the
-    keyboard.
+    """Creates an augmenter that replaces a character with a random character
+    from the keyboard.
 
     Args:
         level (float): The probability to replace a character with a neightbouring
@@ -53,8 +72,8 @@ def create_char_replace_augmenter_v1(
     level: float,
     replace: dict,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that replaces a character with a random character from
-    replace dict
+    """Creates an augmenter that replaces a character with a random character
+    from replace dict.
 
     Args:
         level (float): probability to augment character, if document is augmented.
@@ -75,35 +94,14 @@ def create_char_replace_augmenter_v1(
     )
 
 
-def char_replace_augmenter_v1(
-    nlp: Language,
-    example: Example,
-    level: float,
-    replace: dict,
-) -> Iterator[Example]:
-    def __replace(t):
-        t_ = []
-        for i, c in enumerate(t.text):
-            if random.random() < level and c in replace:
-                c = random.choice(replace[c])
-            t_.append(c)
-        return "".join(t_)
-
-    example_dict = example.to_dict()
-    example_dict["token_annotation"]["ORTH"] = [__replace(t) for t in example.reference]
-    text = make_text_from_orth(example_dict)
-    doc = nlp.make_doc(text)
-    yield example.from_dict(doc, example_dict)
-
-
 @spacy.registry.augmenters("keystroke_error.v1")
 def create_keystroke_error_augmenter_v1(
     level: float,
     distance: float = 1.5,
     keyboard: str = "en_qwerty.v1",
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates a augmenter which augments a text with plausible typos based on keyboard
-    distance.
+    """Creates a augmenter which augments a text with plausible typos based on
+    keyboard distance.
 
     Args:
         level (float): The probability to replace a character with a neightbouring
@@ -129,5 +127,5 @@ def create_keystroke_error_augmenter_v1(
         ["A sajple texr"]
     """
     kb = Keyboard.from_registry(keyboard)
-    replace_dict = kb.create_distance_dict(distance=distance)
+    replace_dict = kb.create_distance_dict(distance=distance)  # type: ignore
     return partial(char_replace_augmenter_v1, replace=replace_dict, level=level)

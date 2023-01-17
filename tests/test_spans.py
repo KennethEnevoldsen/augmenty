@@ -5,7 +5,7 @@ import augmenty
 from .fixtures import nlp_en, nlp_en_md  # noqa
 
 
-def test_create_ent_replace(nlp_en_md, nlp_en):
+def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
     doc = Doc(
         nlp_en.vocab,
         words=[
@@ -54,7 +54,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):
     assert docs[0].text != "My name is Jack."
 
 
-def test_create_per_replace(nlp_en, nlp_en_md):
+def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
     doc = Doc(
         nlp_en.vocab,
         words=["My", "name", "is", "Kenneth", "Enevoldsen"],
@@ -102,8 +102,8 @@ def test_create_per_replace(nlp_en, nlp_en_md):
     assert docs[0] != text
 
 
-def test_create_ent_format_augmenter(nlp_en_md):
-    abbreviate = lambda token: token.text[0] + "."
+def test_create_ent_format_augmenter(nlp_en_md):  # noqa F811
+    abbreviate = lambda token: token.text[0] + "."  # noqa: E731
 
     augmenter = augmenty.load(
         "ents_format.v1",

@@ -12,46 +12,6 @@ from ..augment_utilities import make_text_from_orth
 from .wordnet_util import init_wordnet
 
 
-@spacy.registry.augmenters("token_insert.v1")
-def create_token_insert_augmenter_v1(
-    level: float,
-    insert: Callable[[Token], Dict[str, str]],
-    respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that randomly inserts a token generated based on a insert
-    function.
-
-    Args:
-        level (float): The probability to insert a token.
-        insert (Callable[[Token], Dict[str, str]]): An insert function. The function
-            takes in a spacy Token and return a dictionary representing the new token
-            to replace. The dictionary can contain the keys: "ORTH", "SPACY" (defaults
-            to "True"), "entities" (default to "O"), "POS" (defaults to "X"), "TAG"
-            (defaults to "X"), "MORPH" (defaults to "X"), "LEMMA" (defaults to the ORTH
-            token). You can also specify "HEAD" and "DEP" if they are not specified
-            they will get removed. If the function returns no word is inserted.
-        respect_ents (bool, optional): Should the augmentation respect entities?
-            Defaults to True. In which case it will not insert a token inside an entity.
-
-    Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
-
-    Example:
-        >>> import random
-        >>> insert_fun = lambda t: random.choice([{"ORTH": "words"}, {"ORTH": "to"},
-        >>>                                       {"ORTH": "insert"}])
-        >>> aug = augmenty.load("token_insert.v1", level=0.2, insert=insert_fun)
-        >>> list(augmenty.texts(["This is a cat"], aug))
-        ["This insert is a cat"]
-    """
-    return partial(
-        token_insert_augmenter_v1,
-        level=level,
-        respect_ents=respect_ents,
-        insert=insert,
-    )
-
-
 def token_insert_augmenter_v1(
     nlp: Language,
     example: Example,
@@ -108,6 +68,46 @@ def token_insert_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
+@spacy.registry.augmenters("token_insert.v1")
+def create_token_insert_augmenter_v1(
+    level: float,
+    insert: Callable[[Token], Dict[str, str]],
+    respect_ents: bool = True,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Creates an augmenter that randomly inserts a token generated based on a
+    insert function.
+
+    Args:
+        level (float): The probability to insert a token.
+        insert (Callable[[Token], Dict[str, str]]): An insert function. The function
+            takes in a spacy Token and return a dictionary representing the new token
+            to replace. The dictionary can contain the keys: "ORTH", "SPACY" (defaults
+            to "True"), "entities" (default to "O"), "POS" (defaults to "X"), "TAG"
+            (defaults to "X"), "MORPH" (defaults to "X"), "LEMMA" (defaults to the ORTH
+            token). You can also specify "HEAD" and "DEP" if they are not specified
+            they will get removed. If the function returns no word is inserted.
+        respect_ents (bool, optional): Should the augmentation respect entities?
+            Defaults to True. In which case it will not insert a token inside an entity.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import random
+        >>> insert_fun = lambda t: random.choice([{"ORTH": "words"}, {"ORTH": "to"},
+        >>>                                       {"ORTH": "insert"}])
+        >>> aug = augmenty.load("token_insert.v1", level=0.2, insert=insert_fun)
+        >>> list(augmenty.texts(["This is a cat"], aug))
+        ["This insert is a cat"]
+    """
+    return partial(
+        token_insert_augmenter_v1,
+        level=level,
+        respect_ents=respect_ents,
+        insert=insert,
+    )
+
+
 @spacy.registry.augmenters("token_insert_random.v1")
 def create_token_insert_random_augmenter_v1(
     level: float,
@@ -147,7 +147,7 @@ def create_token_insert_random_augmenter_v1(
     def __insert(t: Token, d: dict) -> dict:
         if d["insert"] is None:
             d["insert"] = list(t.doc.vocab.strings)
-        t = random.choice(d["insert"])
+        t = random.choice(d["insert"])  # type: ignore
         if isinstance(t, dict):
             return t
         return {"ORTH": t}
@@ -216,8 +216,8 @@ def create_random_synonym_insertion_augmenter_v1(
     context_window: Optional[int] = None,
     verbose: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that randomly inserts a synonym or from the tokens context.
-    The synonyms are based on wordnet.
+    """Creates an augmenter that randomly inserts a synonym or from the tokens
+    context. The synonyms are based on wordnet.
 
     Args:
         level (float): The probability to dublicate a token.
@@ -253,7 +253,12 @@ def create_random_synonym_insertion_augmenter_v1(
 
     from .wordnet_util import lang_wn_dict, upos_wn_dict
 
-    def __insert(t: Token, lang: str, respect_pos: bool, verbose: bool) -> dict:
+    def __insert(
+        t: Token,
+        lang: str,
+        respect_pos: bool,
+        verbose: bool,
+    ) -> Union[dict, None]:
         doc = t.doc
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
@@ -267,7 +272,7 @@ def create_random_synonym_insertion_augmenter_v1(
             lang = doc.lang_
             lang = lang_wn_dict[lang]
 
-        rep = set()
+        rep = set()  # type: ignore
         if context_window:
             span = doc[
                 max(0, t.i - context_window) : min(len(doc), t.i + context_window)

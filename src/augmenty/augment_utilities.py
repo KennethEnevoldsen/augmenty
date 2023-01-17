@@ -58,7 +58,7 @@ def repeat(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     n: int,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Set the document level at which the tokenizer should be
+    """Set the document level at which the tokenizer should be.
 
     Args:
         augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter.
@@ -83,7 +83,8 @@ def yield_original(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     doc_level: float = 1.0,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Wraps and augmented such that it yields both the original and augmented example.
+    """Wraps and augmented such that it yields both the original and augmented
+    example.
 
     Args:
         augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy
@@ -105,9 +106,8 @@ def yield_original(
 
 
 def make_text_from_orth(example_dict: dict) -> str:
-    """
-    Reconstructs the text based on ORTH and SPACY from an Example turned to dict
-    """
+    """Reconstructs the text based on ORTH and SPACY from an Example turned to
+    dict."""
     text = ""
     for orth, spacy in zip(
         example_dict["token_annotation"]["ORTH"],

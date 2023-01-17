@@ -1,7 +1,5 @@
-"""
-Function for defining and handling keyboard layouts.
-"""
-from typing import Dict, List, Set, Tuple
+"""Function for defining and handling keyboard layouts."""
+from typing import Dict, List, Tuple
 
 from pydantic import BaseModel
 
@@ -25,7 +23,7 @@ class Keyboard(BaseModel):
     shift_distance: int = 3
 
     def coordinate(self, key: str) -> Tuple[int, int]:
-        """get coordinate for key
+        """Get coordinate for key.
 
         Args:
             key (str): keyboard key
@@ -56,7 +54,7 @@ class Keyboard(BaseModel):
         return False
 
     def euclidian_distance(self, key_a: str, key_b: str) -> int:
-        """Returns euclidian distance between two keys
+        """Returns euclidian distance between two keys.
 
         Args:
             key_a (str): keyboard key
@@ -86,7 +84,7 @@ class Keyboard(BaseModel):
             for x, _ in enumerate(self.keyboard_array[arr]):
                 yield from self.keyboard_array[arr][x]
 
-    def get_neighbours(self, key: str, distance: int = 1) -> Set[int]:
+    def get_neighbours(self, key: str, distance: int = 1) -> List[int]:
         """gets the neighbours of a key with a specified distance.
 
         Args:
@@ -95,9 +93,9 @@ class Keyboard(BaseModel):
                 Defaults to 1.
 
         Returns:
-            Set[int]: The neighbours of a key with a specified distance.
+            List[int]: The neighbours of a key with a specified distance.
         """
-        l = []
+        l = []  # noqa: E741
         for k in self.all_keys():
             if k == key:
                 continue
@@ -110,6 +108,6 @@ class Keyboard(BaseModel):
 
     @staticmethod
     def from_registry(entry: str, shift_distance: int = 3) -> "Keyboard":
-        """Creates a keyboard from a registry"""
+        """Creates a keyboard from a registry."""
         array = registry.keyboards.get(entry)()
         return Keyboard(keyboard_array=array, shift_distance=shift_distance)

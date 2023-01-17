@@ -1,6 +1,4 @@
-"""
-Augmenters for swapping characters
-"""
+"""Augmenters for swapping characters."""
 
 
 import random
@@ -14,12 +12,26 @@ from spacy.training import Example
 from ..augment_utilities import make_text_from_orth
 
 
+def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[Example]:
+    def __replace(t):
+        for i, c in enumerate(t.text[:-1]):
+            if random.random() < level:
+                return t.text[:i] + t.text[i + 1] + c + t.text[i + 2 :]
+        return t.text
+
+    example_dict = example.to_dict()
+    example_dict["token_annotation"]["ORTH"] = [__replace(t) for t in example.reference]
+    text = make_text_from_orth(example_dict)
+    doc = nlp.make_doc(text)
+    yield example.from_dict(doc, example_dict)
+
+
 @spacy.registry.augmenters("char_swap.v1")
 def create_char_swap_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that swaps two neighbouring characters in a token with a
-    given probability.
+    """Creates an augmenter that swaps two neighbouring characters in a token
+    with a given probability.
 
     Args:
         level (float): probability to replace a character.
@@ -37,17 +49,3 @@ def create_char_swap_augmenter_v1(
         ["A smaple txet"]
     """
     return partial(char_swap_augmenter_v1, level=level)
-
-
-def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[Example]:
-    def __replace(t):
-        for i, c in enumerate(t.text[:-1]):
-            if random.random() < level:
-                return t.text[:i] + t.text[i + 1] + c + t.text[i + 2 :]
-        return t.text
-
-    example_dict = example.to_dict()
-    example_dict["token_annotation"]["ORTH"] = [__replace(t) for t in example.reference]
-    text = make_text_from_orth(example_dict)
-    doc = nlp.make_doc(text)
-    yield example.from_dict(doc, example_dict)

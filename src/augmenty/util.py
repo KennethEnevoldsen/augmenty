@@ -2,12 +2,12 @@
 
 from typing import Callable, Dict, Iterable, Iterator, List
 
-import catalogue
-import spacy
-import thinc
-from spacy.language import Language
-from spacy.tokens import Doc
-from spacy.training import Example
+import catalogue  # type: ignore
+import spacy  # type: ignore
+import thinc  # type: ignore
+from spacy.language import Language  # type: ignore
+from spacy.tokens import Doc  # type: ignore
+from spacy.training import Example  # type: ignore
 
 
 class registry(thinc.registry):
@@ -19,7 +19,7 @@ def docs(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     nlp: Language,
 ) -> Iterator[Doc]:
-    """Augments an iterable of spaCy Doc
+    """Augments an iterable of spaCy Doc.
 
     Args:
         docs (Iterable[Doc]): A iterable of spaCy Docs
@@ -39,7 +39,6 @@ def docs(
         >>> docs = [Doc(words=["Fine", "by", "me"])]
         >>> augmenter = augmenty.load("upper_case.v1", level=1)
         >>> augmented_docs = augmenty.docs(docs, augmenter, nlp)
-
     """
     if isinstance(docs, Doc):
         docs = [docs]
@@ -55,7 +54,7 @@ def texts(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     nlp: Language,
 ) -> Iterable[str]:
-    """Augments an list of texts
+    """Augments an list of texts.
 
     Args:
         texts (Iterable[str]): A iterable of strings
@@ -67,7 +66,6 @@ def texts(
 
     Yields:
         str: The augmented text.
-
     """
     if isinstance(texts, str):
         texts = [texts]
@@ -81,7 +79,7 @@ def texts(
 
 
 def augmenters() -> Dict[str, Callable]:
-    """A utility function to get an overview of all augmenters
+    """A utility function to get an overview of all augmenters.
 
     Returns:
         Dict[str, Callable]: Dictionary of all augmenters
@@ -95,7 +93,7 @@ def augmenters() -> Dict[str, Callable]:
 
 
 def load(augmenter=str, **kwargs) -> Callable:
-    """A utility functionload an augmenter
+    """A utility functionload an augmenter.
 
     Returns:
         Dict[str, Callable]: Dictionary of all augmenters
@@ -113,7 +111,7 @@ def load(augmenter=str, **kwargs) -> Callable:
 
 
 def keyboards() -> List[str]:
-    """A utility function to get an overview of all keyboards
+    """A utility function to get an overview of all keyboards.
 
     Returns:
         List[str]]: List of all keyboards
@@ -139,7 +137,7 @@ def meta() -> Dict[str, dict]:
     import pathlib
 
     p = pathlib.Path(__file__).parent.resolve()
-    p = os.path.join(p, "meta.json")
+    p = os.path.join(p, "meta.json")  # type: ignore
     with open(p) as f:
         r = json.load(f)
     return r

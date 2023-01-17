@@ -10,36 +10,6 @@ from spacy.training import Example
 from ..augment_utilities import make_text_from_orth
 
 
-@spacy.registry.augmenters("token_swap.v1")
-def create_token_swap_augmenter_v1(
-    level: float,
-    respect_ents: bool = True,
-    respect_sentences: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter that randomly swaps two neighbouring tokens.
-
-    Args:
-        level (float): The probability to swap two tokens.
-        respect_ents (bool, optional): Should the pipeline respect entities? Defaults
-            to True. In which case it will not swap a token inside an entity with a
-            token outside the entity span, unless it is a one word span. If false it
-            will disregard correcting the entity labels.
-        respect_sentences (bool, optional): Should it respect end of sentence
-            bounderies? Default to True, indicating that it will not swap and end of
-            sentence token. If False it will disregard correcting the sentence start
-            as this becomes arbitrary.
-
-    Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
-    """
-    return partial(
-        token_swap_augmenter_v1,
-        level=level,
-        respect_sentences=respect_sentences,
-        respect_ents=respect_ents,
-    )
-
-
 def token_swap_augmenter_v1(
     nlp: Language,
     example: Example,
@@ -136,3 +106,33 @@ def token_swap_augmenter_v1(
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield example.from_dict(doc, example_dict)
+
+
+@spacy.registry.augmenters("token_swap.v1")
+def create_token_swap_augmenter_v1(
+    level: float,
+    respect_ents: bool = True,
+    respect_sentences: bool = True,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Creates an augmenter that randomly swaps two neighbouring tokens.
+
+    Args:
+        level (float): The probability to swap two tokens.
+        respect_ents (bool, optional): Should the pipeline respect entities? Defaults
+            to True. In which case it will not swap a token inside an entity with a
+            token outside the entity span, unless it is a one word span. If false it
+            will disregard correcting the entity labels.
+        respect_sentences (bool, optional): Should it respect end of sentence
+            bounderies? Default to True, indicating that it will not swap and end of
+            sentence token. If False it will disregard correcting the sentence start
+            as this becomes arbitrary.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+    """
+    return partial(
+        token_swap_augmenter_v1,
+        level=level,
+        respect_sentences=respect_sentences,
+        respect_ents=respect_ents,
+    )

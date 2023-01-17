@@ -12,53 +12,6 @@ from .static_embedding_util import static_embedding
 from .wordnet_util import init_wordnet
 
 
-@spacy.registry.augmenters("token_dict_replace.v1")
-def create_token__dict_replace_augmenter_v1(
-    level: float,
-    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
-    ignore_casing: bool = True,
-    getter: Callable[[Token], str] = lambda token: token.pos_,
-    keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter swaps a token with its synonym based on a dictionary.
-
-    Args:
-        level (float): Probability to replace token given that it is in synonym
-            dictionary.
-        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A
-            dictionary of words and a list of their replacement (e.g. synonyms) or a
-            dictionary denoting replacement based on pos tag.
-        ignore_casing(bool, optional): When doing the lookup should the model ignore
-            casing? Defaults to True.
-        getter (Callable[[Token], str], optional): A getter function to extract the
-            POS-tag.
-        keep_titlecase (bool): Should the model keep the titlecase of the replaced
-            word. Defaults to True.
-
-    Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
-
-    Examples:
-        >>> replace = {"act": ["perform", "move", "action"], }
-        >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
-        >>> # or
-        >>> replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}
-        >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
-    """
-    if ignore_casing is True:
-        for k in replace:
-            replace[k.lower()] = replace[k]
-
-    return partial(
-        token_dict_replace_augmenter_v1,
-        level=level,
-        replace=replace,
-        getter=getter,
-        ignore_casing=ignore_casing,
-        keep_titlecase=keep_titlecase,
-    )
-
-
 def token_dict_replace_augmenter_v1(
     nlp: Language,
     example: Example,
@@ -91,6 +44,54 @@ def token_dict_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
+@spacy.registry.augmenters("token_dict_replace.v1")
+def create_token__dict_replace_augmenter_v1(
+    level: float,
+    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    ignore_casing: bool = True,
+    getter: Callable[[Token], str] = lambda token: token.pos_,
+    keep_titlecase: bool = True,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Creates an augmenter swaps a token with its synonym based on a
+    dictionary.
+
+    Args:
+        level (float): Probability to replace token given that it is in synonym
+            dictionary.
+        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A
+            dictionary of words and a list of their replacement (e.g. synonyms) or a
+            dictionary denoting replacement based on pos tag.
+        ignore_casing(bool, optional): When doing the lookup should the model ignore
+            casing? Defaults to True.
+        getter (Callable[[Token], str], optional): A getter function to extract the
+            POS-tag.
+        keep_titlecase (bool): Should the model keep the titlecase of the replaced
+            word. Defaults to True.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Examples:
+        >>> replace = {"act": ["perform", "move", "action"], }
+        >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
+        >>> # or
+        >>> replace = {"act": {"VERB": ["perform", "move"], "NOUN": ["action", "deed"]}}
+        >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
+    """
+    if ignore_casing is True:
+        for k in replace:
+            replace[k.lower()] = replace[k]  # type: ignore
+
+    return partial(
+        token_dict_replace_augmenter_v1,
+        level=level,
+        replace=replace,
+        getter=getter,
+        ignore_casing=ignore_casing,
+        keep_titlecase=keep_titlecase,
+    )
+
+
 @spacy.registry.augmenters("wordnet_synonym.v1")
 def create_wordnet_synonym_augmenter_v1(
     level: float,
@@ -99,7 +100,8 @@ def create_wordnet_synonym_augmenter_v1(
     getter: Callable = lambda token: token.pos_,
     keep_titlecase: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Creates an augmenter swaps a token with its synonym based on a dictionary.
+    """Creates an augmenter swaps a token with its synonym based on a
+    dictionary.
 
     Args:
         lang (Optional[str], optional): Language supplied a ISO 639-1 language code.
@@ -123,7 +125,7 @@ def create_wordnet_synonym_augmenter_v1(
         >>>                                                              lang="en")
     """
     init_wordnet()
-    from nltk.corpus import wordnet
+    from nltk.corpus import wordnet  # type: ignore
 
     from .wordnet_util import lang_wn_dict, upos_wn_dict
 
@@ -150,7 +152,11 @@ def create_wordnet_synonym_augmenter_v1(
                 else:
                     syns = wordnet.synsets(word, lang=lang)
                 if syns:
-                    rep = {l for syn in syns for l in syn.lemma_names(lang=lang)}
+                    rep = {
+                        l
+                        for syn in syns
+                        for l in syn.lemma_names(lang=lang)  # noqa E741
+                    }
                     if word in rep:
                         rep.remove(word)
                     if rep:
@@ -196,7 +202,7 @@ def token_replace_augmenter_v1(
             return text
 
     else:
-        __replace = replace
+        __replace = replace  # type: ignore
 
     example_dict = example.to_dict()
     example_dict["token_annotation"]["ORTH"] = [
@@ -277,7 +283,7 @@ def create_word_embedding_augmenter_v1(
     ) -> str:
         if embedding.vocab is None:
             embedding.update_from_vocab(t.doc.vocab)
-        if embedding.vocab.vectors.shape == (0, 0):
+        if embedding.vocab.vectors.shape == (0, 0):  # type: ignore
             raise ValueError(
                 "Vectors are empty. Typically this is due to using a transformer-based "
                 + "or small spaCy model. Specify nlp for the "

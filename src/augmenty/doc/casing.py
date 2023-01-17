@@ -7,6 +7,20 @@ from spacy.language import Language
 from spacy.training import Example
 
 
+def upper_casing_augmenter_v1(
+    nlp: Language, example: Example, *, level: float
+) -> Iterator[Example]:
+    if random.random() >= level:
+        yield example
+    else:
+        example_dict = example.to_dict()
+        doc = nlp.make_doc(example.text.upper())
+        example_dict["token_annotation"]["ORTH"] = [
+            t.text.upper() for t in example.reference
+        ]
+        yield example.from_dict(doc, example_dict)
+
+
 @spacy.registry.augmenters("upper_case.v1")
 def create_upper_casing_augmenter_v1(
     level: float,
@@ -31,6 +45,21 @@ def create_upper_casing_augmenter_v1(
     return partial(upper_casing_augmenter_v1, level=level)
 
 
+def spongebob_augmenter_v1(
+    nlp: Language, example: Example, *, level: float
+) -> Iterator[Example]:
+    if random.random() >= level:
+        yield example
+    else:
+        chars = [c.lower() if i % 2 else c.upper() for i, c in enumerate(example.text)]
+        example_dict = example.to_dict()
+        doc = nlp.make_doc("".join(chars))
+        example_dict["token_annotation"]["ORTH"] = [
+            doc.text[t.idx : t.idx + len(t.text)] for t in example.y
+        ]
+        yield example.from_dict(doc, example_dict)
+
+
 @spacy.registry.augmenters("spongebob.v1")
 def create_spongebob_augmenter_v1(
     level: float,
@@ -53,32 +82,3 @@ def create_spongebob_augmenter_v1(
         ["A SaMpLe tExT"]
     """
     return partial(spongebob_augmenter_v1, level=level)
-
-
-def upper_casing_augmenter_v1(
-    nlp: Language, example: Example, *, level: float
-) -> Iterator[Example]:
-    if random.random() >= level:
-        yield example
-    else:
-        example_dict = example.to_dict()
-        doc = nlp.make_doc(example.text.upper())
-        example_dict["token_annotation"]["ORTH"] = [
-            t.text.upper() for t in example.reference
-        ]
-        yield example.from_dict(doc, example_dict)
-
-
-def spongebob_augmenter_v1(
-    nlp: Language, example: Example, *, level: float
-) -> Iterator[Example]:
-    if random.random() >= level:
-        yield example
-    else:
-        chars = [c.lower() if i % 2 else c.upper() for i, c in enumerate(example.text)]
-        example_dict = example.to_dict()
-        doc = nlp.make_doc("".join(chars))
-        example_dict["token_annotation"]["ORTH"] = [
-            doc.text[t.idx : t.idx + len(t.text)] for t in example.y
-        ]
-        yield example.from_dict(doc, example_dict)

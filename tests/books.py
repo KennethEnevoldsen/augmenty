@@ -1,4 +1,5 @@
-"""Borrowed from textdescriptives https://github.com/HLasse/TextDescriptives"""
+"""Borrowed from textdescriptives
+https://github.com/HLasse/TextDescriptives."""
 
 oliver_twist = """Among other public buildings in a certain town, which for many reasons
 it will be prudent to refrain from mentioning, and to which I will

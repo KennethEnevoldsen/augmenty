@@ -1,5 +1,4 @@
-"""
-A small streamlit demo
+"""A small streamlit demo.
 
 pip install streamlit
 pip install st-annotated-text
@@ -49,7 +48,7 @@ for i, _ in enumerate(augmenter_list):
     if _ == def_aug:
         break
 augmenter = st.selectbox("Augmenter", augmenter_list, index=i)
-desc = augmenters[augmenter].__doc__.split("\n\n")[0]
+desc = augmenters[augmenter].__doc__.split("\n\n")[0]  # type: ignore
 st.markdown(f"## Description: \n{desc}")
 
 level = st.slider("level", min_value=0.0, max_value=1.0, step=0.01, value=1.0)

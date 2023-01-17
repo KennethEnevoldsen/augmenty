@@ -5,7 +5,7 @@ import augmenty
 from .fixtures import nlp_en  # noqa
 
 
-def test_create_spongebob_augmenter(nlp_en):
+def test_create_spongebob_augmenter(nlp_en):  # noqa F811
     spongebob_augmenter = augmenty.load("spongebob.v1", level=1)
     texts = ["A sample text"]
     aug_text = "A SaMpLe tExT"
@@ -14,7 +14,7 @@ def test_create_spongebob_augmenter(nlp_en):
     assert aug_texts[0] == aug_text
 
 
-def test_create_upper_case_augmenter(nlp_en):
+def test_create_upper_case_augmenter(nlp_en):  # noqa F811
     spongebob_augmenter = augmenty.load("upper_case.v1", level=1)
     texts = ["A sample text"]
     aug_text = "A SAMPLE TEXT"
@@ -23,7 +23,7 @@ def test_create_upper_case_augmenter(nlp_en):
     assert aug_texts[0] == aug_text
 
 
-def test_paragraph_subset_augmenter(nlp_en):
+def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
     text = (
         "My name is Kenneth Enevoldsen. "
         + "Augmenty is a wonderful tool for augmentation. "

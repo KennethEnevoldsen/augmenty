@@ -10,50 +10,6 @@ from spacy.training import Example
 from augmenty.augment_utilities import make_text_from_orth
 
 
-@spacy.registry.augmenters("paragraph_subset_augmenter.v1")
-def create_paragraph_subset_augmenter_v1(
-    min_paragraph: Union[float, int] = 1,
-    max_paragraph: Union[float, int] = 1.00,
-    respect_sentences: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
-    """Create an augmenter that extracts a subset of a document.
-
-    Args:
-        min_paragraph (Union[float, int]): An float indicating the min percentage of the
-            document to include or a float indicating the minimum number of paragraps
-            to include (tokens in respect sentences is False). Defaults to 1,
-            indicating at least one sentence.
-        max_paragraph (Union[float, int]): An float indicating the max percentage of the
-            document to include or a float indicating the maximum number of paragraps
-            to include (tokens in respect sentences is False). Defaults to 1.00
-            indicating 100%.
-        respect_sentences (bool): should the augmenter respect sentence bounderies?
-            Defaults to True.
-
-    Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
-
-    Example:
-        >>> import augmenty
-        >>> import spacy
-        >>> nlp = spacy.blank("en")
-        >>> nlp.add_pipe("sentencizer")
-        >>> upper_case_augmenter = augmenty.load("sent_subset.v1", level=0.7)
-        >>> text = "Augmenty is a wonderful tool for augmentation. " +
-        >>>   "It have tons of different augmenters. " +
-        >>>   " Augmenty is developed using spaCy."
-        >>> list(augmenty.texts([text], upper_case_augmenter, nlp))
-        ["Augmenty is a wonderful tool for augmentation. Augmenty is developed using
-        spaCy."]
-    """
-    return partial(
-        paragraph_subset_augmenter_v1,
-        respect_sentences=respect_sentences,
-        min_paragraph=min_paragraph,
-        max_paragraph=max_paragraph,
-    )
-
-
 def paragraph_subset_augmenter_v1(
     nlp: Language,
     example: Example,
@@ -109,3 +65,47 @@ def paragraph_subset_augmenter_v1(
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield Example.from_dict(doc, example_dict)
+
+
+@spacy.registry.augmenters("paragraph_subset_augmenter.v1")
+def create_paragraph_subset_augmenter_v1(
+    min_paragraph: Union[float, int] = 1,
+    max_paragraph: Union[float, int] = 1.00,
+    respect_sentences: bool = True,
+) -> Callable[[Language, Example], Iterator[Example]]:
+    """Create an augmenter that extracts a subset of a document.
+
+    Args:
+        min_paragraph (Union[float, int]): An float indicating the min percentage of the
+            document to include or a float indicating the minimum number of paragraps
+            to include (tokens in respect sentences is False). Defaults to 1,
+            indicating at least one sentence.
+        max_paragraph (Union[float, int]): An float indicating the max percentage of the
+            document to include or a float indicating the maximum number of paragraps
+            to include (tokens in respect sentences is False). Defaults to 1.00
+            indicating 100%.
+        respect_sentences (bool): should the augmenter respect sentence bounderies?
+            Defaults to True.
+
+    Returns:
+        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+
+    Example:
+        >>> import augmenty
+        >>> import spacy
+        >>> nlp = spacy.blank("en")
+        >>> nlp.add_pipe("sentencizer")
+        >>> upper_case_augmenter = augmenty.load("sent_subset.v1", level=0.7)
+        >>> text = "Augmenty is a wonderful tool for augmentation. " +
+        >>>   "It have tons of different augmenters. " +
+        >>>   " Augmenty is developed using spaCy."
+        >>> list(augmenty.texts([text], upper_case_augmenter, nlp))
+        ["Augmenty is a wonderful tool for augmentation. Augmenty is developed using
+        spaCy."]
+    """
+    return partial(
+        paragraph_subset_augmenter_v1,
+        respect_sentences=respect_sentences,
+        min_paragraph=min_paragraph,
+        max_paragraph=max_paragraph,
+    )

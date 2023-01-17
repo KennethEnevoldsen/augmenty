@@ -21,7 +21,7 @@ for aug, f in sorted(augmenty.augmenters().items()):
     if "description" in about:
         desc = about["description"]
     else:
-        desc = f.__doc__.split("\n\n")[0]
+        desc = f.__doc__.split("\n\n")[0]  # type: ignore
         desc = " ".join(desc.split("\n"))
 
     # respects
@@ -82,5 +82,5 @@ table = md.table(
 md.add(table)
 
 
-with open("../docs/augmenters_overview.md", "w") as f:
-    f.write(md.text)
+with open("../docs/augmenters_overview.md", "w") as f:  # type: ignore
+    f.write(md.text)  # type: ignore
