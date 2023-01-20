@@ -190,7 +190,9 @@ def create_per_replace_augmenter_v1(
             pattern. Defaults to None, indicating equal probability for each pattern.
         replace_consistency (bool, optional): Should the entity always be replaced with
             the same entity? Defaults to True.
-        person_tag (str, optional) The tag of the person entity. Defaults to "PERSON".
+        person_tag (str, optional): The tag of the person entity. Defaults to "PERSON".
+            However it should be noted that much such as the Danish spacy model uses
+            "PER" instead.
 
     Returns:
         Callable[[Language, Example], Iterator[Example]]: The augmenter
@@ -200,8 +202,10 @@ def create_per_replace_augmenter_v1(
         >>>          "lastname": ["Enevoldsen", "Hansen"]}
         >>> patterns = [["firstname"], ["firstname", "lastname"],
         >>>             ["firstname", "firstname", "lastname"]]
+        >>> person_tag = "PERSON"
         >>> # replace 10% of names:
-        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1)
+        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1, 
+        >>>                                              person_tag=person_tag)
     """
 
     names_gen = generator_from_name_dict(names, patterns, names_p, patterns_p)
