@@ -204,7 +204,7 @@ def create_per_replace_augmenter_v1(
         >>>             ["firstname", "firstname", "lastname"]]
         >>> person_tag = "PERSON"
         >>> # replace 10% of names:
-        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1, 
+        >>> per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1,
         >>>                                              person_tag=person_tag)
     """
 
