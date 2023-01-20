@@ -338,7 +338,9 @@ Defaults to {}, indicating equal probability for each name.</p></li>
 pattern. Defaults to None, indicating equal probability for each pattern.</p></li>
 <li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the entity always be replaced with
 the same entity? Defaults to True.</p></li>
-<li><p><strong>person_tag</strong> (<em>str</em><em>, </em><em>optional</em>) – </p></li>
+<li><p><strong>person_tag</strong> (<em>str</em><em>, </em><em>optional</em>) – The tag of the person entity. Defaults to “PERSON”.
+However it should be noted that much such as the Danish spacy model uses
+“PER” instead.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -353,8 +355,10 @@ the same entity? Defaults to True.</p></li>
 <span class="gp">&gt;&gt;&gt; </span>         <span class="s2">&quot;lastname&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Enevoldsen&quot;</span><span class="p">,</span> <span class="s2">&quot;Hansen&quot;</span><span class="p">]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;firstname&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;firstname&quot;</span><span class="p">,</span> <span class="s2">&quot;lastname&quot;</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>            <span class="p">[</span><span class="s2">&quot;firstname&quot;</span><span class="p">,</span> <span class="s2">&quot;firstname&quot;</span><span class="p">,</span> <span class="s2">&quot;lastname&quot;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person_tag</span> <span class="o">=</span> <span class="s2">&quot;PERSON&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># replace 10% of names:</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">per_augmenter</span> <span class="o">=</span> <span class="n">create_per_replace_augmenter</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">per_augmenter</span> <span class="o">=</span> <span class="n">create_per_replace_augmenter</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                             <span class="n">person_tag</span><span class="o">=</span><span class="n">person_tag</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

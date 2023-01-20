@@ -416,7 +416,9 @@
 <span class="sd">            pattern. Defaults to None, indicating equal probability for each pattern.</span>
 <span class="sd">        replace_consistency (bool, optional): Should the entity always be replaced with</span>
 <span class="sd">            the same entity? Defaults to True.</span>
-<span class="sd">        person_tag (str, optional) The tag of the person entity. Defaults to &quot;PERSON&quot;.</span>
+<span class="sd">        person_tag (str, optional): The tag of the person entity. Defaults to &quot;PERSON&quot;.</span>
+<span class="sd">            However it should be noted that much such as the Danish spacy model uses</span>
+<span class="sd">            &quot;PER&quot; instead.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter</span>
@@ -426,8 +428,10 @@
 <span class="sd">        &gt;&gt;&gt;          &quot;lastname&quot;: [&quot;Enevoldsen&quot;, &quot;Hansen&quot;]}</span>
 <span class="sd">        &gt;&gt;&gt; patterns = [[&quot;firstname&quot;], [&quot;firstname&quot;, &quot;lastname&quot;],</span>
 <span class="sd">        &gt;&gt;&gt;             [&quot;firstname&quot;, &quot;firstname&quot;, &quot;lastname&quot;]]</span>
+<span class="sd">        &gt;&gt;&gt; person_tag = &quot;PERSON&quot;</span>
 <span class="sd">        &gt;&gt;&gt; # replace 10% of names:</span>
-<span class="sd">        &gt;&gt;&gt; per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1)</span>
+<span class="sd">        &gt;&gt;&gt; per_augmenter = create_per_replace_augmenter(names, patterns, level=0.1, </span>
+<span class="sd">        &gt;&gt;&gt;                                              person_tag=person_tag)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">names_gen</span> <span class="o">=</span> <span class="n">generator_from_name_dict</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">names_p</span><span class="p">,</span> <span class="n">patterns_p</span><span class="p">)</span>
