@@ -80,7 +80,7 @@ docs = [
 ]
 tutorials = [
     "jupyter>=1.0.0,<1.1.0",
-    "faker==13.13.0"
+    "faker==16.6.1"
 ]
 
 
