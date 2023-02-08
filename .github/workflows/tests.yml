@@ -63,7 +63,7 @@ jobs:
 
       # if it is run on ubuntu-latest, python 3.9, then create the badge
       - name: Pytest coverage comment
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.9' }}
+        if: ${{ (matrix.os == 'ubuntu-latest' && matrix.python-version == '3.9') && (github.actor != 'dependabot[bot]' || github.actor != 'pre-commit-ci[bot]' || github.event_name != 'push') }}
         id: coverage-comment
         uses: MishaKav/pytest-coverage-comment@v1.1.43
         with:
