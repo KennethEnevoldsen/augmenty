@@ -16,7 +16,6 @@ use = ["evaluation", "training"]
 table_list = []
 
 for aug, f in sorted(augmenty.augmenters().items()):
-
     about = meta[aug]
 
     # description:

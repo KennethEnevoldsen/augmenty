@@ -231,7 +231,6 @@ def ent_format_augmenter_v1(
 
     for ent in example.y.ents:
         if (ent_types is None or ent.label_ in ent_types) and random.random() < level:
-
             # reorder tokens
             new_ent = []
             ent_ = [e for e in ent]

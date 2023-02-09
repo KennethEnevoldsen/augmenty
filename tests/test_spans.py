@@ -75,7 +75,6 @@ def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
     ]
 
     for p, e in zip(patterns, expected):
-
         per_augmenter = augmenty.load(
             "per_replace_v1",
             level=1.00,

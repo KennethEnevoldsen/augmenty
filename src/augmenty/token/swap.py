@@ -17,7 +17,6 @@ def token_swap_augmenter_v1(
     respect_ents: bool,
     respect_sentences: bool,
 ) -> Iterator[Example]:
-
     example_dict = example.to_dict()
 
     n_tok = len(example.y)

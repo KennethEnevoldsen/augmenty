@@ -16,7 +16,7 @@ def paragraph_subset_augmenter_v1(
     *,
     min_paragraph: Union[float, int],
     max_paragraph: Union[float, int],
-    respect_sentences: bool
+    respect_sentences: bool,
 ) -> Iterator[Example]:
     example_dict = example.to_dict()
     token_anno = example_dict["token_annotation"]
