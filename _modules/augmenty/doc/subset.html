@@ -242,7 +242,7 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">min_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
     <span class="n">max_paragraph</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-    <span class="n">respect_sentences</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">respect_sentences</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
     <span class="n">token_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">]</span>
