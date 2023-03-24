@@ -113,18 +113,18 @@ def create_ent_augmenter_v1(
     lookup.
 
     Args:
-        level (float): the percentage of entities to be augmented.
-        ent_dict (Dict[str, Iterable[List[str]]]): A dictionary with keys corresponding
+        level: the percentage of entities to be augmented.
+        ent_dict: A dictionary with keys corresponding
             the the entity type you wish to replace (e.g. "PER") and a itarable of the
             replacements. A replacement is a list of string of the desired entity
             replacement ["Kenneth", "Enevoldsen"].
-        replace_consistency (bool, optional): Should an entity always be replaced with
+        replace_consistency: Should an entity always be replaced with
             the same entity? Defaults to True.
-        resolve_dependencies (bool, optional): Attempts to resolve the dependency tree
-            by setting head of the original entitity as
-        the head of the first token in the new entity. The remainder is the passed as
+        resolve_dependencies: Attempts to resolve the dependency tree
+            by setting head of the original entitity aa the head of the
+            first token in the new entity. The remainder is the passed as
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter
+        The augmenter
 
     Example:
         >>> ent_dict = {"ORG": [["Google"], ["Apple"]],
@@ -177,25 +177,25 @@ def create_per_replace_augmenter_v1(
     the names dictionary.
 
     Args:
-        names (Dict[str, List[str]]): A dictionary of list of names to sample from.
+        names: A dictionary of list of names to sample from.
             These could for example include first name and last names.
-        pattern (List[List[str]]): The pattern to create the names. This should be a
+        pattern: The pattern to create the names. This should be a
             list of patterns.
             Where a pattern is a list of strings, where the string denote the list in
             the names dictionary in which to sample from.
-        level (float): The proportion of PER entities to replace.
-        names_p (Dict[str, List[float]], optional): The probability to sample each name.
+        level: The proportion of PER entities to replace.
+        names_p: The probability to sample each name.
             Defaults to {}, indicating equal probability for each name.
-        patterns_p (Optional[List[float]], optional): The probability to sample each
+        patterns_p: The probability to sample each
             pattern. Defaults to None, indicating equal probability for each pattern.
-        replace_consistency (bool, optional): Should the entity always be replaced with
+        replace_consistency: Should the entity always be replaced with
             the same entity? Defaults to True.
-        person_tag (str, optional): The tag of the person entity. Defaults to "PERSON".
+        person_tag: The tag of the person entity. Defaults to "PERSON".
             However it should be noted that much such as the Danish spacy model uses
             "PER" instead.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter
+        The augmenter
 
     Example:
         >>> names = {"firstname": ["Kenneth", "Lasse"],
@@ -267,23 +267,23 @@ def create_ent_format_augmenter_v1(
     reordering and formatting functions.
 
     Args:
-        reordering (List[Union[int, None]]): A reordering consisting of a the desired
+        reordering: A reordering consisting of a the desired
             order of the list of indices, where None denotes the remainder. For
             instance if this function was solely used on names [-1, None] indicate last
             name (the last token in the name) followed by the remainder of the name.
             Similarly one could more use the reordering [3, 1, 2] e.g. indicating last
             name, first name, middle name. Note that if the entity only include two
             tokens the 3 will be ignored producing the pattern [1, 2].
-        formatter (List[Union[Callable[[Token], str], None]]): A list of function
+        formatter: A list of function
             taking in a spaCy Token returning the reformatted str. E.g. the function
             `lambda token: token.text[0] + "."` would abbreviate the token and add
             punctuation. None corresponds to no augmentation.
-        level (float): The probability of an entities being augmented.
-        ent_types (Optional[Iterable[str]], optional):  The entity types which should
+        level: The probability of an entities being augmented.
+        ent_types:  The entity types which should
             be augmented. Defaults to None, indicating all entity types.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter
+        The augmenter
 
     Example:
         >>> import augmenty
