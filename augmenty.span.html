@@ -251,23 +251,20 @@ lookup.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – the percentage of entities to be augmented.</p></li>
-<li><p><strong>ent_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Iterable</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – A dictionary with keys corresponding
+<li><p><strong>level</strong> – the percentage of entities to be augmented.</p></li>
+<li><p><strong>ent_dict</strong> – A dictionary with keys corresponding
 the the entity type you wish to replace (e.g. “PER”) and a itarable of the
 replacements. A replacement is a list of string of the desired entity
 replacement [“Kenneth”, “Enevoldsen”].</p></li>
-<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should an entity always be replaced with
+<li><p><strong>replace_consistency</strong> – Should an entity always be replaced with
 the same entity? Defaults to True.</p></li>
-<li><p><strong>resolve_dependencies</strong> (<em>bool</em><em>, </em><em>optional</em>) – Attempts to resolve the dependency tree
-by setting head of the original entitity as</p></li>
-<li><p><strong>as</strong> (<em>the head</em><em> of </em><em>the first token in the new entity. The remainder is the passed</em>) – </p></li>
+<li><p><strong>resolve_dependencies</strong> – Attempts to resolve the dependency tree
+by setting head of the original entitity aa the head of the
+first token in the new entity. The remainder is the passed as</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -287,27 +284,24 @@ reordering and formatting functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>reordering</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A reordering consisting of a the desired
+<li><p><strong>reordering</strong> – A reordering consisting of a the desired
 order of the list of indices, where None denotes the remainder. For
 instance if this function was solely used on names [-1, None] indicate last
 name (the last token in the name) followed by the remainder of the name.
 Similarly one could more use the reordering [3, 1, 2] e.g. indicating last
 name, first name, middle name. Note that if the entity only include two
 tokens the 3 will be ignored producing the pattern [1, 2].</p></li>
-<li><p><strong>formatter</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Token</em><em>]</em><em>, </em><em>str</em><em>]</em><em>, </em><em>None</em><em>]</em><em>]</em>) – A list of function
+<li><p><strong>formatter</strong> – A list of function
 taking in a spaCy Token returning the reformatted str. E.g. the function
 <cite>lambda token: token.text[0] + “.”</cite> would abbreviate the token and add
 punctuation. None corresponds to no augmentation.</p></li>
-<li><p><strong>level</strong> (<em>float</em>) – The probability of an entities being augmented.</p></li>
-<li><p><strong>ent_types</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The entity types which should
+<li><p><strong>level</strong> – The probability of an entities being augmented.</p></li>
+<li><p><strong>ent_types</strong> – The entity types which should
 be augmented. Defaults to None, indicating all entity types.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -333,29 +327,26 @@ the names dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>names</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – A dictionary of list of names to sample from.
+<li><p><strong>names</strong> – A dictionary of list of names to sample from.
 These could for example include first name and last names.</p></li>
-<li><p><strong>pattern</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – The pattern to create the names. This should be a
+<li><p><strong>pattern</strong> – The pattern to create the names. This should be a
 list of patterns.
 Where a pattern is a list of strings, where the string denote the list in
 the names dictionary in which to sample from.</p></li>
-<li><p><strong>level</strong> (<em>float</em>) – The proportion of PER entities to replace.</p></li>
-<li><p><strong>names_p</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each name.
+<li><p><strong>level</strong> – The proportion of PER entities to replace.</p></li>
+<li><p><strong>names_p</strong> – The probability to sample each name.
 Defaults to {}, indicating equal probability for each name.</p></li>
-<li><p><strong>patterns_p</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – The probability to sample each
+<li><p><strong>patterns_p</strong> – The probability to sample each
 pattern. Defaults to None, indicating equal probability for each pattern.</p></li>
-<li><p><strong>replace_consistency</strong> (<em>bool</em><em>, </em><em>optional</em>) – Should the entity always be replaced with
+<li><p><strong>replace_consistency</strong> – Should the entity always be replaced with
 the same entity? Defaults to True.</p></li>
-<li><p><strong>person_tag</strong> (<em>str</em><em>, </em><em>optional</em>) – The tag of the person entity. Defaults to “PERSON”.
+<li><p><strong>person_tag</strong> – The tag of the person entity. Defaults to “PERSON”.
 However it should be noted that much such as the Danish spacy model uses
 “PER” instead.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
