@@ -53,7 +53,7 @@ def ent_augmenter_v1(
             tok_anno["POS"][i] = ["PROPN"] * len_ent
 
             tok_anno["MORPH"][i] = [""] * len_ent
-            tok_anno["DEP"][i] = [tok_anno["DEP"][i][0]] + ["flat"] * (len_ent - 1)
+            tok_anno["DEP"][i] = [ent[0].dep_] + ["flat"] * (len_ent - 1)
 
             tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (
                 len_ent - 1
