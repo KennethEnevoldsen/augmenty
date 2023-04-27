@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.3 (2023-04-27)
+### Fix
+* Adjust dep. annotations for ent augmenter ([`00bbc56`](https://github.com/KennethEnevoldsen/augmenty/commit/00bbc561211ca5bde68f030c191ea20caad6dbfc))
+
+### Documentation
+* Fix formatting such that is rendered as intended in the docs ([`a77c362`](https://github.com/KennethEnevoldsen/augmenty/commit/a77c362a09762bf4473d0e4afd1289cbbb15e526))
+
 ## v1.3.2 (2023-03-06)
 ### Fix
 * Test sem release ([`bab9525`](https://github.com/KennethEnevoldsen/augmenty/commit/bab9525d1117a0f5692eac36d371de55dfba9421))
