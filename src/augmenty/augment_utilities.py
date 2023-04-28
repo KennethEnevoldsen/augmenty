@@ -14,11 +14,10 @@ def combine(
     """Combines a series of spaCy style augmenters.
 
     Args:
-        augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An
-            list of spaCy augmenters.
+        augmenters: An list of spaCy augmenters.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The combined augmenter
+        The combined augmenter
     """
 
     def apply_multiple_augmenters(nlp: Language, example: Example):
@@ -37,12 +36,12 @@ def set_doc_level(
     """Set the percantage of examples that the augmenter should be applied to.
 
     Args:
-        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy
-            augmenters which you only want to apply to a certain percentage of docs
-        level (float): The percentage of docs the which should be augmented.
+        augmenter: A spaCy augmenters which you only want to apply to a
+            certain percentage of docs
+        level: The percentage of docs the which should be augmented.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The combined augmenter
+        The combined augmenter
     """
 
     def __augment(nlp: Language, example: Example):
@@ -58,14 +57,15 @@ def repeat(
     augmenter: Callable[[Language, Example], Iterator[Example]],
     n: int,
 ) -> Callable[[Language, Example], Iterator[Example]]:
-    """Set the document level at which the tokenizer should be.
+    """Repeats an augmenter n times over the same example thus increasing the
+    sample size.
 
     Args:
-        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter.
-        n (int): Number of times the augmenter should be repeated
+        augmenter: An augmenter.
+        n: Number of times the augmenter should be repeated
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The repeated augmenter
+        The repeated augmenter
 
     Example:
         >>> augmenter = augmenty.load("char_swap_v1", level=.02)
@@ -87,14 +87,12 @@ def yield_original(
     example.
 
     Args:
-        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy
-            augmenters.
-        doc_level (float, optional): The percentage of documents the augmenter should
-            be applied to. Only yield the original when the original doc is augmented.
+        augmenter: A spaCy augmenters.
+        doc_level: The percentage of documents the augmenter should be applied to.
+            Only yield the original when the original doc is augmented.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now
-            yields both the original and augmented example.
+        The augmenter, which now yields both the original and augmented example.
     """
 
     def __augment(nlp: Language, example: Example, level: float):
