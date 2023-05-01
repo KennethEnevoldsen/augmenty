@@ -58,11 +58,10 @@ def example_doc(nlp) -> Doc:
 def test_entity_with_no_dep(nlp, example_doc: Doc):
     level = 1.0
     docs = [example_doc]
-    ents_as_str = ["Melvin R. Brown"]
     augmenter = augmenty.load(
         "ents_replace_v1",
         level=level,
-        ent_dict={"pers": [[s] for s in ents_as_str]},
+        ent_dict={"pers": ["Melvin R. Brown"]},
         replace_consistency=True,
         resolve_dependencies=True,
     )
@@ -72,3 +71,4 @@ def test_entity_with_no_dep(nlp, example_doc: Doc):
         aug_doc.text
         == "Melvin R. Brown and Melvin R. Brown (concussion protocol) are each progressing. SS Melvin R. Brown"
     )
+    assert aug_doc[0].text == "Melvin"
