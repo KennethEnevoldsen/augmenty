@@ -240,11 +240,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Combines a series of spaCy style augmenters.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenters (Iterable[Callable[[Language, Example], Iterator[Example]]]): An</span>
-<span class="sd">            list of spaCy augmenters.</span>
+<span class="sd">        augmenters: An list of spaCy augmenters.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The combined augmenter</span>
+<span class="sd">        The combined augmenter</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">apply_multiple_augmenters</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">):</span>
@@ -263,12 +262,12 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the percantage of examples that the augmenter should be applied to.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy</span>
-<span class="sd">            augmenters which you only want to apply to a certain percentage of docs</span>
-<span class="sd">        level (float): The percentage of docs the which should be augmented.</span>
+<span class="sd">        augmenter: A spaCy augmenters which you only want to apply to a</span>
+<span class="sd">            certain percentage of docs</span>
+<span class="sd">        level: The percentage of docs the which should be augmented.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The combined augmenter</span>
+<span class="sd">        The combined augmenter</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">):</span>
@@ -284,14 +283,15 @@
     <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the document level at which the tokenizer should be.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Repeats an augmenter n times over the same example thus increasing the</span>
+<span class="sd">    sample size.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter.</span>
-<span class="sd">        n (int): Number of times the augmenter should be repeated</span>
+<span class="sd">        augmenter: An augmenter.</span>
+<span class="sd">        n: Number of times the augmenter should be repeated</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The repeated augmenter</span>
+<span class="sd">        The repeated augmenter</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load(&quot;char_swap_v1&quot;, level=.02)</span>
@@ -313,14 +313,12 @@
 <span class="sd">    example.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): A spaCy</span>
-<span class="sd">            augmenters.</span>
-<span class="sd">        doc_level (float, optional): The percentage of documents the augmenter should</span>
-<span class="sd">            be applied to. Only yield the original when the original doc is augmented.</span>
+<span class="sd">        augmenter: A spaCy augmenters.</span>
+<span class="sd">        doc_level: The percentage of documents the augmenter should be applied to.</span>
+<span class="sd">            Only yield the original when the original doc is augmented.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter, which now</span>
-<span class="sd">            yields both the original and augmented example.</span>
+<span class="sd">        The augmenter, which now yields both the original and augmented example.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>

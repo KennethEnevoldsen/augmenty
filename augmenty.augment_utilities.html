@@ -251,14 +251,10 @@
 <dd><p>Combines a series of spaCy style augmenters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>augmenters</strong> (<em>Iterable</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em><em>]</em>) – An
-list of spaCy augmenters.</p>
+<dd class="field-odd"><p><strong>augmenters</strong> – An list of spaCy augmenters.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The combined augmenter</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -266,19 +262,17 @@ list of spaCy augmenters.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.augment_utilities.repeat">
 <span class="sig-prename descclassname"><span class="pre">augmenty.augment_utilities.</span></span><span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">augmenter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/augment_utilities.html#repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.augment_utilities.repeat" title="Permalink to this definition">#</a></dt>
-<dd><p>Set the document level at which the tokenizer should be.</p>
+<dd><p>Repeats an augmenter n times over the same example thus increasing the
+sample size.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – An augmenter.</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – Number of times the augmenter should be repeated</p></li>
+<li><p><strong>augmenter</strong> – An augmenter.</p></li>
+<li><p><strong>n</strong> – Number of times the augmenter should be repeated</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The repeated augmenter</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -295,16 +289,13 @@ list of spaCy augmenters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – A spaCy
-augmenters which you only want to apply to a certain percentage of docs</p></li>
-<li><p><strong>level</strong> (<em>float</em>) – The percentage of docs the which should be augmented.</p></li>
+<li><p><strong>augmenter</strong> – A spaCy augmenters which you only want to apply to a
+certain percentage of docs</p></li>
+<li><p><strong>level</strong> – The percentage of docs the which should be augmented.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The combined augmenter</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -317,21 +308,13 @@ example.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – A spaCy
-augmenters.</p></li>
-<li><p><strong>doc_level</strong> (<em>float</em><em>, </em><em>optional</em>) – The percentage of documents the augmenter should
-be applied to. Only yield the original when the original doc is augmented.</p></li>
+<li><p><strong>augmenter</strong> – A spaCy augmenters.</p></li>
+<li><p><strong>doc_level</strong> – The percentage of documents the augmenter should be applied to.
+Only yield the original when the original doc is augmented.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>The augmenter, which now</dt><dd><p>yields both the original and augmented example.</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
+<dd class="field-even"><p>The augmenter, which now yields both the original and augmented example.</p>
 </dd>
 </dl>
 </dd></dl>
