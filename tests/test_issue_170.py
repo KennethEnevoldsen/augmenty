@@ -5,36 +5,29 @@ https://github.com/KennethEnevoldsen/augmenty/issues/170.
 
 import pytest
 import spacy
-from spacy.tokens import DocBin, Span
+from spacy.tokens import Doc, Span
 
 import augmenty
 
 
 @pytest.fixture
 def nlp():
-    return spacy.blank("en")
-
-
-@pytest.fixture()
-def sentencizer(nlp):
-    return nlp.create_pipe("sentencizer")
+    nlp_ = spacy.blank("en")
+    nlp_.add_pipe("sentencizer")
+    return nlp_
 
 
 @pytest.fixture
-def docbin_no_dep(nlp) -> DocBin:
+def example_doc(nlp) -> Doc:
     text = "Joc Pederson and Thairo Estrada (concussion protocol) are each progressing. SS Brandon Crawford"
-    doc = nlp.make_doc(text)
+    doc = nlp(text)
     doc.ents = [
         Span(doc, 0, 2, "pers"),
         Span(doc, 3, 5, "pers"),
         Span(doc, 14, 16, "pers"),
     ]
-    docbin_no_dep_ = DocBin(store_user_data=True, docs=[doc])
-    return docbin_no_dep_
 
-
-def test_smoke_docbin_no_dep(nlp, docbin_no_dep: DocBin):
-    doc = list(docbin_no_dep.get_docs(nlp.vocab))[0]
+    # validate example
     assert [t.text for t in doc] == [
         "Joc",
         "Pederson",
@@ -58,18 +51,13 @@ def test_smoke_docbin_no_dep(nlp, docbin_no_dep: DocBin):
         "Thairo Estrada",
         "Brandon Crawford",
     ]
-
-
-def test_smoke_docbin_no_dep_sent(nlp, sentencizer, docbin_no_dep: DocBin):
-    doc = list(docbin_no_dep.get_docs(nlp.vocab))[0]
-    doc = sentencizer(doc)
     assert len(list(doc.sents)) == 2
+    return doc
 
 
-def test_augmenty_dependency_bug(nlp, docbin_no_dep: DocBin):
+def test_entity_with_no_dep(nlp, example_doc: Doc):
     level = 1.0
-    n_repeat = 3
-    docs = list(docbin_no_dep.get_docs(nlp.vocab))
+    docs = [example_doc]
     ents_as_str = ["Melvin R. Brown"]
     augmenter = augmenty.load(
         "ents_replace_v1",
@@ -78,24 +66,9 @@ def test_augmenty_dependency_bug(nlp, docbin_no_dep: DocBin):
         replace_consistency=True,
         resolve_dependencies=True,
     )
-    repeated_augmenter = augmenty.repeat(augmenter=augmenter, n=n_repeat)
-    augmented_docs = list(augmenty.docs(docs, repeated_augmenter, nlp))
-    assert augmented_docs
-
-
-def test_augmenty_dependency_bug_with_sent(nlp, sentencizer, docbin_no_dep: DocBin):
-    level = 1.0
-    n_repeat = 3
-    docs = list([sentencizer(doc) for doc in docbin_no_dep.get_docs(nlp.vocab)])
-    # ents_as_str = ['Mark Folkard', 'Melvin R. Brown', 'Kristiina Mäkelä']
-    ents_as_str = ["Melvin R. Brown"]
-    augmenter = augmenty.load(
-        "ents_replace_v1",
-        level=level,
-        ent_dict={"pers": [[s] for s in ents_as_str]},
-        replace_consistency=True,
-        resolve_dependencies=True,
+    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]
+    assert len(aug_doc.ents) == len(docs[0].ents)
+    assert (
+        aug_doc.text
+        == "Melvin R. Brown and Melvin R. Brown (concussion protocol) are each progressing. SS Melvin R. Brown"
     )
-    repeated_augmenter = augmenty.repeat(augmenter=augmenter, n=n_repeat)
-    augmented_docs = list(augmenty.docs(docs, repeated_augmenter, nlp))
-    assert augmented_docs

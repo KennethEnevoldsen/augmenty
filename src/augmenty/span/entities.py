@@ -62,9 +62,9 @@ def ent_augmenter_v1(
             # which is set based on the original entity
             tok_anno["SPACY"][i] = [True] * (len_ent - 1) + [bool(ent[-1].whitespace_)]
 
+            offset_ = len_ent - (ent.end - ent.start)
             if example.y.has_annotation("HEAD") and resolve_dependencies:
                 # Handle HEAD
-                offset_ = len_ent - (ent.end - ent.start)
 
                 head[head > ent.start + offset] += offset_
                 # keep first head correcting for changing entity size, set rest to
@@ -79,7 +79,7 @@ def ent_augmenter_v1(
                         np.array(head[ent.end + offset :]),  # after
                     ],
                 )
-                offset += offset_
+            offset += offset_
 
             # Handle entities IOB tags
             if len_ent == 1:
