@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2022.12.07 -->
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.0.0 and Furo 2022.12.07 -->
         <title>augmenty.keyboard - augmenty 1.3.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
@@ -266,7 +266,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> was not found in keyboard array&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Keyboard.is_shifted"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.is_shifted">[docs]</a>    <span class="k">def</span> <span class="nf">is_shifted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;is the key shifted?</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Is the key shifted?</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (str): keyboard key</span>
@@ -301,7 +301,7 @@
         <span class="k">return</span> <span class="p">((</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">shift_cost</span></div>
 
 <div class="viewcode-block" id="Keyboard.all_keys"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.all_keys">[docs]</a>    <span class="k">def</span> <span class="nf">all_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;yields all keys in keyboard.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Yields all keys in keyboard.</span>
 
 <span class="sd">        Yields:</span>
 <span class="sd">            all keys in keyboard.</span>
@@ -311,7 +311,7 @@
                 <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">][</span><span class="n">x</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Keyboard.get_neighbours"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.get_neighbours">[docs]</a>    <span class="k">def</span> <span class="nf">get_neighbours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;gets the neighbours of a key with a specified distance.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the neighbours of a key with a specified distance.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key (str): A keyboard key</span>
