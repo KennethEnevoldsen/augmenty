@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.4 (2023-05-01)
+### Fix
+* Handle offset outside "head" annotation scope ([`c02f076`](https://github.com/KennethEnevoldsen/augmenty/commit/c02f076d64ff7e18b5d6a239d2f02a7be966326d))
+* Added fix for issues 170 ([`74aa006`](https://github.com/KennethEnevoldsen/augmenty/commit/74aa00613b6dad7ef004a8f30ab0e8ec3838be94))
+
+### Documentation
+* Updated docstrings on repeat augmenter ([`f4cf48c`](https://github.com/KennethEnevoldsen/augmenty/commit/f4cf48c1585a592e7e798738f46b02bd5d816878))
+
 ## v1.3.3 (2023-04-27)
 ### Fix
 * Adjust dep. annotations for ent augmenter ([`00bbc56`](https://github.com/KennethEnevoldsen/augmenty/commit/00bbc561211ca5bde68f030c191ea20caad6dbfc))
