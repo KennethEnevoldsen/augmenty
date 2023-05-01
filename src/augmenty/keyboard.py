@@ -40,7 +40,7 @@ class Keyboard(BaseModel):
         raise ValueError(f"key {key} was not found in keyboard array")
 
     def is_shifted(self, key: str) -> bool:
-        """is the key shifted?
+        """Is the key shifted?
 
         Args:
             key (str): keyboard key
@@ -75,7 +75,7 @@ class Keyboard(BaseModel):
         return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5 + shift_cost
 
     def all_keys(self):
-        """yields all keys in keyboard.
+        """Yields all keys in keyboard.
 
         Yields:
             all keys in keyboard.
@@ -85,7 +85,7 @@ class Keyboard(BaseModel):
                 yield from self.keyboard_array[arr][x]
 
     def get_neighbours(self, key: str, distance: int = 1) -> List[int]:
-        """gets the neighbours of a key with a specified distance.
+        """Gets the neighbours of a key with a specified distance.
 
         Args:
             key (str): A keyboard key
