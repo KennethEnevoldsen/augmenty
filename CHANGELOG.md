@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.5 (2023-05-01)
+### Fix
+* Removed upper bounds on all dependencies ([`78b6a1d`](https://github.com/KennethEnevoldsen/augmenty/commit/78b6a1dd109e5946b8ba69b3e1215cc6aff328c6))
+
 ## v1.3.4 (2023-05-01)
 ### Fix
 * Handle offset outside "head" annotation scope ([`c02f076`](https://github.com/KennethEnevoldsen/augmenty/commit/c02f076d64ff7e18b5d6a239d2f02a7be966326d))
