@@ -226,33 +226,92 @@
           <h1>Source code for augmenty.span.entities</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span>
+    <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">Generator</span><span class="p">,</span>
+    <span class="n">Iterable</span><span class="p">,</span>
+    <span class="n">Iterator</span><span class="p">,</span>
+    <span class="n">List</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">spacy</span>
 <span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
-<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Span</span><span class="p">,</span> <span class="n">Token</span>
 <span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
+<span class="kn">from</span> <span class="nn">spacy.util</span> <span class="kn">import</span> <span class="n">registry</span>
 
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
+
+<span class="c1"># create entity type</span>
+<span class="n">ENTITY</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Span</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">__normalize_entity</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="n">ENTITY</span><span class="p">,</span> <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+    <span class="n">spacy</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">morph</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">lemma</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">ent_doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+        <span class="n">orth</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">ent_doc</span><span class="p">]</span>
+        <span class="n">spacy</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">whitespace_</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">ent_doc</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">orth</span> <span class="o">=</span> <span class="n">entity</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Span</span><span class="p">):</span>
+        <span class="n">orth</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
+        <span class="n">spacy</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">whitespace_</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">pos_</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">tag_</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
+        <span class="n">morph</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">morph</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
+        <span class="n">lemma</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">lemma_</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;entity must be of type str, List[str] or Span, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="c1"># if not specifed use default values</span>
+    <span class="k">if</span> <span class="n">spacy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">spacy</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">orth</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PROPN&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">orth</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tag</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PROPN&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">orth</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">morph</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">morph</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">orth</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lemma</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">lemma</span> <span class="o">=</span> <span class="n">orth</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;ORTH&quot;</span><span class="p">:</span> <span class="n">orth</span><span class="p">,</span>
+        <span class="s2">&quot;SPACY&quot;</span><span class="p">:</span> <span class="n">spacy</span><span class="p">,</span>
+        <span class="s2">&quot;POS&quot;</span><span class="p">:</span> <span class="n">pos</span><span class="p">,</span>
+        <span class="s2">&quot;TAG&quot;</span><span class="p">:</span> <span class="n">tag</span><span class="p">,</span>
+        <span class="s2">&quot;MORPH&quot;</span><span class="p">:</span> <span class="n">morph</span><span class="p">,</span>
+        <span class="s2">&quot;LEMMA&quot;</span><span class="p">:</span> <span class="n">lemma</span><span class="p">,</span>
+    <span class="p">}</span>
 
 
 <span class="k">def</span> <span class="nf">ent_augmenter_v1</span><span class="p">(</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ENTITY</span><span class="p">]],</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
-    <span class="n">replaced_ents</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict[str, List[str]]</span>
+    <span class="n">replaced_ents</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ENTITY</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="n">tok_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">]</span>
     <span class="n">ents</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;doc_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;entities&quot;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">&quot;HEAD&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">&quot;HEAD&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">resolve_dependencies</span><span class="p">:</span>
         <span class="n">head</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;HEAD&quot;</span><span class="p">])</span>
 
     <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
@@ -269,24 +328,28 @@
                 <span class="k">if</span> <span class="n">replace_consistency</span><span class="p">:</span>
                     <span class="n">replaced_ents</span><span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
 
+            <span class="n">normalized_ent</span> <span class="o">=</span> <span class="n">__normalize_entity</span><span class="p">(</span><span class="n">new_ent</span><span class="p">,</span> <span class="n">nlp</span><span class="p">)</span>
+            <span class="n">new_ent</span> <span class="o">=</span> <span class="n">normalized_ent</span><span class="p">[</span><span class="s2">&quot;ORTH&quot;</span><span class="p">]</span>
+            <span class="n">spacing</span> <span class="o">=</span> <span class="n">normalized_ent</span><span class="p">[</span><span class="s2">&quot;SPACY&quot;</span><span class="p">]</span>
+
             <span class="c1"># Handle token annotations</span>
             <span class="n">len_ent</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_ent</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
             <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;ORTH&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
-            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;LEMMA&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;LEMMA&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_ent</span><span class="p">[</span><span class="s2">&quot;LEMMA&quot;</span><span class="p">]</span>
 
-            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;TAG&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PROPN&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
-            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;POS&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PROPN&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;POS&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_ent</span><span class="p">[</span><span class="s2">&quot;POS&quot;</span><span class="p">]</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;TAG&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_ent</span><span class="p">[</span><span class="s2">&quot;TAG&quot;</span><span class="p">]</span>
 
-            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;MORPH&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">len_ent</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;MORPH&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_ent</span><span class="p">[</span><span class="s2">&quot;MORPH&quot;</span><span class="p">]</span>
             <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;DEP&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dep_</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;flat&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
             <span class="c1"># Set sentence start based on first token in previous entity</span>
             <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;SENT_START&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sent_start</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-            <span class="c1"># set spacing to be whitespace for all tokens except the last one</span>
-            <span class="c1"># which is set based on the original entity</span>
-            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;SPACY&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">len_ent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="nb">bool</span><span class="p">(</span><span class="n">ent</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">whitespace_</span><span class="p">)]</span>
+            <span class="c1"># set the last spacing to be equal to the last token spacing in the previous entity</span>
+            <span class="n">spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ent</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">whitespace_</span><span class="p">]</span>
+            <span class="n">tok_anno</span><span class="p">[</span><span class="s2">&quot;SPACY&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">spacing</span>
 
             <span class="n">offset_</span> <span class="o">=</span> <span class="n">len_ent</span> <span class="o">-</span> <span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">ent</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">has_annotation</span><span class="p">(</span><span class="s2">&quot;HEAD&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">resolve_dependencies</span><span class="p">:</span>
@@ -328,10 +391,10 @@
     <span class="k">yield</span> <span class="n">Example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_ent_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_replace_v1&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="create_ent_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_augmenter_v1">[docs]</a><span class="nd">@registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_replace_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_ent_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ENTITY</span><span class="p">]],</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
@@ -342,8 +405,10 @@
 <span class="sd">        level: the percentage of entities to be augmented.</span>
 <span class="sd">        ent_dict: A dictionary with keys corresponding</span>
 <span class="sd">            the the entity type you wish to replace (e.g. &quot;PER&quot;) and a itarable of the</span>
-<span class="sd">            replacements. A replacement is a list of string of the desired entity</span>
-<span class="sd">            replacement [&quot;Kenneth&quot;, &quot;Enevoldsen&quot;].</span>
+<span class="sd">            replacements entities. A replacement can be either 1) a list of string of the desired entity</span>
+<span class="sd">            i.e. [&quot;Kenneth&quot;, &quot;Enevoldsen&quot;], 2) a string of the desired entity i.e. &quot;Kenneth Enevoldsen&quot;, this</span>
+<span class="sd">            will be split using the tokenizer of the nlp pipeline, or 3) Span object with the desired entity, here all information will be passed</span>
+<span class="sd">            on except for the dependency tree.</span>
 <span class="sd">        replace_consistency: Should an entity always be replaced with</span>
 <span class="sd">            the same entity? Defaults to True.</span>
 <span class="sd">        resolve_dependencies: Attempts to resolve the dependency tree</span>
@@ -386,7 +451,7 @@
         <span class="p">]</span>
 
 
-<div class="viewcode-block" id="create_per_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;per_replace_v1&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="create_per_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1">[docs]</a><span class="nd">@registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;per_replace_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_per_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
@@ -482,7 +547,7 @@
     <span class="k">yield</span> <span class="n">Example</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="create_ent_format_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_format_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_format_v1&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="create_ent_format_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_format_augmenter_v1">[docs]</a><span class="nd">@registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_format_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_ent_format_augmenter_v1</span><span class="p">(</span>
     <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>
     <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>
