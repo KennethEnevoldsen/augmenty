@@ -55,12 +55,12 @@ def ent_augmenter_v1(
             tok_anno["MORPH"][i] = [""] * len_ent
             tok_anno["DEP"][i] = [ent[0].dep_] + ["flat"] * (len_ent - 1)
 
-            tok_anno["SENT_START"][i] = [tok_anno["SENT_START"][i][0]] + [0] * (
-                len_ent - 1
-            )
-            tok_anno["SPACY"][i] = [True] * (len_ent - 1) + (
-                tok_anno["SPACY"][i][-1:]  # set last spacing
-            )
+            # Set sentence start based on first token in previous entity
+            tok_anno["SENT_START"][i] = [ent[0].sent_start] + [0] * (len_ent - 1)
+
+            # set spacing to be whitespace for all tokens except the last one
+            # which is set based on the original entity
+            tok_anno["SPACY"][i] = [True] * (len_ent - 1) + [bool(ent[-1].whitespace_)]
 
             if example.y.has_annotation("HEAD") and resolve_dependencies:
                 # Handle HEAD

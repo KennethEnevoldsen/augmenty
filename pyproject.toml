@@ -130,3 +130,16 @@ exclude = [
     ".git",
     "__pycache__",
 ]
+ignore = [
+  "ANN101",
+  "ANN401",
+  "E402",
+  "E501",
+  "F401",
+  "F841",
+  "RET504",
+  "ANN202",
+]
+ignore-init-module-imports = true
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+unfixable = ["ERA"]
