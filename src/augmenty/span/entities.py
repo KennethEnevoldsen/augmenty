@@ -14,14 +14,14 @@ from typing import (
 
 import numpy as np
 from spacy.language import Language
-from spacy.tokens import Span, Token
+from spacy.tokens import Doc, Span, Token
 from spacy.training import Example
 from spacy.util import registry
 
 from ..augment_utilities import make_text_from_orth
 
 # create entity type
-ENTITY = Union[str, List[str], Span]
+ENTITY = Union[str, List[str], Span, Doc]
 
 
 def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, List[Any]]:
@@ -37,7 +37,7 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, List[Any]]:
         spacy = [tok.whitespace_ for tok in ent_doc]
     elif isinstance(entity, list):
         orth = entity
-    elif isinstance(entity, Span):
+    elif isinstance(entity, (Span, Doc)):
         orth = [tok.text for tok in entity]
         spacy = [tok.whitespace_ for tok in entity]
         pos = [tok.pos_ for tok in entity]
