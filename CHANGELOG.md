@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.7 (2023-05-04)
+### Fix
+* Added support for doc entities ([`6ca5439`](https://github.com/KennethEnevoldsen/augmenty/commit/6ca5439b48e0ad0c1695991128d1da945d497b3a))
+
 ## v1.3.6 (2023-05-01)
 ### Fix
 * Entity augmenter now allows for passing in spans or string ([`faf2abc`](https://github.com/KennethEnevoldsen/augmenty/commit/faf2abcfd05b3efe1a954a4d5e1b09b7c65ae50b))
