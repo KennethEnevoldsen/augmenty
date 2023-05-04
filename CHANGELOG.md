@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.6 (2023-05-01)
+### Fix
+* Entity augmenter now allows for passing in spans or string ([`faf2abc`](https://github.com/KennethEnevoldsen/augmenty/commit/faf2abcfd05b3efe1a954a4d5e1b09b7c65ae50b))
+
 ## v1.3.5 (2023-05-01)
 ### Fix
 * Removed upper bounds on all dependencies ([`78b6a1d`](https://github.com/KennethEnevoldsen/augmenty/commit/78b6a1dd109e5946b8ba69b3e1215cc6aff328c6))
