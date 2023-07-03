@@ -8,7 +8,10 @@ from spacy.training import Example
 
 
 def upper_casing_augmenter_v1(
-    nlp: Language, example: Example, *, level: float
+    nlp: Language,
+    example: Example,
+    *,
+    level: float,
 ) -> Iterator[Example]:
     if random.random() >= level:
         yield example
@@ -46,7 +49,10 @@ def create_upper_casing_augmenter_v1(
 
 
 def spongebob_augmenter_v1(
-    nlp: Language, example: Example, *, level: float
+    nlp: Language,
+    example: Example,
+    *,
+    level: float,
 ) -> Iterator[Example]:
     if random.random() >= level:
         yield example
