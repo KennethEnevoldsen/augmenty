@@ -2,7 +2,7 @@ default_stages: [commit, push]
 
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.8.0
+    rev: v3.9.0
     hooks:
       - id: pyupgrade
 
@@ -17,7 +17,7 @@ repos:
       - id: add-trailing-comma
 
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.3
+    rev: v1.7.4
     hooks:
       - id: docformatter
         args: [--in-place]
@@ -28,8 +28,8 @@ repos:
       - id: black
         args: [--line-length, "88"]
 
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.275
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.277
     hooks:
       - id: ruff
 
