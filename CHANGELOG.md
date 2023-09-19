@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2023-09-19)
+
+### Feature
+
+* Keep span annotations for ents ([`8dcafc5`](https://github.com/KennethEnevoldsen/augmenty/commit/8dcafc5ce7eceb0590ccea9b4d301d3ba13cb816))
+
 ## v1.3.7 (2023-05-04)
 ### Fix
 * Added support for doc entities ([`6ca5439`](https://github.com/KennethEnevoldsen/augmenty/commit/6ca5439b48e0ad0c1695991128d1da945d497b3a))
