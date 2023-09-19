@@ -18,13 +18,26 @@ from spacy.tokens import Doc, Span, Token
 from spacy.training import Example
 from spacy.util import registry
 
+from augmenty import span
+
 from ..augment_utilities import make_text_from_orth
+from .utils import offset_range
 
 # create entity type
 ENTITY = Union[str, List[str], Span, Doc]
 
 
-def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, List[Any]]:
+def _spacing_to_str(spacing: Union[List[str], List[bool]]) -> List[str]:
+    def to_string(x: Union[str, bool]) -> str:
+        if isinstance(x, str):
+            return x
+        else:
+            return " " if x else ""
+
+    return [to_string(x) for x in spacing]
+
+
+def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
     spacy = None
     pos = None
     tag = None
@@ -50,7 +63,7 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, List[Any]]:
         )
     # if not specifed use default values
     if spacy is None:
-        spacy = [True] * len(orth)
+        spacy = [" "] * len(orth)
     if pos is None:
         pos = ["PROPN"] * len(orth)
     if tag is None:
@@ -60,6 +73,12 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, List[Any]]:
     if lemma is None:
         lemma = orth
 
+    _spacy = _spacing_to_str(spacy)
+    str_repr = ""
+    for e, s in zip(orth[:-1], _spacy[:-1]):
+        str_repr += e + s
+    str_repr += orth[-1]
+
     return {
         "ORTH": orth,
         "SPACY": spacy,
@@ -67,7 +86,32 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, List[Any]]:
         "TAG": tag,
         "MORPH": morph,
         "LEMMA": lemma,
+        "STR": str_repr,
     }
+
+
+def _update_span_annotations(
+    span_anno: Dict[str, list],
+    ent: Span,
+    offset: int,
+    entity_offset: int,
+) -> Dict[str, list]:
+    """Update the span annotations to be in line with the new doc."""
+    ent_range = (ent.start + offset, ent.end + offset)
+
+    for anno_key, spans in span_anno.items():
+        new_spans = []
+        for span_start, span_end, _, __ in spans:
+            span_start, span_end = offset_range(
+                current_range=(span_start, span_end),
+                inserted_range=ent_range,
+                offset=entity_offset,
+            )
+            new_spans.append((span_start, span_end, _, __))
+
+        span_anno[anno_key] = new_spans
+
+    return span_anno
 
 
 def ent_augmenter_v1(
@@ -82,10 +126,14 @@ def ent_augmenter_v1(
     example_dict = example.to_dict()
 
     offset = 0
+    str_offset = 0
 
+    spans_anno = example_dict["doc_annotation"]["spans"]
     tok_anno = example_dict["token_annotation"]
     ents = example_dict["doc_annotation"]["entities"]
-    if example.y.has_annotation("HEAD") and resolve_dependencies:
+
+    should_update_heads = example.y.has_annotation("HEAD") and resolve_dependencies
+    if should_update_heads:
         head = np.array(tok_anno["HEAD"])
 
     for ent in example.y.ents:
@@ -105,10 +153,13 @@ def ent_augmenter_v1(
             normalized_ent = __normalize_entity(new_ent, nlp)
             new_ent = normalized_ent["ORTH"]
             spacing = normalized_ent["SPACY"]
+            str_ent = normalized_ent["STR"]
 
             # Handle token annotations
             len_ent = len(new_ent)
-            i = slice(ent.start + offset, ent.end + offset)
+            str_len_ent = len(str_ent)
+            ent_range = (ent.start + offset, ent.end + offset)
+            i = slice(*ent_range)
             tok_anno["ORTH"][i] = new_ent
             tok_anno["LEMMA"][i] = normalized_ent["LEMMA"]
 
@@ -125,11 +176,12 @@ def ent_augmenter_v1(
             spacing[-1:] = [ent[-1].whitespace_]
             tok_anno["SPACY"][i] = spacing
 
-            offset_ = len_ent - (ent.end - ent.start)
-            if example.y.has_annotation("HEAD") and resolve_dependencies:
+            entity_offset = len_ent - (ent.end - ent.start)
+            entity_str_offset = str_len_ent - len(ent.text)
+            if should_update_heads:
                 # Handle HEAD
 
-                head[head > ent.start + offset] += offset_
+                head[head > ent.start + offset] += entity_offset
                 # keep first head correcting for changing entity size, set rest to
                 # refer to index of first name
                 head = np.concatenate(
@@ -142,7 +194,15 @@ def ent_augmenter_v1(
                         np.array(head[ent.end + offset :]),  # after
                     ],
                 )
-            offset += offset_
+
+            spans_anno = _update_span_annotations(
+                spans_anno,
+                ent,
+                str_offset,
+                entity_str_offset,
+            )
+            offset += entity_offset
+            str_offset += entity_str_offset
 
             # Handle entities IOB tags
             if len_ent == 1:
@@ -154,8 +214,8 @@ def ent_augmenter_v1(
                     + ["L-" + ent.label_]
                 )
 
-    if example.y.has_annotation("HEAD") and resolve_dependencies:
-        tok_anno["HEAD"] = head.tolist()
+    if should_update_heads:
+        tok_anno["HEAD"] = head.tolist()  # type: ignore
     else:
         tok_anno["HEAD"] = list(range(len(tok_anno["ORTH"])))
 

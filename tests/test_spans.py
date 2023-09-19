@@ -1,8 +1,91 @@
+from typing import Callable
+
+import pytest
+from spacy.language import Language
 from spacy.tokens import Doc
 
 import augmenty
 
 from .fixtures import nlp_en, nlp_en_md  # noqa
+
+
+@pytest.fixture
+def doc(nlp_en: Language) -> Doc:  # noqa
+    doc = Doc(
+        nlp_en.vocab,
+        words=[
+            "Augmenty",
+            "is",
+            "a",
+            "wonderful",
+            "tool",
+            "for",
+            "augmentation",
+            ".",
+        ],
+        spaces=[True] * 6 + [False] * 2,
+        ents=["B-ORG"] + ["O"] * 7,
+    )
+    return doc
+
+
+@pytest.fixture
+def ent_augmenter():
+    ent_augmenter = augmenty.load(
+        "ents_replace_v1",  # type: ignore
+        level=1.00,
+        ent_dict={"ORG": [["SpaCy"]]},
+    )
+    return ent_augmenter
+
+
+@pytest.mark.parametrize(
+    "nlp",
+    [
+        pytest.lazy_fixture("nlp_en"),
+        pytest.lazy_fixture("nlp_en_md"),
+    ],
+)
+def test_ent_replace_with_span_annotations(
+    doc: Doc,
+    ent_augmenter: Callable,
+    nlp: Language,
+):
+    # add span annotations
+    positive_noun_chunks = [doc[3:5]]
+    is_augmenty = [doc[0:1]]
+    doc.spans["positive_noun_chunks"] = positive_noun_chunks
+    doc.spans["is_augmenty"] = is_augmenty
+
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
+
+    # Check spans
+    doc_pos_noun_chunks = docs[0].spans["positive_noun_chunks"]
+    assert doc_pos_noun_chunks[0].text == "wonderful tool", "the span is not maintained"
+
+    doc_is_augmenty = docs[0].spans["is_augmenty"]
+    assert doc_is_augmenty[0].text == "SpaCy", "the span is not maintained"
+
+
+@pytest.mark.parametrize(
+    "nlp",
+    [
+        pytest.lazy_fixture("nlp_en"),
+        pytest.lazy_fixture("nlp_en_md"),
+    ],
+)
+def test_ent_replace_with_cats_annotations(
+    doc: Doc,
+    ent_augmenter: Callable,
+    nlp: Language,
+):
+    # add doc annotations
+    doc.cats["is_positive"] = 1
+
+    # augment
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
+
+    assert docs[0].cats["is_positive"] == 1.0, "the document category is not maintained"
 
 
 def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
