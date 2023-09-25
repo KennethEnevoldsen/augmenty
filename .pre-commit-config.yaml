@@ -2,7 +2,7 @@ default_stages: [commit, push]
 
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.11.0
+    rev: v3.13.0
     hooks:
       - id: pyupgrade
 
@@ -29,7 +29,7 @@ repos:
         args: [--line-length, "88"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.290
+    rev: v0.0.291
     hooks:
       - id: ruff
 
