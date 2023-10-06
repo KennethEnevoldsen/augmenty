@@ -18,6 +18,14 @@ def combine(
 
     Returns:
         The combined augmenter
+
+
+    Example:
+        >>> char_swap_augmenter = augmenty.load("char_swap_v1", level=.02)
+        >>> synonym_augmenter = augmenty.load("wordnet_synonym_v1", level=1, lang="en")
+        >>> combined_aug = augmenty.combine([char_swap_augmenter, synonym_augmenter])
+        >>> # combine doc using two augmenters
+        >>> augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))
     """
 
     def apply_multiple_augmenters(nlp: Language, example: Example):
@@ -42,13 +50,6 @@ def set_doc_level(
 
     Returns:
         The combined augmenter
-
-    Example:
-        >>> char_swap_augmenter = augmenty.load("char_swap_v1", level=.02)
-        >>> synonym_augmenter = augmenty.load("wordnet_synonym_v1", level=1, lang="en")
-        >>> combined_aug = augmenty.combine([char_swap_augmenter, synonym_augmenter])
-        >>> # combine doc using two augmenters
-        >>> augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))
     """
 
     def __augment(nlp: Language, example: Example):
