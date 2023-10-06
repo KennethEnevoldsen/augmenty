@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.1 (2023-10-06)
+
+### Fix
+
+* Update combine docs ([`7ebac19`](https://github.com/KennethEnevoldsen/augmenty/commit/7ebac193aba9a7fbe2c0d8ef5af3ed4857a8a050))
+
+### Documentation
+
+* Move example to correct function ([`8aeae27`](https://github.com/KennethEnevoldsen/augmenty/commit/8aeae272c454d938bf40308cd474fed256077131))
+* Add example for  combine ([`ba163a1`](https://github.com/KennethEnevoldsen/augmenty/commit/ba163a102e83adba217442a53c449dfe893d37ff))
+
 ## v1.4.0 (2023-09-19)
 
 ### Feature
