@@ -268,6 +268,13 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The combined augmenter</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; char_swap_augmenter = augmenty.load(&quot;char_swap_v1&quot;, level=.02)</span>
+<span class="sd">        &gt;&gt;&gt; synonym_augmenter = augmenty.load(&quot;wordnet_synonym_v1&quot;, level=1, lang=&quot;en&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; combined_aug = augmenty.combine([char_swap_augmenter, synonym_augmenter])</span>
+<span class="sd">        &gt;&gt;&gt; # combine doc using two augmenters</span>
+<span class="sd">        &gt;&gt;&gt; augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">):</span>
