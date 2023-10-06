@@ -25,7 +25,7 @@ def combine(
         >>> synonym_augmenter = augmenty.load("wordnet_synonym_v1", level=1, lang="en")
         >>> combined_aug = augmenty.combine([char_swap_augmenter, synonym_augmenter])
         >>> # combine doc using two augmenters
-        >>> augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))
+        >>> augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp))
     """
 
     def apply_multiple_augmenters(nlp: Language, example: Example):
