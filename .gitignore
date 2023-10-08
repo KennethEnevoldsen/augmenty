@@ -22,3 +22,6 @@ build/*
 
 # meta
 publicity.md
+
+# docs training
+docs/tutorials/training_using_augmenty/project.lock

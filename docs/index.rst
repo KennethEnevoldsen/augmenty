@@ -45,6 +45,7 @@ please use the discussion Forums.
 
    installation
    tutorials/introduction
+   tutorials/training_using_augmenty/training_using_augmenty
    news
    adding_an_augmenter
    faq
