@@ -14,7 +14,7 @@
 <meta property="og:image:alt" content="Augmenty is an augmentation library based on spaCy for augmenting texts. Augmenty differs from other augmentation libraries in that it corrects (as far as po..." />
 <meta name="description" content="Augmenty is an augmentation library based on spaCy for augmenting texts. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the token, sentence and document..." />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="News and Changelog" href="../news.html" /><link rel="prev" title="Installation" href="../installation.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Training using Augmenty" href="training_using_augmenty/training_using_augmenty.html" /><link rel="prev" title="Installation" href="../installation.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
         <title>Getting Started - augmenty 1.4.1 documentation</title>
@@ -181,6 +181,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_using_augmenty/training_using_augmenty.html">Training using Augmenty</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../news.html">News and Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adding_an_augmenter.html">Creating and Contributing Augmenters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
@@ -319,8 +320,8 @@ ents_format_v1
 <section id="applying-the-augmentation">
 <h2>Applying the augmentation<a class="headerlink" href="#applying-the-augmentation" title="Permalink to this heading">#</a></h2>
 <p>Augmenters in augmenty always take in a spaCy <a class="reference external" href="https://spacy.io/api/language">Language pipeline</a> and an spaCy <a class="reference external" href="https://spacy.io/api/example">Example</a> so that it can be easily used while training workflows, however, augmenty also allows for easy application of augmenters to raw text and spaCy <a class="reference external" href="https://spacy.io/api/doc">Docs</a>.</p>
-<div class="alert alert-info">
-<p><strong>Why examples and not just raw text?</strong></p>
+<div class="note admonition">
+<p class="admonition-title">Why examples and not just raw text?</p>
 <p>A spaCy example consist of two documents, the labelled document, containing all the correct labels including document classification such as whether a tweet is positive or negative and token classiification such as Part-of-speech-tags and named entities. When augmenting the Example augmenty seeks to correct these tags in accordance with the augmentation. As the raw text does not include these labels it as naturally not possible. For instance if I was to swap two tokens I would want to swap their corresponding labels as well. When swapping tokens augmenty even respect entities and sentences as to not split an entity or swap tokens across sentence borders. You can naturally turn this of if you wish to.</p>
 </div>
 <section id="applying-augmentations-on-docs">
@@ -405,7 +406,7 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The SpaCy Universe is a rattling prick for augmentation which is produce utilise The SpaCy Universe explicate by Burst.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The SpaCy Universe is a rattling cock for augmentation which is realize expend The SpaCy Universe arise by Detonation.
 </pre></div>
 </div>
 </div>
@@ -443,8 +444,8 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a wond3rful topl for augmentation.
-Augmentztion is a wohderful tool foe pbtaining highfr performance on limited datak
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a wonderful tool for augm2ntxfion.
+Augmentation is a wonderful tool for obtaining higher performance on limited data.
 You can also use it to see how robust your model is to changes.
 </pre></div>
 </div>
@@ -466,11 +467,11 @@ You can also use it to see how robust your model is to changes.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>is Augmenty wonderful a tool for augmentation.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty a is tool wonderful for augmentation.
 Augmenty is a wonderful tool for augmentation.
-Augmentation is a wonderful for tool higher obtaining on performance limited data.
+Augmentation a is wonderful for tool obtaining higher performance on data limited.
 Augmentation is a wonderful tool for obtaining higher performance on limited data.
-can You also use it to how see your robust model to is changes.
+You can also use it to see how robust your model is to changes.
 You can also use it to see how robust your model is to changes.
 </pre></div>
 </div>
@@ -543,7 +544,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Alyssa Fisher
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Alejandra Werner
 </pre></div>
 </div>
 </div>
@@ -561,12 +562,12 @@ entities such as names. It is compatibile with multiple languages and has a lot 
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../news.html">
+          <a class="next-page" href="training_using_augmenty/training_using_augmenty.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">News and Changelog</div>
+                <div class="title">Training using Augmenty</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

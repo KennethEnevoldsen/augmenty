@@ -1,0 +1,521 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta property="og:title" content="Training using Augmenty" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="tutorials/training_using_augmenty/training_using_augmenty.html" />
+<meta property="og:site_name" content="augmenty" />
+<meta property="og:description" content="This tutorial takes you through how to utilize spacy augmenters during training. It build upon the spacy project for training a part-of-speech tagger and dependency parser. This code will take you ..." />
+<meta property="og:image:width" content="1146" />
+<meta property="og:image:height" content="600" />
+<meta property="og:image" content="/_images/social_previews/summary_tutorials_training_using_augmenty_training_using_augmenty_68a73901.png" />
+<meta property="og:image:alt" content="This tutorial takes you through how to utilize spacy augmenters during training. It build upon the spacy project for training a part-of-speech tagger and dep..." />
+<meta name="description" content="This tutorial takes you through how to utilize spacy augmenters during training. It build upon the spacy project for training a part-of-speech tagger and dependency parser. This code will take you ..." />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="News and Changelog" href="../../news.html" /><link rel="prev" title="Getting Started" href="../introduction.html" />
+
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
+        <title>Training using Augmenty - augmenty 1.4.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #ff5454;
+  --color-brand-content: #ff7575;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ff8f8f;
+  --color-brand-content: #ff8f8f;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">augmenty 1.4.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../_static/icon.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/icon_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Getting Started</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Training using Augmenty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../news.html">News and Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_an_augmenter.html">Creating and Contributing Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Augmenters</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenters_overview.html">Overview of Augmenters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.character.html">Character-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.token.html">Token-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.span.html">Span-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.doc.html">Document-based</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.lang.html">Language-specific</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.augment_utilities.html">Augmentation Utilities</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API references</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.util.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../augmenty.keyboard.html">Keyboard</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/kennethenevoldsen/augmenty">GitHub Repository</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/KenethEnevoldsen/augmenty/edit/main/docs/tutorials/training_using_augmenty/training_using_augmenty.ipynb" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="training-using-augmenty">
+<h1>Training using Augmenty<a class="headerlink" href="#training-using-augmenty" title="Permalink to this heading">#</a></h1>
+<p>This tutorial takes you through how to utilize spacy augmenters during training.
+It build upon <a class="reference external" href="https://github.com/explosion/projects/tree/v3/pipelines/tagger_parser_ud">the spacy project</a> for training a part-of-speech tagger and dependency parser.</p>
+<p>This code will take you through how to adapt the code to allow for training using augmenty, but the you can also just go a see the finished project within the <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/tree/main/docs/tutorials">tutorials folder</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This examples assumes that the reader is familiar with <a class="reference external" href="https://spacy.io/usage/projects">spacy projects</a>.</p>
+</div>
+<section id="setting-up-the-spacy-project">
+<h2>Setting up the spacy project<a class="headerlink" href="#setting-up-the-spacy-project" title="Permalink to this heading">#</a></h2>
+<p>You can download the spacy project using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>project<span class="w"> </span>clone<span class="w"> </span>pipelines/tagger_parser_ud
+</pre></div>
+</div>
+<p>Which should get you a folder called <code class="docutils literal notranslate"><span class="pre">tagger_parser_ud</span></code>. You can now run it to see that everything works, by first fetching the assets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spacy<span class="w"> </span>project<span class="w"> </span>assets
+</pre></div>
+</div>
+<p>And then run the whole training pipeline:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spacy<span class="w"> </span>project<span class="w"> </span>run<span class="w"> </span>all
+</pre></div>
+</div>
+<p>This should give you something like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ℹ<span class="w"> </span>Running<span class="w"> </span>workflow<span class="w"> </span><span class="s1">&#39;all&#39;</span>
+
+<span class="o">=================================</span><span class="w"> </span><span class="nv">preprocess</span><span class="w"> </span><span class="o">=================================</span>
+Running<span class="w"> </span>command:<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>corpus/UD_English-EWT
+<span class="o">[</span>...<span class="o">]</span>
+<span class="o">===================================</span><span class="w"> </span><span class="nv">train</span><span class="w"> </span><span class="o">===================================</span>
+Running<span class="w"> </span>command:<span class="w"> </span>/Users/au561649/.virtualenvs/augmenty/bin/python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>train<span class="w"> </span><span class="o">[</span>...<span class="o">]</span>
+<span class="o">[</span>...<span class="o">]</span>
+✔<span class="w"> </span>Initialized<span class="w"> </span><span class="nv">pipeline</span>
+<span class="o">=============================</span><span class="w"> </span>Training<span class="w"> </span><span class="nv">pipeline</span><span class="w"> </span><span class="o">=============================</span>
+ℹ<span class="w"> </span>Pipeline:<span class="w"> </span><span class="o">[</span><span class="s1">&#39;tok2vec&#39;</span>,<span class="w"> </span><span class="s1">&#39;tagger&#39;</span>,<span class="w"> </span><span class="s1">&#39;morphologizer&#39;</span>,
+<span class="s1">&#39;trainable_lemmatizer&#39;</span>,<span class="w"> </span><span class="s1">&#39;parser&#39;</span><span class="o">]</span>
+ℹ<span class="w"> </span>Initial<span class="w"> </span>learn<span class="w"> </span>rate:<span class="w"> </span><span class="m">0</span>.001
+E<span class="w">    </span><span class="c1">#       LOSS TOK2VEC  LOSS TAGGER  LOSS MORPH...  LOSS TRAIN...  LOSS PARSER  TAG_ACC  POS_ACC  MORPH_ACC  LEMMA_ACC  DEP_UAS  DEP_LAS  SENTS_F  SCORE </span>
+---<span class="w">  </span>------<span class="w">  </span>------------<span class="w">  </span>-----------<span class="w">  </span>-------------<span class="w">  </span>-------------<span class="w">  </span>-----------<span class="w">  </span>-------<span class="w">  </span>-------<span class="w">  </span>---------<span class="w">  </span>---------<span class="w">  </span>-------<span class="w">  </span>-------<span class="w">  </span>-------<span class="w">  </span>------
+<span class="w">  </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">          </span><span class="m">0</span>.00<span class="w">       </span><span class="m">137</span>.44<span class="w">         </span><span class="m">138</span>.58<span class="w">         </span><span class="m">138</span>.94<span class="w">       </span><span class="m">264</span>.16<span class="w">    </span><span class="m">21</span>.87<span class="w">    </span><span class="m">24</span>.48<span class="w">      </span><span class="m">25</span>.75<span class="w">      </span><span class="m">76</span>.52<span class="w">    </span><span class="m">14</span>.36<span class="w">     </span><span class="m">7</span>.38<span class="w">     </span><span class="m">0</span>.91<span class="w">    </span><span class="m">0</span>.29
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+<p>Once you start seeing the table feel free to stop the pipeline. We now know that the setup works and we can then adopt it to start using augmenty for augmenting the data.</p>
+</section>
+<section id="adding-augmenty">
+<h2>Adding Augmenty<a class="headerlink" href="#adding-augmenty" title="Permalink to this heading">#</a></h2>
+<p>To add in augmenty you need to</p>
+<ol class="arabic simple" start="0">
+<li><p>Install augmenty in your environment</p></li>
+<li><p>create your desired augmenters</p></li>
+<li><p>update the config file (located in configs/default.cfg)</p></li>
+<li><p>Ensure that the code with the augmenters is loaded in when training</p></li>
+</ol>
+<section id="create-your-desired-augmenters">
+<h3>1) create your desired augmenters<a class="headerlink" href="#create-your-desired-augmenters" title="Permalink to this heading">#</a></h3>
+<p>To create your desired augmenters, you should be aware what model you are training. For instance in our case we are training a dependency parser and a
+part-of-speech tagger. This can put some limitations on what augmenters you can use. For instance, removing a token from a text can lead to invalid
+dependency annotations, thus the token deletion augmentation is not useable. There is an overview of what you can use the augmenters for <a class="reference external" href="https://kennethenevoldsen.github.io/augmenty/augmenters_overview.html">here</a>.</p>
+<p>For our case, we will create a simple augmenter, which introduces some spelling errors, using two existing augmenters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: augmenters.py</span>
+
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="kn">import</span> <span class="nn">augmenty</span>
+
+<span class="c1"># register the augmenter such with the name you want to specify in the config</span>
+<span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;my_augmenter&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_augmenters</span><span class="p">():</span>
+    <span class="c1"># create the augmenters you wish to use</span>
+    <span class="n">keystroke_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="s2">&quot;keystroke_error_v1&quot;</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">=</span><span class="s2">&quot;en_qwerty_v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.05</span>  <span class="c1"># 5% of characters might be too much</span>
+    <span class="p">)</span>
+
+    <span class="n">char_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;char_swap_v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+
+    <span class="c1"># combine them into a single augmenter to be used for training</span>
+    <span class="c1"># the order of the augmenters is important, as the first augmenter will be applied first</span>
+    <span class="k">return</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">combine</span><span class="p">([</span><span class="n">keystroke_augmenter</span><span class="p">,</span> <span class="n">char_swap_augmenter</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us quickly check out that our augmenters works as intended:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+<span class="n">augmenter</span> <span class="o">=</span> <span class="n">my_augmenters</span><span class="p">()</span>
+
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;This is a test sentence.&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thsi is q test sentfnce.
+This is a test sentence.
+This is a test sentence.
+This is a tets sebtence.
+This is a test sentence.
+This is a test senetnce.
+This js a test sentence.
+This is a test sentence.
+This is a test sentebce.
+This is a test sentence.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then need to add the registered augmenters to a file. In our case it will be <code class="docutils literal notranslate"><span class="pre">augmenters.py</span></code></p>
+</section>
+<section id="update-the-config-file">
+<h3>2) update the config file<a class="headerlink" href="#update-the-config-file" title="Permalink to this heading">#</a></h3>
+<p>Then we will need ot thell the training process that it should use the augmenter. We do this by changing ght econfig located in the configs/default.cfg.</p>
+<p>We do this by replacing the line <code class="docutils literal notranslate"><span class="pre">augmenter</span> <span class="pre">=</span> <span class="pre">null</span></code> in the following:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span># file: configs/default.cfg
+[corpora.train]
+@readers = &quot;spacy.Corpus.v1&quot;
+path = ${paths.train}
+max_length = 0
+gold_preproc = false
+limit = 0
+augmenter = null
+</pre></div>
+</div>
+<p>with the lines:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span>[corpora.train.augmenter]
+@augmenters = &quot;my_augmenter&quot;
+</pre></div>
+</div>
+</section>
+<section id="ensure-that-the-code-with-the-augmenters-is-loaded-in-when-training">
+<h3>3) Ensure that the code with the augmenters is loaded in when training<a class="headerlink" href="#ensure-that-the-code-with-the-augmenters-is-loaded-in-when-training" title="Permalink to this heading">#</a></h3>
+<p>If you were just to run the command <code class="docutils literal notranslate"><span class="pre">spacy</span> <span class="pre">project</span> <span class="pre">run</span> <span class="pre">train</span></code> (to start the training) you would get an error stating that the augmenter could not be
+found.</p>
+<p>However, that is easily fixable. The spacy project contains the train command which specifies what the <code class="docutils literal notranslate"><span class="pre">spacy</span> <span class="pre">project</span> <span class="pre">run</span> <span class="pre">train</span></code> should do.
+In the code below we see that it calls the <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">spacy</span> <span class="pre">train</span></code> command with a sequence of arguments. Luckily for us adding the code that we want executes is as simply as just adding it as an argument as seen in the code below:</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span># file: project.yml
+  - name: train
+    help: &quot;Train ${vars.treebank}&quot;
+    script:
+      - &gt;-
+        python -m spacy train 
+        configs/${vars.config}.cfg
+        --output training/${vars.treebank}
+        --gpu-id ${vars.gpu} 
+        --paths.train corpus/${vars.treebank}/train.spacy 
+        --paths.dev corpus/${vars.treebank}/dev.spacy 
+        --nlp.lang=${vars.lang}
+        --code augmenters.py # &lt;-- we need to add this line for the code to be run and the augmenters to be registred
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>That is it. You can now run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spacy<span class="w"> </span>project<span class="w"> </span>run<span class="w"> </span>train
+</pre></div>
+</div>
+<p>and the project will now train using the augmenter.</p>
+<div class="note admonition">
+<p class="admonition-title">Evaluation</p>
+<p>One important thing when evaluating, especially using augmented training is that you evaluate as close as possible to the target.
+For instance if you want your model to be able to handle lowercase text you have to make sure that your evaluating set also have some lowercases text.
+Naturally you can also use Augmenty for this as well.</p>
+<p>However augmentations during training does not need to resemble the augmentations during evaluation. In fact it is quite common to see that a model training
+using only small amounts of augmentation (e.g. ~0.5% spelling errors) handles larger degrees of augmentation notably better (e.g. ~5%) without sacrificing as
+much performance as if you had trained using a higher degree of augmentation.</p>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../../news.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">News and Changelog</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../introduction.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Getting Started</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/KenethEnevoldsen/augmenty" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Training using Augmenty</a><ul>
+<li><a class="reference internal" href="#setting-up-the-spacy-project">Setting up the spacy project</a></li>
+<li><a class="reference internal" href="#adding-augmenty">Adding Augmenty</a><ul>
+<li><a class="reference internal" href="#create-your-desired-augmenters">1) create your desired augmenters</a></li>
+<li><a class="reference internal" href="#update-the-config-file">2) update the config file</a></li>
+<li><a class="reference internal" href="#ensure-that-the-code-with-the-augmenters-is-loaded-in-when-training">3) Ensure that the code with the augmenters is loaded in when training</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    </body>
+</html>

@@ -1,0 +1,278 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Training using Augmenty\n",
+    "\n",
+    "This tutorial takes you through how to utilize spacy augmenters during training.\n",
+    "It build upon [the spacy project](https://github.com/explosion/projects/tree/v3/pipelines/tagger_parser_ud) for training a part-of-speech tagger and dependency parser.\n",
+    "\n",
+    "This code will take you through how to adapt the code to allow for training using augmenty, but the you can also just go a see the finished project within the [tutorials folder](https://github.com/KennethEnevoldsen/augmenty/tree/main/docs/tutorials).\n",
+    "\n",
+    "```{note}\n",
+    "This examples assumes that the reader is familiar with [spacy projects](https://spacy.io/usage/projects).\n",
+    "```\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Setting up the spacy project\n",
+    "You can download the spacy project using:\n",
+    "\n",
+    "```bash\n",
+    "python -m spacy project clone pipelines/tagger_parser_ud\n",
+    "```\n",
+    "\n",
+    "Which should get you a folder called `tagger_parser_ud`. You can now run it to see that everything works, by first fetching the assets:\n",
+    "\n",
+    "```bash\n",
+    "spacy project assets\n",
+    "```\n",
+    "\n",
+    "And then run the whole training pipeline:\n",
+    "```bash\n",
+    "spacy project run all\n",
+    "```\n",
+    "\n",
+    "This should give you something like:\n",
+    "\n",
+    "```bash\n",
+    "ℹ Running workflow 'all'\n",
+    "\n",
+    "================================= preprocess =================================\n",
+    "Running command: mkdir -p corpus/UD_English-EWT\n",
+    "[...]\n",
+    "=================================== train ===================================\n",
+    "Running command: /Users/au561649/.virtualenvs/augmenty/bin/python -m spacy train [...]\n",
+    "[...]\n",
+    "✔ Initialized pipeline\n",
+    "============================= Training pipeline =============================\n",
+    "ℹ Pipeline: ['tok2vec', 'tagger', 'morphologizer',\n",
+    "'trainable_lemmatizer', 'parser']\n",
+    "ℹ Initial learn rate: 0.001\n",
+    "E    #       LOSS TOK2VEC  LOSS TAGGER  LOSS MORPH...  LOSS TRAIN...  LOSS PARSER  TAG_ACC  POS_ACC  MORPH_ACC  LEMMA_ACC  DEP_UAS  DEP_LAS  SENTS_F  SCORE \n",
+    "---  ------  ------------  -----------  -------------  -------------  -----------  -------  -------  ---------  ---------  -------  -------  -------  ------\n",
+    "  0       0          0.00       137.44         138.58         138.94       264.16    21.87    24.48      25.75      76.52    14.36     7.38     0.91    0.29\n",
+    "[...]\n",
+    "```\n",
+    "\n",
+    "Once you start seeing the table feel free to stop the pipeline. We now know that the setup works and we can then adopt it to start using augmenty for augmenting the data."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Adding Augmenty\n",
+    "\n",
+    "To add in augmenty you need to \n",
+    "\n",
+    "0) Install augmenty in your environment\n",
+    "1) create your desired augmenters\n",
+    "2) update the config file (located in configs/default.cfg)\n",
+    "3) Ensure that the code with the augmenters is loaded in when training"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1) create your desired augmenters\n",
+    "To create your desired augmenters, you should be aware what model you are training. For instance in our case we are training a dependency parser and a\n",
+    "part-of-speech tagger. This can put some limitations on what augmenters you can use. For instance, removing a token from a text can lead to invalid\n",
+    "dependency annotations, thus the token deletion augmentation is not useable. There is an overview of what you can use the augmenters for [here](https://kennethenevoldsen.github.io/augmenty/augmenters_overview.html).\n",
+    "\n",
+    "For our case, we will create a simple augmenter, which introduces some spelling errors, using two existing augmenters:\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# file: augmenters.py\n",
+    "\n",
+    "import spacy\n",
+    "\n",
+    "import augmenty\n",
+    "\n",
+    "# register the augmenter such with the name you want to specify in the config\n",
+    "@spacy.registry.augmenters(\"my_augmenter\")\n",
+    "def my_augmenters():\n",
+    "    # create the augmenters you wish to use\n",
+    "    keystroke_augmenter = augmenty.load(\n",
+    "        \"keystroke_error_v1\", keyboard=\"en_qwerty_v1\", level=0.05  # 5% of characters might be too much\n",
+    "    )\n",
+    "\n",
+    "    char_swap_augmenter = augmenty.load(\"char_swap_v1\", level=0.03)\n",
+    "\n",
+    "    # combine them into a single augmenter to be used for training\n",
+    "    # the order of the augmenters is important, as the first augmenter will be applied first\n",
+    "    return augmenty.combine([keystroke_augmenter, char_swap_augmenter])\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let us quickly check out that our augmenters works as intended:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "This is a test sentence.\n",
+      "Tjis is a rest sentence.\n",
+      "This is a test sentence.\n",
+      "This is a test senrence.\n",
+      "This is a tesg sentenex.\n",
+      "This is a test sentnece.\n",
+      "This is a tect sentence.\n",
+      "This si a test sentence.\n",
+      "Tihs is a tewt sentence.\n",
+      "%hus is a test sentence.\n"
+     ]
+    }
+   ],
+   "source": [
+    "nlp = spacy.blank(\"en\")\n",
+    "augmenter = my_augmenters()\n",
+    "\n",
+    "texts = [\"This is a test sentence.\"]\n",
+    "\n",
+    "for i in range(10):\n",
+    "    augmented_texts = augmenty.texts(texts, augmenter, nlp=nlp)\n",
+    "\n",
+    "    for text in augmented_texts:\n",
+    "        print(text)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We then need to add the registered augmenters to a file. In our case it will be `augmenters.py`"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2) update the config file\n",
+    "Then we will need ot thell the training process that it should use the augmenter. We do this by changing ght econfig located in the configs/default.cfg.\n",
+    "\n",
+    "We do this by replacing the line `augmenter = null` in the following:\n",
+    "```toml\n",
+    "# file: configs/default.cfg\n",
+    "[corpora.train]\n",
+    "@readers = \"spacy.Corpus.v1\"\n",
+    "path = ${paths.train}\n",
+    "max_length = 0\n",
+    "gold_preproc = false\n",
+    "limit = 0\n",
+    "augmenter = null\n",
+    "```\n",
+    "\n",
+    "with the lines:\n",
+    "\n",
+    "```toml\n",
+    "[corpora.train.augmenter]\n",
+    "@augmenters = \"my_augmenter\"\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 3) Ensure that the code with the augmenters is loaded in when training\n",
+    "\n",
+    "If you were just to run the command `spacy project run train` (to start the training) you would get an error stating that the augmenter could not be\n",
+    "found.\n",
+    "\n",
+    "However, that is easily fixable. The spacy project contains the train command which specifies what the `spacy project run train` should do.\n",
+    "In the code below we see that it calls the `python -m spacy train` command with a sequence of arguments. Luckily for us adding the code that we want executes is as simply as just adding it as an argument as seen in the code below:\n",
+    "\n",
+    "```yml\n",
+    "# file: project.yml\n",
+    "  - name: train\n",
+    "    help: \"Train ${vars.treebank}\"\n",
+    "    script:\n",
+    "      - >-\n",
+    "        python -m spacy train \n",
+    "        configs/${vars.config}.cfg\n",
+    "        --output training/${vars.treebank}\n",
+    "        --gpu-id ${vars.gpu} \n",
+    "        --paths.train corpus/${vars.treebank}/train.spacy \n",
+    "        --paths.dev corpus/${vars.treebank}/dev.spacy \n",
+    "        --nlp.lang=${vars.lang}\n",
+    "        --code augmenters.py # <-- we need to add this line for the code to be run and the augmenters to be registred\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Conclusion\n",
+    "That is it. You can now run:\n",
+    "\n",
+    "```bash\n",
+    "spacy project run train\n",
+    "```\n",
+    "and the project will now train using the augmenter.\n",
+    "\n",
+    "\n",
+    "```{admonition} Evaluation\n",
+    ":class: note\n",
+    "One important thing when evaluating, especially using augmented training is that you evaluate as close as possible to the target.\n",
+    "For instance if you want your model to be able to handle lowercase text you have to make sure that your evaluating set also have some lowercases text.\n",
+    "Naturally you can also use Augmenty for this as well.\n",
+    "\n",
+    "However augmentations during training does not need to resemble the augmentations during evaluation. In fact it is quite common to see that a model training\n",
+    "using only small amounts of augmentation (e.g. ~0.5% spelling errors) handles larger degrees of augmentation notably better (e.g. ~5%) without sacrificing as\n",
+    "much performance as if you had trained using a higher degree of augmentation.\n",
+    "``` \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "augmenty",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.17"
+  },
+  "orig_nbformat": 4
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
