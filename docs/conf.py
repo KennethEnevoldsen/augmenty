@@ -17,7 +17,7 @@ from augmenty.about import __version__
 
 project = "augmenty"
 author = "Kenneth Enevoldsen"
-github_user = "KenethEnevoldsen"
+github_user = "KennethEnevoldsen"
 repo_url = f"https://github.com/{github_user}/{project}"
 
 
@@ -68,7 +68,7 @@ html_show_sourcelink = True
 
 html_context = {
     "display_github": True,  # Add 'Edit on Github' link instead of 'View page source'
-    "github_user": "KennethEnevoldsen",
+    "github_user": github_user,
     "github_repo": project,
     "github_version": "main",
     "conf_py_path": "/docs/",
