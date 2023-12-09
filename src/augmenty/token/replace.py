@@ -56,20 +56,14 @@ def create_token__dict_replace_augmenter_v1(
     dictionary.
 
     Args:
-        level (float): Probability to replace token given that it is in synonym
-            dictionary.
-        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A
-            dictionary of words and a list of their replacement (e.g. synonyms) or a
-            dictionary denoting replacement based on pos tag.
-        ignore_casing(bool, optional): When doing the lookup should the model ignore
-            casing? Defaults to True.
-        getter (Callable[[Token], str], optional): A getter function to extract the
-            POS-tag.
-        keep_titlecase (bool): Should the model keep the titlecase of the replaced
-            word. Defaults to True.
+        level: Probability to replace token given that it is in synonym dictionary.
+        replace: A dictionary of words and a list of their replacement (e.g. synonyms) or a dictionary denoting replacement based on pos tag.
+        ignore_casing: When doing the lookup should the model ignore casing? 
+        getter: A getter function to extract the POS-tag.
+        keep_titlecase: Should the model keep the titlecase of the replaced word. 
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Examples:
         >>> replace = {"act": ["perform", "move", "action"], }
@@ -104,21 +98,17 @@ def create_wordnet_synonym_augmenter_v1(
     dictionary.
 
     Args:
-        lang (Optional[str], optional): Language supplied a ISO 639-1 language code.
-            Defaults to None, in which case the lang is based on the language of the
+        lang: Language supplied a ISO 639-1 language code. If None, the lang is based on the language of the
             spacy nlp pipeline used. Possible language codes include:
             "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja",
             "nn", "no", "pl", "pt", "es", "th".
-        level (float): Probability to replace token given that it is in synonym
-            dictionary.
-        respect_pos (bool, optional): Should POS-tag be respected? Defaults to True.
-        getter (Callable[[Token], str], optional): A getter function to extract the
-            POS-tag.
-        keep_titlecase (bool): Should the model keep the titlecase of the replaced
-            word. Defaults to True.
+        level: Probability to replace token given that it is in synonym dictionary.
+        respect_pos: Should POS-tag be respected?
+        getter: A getter function to extract the POS-tag.
+        keep_titlecase: Should the model keep the titlecase of the replaced word.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1,
@@ -221,15 +211,12 @@ def create_token_replace_augmenter_v1(
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
-        level (float): Probability to replace token given that it is in synonym
-            dictionary.
-        replace (Callable[[Token], str): A callable which takes a spaCy Token as input
-            and returns the replaces word as a string.
-        keep_titlecase (bool, optional): If original text was uppercased cased should
-            replaces text also be? Defaults to True.
+        level: Probability to replace token given that it is in synonym dictionary.
+        replace: A callable which takes a spaCy Token as input and returns the replaces word as a string.
+        keep_titlecase: If original text was uppercased cased should replaces text also be?
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Examples:
         >>> def remove_vowels(token):
@@ -256,23 +243,18 @@ def create_word_embedding_augmenter_v1(
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
-        level (float): Probability to replace token given that it is in synonym
-            dictionary.
-        n (int, optional): Number of most similar word vectors to sample from nlp
-            (Optional[Language], optional): A spaCy text-processing pipeline used for
-            supplying the word vectors if the nlp model supplies doesn't contain word
-            vectors.
-        keep_titlecase (bool, optional): If original text was uppercased cased should
-            replaces text also be? Defaults to True.
-        ignore_case (bool, optional): The word embedding augmenter does not replace a
-            word with the same word. Should this operation ignore casing? Default to
-            True.
+        level: Probability to replace token given that it is in synonym dictionary.
+        n: Number of most similar word vectors to sample from nlp
+        nlp: A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn't contain word vectors.
+        keep_titlecase: If original text was uppercased cased should replaces text also be?
+        ignore_case: The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing?
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Examples:
         >>> nlp = spacy.load('en_core_web_lg')
+        >>> aug = create_word_embedding_augmenter(nlp=nlp, level=.10)
     """
 
     def replace(

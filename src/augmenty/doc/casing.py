@@ -31,10 +31,10 @@ def create_upper_casing_augmenter_v1(
     """Create an augmenter that converts documents to uppercase.
 
     Args:
-        level (float): The percentage of examples that will be augmented.
+        level: The percentage of examples that will be augmented.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty
@@ -73,10 +73,10 @@ def create_spongebob_augmenter_v1(
     """Create an augmneter that converts documents to SpOnGeBoB casing.
 
     Args:
-        level (float): The percentage of examples that will be augmented.
+        level: The percentage of examples that will be augmented.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty

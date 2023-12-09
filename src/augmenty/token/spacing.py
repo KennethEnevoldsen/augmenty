@@ -38,10 +38,10 @@ def create_letter_spacing_augmenter_v1(
     tokenization.
 
     Args:
-        level (float): The probability add grundtvigian letter spacing emphasis.
+        level: The probability add grundtvigian letter spacing emphasis.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
     """
     return partial(letter_spacing_augmenter_v1, level=level)
 
@@ -79,11 +79,11 @@ def create_spacing_insertion_augmenter_v1(
     Tokens are kept the same.
 
     Args:
-        level (float): The probability to add a space after a character.
-        max_insertions (int, optional): Maximum number of insertions pr. word.
+        level: The probability to add a space after a character.
+        max_insertions: Maximum number of insertions pr. word.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
     """
     return partial(
         spacing_insertion_augmenter_v1,

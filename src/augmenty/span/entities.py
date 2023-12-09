@@ -239,8 +239,7 @@ def create_ent_augmenter_v1(
             i.e. ["Kenneth", "Enevoldsen"], 2) a string of the desired entity i.e. "Kenneth Enevoldsen", this
             will be split using the tokenizer of the nlp pipeline, or 3) Span object with the desired entity, here all information will be passed
             on except for the dependency tree.
-        replace_consistency: Should an entity always be replaced with
-            the same entity? Defaults to True.
+        replace_consistency: Should an entity always be replaced with the same entity? 
         resolve_dependencies: Attempts to resolve the dependency tree
             by setting head of the original entitity aa the head of the
             first token in the new entity. The remainder is the passed as
@@ -305,15 +304,10 @@ def create_per_replace_augmenter_v1(
             Where a pattern is a list of strings, where the string denote the list in
             the names dictionary in which to sample from.
         level: The proportion of PER entities to replace.
-        names_p: The probability to sample each name.
-            Defaults to {}, indicating equal probability for each name.
-        patterns_p: The probability to sample each
-            pattern. Defaults to None, indicating equal probability for each pattern.
-        replace_consistency: Should the entity always be replaced with
-            the same entity? Defaults to True.
-        person_tag: The tag of the person entity. Defaults to "PERSON".
-            However it should be noted that much such as the Danish spacy model uses
-            "PER" instead.
+        names_p: The probability to sample each name. An empty dictionary "{}", indicates equal probability for each name.
+        patterns_p: The probability to sample each pattern. None indicates equal probability for each pattern.
+        replace_consistency: Should the entity always be replaced with the same entity?
+        person_tag: The tag of the person entity (e.g. "PERSON" or "PER").
 
     Returns:
         The augmenter

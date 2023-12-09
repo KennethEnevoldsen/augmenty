@@ -10,10 +10,9 @@ class Keyboard(BaseModel):
     """A Pydantic dataclass object for constructing Keyboard setup.
 
     Args:
-        keyboard_array (Dict[str, str]): An array corresponding to a keyboard.
-            This should include two keys a "default" and a "shift". Each containing
+        keyboard_array: An array corresponding to a keyboard. This should include two keys a "default" and a "shift". Each containing
             an array of non-shifted and shifted keys respectively.
-        shift_distance (int): The distance given by the shift operator. Defaults to 3.
+        shift_distance: The distance given by the shift operator.
 
     Returns:
         Keyboard: a Keyboard object
@@ -26,10 +25,10 @@ class Keyboard(BaseModel):
         """Get coordinate for key.
 
         Args:
-            key (str): keyboard key
+            key: keyboard key
 
         Returns:
-            Tuple[int, int]: key coordinate on keyboard
+            key coordinate on keyboard
         """
         for arr in self.keyboard_array:
             for x, row in enumerate(self.keyboard_array[arr]):
@@ -57,11 +56,11 @@ class Keyboard(BaseModel):
         """Returns euclidian distance between two keys.
 
         Args:
-            key_a (str): keyboard key
-            key_b (str): keyboard key
+            key_a: keyboard key
+            key_b: keyboard key
 
         Returns:
-            int: The euclidian distance between two keyboard keys.
+            The euclidian distance between two keyboard keys.
         """
         x1, y1 = self.coordinate(key_a)
         x2, y2 = self.coordinate(key_b)
@@ -88,12 +87,11 @@ class Keyboard(BaseModel):
         """Gets the neighbours of a key with a specified distance.
 
         Args:
-            key (str): A keyboard key
-            distance (int, optional): The euclidian distance of neightbours.
-                Defaults to 1.
+            key: A keyboard key
+            distance: The euclidian distance of neightbours.
 
         Returns:
-            List[int]: The neighbours of a key with a specified distance.
+            The neighbours of a key with a specified distance.
         """
         l = []  # noqa: E741
         for k in self.all_keys():

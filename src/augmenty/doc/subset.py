@@ -76,19 +76,16 @@ def create_paragraph_subset_augmenter_v1(
     """Create an augmenter that extracts a subset of a document.
 
     Args:
-        min_paragraph (Union[float, int]): An float indicating the min percentage of the
+        min_paragraph: An float indicating the min percentage of the
             document to include or a float indicating the minimum number of paragraps
-            to include (tokens in respect sentences is False). Defaults to 1,
-            indicating at least one sentence.
-        max_paragraph (Union[float, int]): An float indicating the max percentage of the
+            to include (tokens in respect sentences is False). E.g. 1, indicates at least one sentence.
+        max_paragraph: An float indicating the max percentage of the
             document to include or a float indicating the maximum number of paragraps
-            to include (tokens in respect sentences is False). Defaults to 1.00
-            indicating 100%.
-        respect_sentences (bool): should the augmenter respect sentence bounderies?
-            Defaults to True.
+            to include (tokens in respect sentences is False). E.g. 1.00 indicates 100%.
+        respect_sentences: should the augmenter respect sentence bounderies?
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty

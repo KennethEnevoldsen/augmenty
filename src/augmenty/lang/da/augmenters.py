@@ -16,10 +16,10 @@ def create_da_æøå_replace_augmenter_v1(
     variants ae, oe, aa.
 
     Args:
-        level (float): probability to augment æ, ø or å.
+        level: probability to augment æ, ø or å.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The desired augmenter.
+        The desired augmenter.
 
     Example:
         >>> import augmenty
@@ -48,10 +48,10 @@ def create_da_historical_noun_casing_augmenter_v1(
     """Creates an augmenter that capitalizes nouns.
 
     Args:
-        level (float): The probabiliy to upper case a noun.
+        level: The probabiliy to upper case a noun.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
     """
 
     def conditional(token):

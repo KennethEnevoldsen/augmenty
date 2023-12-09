@@ -78,19 +78,18 @@ def create_token_insert_augmenter_v1(
     insert function.
 
     Args:
-        level (float): The probability to insert a token.
-        insert (Callable[[Token], Dict[str, str]]): An insert function. The function
+        level: The probability to insert a token.
+        insert: An insert function. The function
             takes in a spacy Token and return a dictionary representing the new token
             to replace. The dictionary can contain the keys: "ORTH", "SPACY" (defaults
             to "True"), "entities" (default to "O"), "POS" (defaults to "X"), "TAG"
             (defaults to "X"), "MORPH" (defaults to "X"), "LEMMA" (defaults to the ORTH
             token). You can also specify "HEAD" and "DEP" if they are not specified
             they will get removed. If the function returns no word is inserted.
-        respect_ents (bool, optional): Should the augmentation respect entities?
-            Defaults to True. In which case it will not insert a token inside an entity.
+        respect_ents: Should the augmentation respect entities? If True it will not insert a token inside an entity.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import random
@@ -117,15 +116,14 @@ def create_token_insert_random_augmenter_v1(
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:
-        level (float): The probability to insert a token.
-        insert (List[Union[str, Dict[str, str]]], optional): A list of string or a list
+        level: The probability to insert a token.
+        insert: A list of string or a list
             of dictionaries representing a token. If None it will sample from the
             vocabulary of the nlp pipeline.
-        respect_ents (bool, optional): Should the augmentation respect entities?
-            Defaults to True. In which case it will not insert a token inside an entity.
+        respect_ents: Should the augmentation respect entities? If True it will not insert a token inside an entity.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty
@@ -155,7 +153,7 @@ def create_token_insert_random_augmenter_v1(
     __insert = partial(__insert, d=d)
     return partial(
         token_insert_augmenter_v1,
-        level=level, 
+        level=level,
         respect_ents=respect_ents,
         insert=__insert,
     )
@@ -169,12 +167,11 @@ def create_duplicate_token_augmenter_v1(
     """Creates an augmenter that randomly duplicate a token token.
 
     Args:
-        level (float): The probability to dublicate a token.
-        respect_ents (bool, optional): Should the augmentation respect entities?
-            Defaults to True. In which case it will not insert a token inside an entity.
+        level: The probability to dublicate a token.
+        respect_ents: Should the augmentation respect entities? Defualt to True, in which case it will not insert a token inside an entity.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty
@@ -220,24 +217,20 @@ def create_random_synonym_insertion_augmenter_v1(
     context. The synonyms are based on wordnet.
 
     Args:
-        level (float): The probability to dublicate a token.
-        respect_ents (bool, optional): Should the augmentation respect entities?
-            Defaults to True. In which case it will not insert a token inside an entity.
-        respect_pos (bool, optional): Should POS-tag of the synonyms be respected?
-            Defaults to True.
-        pos_getter (Callable[[Token], str], optional): A getter function to extract the
-            POS-tag.
-        lang (Optional[str], optional): Language supplied a ISO 639-1 language code.
-            Defaults to None, in which case the lang is based on the language of the
+        level: The probability to dublicate a token.
+        respect_ents: Should the augmentation respect entities?
+            Defaults to True, in which case it will not insert a token inside an entity.
+        respect_pos: Should POS-tag of the synonyms be respected (True)?
+        pos_getter: A getter function to extract the POS-tag.
+        lang: Language supplied a ISO 639-1 language code. If None, the lang is based on the language of the
             spacy nlp pipeline used. Possible language codes include:
             "da", "ca", "en", "eu", "fa", "fi", "fr", "gl", "he", "id", "it", "ja",
             "nn", "no", "pl", "pt", "es", "th".
-        context_window (Optional[int], optional): Sets window in which synonyms can be
-        generated from. If None the context is set to the sentence.
-        verbose (bool, optional): Toggle the verbosity of the function. Default to True.
+        context_window: Sets window in which synonyms can be generated from. If None the context is set to the sentence.
+        verbose: Toggle the verbosity of the function. Default to True.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty

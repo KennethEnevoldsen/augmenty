@@ -6,17 +6,13 @@ from spacy.vocab import Vocab
 
 
 class static_embedding(BaseModel):
-    """A utility function for computing most similar word vectors using
+    """A utility object for computing most similar word vectors using
     precomputed normalized vectors.
 
     Args:
-        unit_vectors (Optional[np.ndarray]): The normalized word vectors
-        keys (Optional[List[int]]): The mapping from vectors to hash values
-        vocab (Optional[Vocab]): A SpaCy vocabulary
-
-    Returns:
-        static_embedding: An utility class for efficiently calculating static word
-            embeddings.
+        unit_vectors: The normalized word vectors
+        keys: The mapping from vectors to hash values
+        vocab: A SpaCy vocabulary
     """
 
     class Config:
@@ -30,11 +26,11 @@ class static_embedding(BaseModel):
         """Calculate most similar vectors using cosine similarity.
 
         Args:
-            target (str): Target in the vocabulary
-            n (int): The number of words of interest.
+            target: Target in the vocabulary
+            n: The number of words of interest.
 
         Returns:
-            List[str]: A list of most similar word.
+            A list of most similar word.
         """
         target = self.vocab.get_vector(target)  # type: ignore
         unit_target = target / np.linalg.norm(target)  # type: ignore

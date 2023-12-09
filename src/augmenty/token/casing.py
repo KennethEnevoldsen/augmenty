@@ -4,10 +4,10 @@ from typing import Callable, Iterator, Optional
 
 import spacy  # type: ignore
 from spacy.language import Language  # type: ignore
+from spacy.tokens import Token
 from spacy.training import Example  # type: ignore
 
 from ..augment_utilities import make_text_from_orth
-
 
 uncapitalize = lambda s: s[:1].lower() + s[1:] if s else s  # noqa: E731
 
@@ -39,10 +39,10 @@ def create_starting_case_augmenter_v1(
     token.
 
     Args:
-        level (float): Probability to randomly case the first letter of a token.
+        level: Probability to randomly case the first letter of a token.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty
@@ -79,7 +79,7 @@ def conditional_casing_augmenter_v1(
 
 @spacy.registry.augmenters("conditional_token_casing_v1")  # type: ignore
 def create_conditional_token_casing_augmenter_v1(
-    conditional: Callable,  # type: ignore
+    conditional: Callable[[Token], bool],  # type: ignore
     level: float,
     lower: Optional[bool] = None,  # type: ignore
     upper: Optional[bool] = None,  # type: ignore
@@ -89,15 +89,13 @@ def create_conditional_token_casing_augmenter_v1(
     True.
 
     Args:
-        level (float):
-        conditional (Callable):
-        lower (Optional[bool], optional): If the conditional returns True should the
-            casing the lowercased. Default to None.
-        upper (Optional[bool], optional): If the conditional returns True should the
-            casing the uppercased. Default to None.
+        level: The probability to case the first letter of a token.
+        conditional: A function that takes a token and returns True if the token should be cased.
+        lower: If the conditional returns True should the casing the lowercased.
+        upper: If the conditional returns True should the casing the uppercased.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> def is_pronoun(token):
