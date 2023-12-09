@@ -1,0 +1,35 @@
+name: static_type_checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  static_type_checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.9"]
+    steps:
+      - uses: actions/checkout@v3
+
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        id: setup_python
+        with:
+          python-version: ${{ matrix.python-version}}
+          cache: pip
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          make install
+
+      - name: Run static type checker
+        shell: bash
+        run: |
+          make static-type-check

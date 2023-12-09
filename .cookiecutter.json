@@ -1,0 +1,14 @@
+{
+    "_copy_without_render": [
+        "*.github"
+    ],
+    "_template": "https://github.com/KennethEnevoldsen/swift-python-cookiecutter",
+    "author": "Kenneth Enevoldsen",
+    "copyright_year": "2021",
+    "email": "Kenneth.enevoldsen@cas.au.dk",
+    "friendly_name": "Augmenty",
+    "github_user": "KennethEnevoldsen",
+    "package_name": "augmenty",
+    "project_name": "augmenty",
+    "version": "1.4.1"
+}
