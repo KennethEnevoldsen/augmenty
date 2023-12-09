@@ -297,13 +297,13 @@ def create_random_synonym_insertion_augmenter_v1(
                         {
                             (lem, pos)
                             for syn in syns
-                            for lem in syn.lemma_names(lang=lang)
+                            for lem in syn.lemma_names(lang=lang)  # noqa
                         },
                     )
             else:
                 syns = wordnet.synsets(word, lang=lang)
                 rep = rep.union(
-                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},
+                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},  # noqa
                 )
 
         if rep:
@@ -324,5 +324,5 @@ def create_random_synonym_insertion_augmenter_v1(
         token_insert_augmenter_v1,
         level=level,
         respect_ents=respect_ents,
-        insert=insert,
+        insert=insert,  # type: ignore
     )
