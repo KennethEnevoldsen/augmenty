@@ -4,17 +4,9 @@ FAQ
 
 How do I cite this work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you use this library in your research, it would be much appreciated it if you would cite:
+If you use this library in your research, it would be much appreciated it if you would cite the package. For the most up to date ciation see the
+"cite this repository" on the `github page <https://github.com/KennethEnevoldsen/augmenty>`__ for an up to date citation.
 
-.. code-block::
-   
-   @software{enevoldsen_augmenty_2021,
-      author = {Enevoldsen, Kenneth},
-      doi = {10.5281/zenodo.6675315},
-      title = {{Augmenty: The cherry on top of your NLP pipeline}},
-      url = {https://github.com/KennethEnevoldsen/augmenty},
-      version = {1.0.1}
-   }
 
 How do I test the code and run the test suite?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
