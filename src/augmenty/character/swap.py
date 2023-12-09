@@ -12,7 +12,7 @@ from spacy.training import Example
 from ..augment_utilities import make_text_from_orth
 
 
-def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[Example]:
+def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[Example]:  # type: ignore
     def __replace(t):
         for i, c in enumerate(t.text[:-1]):
             if random.random() < level:
@@ -26,10 +26,10 @@ def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[E
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("char_swap_v1")
-def create_char_swap_augmenter_v1(
+@spacy.registry.augmenters("char_swap_v1")  # type: ignore
+def create_char_swap_augmenter_v1( 
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that swaps two neighbouring characters in a token
     with a given probability.
 

@@ -16,11 +16,11 @@ def token_dict_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],  # type: ignore
     ignore_casing: bool,
-    getter: Callable[[Token], str],
+    getter: Callable[[Token], str],  # type: ignore
     keep_titlecase: bool,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __replace(t):
         text = t.text
         if ignore_casing is True:
@@ -29,9 +29,9 @@ def token_dict_replace_augmenter_v1(
             if isinstance(replace[t.text], dict):
                 pos = getter(t)
                 if pos in replace[t.text]:
-                    text = random.sample(replace[t.text][pos], k=1)[0]
+                    text = random.sample(replace[t.text][pos], k=1)[0]  # type: ignore
             else:
-                text = random.sample(replace[t.text], k=1)[0]
+                text = random.sample(replace[t.text], k=1)[0]  # type: ignore
             if keep_titlecase is True and t.is_title is True:
                 text = text.capitalize()
             return text
@@ -44,14 +44,14 @@ def token_dict_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_dict_replace_v1")
+@spacy.registry.augmenters("token_dict_replace_v1")  # type: ignore
 def create_token__dict_replace_augmenter_v1(
     level: float,
-    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],
+    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],  # type: ignore
     ignore_casing: bool = True,
-    getter: Callable[[Token], str] = lambda token: token.pos_,
+    getter: Callable[[Token], str] = lambda token: token.pos_,  # type: ignore
     keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter swaps a token with its synonym based on a
     dictionary.
 
@@ -92,14 +92,14 @@ def create_token__dict_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("wordnet_synonym_v1")
+@spacy.registry.augmenters("wordnet_synonym_v1")  # type: ignore
 def create_wordnet_synonym_augmenter_v1(
     level: float,
-    lang: Optional[str] = None,
+    lang: Optional[str] = None,  # type: ignore
     respect_pos: bool = True,
-    getter: Callable = lambda token: token.pos_,
+    getter: Callable = lambda token: token.pos_,  # type: ignore
     keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter swaps a token with its synonym based on a
     dictionary.
 
@@ -133,14 +133,14 @@ def create_wordnet_synonym_augmenter_v1(
         nlp: Language,
         example: Example,
         level: float,
-        lang: Optional[str],
-        getter: Callable,
+        lang: Optional[str],  # type: ignore
+        getter: Callable,  # type: ignore
         respect_pos: bool,
         keep_titlecase: bool,
-    ) -> Iterator[Example]:
+    ) -> Iterator[Example]:  # type: ignore
         if lang is None:
             lang = nlp.lang
-            lang = lang_wn_dict[lang]
+            lang = lang_wn_dict[lang]  # type: ignore
 
         def __replace(t):
             word = t.text.lower()
@@ -190,9 +190,9 @@ def token_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-    replace: Callable[[Token], str],
+    replace: Callable[[Token], str],  # type: ignore
     keep_titlecase: bool,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     if keep_titlecase is True:
 
         def __replace(t) -> str:
@@ -213,11 +213,11 @@ def token_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_replace_v1")
+@spacy.registry.augmenters("token_replace_v1")  # type: ignore
 def create_token_replace_augmenter_v1(
-    replace: Callable[[Token], str],
+    replace: Callable[[Token], str],  # type: ignore
     keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
@@ -238,21 +238,21 @@ def create_token_replace_augmenter_v1(
         ...    return ''.join(non_vowels)
         >>> aug = create_token_replace_augmenter(replace=remove_vowels, level=.10)
     """
-    return partial(
+    return partial(  # type: ignore
         token_replace_augmenter_v1,
         replace=replace,
         keep_titlecase=keep_titlecase,
     )
 
 
-@spacy.registry.augmenters("word_embedding_v1")
+@spacy.registry.augmenters("word_embedding_v1")  # type: ignore
 def create_word_embedding_augmenter_v1(
     level=float,
     n: int = 10,
-    nlp: Optional[Language] = None,
+    nlp: Optional[Language] = None,  # type: ignore
     keep_titlecase: bool = True,
     ignore_casing: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
@@ -307,5 +307,5 @@ def create_word_embedding_augmenter_v1(
         token_replace_augmenter_v1,
         replace=__replace,
         keep_titlecase=keep_titlecase,
-        level=level,
+        level=level,    # type: ignore
     )

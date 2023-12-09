@@ -19,10 +19,10 @@ class Keyboard(BaseModel):
         Keyboard: a Keyboard object
     """
 
-    keyboard_array: Dict[str, List[List[str]]]
+    keyboard_array: Dict[str, List[List[str]]]  # type: ignore
     shift_distance: int = 3
 
-    def coordinate(self, key: str) -> Tuple[int, int]:
+    def coordinate(self, key: str) -> Tuple[int, int]:  # type: ignore
         """Get coordinate for key.
 
         Args:
@@ -84,7 +84,7 @@ class Keyboard(BaseModel):
             for x, _ in enumerate(self.keyboard_array[arr]):
                 yield from self.keyboard_array[arr][x]
 
-    def get_neighbours(self, key: str, distance: int = 1) -> List[int]:
+    def get_neighbours(self, key: str, distance: int = 1) -> List[int]:  # type: ignore
         """Gets the neighbours of a key with a specified distance.
 
         Args:

@@ -17,8 +17,8 @@ def token_insert_augmenter_v1(
     example: Example,
     level: float,
     respect_ents: bool,
-    insert: Callable[[Token], Dict[str, str]],
-) -> Iterator[Example]:
+    insert: Callable[[Token], Dict[str, str]],  # type: ignore
+) -> Iterator[Example]:  # type: ignore
     doc = example.y
 
     example_dict = example.to_dict()
@@ -68,12 +68,12 @@ def token_insert_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_insert_v1")
+@spacy.registry.augmenters("token_insert_v1")  # type: ignore
 def create_token_insert_augmenter_v1(
     level: float,
-    insert: Callable[[Token], Dict[str, str]],
+    insert: Callable[[Token], Dict[str, str]],  # type: ignore
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that randomly inserts a token generated based on a
     insert function.
 
@@ -108,12 +108,12 @@ def create_token_insert_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("token_insert_random_v1")
+@spacy.registry.augmenters("token_insert_random_v1") # type: ignore
 def create_token_insert_random_augmenter_v1(
     level: float,
-    insert: Optional[List[Union[str, Dict[str, str]]]] = None,
+    insert: Optional[List[Union[str, Dict[str, str]]]] = None,  # type: ignore
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]: # type: ignore
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:
@@ -161,11 +161,11 @@ def create_token_insert_random_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("duplicate_token_v1")
+@spacy.registry.augmenters("duplicate_token_v1")  # type: ignore
 def create_duplicate_token_augmenter_v1(
     level: float,
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that randomly duplicate a token token.
 
     Args:
@@ -206,16 +206,16 @@ def create_duplicate_token_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("random_synonym_insertion_v1")
+@spacy.registry.augmenters("random_synonym_insertion_v1")  # type: ignore
 def create_random_synonym_insertion_augmenter_v1(
     level: float,
     respect_pos: bool = True,
     respect_ents: bool = True,
     pos_getter=lambda token: token.pos_,
-    lang: Optional[str] = None,
-    context_window: Optional[int] = None,
+    lang: Optional[str] = None,  # type: ignore
+    context_window: Optional[int] = None,  # type: ignore
     verbose: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that randomly inserts a synonym or from the tokens
     context. The synonyms are based on wordnet.
 
@@ -258,7 +258,7 @@ def create_random_synonym_insertion_augmenter_v1(
         lang: str,
         respect_pos: bool,
         verbose: bool,
-    ) -> Union[dict, None]:
+    ) -> Union[dict, None]: # type: ignore
         doc = t.doc
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
@@ -275,7 +275,7 @@ def create_random_synonym_insertion_augmenter_v1(
         rep = set()  # type: ignore
         if context_window:
             span = doc[
-                max(0, t.i - context_window) : min(len(doc), t.i + context_window)
+                max(0, t.i - context_window) : min(len(doc), t.i + context_window)  # type: ignore
             ]
         elif doc.has_annotation("SENT_START"):
             span = t.sent
@@ -308,7 +308,7 @@ def create_random_synonym_insertion_augmenter_v1(
             text = random.sample(rep, k=1)[0]  # type: ignore
             if isinstance(text, tuple):
                 return {
-                    "ORTH": text[0],
+                    "ORTH": text[0],  # type: ignore
                     "POS": t.pos_,
                     "TAG": t.tag_,
                 }
@@ -317,7 +317,7 @@ def create_random_synonym_insertion_augmenter_v1(
             }
         return None
 
-    insert = partial(__insert, lang=lang, respect_pos=respect_pos, verbose=verbose)
+    insert = partial(__insert, lang=lang, respect_pos=respect_pos, verbose=verbose)  # type: ignore
     return partial(
         token_insert_augmenter_v1,
         level=level,

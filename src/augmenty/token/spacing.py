@@ -13,7 +13,7 @@ def letter_spacing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __spacing(t):
         if random.random() < level:
             return " ".join([c for c in t.text])
@@ -26,10 +26,10 @@ def letter_spacing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("letter_spacing_augmenter_v1")
+@spacy.registry.augmenters("letter_spacing_augmenter_v1")  # type: ignore
 def create_letter_spacing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Typically casing is used to add emphasis to words, but letter spacing
     has also been used to add e m p h a s i s  to words (e.g. by Grundtvig;
     Baunvig, Jarvis and Nielbo, 2020). This augmenter randomly adds letter
@@ -51,7 +51,7 @@ def spacing_insertion_augmenter_v1(
     example: Example,
     level: float,
     max_insertions: int,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __spacing(t):
         insertions = 0
         text = []
@@ -70,11 +70,11 @@ def spacing_insertion_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("spacing_insertion_v1")
+@spacy.registry.augmenters("spacing_insertion_v1")  # type: ignore
 def create_spacing_insertion_augmenter_v1(
     level: float,
     max_insertions: int = 1,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates and augmneter that randomly adds a space after a chara cter.
     Tokens are kept the same.
 

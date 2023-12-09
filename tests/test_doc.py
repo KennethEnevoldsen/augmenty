@@ -10,7 +10,7 @@ def test_create_spongebob_augmenter(nlp_en):  # noqa F811
     aug_text = "A SaMpLe tExT"
 
     aug_texts = list(augmenty.texts(texts, spongebob_augmenter, nlp_en))
-    assert aug_texts[0] == aug_text
+    assert aug_texts[0] == aug_text  # type: ignore
 
 
 def test_create_upper_case_augmenter(nlp_en):  # noqa F811
@@ -19,7 +19,7 @@ def test_create_upper_case_augmenter(nlp_en):  # noqa F811
     aug_text = "A SAMPLE TEXT"
 
     aug_texts = list(augmenty.texts(texts, spongebob_augmenter, nlp_en))
-    assert aug_texts[0] == aug_text
+    assert aug_texts[0] == aug_text  # type: ignore
 
 
 def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
@@ -46,12 +46,12 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
         max_paragraph=1.00,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
-    assert aug_docs[0].text
+    assert aug_docs[0].text  # type: ignore
 
     # with sentencizer
     nlp_en.add_pipe("sentencizer")
     aug_texts = list(augmenty.texts([text], p_subset_aug, nlp_en))
-    assert aug_texts[0]
+    assert aug_texts[0]  # type: ignore
 
     # full length
     p_subset_aug = augmenty.load(
@@ -60,7 +60,7 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
         max_paragraph=1.0,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
-    assert aug_docs[0].text == text
+    assert aug_docs[0].text == text  # type: ignore
 
     # zero length
     p_subset_aug = augmenty.load(
@@ -69,4 +69,4 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
         max_paragraph=0.0,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
-    assert aug_docs[0].text == ""
+    assert aug_docs[0].text == ""  # type: ignore

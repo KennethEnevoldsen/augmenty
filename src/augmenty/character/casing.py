@@ -13,7 +13,7 @@ def random_casing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __casing(c):
         if random.random() < level:
             return c.lower() if random.random() < 0.5 else c.upper()
@@ -28,10 +28,10 @@ def random_casing_augmenter_v1(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_casing_v1")
+@spacy.registry.augmenters("random_casing_v1")  # type: ignore
 def create_random_casing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Create an augment that randomly changes the casing of the document.
 
     Args:

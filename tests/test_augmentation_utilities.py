@@ -22,7 +22,7 @@ def test_combine(nlp_en_md):  # noqa F811
 
     augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))
 
-    assert augmented_docs[0][0].text == "spaCy"
+    assert augmented_docs[0][0].text == "spaCy"  # type: ignore
 
 
 def test_yield_original(nlp_en):  # noqa F811

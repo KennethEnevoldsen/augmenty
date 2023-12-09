@@ -21,7 +21,7 @@ def nlp() -> Language:
 def example_doc(nlp: Language) -> Doc:
     text = "Joc Pederson and Thairo Estrada (concussion protocol) are each progressing. SS Brandon Crawford"
     doc = nlp(text)
-    doc.ents = [
+    doc.ents = [  # type: ignore
         Span(doc, 0, 2, "pers"),
         Span(doc, 3, 5, "pers"),
         Span(doc, 14, 16, "pers"),
@@ -65,10 +65,10 @@ def test_entity_with_no_dep(nlp: Language, example_doc: Doc):
         replace_consistency=True,
         resolve_dependencies=True,
     )
-    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]  # noqa
-    assert len(aug_doc.ents) == len(docs[0].ents)
+    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]  # noqa  # type: ignore
+    assert len(aug_doc.ents) == len(docs[0].ents)  # type: ignore
     assert (
         aug_doc.text
         == "Melvin R. Brown and Melvin R. Brown (concussion protocol) are each progressing. SS Melvin R. Brown"
     )
-    assert aug_doc[0].text == "Melvin"
+    assert aug_doc[0].text == "Melvin"  # type: ignore

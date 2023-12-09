@@ -16,7 +16,7 @@ def token_swap_augmenter_v1(
     level: float,
     respect_ents: bool,
     respect_sentences: bool,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     example_dict = example.to_dict()
 
     n_tok = len(example.y)
@@ -24,10 +24,10 @@ def token_swap_augmenter_v1(
     if respect_ents is True:
         swap_ents = False
 
-    is_swapped = set()
+    is_swapped = set()  # type: ignore
 
     tok_anno = example_dict["token_annotation"]
-    for i in range(n_tok):
+    for i in range(n_tok):  # type: ignore
         if i in is_swapped:
             continue
         if random.random() < level:
@@ -84,14 +84,14 @@ def token_swap_augmenter_v1(
                     continue
                 if k == "HEAD":
                     if example.y.has_annotation("HEAD"):
-                        head = np.array(tok_anno[k])
+                        head = np.array(tok_anno[k])  # type: ignore
                         head[head == i], head[head == min_i] = min_i, i
                         tok_anno[k] = head
                     else:
                         continue
                 tok_anno[k][i], tok_anno[k][min_i] = tok_anno[k][min_i], tok_anno[k][i]
 
-            if respect_ents is True and swap_ents is True:
+            if respect_ents is True and swap_ents is True:  # type: ignore
                 ents = example_dict["doc_annotation"]["entities"]
                 ent1, ent2 = ents[min_i], ents[i]
                 if ent1 != "O" or ent2 != "O":
@@ -107,12 +107,12 @@ def token_swap_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_swap_v1")
+@spacy.registry.augmenters("token_swap_v1")  # type: ignore
 def create_token_swap_augmenter_v1(
     level: float,
     respect_ents: bool = True,
     respect_sentences: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]: # type: ignore
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:

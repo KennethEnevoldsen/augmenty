@@ -26,7 +26,7 @@ def nlp_en_md() -> Language:
 
 
 @pytest.fixture()
-def dane_test(nlp_da: Language) -> Any:
+def dane_test(nlp_da: Language) -> Any:  # type: ignore
     return dane(splits=["test"])(nlp_da)  # type: ignore
 
 

@@ -15,10 +15,10 @@ class registry(thinc.registry):
 
 
 def docs(
-    docs: Iterable[Doc],
-    augmenter: Callable[[Language, Example], Iterator[Example]],
+    docs: Iterable[Doc],  # type: ignore
+    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
     nlp: Language,
-) -> Iterator[Doc]:
+) -> Iterator[Doc]:  # type: ignore
     """Augments an iterable of spaCy Doc.
 
     Args:
@@ -50,10 +50,10 @@ def docs(
 
 
 def texts(
-    texts: Iterable[str],
-    augmenter: Callable[[Language, Example], Iterator[Example]],
+    texts: Iterable[str],  # type: ignore
+    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
     nlp: Language,
-) -> Iterable[str]:
+) -> Iterable[str]:  # type: ignore
     """Augments an list of texts.
 
     Args:
@@ -70,7 +70,7 @@ def texts(
     if isinstance(texts, str):
         texts = [texts]
 
-    def __gen() -> Iterable[Doc]:
+    def __gen() -> Iterable[Doc]: # type: ignore
         for text in texts:
             yield nlp(text)
 
@@ -78,7 +78,7 @@ def texts(
         yield doc.text
 
 
-def augmenters() -> Dict[str, Callable]:
+def augmenters() -> Dict[str, Callable]:  # type: ignore
     """A utility function to get an overview of all augmenters.
 
     Returns:
@@ -89,14 +89,14 @@ def augmenters() -> Dict[str, Callable]:
     >>> "upper_case_v1" in augmenters
     True
     """
-    return spacy.registry.augmenters.get_all()
+    return spacy.registry.augmenters.get_all() # type: ignore
 
 
-def load(augmenter=str, **kwargs) -> Callable:
+def load(augmenter: str, **kwargs) -> Callable:  # type: ignore
     """A utility functionload an augmenter.
 
     Returns:
-        Dict[str, Callable]: Dictionary of all augmenters
+        Dictionary of all augmenters
 
     Example:
     >>> from spacy.lang.en import English
@@ -106,11 +106,11 @@ def load(augmenter=str, **kwargs) -> Callable:
     >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
     ["HELLO THERE!"]
     """
-    aug = spacy.registry.augmenters.get(augmenter)
+    aug = spacy.registry.augmenters.get(augmenter)  # type: ignore
     return aug(**kwargs)
 
 
-def keyboards() -> List[str]:
+def keyboards() -> List[str]:  # type: ignore
     """A utility function to get an overview of all keyboards.
 
     Returns:
@@ -122,7 +122,7 @@ def keyboards() -> List[str]:
     return list(registry.keyboards.get_all().keys())
 
 
-def meta() -> Dict[str, dict]:
+def meta() -> Dict[str, dict]:  # type: ignore
     """Returns a a dictionary containing metadata for each augmenter.
 
     Returns:
@@ -138,6 +138,6 @@ def meta() -> Dict[str, dict]:
 
     p = pathlib.Path(__file__).parent.resolve()
     p = os.path.join(p, "meta.json")  # type: ignore
-    with open(p) as f:
+    with open(p) as f:  # type: ignore
         r = json.load(f)
     return r

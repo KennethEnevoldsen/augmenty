@@ -7,11 +7,11 @@ from spacy.training import Example
 from ...character import create_char_replace_augmenter_v1
 from ...token import create_conditional_token_casing_augmenter_v1
 
-
-@spacy.registry.augmenters("da_æøå_replace_v1")
+ 
+@spacy.registry.augmenters("da_æøå_replace_v1")  # type: ignore
 def create_da_æøå_replace_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that augments æ, ø, and å into their spelling
     variants ae, oe, aa.
 
@@ -41,10 +41,10 @@ def create_da_æøå_replace_augmenter_v1(
     return create_char_replace_augmenter_v1(replace=replace_dict, level=level)
 
 
-@spacy.registry.augmenters("da_historical_noun_casing_v1")
+@spacy.registry.augmenters("da_historical_noun_casing_v1") # type: ignore
 def create_da_historical_noun_casing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that capitalizes nouns.
 
     Args:

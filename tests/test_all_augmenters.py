@@ -93,14 +93,14 @@ augmenters_args = {
 @pytest.mark.parametrize(
     "examples,nlp",  # noqa
     [
-        (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),
+        (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),  # type: ignore
         (
-            pytest.lazy_fixture("books_without_annotations"),
-            pytest.lazy_fixture("nlp_en"),
+            pytest.lazy_fixture("books_without_annotations"),  # type: ignore
+            pytest.lazy_fixture("nlp_en"),   # type: ignore
         ),
     ],
 )
-def test_augmenters(aug: Callable, args: dict, examples, nlp: Language, level: float):  # noqa
+def test_augmenters(aug: Callable, args: dict, examples, nlp: Language, level: float):  # noqa  # type: ignore
     args["level"] = level
     aug = augmenty.load(aug, **args)
     augmented_examples = [e for ex in examples for e in aug(nlp=nlp, example=ex)]

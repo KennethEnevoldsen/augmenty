@@ -29,7 +29,7 @@ def doc(nlp_en: Language) -> Doc:  # noqa
 
 
 @pytest.fixture()
-def ent_augmenter() -> Callable:
+def ent_augmenter() -> Callable:  # type: ignore
     ent_augmenter = augmenty.load(
         "ents_replace_v1",  # type: ignore
         level=1.00,
@@ -41,13 +41,13 @@ def ent_augmenter() -> Callable:
 @pytest.mark.parametrize(
     "nlp",
     [
-        pytest.lazy_fixture("nlp_en"),
-        pytest.lazy_fixture("nlp_en_md"),
+        pytest.lazy_fixture("nlp_en"),  # type: ignore
+        pytest.lazy_fixture("nlp_en_md"),  # type: ignore
     ],
 )
 def test_ent_replace_with_span_annotations(
     doc: Doc,
-    ent_augmenter: Callable,
+    ent_augmenter: Callable,  # type: ignore
     nlp: Language,
 ):
     # add span annotations
@@ -59,23 +59,23 @@ def test_ent_replace_with_span_annotations(
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
 
     # Check spans
-    doc_pos_noun_chunks = docs[0].spans["positive_noun_chunks"]
+    doc_pos_noun_chunks = docs[0].spans["positive_noun_chunks"]  # type: ignore
     assert doc_pos_noun_chunks[0].text == "wonderful tool", "the span is not maintained"
 
-    doc_is_augmenty = docs[0].spans["is_augmenty"]
+    doc_is_augmenty = docs[0].spans["is_augmenty"]  # type: ignore
     assert doc_is_augmenty[0].text == "SpaCy", "the span is not maintained"
 
 
 @pytest.mark.parametrize(
     "nlp",
     [
-        pytest.lazy_fixture("nlp_en"),
-        pytest.lazy_fixture("nlp_en_md"),
+        pytest.lazy_fixture("nlp_en"),  # type: ignore
+        pytest.lazy_fixture("nlp_en_md"),  # type: ignore
     ],
 )
 def test_ent_replace_with_cats_annotations(
     doc: Doc,
-    ent_augmenter: Callable,
+    ent_augmenter: Callable,  # type: ignore
     nlp: Language,
 ):
     # add doc annotations
@@ -84,7 +84,7 @@ def test_ent_replace_with_cats_annotations(
     # augment
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
 
-    assert docs[0].cats["is_positive"] == 1.0, "the document category is not maintained"
+    assert docs[0].cats["is_positive"] == 1.0, "the document category is not maintained"  # type: ignore
 
 
 def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
@@ -112,7 +112,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
 
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
 
-    assert docs[0].text == "SpaCy is a wonderful tool for augmentation."
+    assert docs[0].text == "SpaCy is a wonderful tool for augmentation."  # type: ignore
 
     ent_augmenter = augmenty.load(
         "ents_replace_v1",
@@ -122,7 +122,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
 
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
 
-    assert docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."
+    assert docs[0].text == "The SpaCy Universe is a wonderful tool for augmentation."  # type: ignore
 
     ent_augmenter = augmenty.load(
         "ents_replace_v1",
@@ -133,7 +133,7 @@ def test_create_ent_replace(nlp_en_md, nlp_en):  # noqa F811
     doc = nlp_en_md("My name is Jack.")
     docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en_md))
 
-    assert docs[0].text != "My name is Jack."
+    assert docs[0].text != "My name is Jack."  # type: ignore
 
 
 def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
@@ -156,7 +156,7 @@ def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
         "My name is Lasse Lasse Hansen",
     ]
 
-    for p, e in zip(patterns, expected):
+    for p, e in zip(patterns, expected):  # type: ignore
         per_augmenter = augmenty.load(
             "per_replace_v1",
             level=1.00,
@@ -166,7 +166,7 @@ def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
 
         docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp_en))
 
-        assert docs[0].text == e
+        assert docs[0].text == e  # type: ignore
 
     per_augmenter = augmenty.load(
         "per_replace_v1",
@@ -175,12 +175,12 @@ def test_create_per_replace(nlp_en, nlp_en_md):  # noqa F811
             "firstname": ["Charles", "Jens"],
             "lastname": ["Kirkegaard", "Andersen"],
         },
-        patterns=[p],
+        patterns=[p],  # type: ignore
     )
     text = "My name is Charlie."
     doc = nlp_en_md(text)
     docs = list(augmenty.docs([doc], augmenter=per_augmenter, nlp=nlp_en_md))
-    assert docs[0] != text
+    assert docs[0] != text  # type: ignore
 
 
 def test_create_ent_format_augmenter(nlp_en_md):  # noqa F811
@@ -196,4 +196,4 @@ def test_create_ent_format_augmenter(nlp_en_md):  # noqa F811
     aug_text = "my name is Enevoldsen K."
 
     aug_texts = list(augmenty.texts(texts, augmenter, nlp_en_md))
-    assert aug_texts[0] == aug_text
+    assert aug_texts[0] == aug_text  # type: ignore

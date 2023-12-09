@@ -2,10 +2,10 @@ from typing import Tuple
 
 
 def offset_range(
-    current_range: Tuple[int, int],
-    inserted_range: Tuple[int, int],
+    current_range: Tuple[int, int],  # type: ignore
+    inserted_range: Tuple[int, int],  # type: ignore
     offset: int,
-) -> Tuple[int, int]:
+) -> Tuple[int, int]:  # type: ignore
     """Update current range based on inserted range and previous range.
 
     Args:

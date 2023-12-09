@@ -18,7 +18,7 @@ def char_replace_augmenter_v1(
     example: Example,
     level: float,
     replace: dict,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __replace(t):
         t_ = []
         for i, c in enumerate(t.text):
@@ -34,11 +34,11 @@ def char_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("char_replace_random_v1")
+@spacy.registry.augmenters("char_replace_random_v1")  # type: ignore
 def create_char_random_augmenter_v1(
     level: float,
     keyboard: str = "en_qwerty_v1",
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that replaces a character with a random character
     from the keyboard.
 
@@ -67,11 +67,11 @@ def create_char_random_augmenter_v1(
     return partial(char_replace_augmenter_v1, replace=replace_dict, level=level)
 
 
-@spacy.registry.augmenters("char_replace_v1")
+@spacy.registry.augmenters("char_replace_v1")  # type: ignore
 def create_char_replace_augmenter_v1(
     level: float,
     replace: dict,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that replaces a character with a random character
     from replace dict.
 
@@ -94,12 +94,12 @@ def create_char_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("keystroke_error_v1")
+@spacy.registry.augmenters("keystroke_error_v1")  # type: ignore
 def create_keystroke_error_augmenter_v1(
     level: float,
     distance: float = 1.5,
     keyboard: str = "en_qwerty_v1",
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates a augmenter which augments a text with plausible typos based on
     keyboard distance.
 

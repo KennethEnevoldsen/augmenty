@@ -16,7 +16,7 @@ def starting_case_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __casing(t):
         if random.random() < level:
             return (
@@ -31,10 +31,10 @@ def starting_case_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_starting_case_v1")
+@spacy.registry.augmenters("random_starting_case_v1")  # type: ignore
 def create_starting_case_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter which randomly cases the first letter in each
     token.
 
@@ -61,8 +61,8 @@ def conditional_casing_augmenter_v1(
     example: Example,
     level: float,
     upper: bool,
-    conditional: Callable,
-) -> Iterator[Example]:
+    conditional: Callable,  # type: ignore
+) -> Iterator[Example]:  # type: ignore
     def __casing(t):
         if conditional(t) and random.random() < level:
             if upper:
@@ -77,13 +77,13 @@ def conditional_casing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("conditional_token_casing_v1")
+@spacy.registry.augmenters("conditional_token_casing_v1")  # type: ignore
 def create_conditional_token_casing_augmenter_v1(
-    conditional: Callable,
+    conditional: Callable,  # type: ignore
     level: float,
-    lower: Optional[bool] = None,
-    upper: Optional[bool] = None,
-) -> Callable[[Language, Example], Iterator[Example]]:
+    lower: Optional[bool] = None,  # type: ignore
+    upper: Optional[bool] = None,  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that conditionally cases the first letter of a
     token based on the getter. Either lower og upper needs to specifiedd as
     True.
@@ -119,6 +119,6 @@ def create_conditional_token_casing_augmenter_v1(
     return partial(
         conditional_casing_augmenter_v1,
         level=level,
-        upper=upper,
+        upper=upper,  # type: ignore
         conditional=conditional,
     )

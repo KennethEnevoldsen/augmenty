@@ -15,7 +15,7 @@ def remove_spacing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     def __replace(s):
         if random.random() < level and (s is True):
             return False
@@ -30,10 +30,10 @@ def remove_spacing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("remove_spacing_v1")
+@spacy.registry.augmenters("remove_spacing_v1")  # type: ignore
 def create_remove_spacing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that removes spacing with a given probability.
 
     Args:

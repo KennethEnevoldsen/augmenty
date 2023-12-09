@@ -12,7 +12,7 @@ def upper_casing_augmenter_v1(
     example: Example,
     *,
     level: float,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     if random.random() >= level:
         yield example
     else:
@@ -24,10 +24,10 @@ def upper_casing_augmenter_v1(
         yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("upper_case_v1")
+@spacy.registry.augmenters("upper_case_v1")  # type: ignore
 def create_upper_casing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Create an augmenter that converts documents to uppercase.
 
     Args:
@@ -53,7 +53,7 @@ def spongebob_augmenter_v1(
     example: Example,
     *,
     level: float,
-) -> Iterator[Example]:
+) -> Iterator[Example]:  # type: ignore
     if random.random() >= level:
         yield example
     else:
@@ -66,10 +66,10 @@ def spongebob_augmenter_v1(
         yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("spongebob_v1")
+@spacy.registry.augmenters("spongebob_v1")  # type: ignore
 def create_spongebob_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Create an augmneter that converts documents to SpOnGeBoB casing.
 
     Args:
