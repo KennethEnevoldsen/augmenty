@@ -1,6 +1,6 @@
 from augmenty.token.static_embedding_util import static_embedding
 
-from .fixtures import nlp_en_md  # noqa
+from .fixtures import nlp_en_md
 
 
 def test_static_embedding_util(nlp_en_md):  # noqa F811

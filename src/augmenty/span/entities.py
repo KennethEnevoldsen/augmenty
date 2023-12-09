@@ -144,9 +144,7 @@ def ent_augmenter_v1(
                 if isinstance(ent_dict[ent.label_], Generator):
                     new_ent = next(ent_dict[ent.label_])  # type: ignore
                 else:
-                    new_ent = random.sample(ent_dict[ent.label_], k=1)[  # type: ignore
-                        0
-                    ]
+                    new_ent = random.sample(ent_dict[ent.label_], k=1)[0]  # type: ignore
                 if replace_consistency:
                     replaced_ents[ent.text] = new_ent
 

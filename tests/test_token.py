@@ -1,11 +1,10 @@
+import augmenty
 import spacy  # type: ignore
+from augmenty.token.insert import create_token_insert_random_augmenter_v1
 from spacy.tokens import Doc  # type: ignore
 
-import augmenty
-from augmenty.token.insert import create_token_insert_random_augmenter_v1
-
 from .books import BOOKS
-from .fixtures import nlp_da, nlp_en, nlp_en_md  # noqa
+from .fixtures import nlp_da, nlp_en, nlp_en_md
 
 
 def test_create_starting_case_augmenter(nlp_en):  # noqa F811
@@ -30,7 +29,7 @@ def test_create_conditional_token_casing_augmenter(nlp_en):  # noqa F811
 
     doc = Doc(nlp_en.vocab, words=tokens, pos=pos, spaces=spaces)
 
-    def conditional(token):
+    def conditional(token):  # noqa
         if token.pos_ == "PRON":
             return True
         return False
@@ -181,7 +180,7 @@ def test_create_token_insert_augmenter(nlp_en):  # noqa F811
     words = ["cat"]
     spaces = [False]
     doc = Doc(nlp_en.vocab, words=words, spaces=spaces, pos=["NOUN"])
-    insert_fun = lambda t: {"ORTH": "word"}  # noqa: E731
+    insert_fun = lambda: {"ORTH": "word"}  # noqa: E731
     aug = augmenty.load("token_insert_v1", level=1, insert=insert_fun)
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp_en))
     assert len(docs[0]) == 2

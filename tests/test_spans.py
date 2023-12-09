@@ -1,15 +1,14 @@
 from typing import Callable
 
+import augmenty
 import pytest
 from spacy.language import Language
 from spacy.tokens import Doc
 
-import augmenty
-
-from .fixtures import nlp_en, nlp_en_md  # noqa
+from .fixtures import nlp_en, nlp_en_md
 
 
-@pytest.fixture
+@pytest.fixture()
 def doc(nlp_en: Language) -> Doc:  # noqa
     doc = Doc(
         nlp_en.vocab,
@@ -29,8 +28,8 @@ def doc(nlp_en: Language) -> Doc:  # noqa
     return doc
 
 
-@pytest.fixture
-def ent_augmenter():
+@pytest.fixture()
+def ent_augmenter() -> Callable:
     ent_augmenter = augmenty.load(
         "ents_replace_v1",  # type: ignore
         level=1.00,

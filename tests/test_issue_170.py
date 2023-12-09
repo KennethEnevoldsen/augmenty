@@ -3,22 +3,22 @@
 https://github.com/KennethEnevoldsen/augmenty/issues/170.
 """
 
+import augmenty
 import pytest
 import spacy
+from spacy.language import Language
 from spacy.tokens import Doc, Span
 
-import augmenty
 
-
-@pytest.fixture
-def nlp():
+@pytest.fixture()
+def nlp() -> Language:
     nlp_ = spacy.blank("en")
     nlp_.add_pipe("sentencizer")
     return nlp_
 
 
-@pytest.fixture
-def example_doc(nlp) -> Doc:
+@pytest.fixture()
+def example_doc(nlp: Language) -> Doc:
     text = "Joc Pederson and Thairo Estrada (concussion protocol) are each progressing. SS Brandon Crawford"
     doc = nlp(text)
     doc.ents = [
@@ -55,7 +55,7 @@ def example_doc(nlp) -> Doc:
     return doc
 
 
-def test_entity_with_no_dep(nlp, example_doc: Doc):
+def test_entity_with_no_dep(nlp: Language, example_doc: Doc):
     level = 1.0
     docs = [example_doc]
     augmenter = augmenty.load(
@@ -65,7 +65,7 @@ def test_entity_with_no_dep(nlp, example_doc: Doc):
         replace_consistency=True,
         resolve_dependencies=True,
     )
-    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]
+    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]  # noqa
     assert len(aug_doc.ents) == len(docs[0].ents)
     assert (
         aug_doc.text

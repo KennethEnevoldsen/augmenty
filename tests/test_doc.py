@@ -1,8 +1,7 @@
+import augmenty
 from spacy.tokens import Span
 
-import augmenty
-
-from .fixtures import nlp_en  # noqa
+from .fixtures import nlp_en
 
 
 def test_create_spongebob_augmenter(nlp_en):  # noqa F811
@@ -39,7 +38,7 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
     )
 
     for t in doc:
-        t.is_sent_start = True if t.text == "." else False
+        t.is_sent_start = True if t.text == "." else False  # noqa
 
     p_subset_aug = augmenty.load(
         "paragraph_subset_augmenter_v1",

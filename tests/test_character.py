@@ -1,8 +1,7 @@
+import augmenty
 import spacy  # type: ignore
 
-import augmenty
-
-from .fixtures import nlp_da, nlp_en  # noqa
+from .fixtures import nlp_da, nlp_en
 
 
 def test_create_random_casing_augmenter(nlp_en):  # noqa F811

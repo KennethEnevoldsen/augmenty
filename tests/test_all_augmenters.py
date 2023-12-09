@@ -1,18 +1,26 @@
 """Pytest script for testing all augmenters in a variety of cases."""
 
-import numpy as np
-import pytest
+from typing import Callable
 
 import augmenty
+import numpy as np
+import pytest
+from spacy.language import Language
+from spacy.tokens import Token
 
-from .fixtures import books_without_annotations  # noqa
-from .fixtures import nlp_en  # noqa
-from .fixtures import books_w_annotations, dane_test, nlp_da, nlp_en_md  # noqa
+from .fixtures import (
+    books_w_annotations,
+    books_without_annotations,
+    dane_test,
+    nlp_da,
+    nlp_en,
+    nlp_en_md,
+)
 
 np.seterr(divide="raise", invalid="raise")
 
 
-def is_pronoun(token):
+def is_pronoun(token: Token) -> bool:
     if token.pos_ == "PRON":
         return True
     return False
@@ -79,11 +87,11 @@ augmenters_args = {
 }
 
 
-@pytest.mark.parametrize("aug,args", [(k, augmenters_args[k]) for k in augmenters_args])
+@pytest.mark.parametrize("aug,args", [(k, augmenters_args[k]) for k in augmenters_args])  # noqa
 @pytest.mark.parametrize("level", [0.1, 0.5, 1])
 @pytest.mark.timeout(100)
 @pytest.mark.parametrize(
-    "examples,nlp",
+    "examples,nlp",  # noqa
     [
         (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),
         (
@@ -92,12 +100,10 @@ augmenters_args = {
         ),
     ],
 )
-def test_augmenters(aug, args, examples, nlp, level):
+def test_augmenters(aug: Callable, args: dict, examples, nlp: Language, level: float):  # noqa
     args["level"] = level
     aug = augmenty.load(aug, **args)
-    augmented_examples = [  # noqa
-        e for ex in examples for e in aug(nlp=nlp, example=ex)
-    ]
+    augmented_examples = [e for ex in examples for e in aug(nlp=nlp, example=ex)]
 
 
 def test_check_untested():

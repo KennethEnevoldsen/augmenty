@@ -1,12 +1,11 @@
 import os
 
-from wasabi import MarkdownRenderer
-
 import augmenty
+from wasabi import MarkdownRenderer
 
 print("Running create_augmenters_table.py")
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(os.path.dirname(os.path.abspath(__file__)))  # noqa
 
 md = MarkdownRenderer()
 meta = augmenty.meta()
@@ -40,8 +39,8 @@ for aug, f in sorted(augmenty.augmenters().items()):
             if not isinstance(r, list):
                 r = [r]
             for ref_dict in r:
-                ref = f"{ref}: "
-                ref += md.link(
+                ref = f"{ref}: "  # noqa
+                ref += md.link(  # noqa
                     f"{ref_dict['authors']} ({ref_dict['year']})",
                     ref_dict["link"],
                 )
@@ -83,5 +82,5 @@ table = md.table(
 md.add(table)
 
 
-with open("../docs/augmenters_overview.md", "w") as f:  # type: ignore
+with open("../docs/augmenters_overview.md", "w") as f:  # type: ignore # noqa
     f.write(md.text)  # type: ignore
