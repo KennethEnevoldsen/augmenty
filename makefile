@@ -1,6 +1,6 @@
 install:
 	@echo "--- 🚀 Installing project ---"
-	pip install -e ".[dev, docs, tests,tutorials,all]" 
+	pip install -e ".[dev, docs, tests,tutorials,all,dacy]" 
 
 static-type-check:
 	@echo "--- 🔍 Running static type check ---"
