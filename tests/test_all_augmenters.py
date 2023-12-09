@@ -100,10 +100,10 @@ augmenters_args = {
         ),
     ],
 )
-def test_augmenters(aug: Callable, args: dict, examples, nlp: Language, level: float):  # noqa  # type: ignore
+def test_augmenters(aug: str, args: dict, examples, nlp: Language, level: float):  # noqa  # type: ignore
     args["level"] = level
-    aug = augmenty.load(aug, **args)
-    augmented_examples = [e for ex in examples for e in aug(nlp=nlp, example=ex)]
+    augmenter = augmenty.load(aug, **args)
+    augmented_examples = [e for ex in examples for e in augmenter(nlp=nlp, example=ex)]
 
 
 def test_check_untested():

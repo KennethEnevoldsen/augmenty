@@ -269,7 +269,8 @@ def create_random_synonym_insertion_augmenter_v1(
         if context_window:
             span = doc[
                 max(0, t.i - context_window) : min(  # type: ignore
-                    len(doc), t.i + context_window  # type: ignore
+                    len(doc),
+                    t.i + context_window,  # type: ignore
                 )
             ]
         elif doc.has_annotation("SENT_START"):

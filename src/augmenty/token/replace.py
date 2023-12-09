@@ -58,9 +58,9 @@ def create_token__dict_replace_augmenter_v1(
     Args:
         level: Probability to replace token given that it is in synonym dictionary.
         replace: A dictionary of words and a list of their replacement (e.g. synonyms) or a dictionary denoting replacement based on pos tag.
-        ignore_casing: When doing the lookup should the model ignore casing? 
+        ignore_casing: When doing the lookup should the model ignore casing?
         getter: A getter function to extract the POS-tag.
-        keep_titlecase: Should the model keep the titlecase of the replaced word. 
+        keep_titlecase: Should the model keep the titlecase of the replaced word.
 
     Returns:
         The augmenter.

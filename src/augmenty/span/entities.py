@@ -239,7 +239,7 @@ def create_ent_augmenter_v1(
             i.e. ["Kenneth", "Enevoldsen"], 2) a string of the desired entity i.e. "Kenneth Enevoldsen", this
             will be split using the tokenizer of the nlp pipeline, or 3) Span object with the desired entity, here all information will be passed
             on except for the dependency tree.
-        replace_consistency: Should an entity always be replaced with the same entity? 
+        replace_consistency: Should an entity always be replaced with the same entity?
         resolve_dependencies: Attempts to resolve the dependency tree
             by setting head of the original entitity aa the head of the
             first token in the new entity. The remainder is the passed as
