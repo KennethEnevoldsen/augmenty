@@ -19,7 +19,7 @@ import spacy
 import augmenty
 
 
-@spacy.registry.augmenters("my_augmenter") # type: ignore
+@spacy.registry.augmenters("my_augmenter")  # type: ignore
 def my_augmenters():
     # create the augmenters you wish to use
     # note that not all augmenters are compatible with all tasks (e.g. token deletion is not compatible with dependency parsing as e.g. the sentence
@@ -47,4 +47,4 @@ if __name__ == "__main__":
         augmented_texts = augmenty.texts(texts, augmenter, nlp=nlp)
 
         for text in augmented_texts:
-            print(text)  
+            print(text)

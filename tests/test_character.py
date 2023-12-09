@@ -1,7 +1,6 @@
+import augmenty
 import spacy
 from spacy.tokens import Doc
-
-import augmenty
 
 from .fixtures import nlp_da, nlp_en
 
@@ -57,7 +56,7 @@ def test_create_keystroke_error_augmenter(nlp_da):  # noqa F811
     doc = nlp_da(text)
 
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
-    aug_doc: Doc = next(docs) # type: ignore
+    aug_doc: Doc = next(docs)  # type: ignore
     assert aug_doc.text in "12wsa"
 
 

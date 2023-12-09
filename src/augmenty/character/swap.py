@@ -27,7 +27,7 @@ def char_swap_augmenter_v1(nlp: Language, example: Example, level) -> Iterator[E
 
 
 @spacy.registry.augmenters("char_swap_v1")  # type: ignore
-def create_char_swap_augmenter_v1( 
+def create_char_swap_augmenter_v1(
     level: float,
 ) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that swaps two neighbouring characters in a token

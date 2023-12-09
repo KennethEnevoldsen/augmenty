@@ -108,12 +108,12 @@ def create_token_insert_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("token_insert_random_v1") # type: ignore
+@spacy.registry.augmenters("token_insert_random_v1")  # type: ignore
 def create_token_insert_random_augmenter_v1(
     level: float,
     insert: Optional[List[Union[str, Dict[str, str]]]] = None,  # type: ignore
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]: # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:
@@ -258,7 +258,7 @@ def create_random_synonym_insertion_augmenter_v1(
         lang: str,
         respect_pos: bool,
         verbose: bool,
-    ) -> Union[dict, None]: # type: ignore
+    ) -> Union[dict, None]:  # type: ignore
         doc = t.doc
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
@@ -275,7 +275,9 @@ def create_random_synonym_insertion_augmenter_v1(
         rep = set()  # type: ignore
         if context_window:
             span = doc[
-                max(0, t.i - context_window) : min(len(doc), t.i + context_window)  # type: ignore
+                max(0, t.i - context_window) : min(  # type: ignore
+                    len(doc), t.i + context_window  # type: ignore
+                )
             ]
         elif doc.has_annotation("SENT_START"):
             span = t.sent

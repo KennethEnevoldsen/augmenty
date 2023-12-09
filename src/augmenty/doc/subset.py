@@ -14,8 +14,8 @@ def paragraph_subset_augmenter_v1(
     nlp: Language,
     example: Example,
     *,
-    min_paragraph: Union[float, int], # type: ignore
-    max_paragraph: Union[float, int], # type: ignore
+    min_paragraph: Union[float, int],  # type: ignore
+    max_paragraph: Union[float, int],  # type: ignore
     respect_sentences: bool,
 ) -> Iterator[Example]:  # type: ignore
     example_dict = example.to_dict()

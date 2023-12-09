@@ -362,7 +362,8 @@ def ent_format_augmenter_v1(
 
             # format tokens
             new_ent_ = [
-                e.text if f is None else f(e) for e, f in zip(new_ent, formatter)  # type: ignore
+                e.text if f is None else f(e)
+                for e, f in zip(new_ent, formatter)  # type: ignore
             ]
 
             if len(new_ent_) < len(new_ent):
@@ -383,7 +384,7 @@ def create_ent_format_augmenter_v1(
     formatter: List[Union[Callable[[Token], str], None]],  # type: ignore
     level: float,
     ent_types: Optional[List[str]] = None,  # type: ignore
-) -> Callable[[Language, Example], Iterator[Example]]:   # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter which reorders and formats a entity according to
     reordering and formatting functions.
 

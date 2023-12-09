@@ -1,8 +1,7 @@
-import spacy  # type: ignore
-from spacy.tokens import Doc  # type: ignore
-
 import augmenty
+import spacy  # type: ignore
 from augmenty.token.insert import create_token_insert_random_augmenter_v1
+from spacy.tokens import Doc  # type: ignore
 
 from .books import BOOKS
 from .fixtures import nlp_da, nlp_en, nlp_en_md
@@ -74,7 +73,7 @@ def test_create_token_dict_replace_augmenter(nlp_en):  # noqa F811
 def test_create_wordnet_synonym_augmenter(nlp_en, nlp_da):  # noqa F811
     text = "Skal jeg pande dig en?"
 
-    aug = spacy.registry.augmenters.get("wordnet_synonym_v1")( # type: ignore
+    aug = spacy.registry.augmenters.get("wordnet_synonym_v1")(  # type: ignore
         level=1,
         lang="da",
         respect_pos=False,
@@ -84,7 +83,7 @@ def test_create_wordnet_synonym_augmenter(nlp_en, nlp_da):  # noqa F811
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
     assert next(docs)[2].text in ["stegepande"]  # type: ignore
 
-    aug = spacy.registry.augmenters.get("wordnet_synonym_v1")(level=1, lang="da") # type: ignore
+    aug = spacy.registry.augmenters.get("wordnet_synonym_v1")(level=1, lang="da")  # type: ignore
     docs = nlp_en.pipe(BOOKS)
     docs = list(augmenty.docs(docs, augmenter=aug, nlp=nlp_en))
 
@@ -185,7 +184,7 @@ def test_create_token_insert_augmenter(nlp_en):  # noqa F811
     aug = augmenty.load("token_insert_v1", level=1, insert=insert_fun)  # type: ignore
     docs = list(augmenty.docs([doc], augmenter=aug, nlp=nlp_en))
     assert len(docs[0]) == 2  # type: ignore
-    assert docs[0][0].text == "word" # type: ignore
+    assert docs[0][0].text == "word"  # type: ignore
 
 
 def test_create_token_insert_random_augmenter(nlp_en):  # noqa F811

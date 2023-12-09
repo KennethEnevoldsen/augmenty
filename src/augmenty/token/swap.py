@@ -112,7 +112,7 @@ def create_token_swap_augmenter_v1(
     level: float,
     respect_ents: bool = True,
     respect_sentences: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]: # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:

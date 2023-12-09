@@ -21,7 +21,7 @@ class static_embedding(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
- 
+
     unit_vectors: Optional[np.ndarray] = None  # type: ignore
     keys: Optional[List[int]] = None  # type: ignore
     vocab: Optional[Vocab] = None  # type: ignore

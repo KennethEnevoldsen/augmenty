@@ -70,7 +70,7 @@ def texts(
     if isinstance(texts, str):
         texts = [texts]
 
-    def __gen() -> Iterable[Doc]: # type: ignore
+    def __gen() -> Iterable[Doc]:  # type: ignore
         for text in texts:
             yield nlp(text)
 
@@ -89,7 +89,7 @@ def augmenters() -> Dict[str, Callable]:  # type: ignore
     >>> "upper_case_v1" in augmenters
     True
     """
-    return spacy.registry.augmenters.get_all() # type: ignore
+    return spacy.registry.augmenters.get_all()  # type: ignore
 
 
 def load(augmenter: str, **kwargs) -> Callable:  # type: ignore

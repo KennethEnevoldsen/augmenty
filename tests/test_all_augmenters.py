@@ -96,7 +96,7 @@ augmenters_args = {
         (pytest.lazy_fixture("dane_test"), pytest.lazy_fixture("nlp_da")),  # type: ignore
         (
             pytest.lazy_fixture("books_without_annotations"),  # type: ignore
-            pytest.lazy_fixture("nlp_en"),   # type: ignore
+            pytest.lazy_fixture("nlp_en"),  # type: ignore
         ),
     ],
 )

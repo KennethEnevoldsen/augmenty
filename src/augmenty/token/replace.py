@@ -307,5 +307,5 @@ def create_word_embedding_augmenter_v1(
         token_replace_augmenter_v1,
         replace=__replace,
         keep_titlecase=keep_titlecase,
-        level=level,    # type: ignore
+        level=level,  # type: ignore
     )
