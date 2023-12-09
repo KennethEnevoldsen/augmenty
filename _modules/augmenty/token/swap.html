@@ -343,18 +343,18 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that randomly swaps two neighbouring tokens.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to swap two tokens.</span>
-<span class="sd">        respect_ents (bool, optional): Should the pipeline respect entities? Defaults</span>
+<span class="sd">        level: The probability to swap two tokens.</span>
+<span class="sd">        respect_ents: Should the pipeline respect entities? Defaults</span>
 <span class="sd">            to True. In which case it will not swap a token inside an entity with a</span>
 <span class="sd">            token outside the entity span, unless it is a one word span. If false it</span>
 <span class="sd">            will disregard correcting the entity labels.</span>
-<span class="sd">        respect_sentences (bool, optional): Should it respect end of sentence</span>
+<span class="sd">        respect_sentences: Should it respect end of sentence</span>
 <span class="sd">            bounderies? Default to True, indicating that it will not swap and end of</span>
 <span class="sd">            sentence token. If False it will disregard correcting the sentence start</span>
 <span class="sd">            as this becomes arbitrary.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">token_swap_augmenter_v1</span><span class="p">,</span>

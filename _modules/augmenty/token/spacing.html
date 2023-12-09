@@ -265,10 +265,10 @@
 <span class="sd">    tokenization.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability add grundtvigian letter spacing emphasis.</span>
+<span class="sd">        level: The probability add grundtvigian letter spacing emphasis.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">letter_spacing_augmenter_v1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 
@@ -306,11 +306,11 @@
 <span class="sd">    Tokens are kept the same.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to add a space after a character.</span>
-<span class="sd">        max_insertions (int, optional): Maximum number of insertions pr. word.</span>
+<span class="sd">        level: The probability to add a space after a character.</span>
+<span class="sd">        max_insertions: Maximum number of insertions pr. word.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">spacing_insertion_augmenter_v1</span><span class="p">,</span>

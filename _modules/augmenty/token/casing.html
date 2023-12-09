@@ -231,10 +231,10 @@
 
 <span class="kn">import</span> <span class="nn">spacy</span>  <span class="c1"># type: ignore</span>
 <span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>  <span class="c1"># type: ignore</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Token</span>
 <span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>  <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
-
 
 <span class="n">uncapitalize</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">s</span> <span class="k">else</span> <span class="n">s</span>  <span class="c1"># noqa: E731</span>
 
@@ -266,10 +266,10 @@
 <span class="sd">    token.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): Probability to randomly case the first letter of a token.</span>
+<span class="sd">        level: Probability to randomly case the first letter of a token.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
@@ -306,7 +306,7 @@
 
 <div class="viewcode-block" id="create_conditional_token_casing_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.token.html#augmenty.token.casing.create_conditional_token_casing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;conditional_token_casing_v1&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 <span class="k">def</span> <span class="nf">create_conditional_token_casing_augmenter_v1</span><span class="p">(</span>
-    <span class="n">conditional</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+    <span class="n">conditional</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">bool</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">lower</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
     <span class="n">upper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
@@ -316,15 +316,13 @@
 <span class="sd">    True.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float):</span>
-<span class="sd">        conditional (Callable):</span>
-<span class="sd">        lower (Optional[bool], optional): If the conditional returns True should the</span>
-<span class="sd">            casing the lowercased. Default to None.</span>
-<span class="sd">        upper (Optional[bool], optional): If the conditional returns True should the</span>
-<span class="sd">            casing the uppercased. Default to None.</span>
+<span class="sd">        level: The probability to case the first letter of a token.</span>
+<span class="sd">        conditional: A function that takes a token and returns True if the token should be cased.</span>
+<span class="sd">        lower: If the conditional returns True should the casing the lowercased.</span>
+<span class="sd">        upper: If the conditional returns True should the casing the uppercased.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; def is_pronoun(token):</span>

@@ -466,8 +466,7 @@
 <span class="sd">            i.e. [&quot;Kenneth&quot;, &quot;Enevoldsen&quot;], 2) a string of the desired entity i.e. &quot;Kenneth Enevoldsen&quot;, this</span>
 <span class="sd">            will be split using the tokenizer of the nlp pipeline, or 3) Span object with the desired entity, here all information will be passed</span>
 <span class="sd">            on except for the dependency tree.</span>
-<span class="sd">        replace_consistency: Should an entity always be replaced with</span>
-<span class="sd">            the same entity? Defaults to True.</span>
+<span class="sd">        replace_consistency: Should an entity always be replaced with the same entity?</span>
 <span class="sd">        resolve_dependencies: Attempts to resolve the dependency tree</span>
 <span class="sd">            by setting head of the original entitity aa the head of the</span>
 <span class="sd">            first token in the new entity. The remainder is the passed as</span>
@@ -532,15 +531,10 @@
 <span class="sd">            Where a pattern is a list of strings, where the string denote the list in</span>
 <span class="sd">            the names dictionary in which to sample from.</span>
 <span class="sd">        level: The proportion of PER entities to replace.</span>
-<span class="sd">        names_p: The probability to sample each name.</span>
-<span class="sd">            Defaults to {}, indicating equal probability for each name.</span>
-<span class="sd">        patterns_p: The probability to sample each</span>
-<span class="sd">            pattern. Defaults to None, indicating equal probability for each pattern.</span>
-<span class="sd">        replace_consistency: Should the entity always be replaced with</span>
-<span class="sd">            the same entity? Defaults to True.</span>
-<span class="sd">        person_tag: The tag of the person entity. Defaults to &quot;PERSON&quot;.</span>
-<span class="sd">            However it should be noted that much such as the Danish spacy model uses</span>
-<span class="sd">            &quot;PER&quot; instead.</span>
+<span class="sd">        names_p: The probability to sample each name. An empty dictionary &quot;{}&quot;, indicates equal probability for each name.</span>
+<span class="sd">        patterns_p: The probability to sample each pattern. None indicates equal probability for each pattern.</span>
+<span class="sd">        replace_consistency: Should the entity always be replaced with the same entity?</span>
+<span class="sd">        person_tag: The tag of the person entity (e.g. &quot;PERSON&quot; or &quot;PER&quot;).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The augmenter</span>

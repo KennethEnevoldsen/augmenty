@@ -243,10 +243,10 @@
 <span class="sd">    variants ae, oe, aa.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): probability to augment æ, ø or å.</span>
+<span class="sd">        level: probability to augment æ, ø or å.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The desired augmenter.</span>
+<span class="sd">        The desired augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
@@ -275,10 +275,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that capitalizes nouns.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probabiliy to upper case a noun.</span>
+<span class="sd">        level: The probabiliy to upper case a noun.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">conditional</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>

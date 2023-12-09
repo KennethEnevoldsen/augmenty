@@ -254,10 +254,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>keyboard_array</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – An array corresponding to a keyboard.
-This should include two keys a “default” and a “shift”. Each containing
+<li><p><strong>keyboard_array</strong> – An array corresponding to a keyboard. This should include two keys a “default” and a “shift”. Each containing
 an array of non-shifted and shifted keys respectively.</p></li>
-<li><p><strong>shift_distance</strong> (<em>int</em>) – The distance given by the shift operator. Defaults to 3.</p></li>
+<li><p><strong>shift_distance</strong> – The distance given by the shift operator.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -284,13 +283,10 @@ an array of non-shifted and shifted keys respectively.</p></li>
 <dd><p>Get coordinate for key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – keyboard key</p>
+<dd class="field-odd"><p><strong>key</strong> – keyboard key</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>key coordinate on keyboard</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[int, int]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -307,15 +303,12 @@ an array of non-shifted and shifted keys respectively.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>key_a</strong> (<em>str</em>) – keyboard key</p></li>
-<li><p><strong>key_b</strong> (<em>str</em>) – keyboard key</p></li>
+<li><p><strong>key_a</strong> – keyboard key</p></li>
+<li><p><strong>key_b</strong> – keyboard key</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The euclidian distance between two keyboard keys.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -333,16 +326,12 @@ an array of non-shifted and shifted keys respectively.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>key</strong> (<em>str</em>) – A keyboard key</p></li>
-<li><p><strong>distance</strong> (<em>int</em><em>, </em><em>optional</em>) – The euclidian distance of neightbours.
-Defaults to 1.</p></li>
+<li><p><strong>key</strong> – A keyboard key</p></li>
+<li><p><strong>distance</strong> – The euclidian distance of neightbours.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The neighbours of a key with a specified distance.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[int]</p>
 </dd>
 </dl>
 </dd></dl>

@@ -303,19 +303,16 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter that extracts a subset of a document.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        min_paragraph (Union[float, int]): An float indicating the min percentage of the</span>
+<span class="sd">        min_paragraph: An float indicating the min percentage of the</span>
 <span class="sd">            document to include or a float indicating the minimum number of paragraps</span>
-<span class="sd">            to include (tokens in respect sentences is False). Defaults to 1,</span>
-<span class="sd">            indicating at least one sentence.</span>
-<span class="sd">        max_paragraph (Union[float, int]): An float indicating the max percentage of the</span>
+<span class="sd">            to include (tokens in respect sentences is False). E.g. 1, indicates at least one sentence.</span>
+<span class="sd">        max_paragraph: An float indicating the max percentage of the</span>
 <span class="sd">            document to include or a float indicating the maximum number of paragraps</span>
-<span class="sd">            to include (tokens in respect sentences is False). Defaults to 1.00</span>
-<span class="sd">            indicating 100%.</span>
-<span class="sd">        respect_sentences (bool): should the augmenter respect sentence bounderies?</span>
-<span class="sd">            Defaults to True.</span>
+<span class="sd">            to include (tokens in respect sentences is False). E.g. 1.00 indicates 100%.</span>
+<span class="sd">        respect_sentences: should the augmenter respect sentence bounderies?</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>

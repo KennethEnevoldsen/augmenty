@@ -259,8 +259,7 @@ replacements entities. A replacement can be either 1) a list of string of the de
 i.e. [“Kenneth”, “Enevoldsen”], 2) a string of the desired entity i.e. “Kenneth Enevoldsen”, this
 will be split using the tokenizer of the nlp pipeline, or 3) Span object with the desired entity, here all information will be passed
 on except for the dependency tree.</p></li>
-<li><p><strong>replace_consistency</strong> – Should an entity always be replaced with
-the same entity? Defaults to True.</p></li>
+<li><p><strong>replace_consistency</strong> – Should an entity always be replaced with the same entity?</p></li>
 <li><p><strong>resolve_dependencies</strong> – Attempts to resolve the dependency tree
 by setting head of the original entitity aa the head of the
 first token in the new entity. The remainder is the passed as</p></li>
@@ -337,15 +336,10 @@ list of patterns.
 Where a pattern is a list of strings, where the string denote the list in
 the names dictionary in which to sample from.</p></li>
 <li><p><strong>level</strong> – The proportion of PER entities to replace.</p></li>
-<li><p><strong>names_p</strong> – The probability to sample each name.
-Defaults to {}, indicating equal probability for each name.</p></li>
-<li><p><strong>patterns_p</strong> – The probability to sample each
-pattern. Defaults to None, indicating equal probability for each pattern.</p></li>
-<li><p><strong>replace_consistency</strong> – Should the entity always be replaced with
-the same entity? Defaults to True.</p></li>
-<li><p><strong>person_tag</strong> – The tag of the person entity. Defaults to “PERSON”.
-However it should be noted that much such as the Danish spacy model uses
-“PER” instead.</p></li>
+<li><p><strong>names_p</strong> – The probability to sample each name. An empty dictionary “{}”, indicates equal probability for each name.</p></li>
+<li><p><strong>patterns_p</strong> – The probability to sample each pattern. None indicates equal probability for each pattern.</p></li>
+<li><p><strong>replace_consistency</strong> – Should the entity always be replaced with the same entity?</p></li>
+<li><p><strong>person_tag</strong> – The tag of the person entity (e.g. “PERSON” or “PER”).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

@@ -253,13 +253,10 @@ into smaller parts.</p>
 <dd><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The percentage of examples that will be augmented.</p>
+<dd class="field-odd"><p><strong>level</strong> – The percentage of examples that will be augmented.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -280,13 +277,10 @@ into smaller parts.</p>
 <dd><p>Create an augmenter that converts documents to uppercase.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The percentage of examples that will be augmented.</p>
+<dd class="field-odd"><p><strong>level</strong> – The percentage of examples that will be augmented.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -311,23 +305,17 @@ into smaller parts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>min_paragraph</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>int</em><em>]</em>) – An float indicating the min percentage of the
+<li><p><strong>min_paragraph</strong> – An float indicating the min percentage of the
 document to include or a float indicating the minimum number of paragraps
-to include (tokens in respect sentences is False). Defaults to 1,
-indicating at least one sentence.</p></li>
-<li><p><strong>max_paragraph</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>int</em><em>]</em>) – An float indicating the max percentage of the
+to include (tokens in respect sentences is False). E.g. 1, indicates at least one sentence.</p></li>
+<li><p><strong>max_paragraph</strong> – An float indicating the max percentage of the
 document to include or a float indicating the maximum number of paragraps
-to include (tokens in respect sentences is False). Defaults to 1.00
-indicating 100%.</p></li>
-<li><p><strong>respect_sentences</strong> (<em>bool</em>) – should the augmenter respect sentence bounderies?
-Defaults to True.</p></li>
+to include (tokens in respect sentences is False). E.g. 1.00 indicates 100%.</p></li>
+<li><p><strong>respect_sentences</strong> – should the augmenter respect sentence bounderies?</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>

@@ -283,20 +283,14 @@
 <span class="sd">    dictionary.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
-<span class="sd">            dictionary.</span>
-<span class="sd">        replace (Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]]): A</span>
-<span class="sd">            dictionary of words and a list of their replacement (e.g. synonyms) or a</span>
-<span class="sd">            dictionary denoting replacement based on pos tag.</span>
-<span class="sd">        ignore_casing(bool, optional): When doing the lookup should the model ignore</span>
-<span class="sd">            casing? Defaults to True.</span>
-<span class="sd">        getter (Callable[[Token], str], optional): A getter function to extract the</span>
-<span class="sd">            POS-tag.</span>
-<span class="sd">        keep_titlecase (bool): Should the model keep the titlecase of the replaced</span>
-<span class="sd">            word. Defaults to True.</span>
+<span class="sd">        level: Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        replace: A dictionary of words and a list of their replacement (e.g. synonyms) or a dictionary denoting replacement based on pos tag.</span>
+<span class="sd">        ignore_casing: When doing the lookup should the model ignore casing?</span>
+<span class="sd">        getter: A getter function to extract the POS-tag.</span>
+<span class="sd">        keep_titlecase: Should the model keep the titlecase of the replaced word.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; replace = {&quot;act&quot;: [&quot;perform&quot;, &quot;move&quot;, &quot;action&quot;], }</span>
@@ -331,21 +325,17 @@
 <span class="sd">    dictionary.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lang (Optional[str], optional): Language supplied a ISO 639-1 language code.</span>
-<span class="sd">            Defaults to None, in which case the lang is based on the language of the</span>
+<span class="sd">        lang: Language supplied a ISO 639-1 language code. If None, the lang is based on the language of the</span>
 <span class="sd">            spacy nlp pipeline used. Possible language codes include:</span>
 <span class="sd">            &quot;da&quot;, &quot;ca&quot;, &quot;en&quot;, &quot;eu&quot;, &quot;fa&quot;, &quot;fi&quot;, &quot;fr&quot;, &quot;gl&quot;, &quot;he&quot;, &quot;id&quot;, &quot;it&quot;, &quot;ja&quot;,</span>
 <span class="sd">            &quot;nn&quot;, &quot;no&quot;, &quot;pl&quot;, &quot;pt&quot;, &quot;es&quot;, &quot;th&quot;.</span>
-<span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
-<span class="sd">            dictionary.</span>
-<span class="sd">        respect_pos (bool, optional): Should POS-tag be respected? Defaults to True.</span>
-<span class="sd">        getter (Callable[[Token], str], optional): A getter function to extract the</span>
-<span class="sd">            POS-tag.</span>
-<span class="sd">        keep_titlecase (bool): Should the model keep the titlecase of the replaced</span>
-<span class="sd">            word. Defaults to True.</span>
+<span class="sd">        level: Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        respect_pos: Should POS-tag be respected?</span>
+<span class="sd">        getter: A getter function to extract the POS-tag.</span>
+<span class="sd">        keep_titlecase: Should the model keep the titlecase of the replaced word.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; english_synonym_augmenter = create_wordnet_synonym_augmenter(level=0.1,</span>
@@ -448,15 +438,12 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
-<span class="sd">            dictionary.</span>
-<span class="sd">        replace (Callable[[Token], str): A callable which takes a spaCy Token as input</span>
-<span class="sd">            and returns the replaces word as a string.</span>
-<span class="sd">        keep_titlecase (bool, optional): If original text was uppercased cased should</span>
-<span class="sd">            replaces text also be? Defaults to True.</span>
+<span class="sd">        level: Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        replace: A callable which takes a spaCy Token as input and returns the replaces word as a string.</span>
+<span class="sd">        keep_titlecase: If original text was uppercased cased should replaces text also be?</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; def remove_vowels(token):</span>
@@ -483,23 +470,18 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which replaces a token based on a replace function.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): Probability to replace token given that it is in synonym</span>
-<span class="sd">            dictionary.</span>
-<span class="sd">        n (int, optional): Number of most similar word vectors to sample from nlp</span>
-<span class="sd">            (Optional[Language], optional): A spaCy text-processing pipeline used for</span>
-<span class="sd">            supplying the word vectors if the nlp model supplies doesn&#39;t contain word</span>
-<span class="sd">            vectors.</span>
-<span class="sd">        keep_titlecase (bool, optional): If original text was uppercased cased should</span>
-<span class="sd">            replaces text also be? Defaults to True.</span>
-<span class="sd">        ignore_case (bool, optional): The word embedding augmenter does not replace a</span>
-<span class="sd">            word with the same word. Should this operation ignore casing? Default to</span>
-<span class="sd">            True.</span>
+<span class="sd">        level: Probability to replace token given that it is in synonym dictionary.</span>
+<span class="sd">        n: Number of most similar word vectors to sample from nlp</span>
+<span class="sd">        nlp: A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn&#39;t contain word vectors.</span>
+<span class="sd">        keep_titlecase: If original text was uppercased cased should replaces text also be?</span>
+<span class="sd">        ignore_case: The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing?</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&#39;en_core_web_lg&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; aug = create_word_embedding_augmenter(nlp=nlp, level=.10)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span>

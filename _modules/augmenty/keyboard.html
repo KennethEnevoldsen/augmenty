@@ -237,10 +237,9 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A Pydantic dataclass object for constructing Keyboard setup.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        keyboard_array (Dict[str, str]): An array corresponding to a keyboard.</span>
-<span class="sd">            This should include two keys a &quot;default&quot; and a &quot;shift&quot;. Each containing</span>
+<span class="sd">        keyboard_array: An array corresponding to a keyboard. This should include two keys a &quot;default&quot; and a &quot;shift&quot;. Each containing</span>
 <span class="sd">            an array of non-shifted and shifted keys respectively.</span>
-<span class="sd">        shift_distance (int): The distance given by the shift operator. Defaults to 3.</span>
+<span class="sd">        shift_distance: The distance given by the shift operator.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Keyboard: a Keyboard object</span>
@@ -253,10 +252,10 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get coordinate for key.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            key (str): keyboard key</span>
+<span class="sd">            key: keyboard key</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Tuple[int, int]: key coordinate on keyboard</span>
+<span class="sd">            key coordinate on keyboard</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">]):</span>
@@ -284,11 +283,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns euclidian distance between two keys.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            key_a (str): keyboard key</span>
-<span class="sd">            key_b (str): keyboard key</span>
+<span class="sd">            key_a: keyboard key</span>
+<span class="sd">            key_b: keyboard key</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            int: The euclidian distance between two keyboard keys.</span>
+<span class="sd">            The euclidian distance between two keyboard keys.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate</span><span class="p">(</span><span class="n">key_a</span><span class="p">)</span>
         <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinate</span><span class="p">(</span><span class="n">key_b</span><span class="p">)</span>
@@ -315,12 +314,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the neighbours of a key with a specified distance.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            key (str): A keyboard key</span>
-<span class="sd">            distance (int, optional): The euclidian distance of neightbours.</span>
-<span class="sd">                Defaults to 1.</span>
+<span class="sd">            key: A keyboard key</span>
+<span class="sd">            distance: The euclidian distance of neightbours.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            List[int]: The neighbours of a key with a specified distance.</span>
+<span class="sd">            The neighbours of a key with a specified distance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># noqa: E741</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_keys</span><span class="p">():</span>
