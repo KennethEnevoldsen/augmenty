@@ -155,7 +155,7 @@ def create_token_insert_random_augmenter_v1(
     __insert = partial(__insert, d=d)
     return partial(
         token_insert_augmenter_v1,
-        level=level,
+        level=level, 
         respect_ents=respect_ents,
         insert=__insert,
     )
@@ -297,13 +297,13 @@ def create_random_synonym_insertion_augmenter_v1(
                         {
                             (lem, pos)
                             for syn in syns
-                            for lem in syn.lemma_names(lang=lang)  # noqa
+                            for lem in syn.lemma_names(lang=lang)  # type: ignore
                         },
                     )
             else:
                 syns = wordnet.synsets(word, lang=lang)
                 rep = rep.union(
-                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},  # noqa
+                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},  # type: ignore
                 )
 
         if rep:

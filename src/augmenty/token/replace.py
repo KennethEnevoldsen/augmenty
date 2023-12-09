@@ -155,7 +155,7 @@ def create_wordnet_synonym_augmenter_v1(
                     rep = {
                         l
                         for syn in syns
-                        for l in syn.lemma_names(lang=lang)  # noqa E741
+                        for l in syn.lemma_names(lang=lang)  # noqa E741 # type: ignore
                     }
                     if word in rep:
                         rep.remove(word)
