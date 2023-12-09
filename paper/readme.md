@@ -9,13 +9,11 @@
 quarto install extension mikemahoney218/quarto-arxiv
 
 # render to pdf
-quarto render paper_quarto.qmd
+quarto render paper.qmd --to arxiv-pdf
 ```
-
 
 to render to pdf with the JOSS template do the following:
 
 ```
-cd paper
-pandoc --citeproc --pdf-engine=xelatex paper.md -o paper.pdf
+pandoc --citeproc paper.md -o paper.pdf    
 ```
