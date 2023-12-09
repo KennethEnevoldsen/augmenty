@@ -20,4 +20,5 @@ jobs:
           close-pr-message: "This PR was closed automatically. Feel free to re-open it if you still want to work on it."
           close-pr-label: "closed-by-stalebot"
           operations-per-run: 20
-          exempt-pr-labels: "dependencies,bot"
+          exempt-pr-labels: "no-stale"
+          exempt-issue-labels: "no-stale"
