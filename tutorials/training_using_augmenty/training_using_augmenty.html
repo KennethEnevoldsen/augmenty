@@ -308,12 +308,15 @@ dependency annotations, thus the token deletion augmentation is not useable. The
 
 <span class="kn">import</span> <span class="nn">augmenty</span>
 
+
 <span class="c1"># register the augmenter such with the name you want to specify in the config</span>
 <span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;my_augmenter&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">my_augmenters</span><span class="p">():</span>
     <span class="c1"># create the augmenters you wish to use</span>
     <span class="n">keystroke_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-        <span class="s2">&quot;keystroke_error_v1&quot;</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">=</span><span class="s2">&quot;en_qwerty_v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.05</span>  <span class="c1"># 5% of characters might be too much</span>
+        <span class="s2">&quot;keystroke_error_v1&quot;</span><span class="p">,</span>
+        <span class="n">keyboard</span><span class="o">=</span><span class="s2">&quot;en_qwerty_v1&quot;</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># 5% of characters might be too much</span>
     <span class="p">)</span>
 
     <span class="n">char_swap_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;char_swap_v1&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
@@ -342,16 +345,16 @@ dependency annotations, thus the token deletion augmentation is not useable. The
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thls is a tes5 sentence.
-This si a test sentence.
-This is a dtst setnenfe.
-This os a test sentence.
-This is a test sentnece.
-Fhis is a test semtenfe.
-This js a test setnence.
-This is a test sen3ence.
-This is a test sentenc2.
-Thia is a test sehtence.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is a tets sentence.
+This is a test sentence.
+Thjs is a test sentence.
+This is a tes5 sentence.
+This js a test sentence.
+This is a test sentence.
+This is x tes3 sentencw.
+This is a test sentence.
+This is a test senrenve.
+This is a twsy setnence.
 </pre></div>
 </div>
 </div>

@@ -235,10 +235,10 @@
 <span class="kn">from</span> <span class="nn">...token</span> <span class="kn">import</span> <span class="n">create_conditional_token_casing_augmenter_v1</span>
 
 
-<div class="viewcode-block" id="create_da_æøå_replace_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_æøå_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;da_æøå_replace_v1&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="create_da_æøå_replace_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_æøå_replace_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;da_æøå_replace_v1&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 <span class="k">def</span> <span class="nf">create_da_æøå_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that augments æ, ø, and å into their spelling</span>
 <span class="sd">    variants ae, oe, aa.</span>
 
@@ -268,10 +268,10 @@
     <span class="k">return</span> <span class="n">create_char_replace_augmenter_v1</span><span class="p">(</span><span class="n">replace</span><span class="o">=</span><span class="n">replace_dict</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="create_da_historical_noun_casing_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;da_historical_noun_casing_v1&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="create_da_historical_noun_casing_augmenter_v1"><a class="viewcode-back" href="../../../../augmenty.lang.html#augmenty.lang.da.augmenters.create_da_historical_noun_casing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;da_historical_noun_casing_v1&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 <span class="k">def</span> <span class="nf">create_da_historical_noun_casing_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that capitalizes nouns.</span>
 
 <span class="sd">    Args:</span>

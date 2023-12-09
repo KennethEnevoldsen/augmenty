@@ -236,8 +236,8 @@
 
 
 <div class="viewcode-block" id="combine"><a class="viewcode-back" href="../../augmenty.augment_utilities.html#augmenty.augment_utilities.combine">[docs]</a><span class="k">def</span> <span class="nf">combine</span><span class="p">(</span>
-    <span class="n">augmenters</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+    <span class="n">augmenters</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]],</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Combines a series of spaCy style augmenters.</span>
 
 <span class="sd">    Args:</span>
@@ -265,9 +265,9 @@
 
 
 <div class="viewcode-block" id="set_doc_level"><a class="viewcode-back" href="../../augmenty.augment_utilities.html#augmenty.augment_utilities.set_doc_level">[docs]</a><span class="k">def</span> <span class="nf">set_doc_level</span><span class="p">(</span>
-    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>
+    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the percantage of examples that the augmenter should be applied to.</span>
 
 <span class="sd">    Args:</span>
@@ -289,9 +289,9 @@
 
 
 <div class="viewcode-block" id="repeat"><a class="viewcode-back" href="../../augmenty.augment_utilities.html#augmenty.augment_utilities.repeat">[docs]</a><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span>
-    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>
+    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Repeats an augmenter n times over the same example thus increasing the</span>
 <span class="sd">    sample size.</span>
 
@@ -308,16 +308,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__augment</span><span class="p">(</span><span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
             <span class="k">yield from</span> <span class="n">augmenter</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">__augment</span></div>
 
 
 <div class="viewcode-block" id="yield_original"><a class="viewcode-back" href="../../augmenty.augment_utilities.html#augmenty.augment_utilities.yield_original">[docs]</a><span class="k">def</span> <span class="nf">yield_original</span><span class="p">(</span>
-    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>
+    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
     <span class="n">doc_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wraps and augmented such that it yields both the original and augmented</span>
 <span class="sd">    example.</span>
 
@@ -342,7 +342,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reconstructs the text based on ORTH and SPACY from an Example turned to</span>
 <span class="sd">    dict.&quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">orth</span><span class="p">,</span> <span class="n">spacy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="k">for</span> <span class="n">orth</span><span class="p">,</span> <span class="n">spacy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
         <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;ORTH&quot;</span><span class="p">],</span>
         <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">][</span><span class="s2">&quot;SPACY&quot;</span><span class="p">],</span>
     <span class="p">):</span>
