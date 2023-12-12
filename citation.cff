@@ -1,11 +1,49 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
-authors:
-- family-names: "Enevoldsen"
-  given-names: "Kenneth"
-  orcid: "https://orcid.org/0000-0001-8733-0966"
 title: "Augmenty: The cherry on top of your NLP pipeline"
-version: 1.0.1
-doi: 10.5281/zenodo.6675315
-date-released: 2022-21-06
-url: "https://github.com/KennethEnevoldsen/augmenty"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: Enevoldsen
+    given-names: Kenneth
+    orcid: "https://orcid.org/0000-0001-8733-0966"
+identifiers:
+  - type: url
+    value: "https://arxiv.org/abs/2312.05520"
+    description: Arxiv URL
+  - type: doi
+    value: 10.5281/zenodo.6675315
+    description: Zonedo DOI
+repository-code: "https://github.com/KennethEnevoldsen/augmenty"
+url: "https://kennethenevoldsen.github.io/augmenty/"
+abstract: >-
+  Augmnety is a Python library for structured text
+  augmentation. It is built on top of spaCy and allows for
+  augmentation of both the text and its annotations.
+  Augmenty provides a wide range of augmenters which can be
+  combined in a flexible manner to create complex
+  augmentation pipelines. It also includes a set of
+  primitives that can be used to create custom augmenters
+  such as word replacement augmenters. This functionality
+  allows for augmentations within a range of applications
+  such as named entity recognition (NER), part-of-speech
+  tagging, and dependency parsing.
+keywords:
+  - nlp
+  - augmentation
+  - spacy
+  - natural language processing
+license: MIT
+version: 1.4.2
+date-released: "2023-12-09"
+preferred-citation:
+  type: article
+  title: "Augmenty: A Python Library for Structured Text Augmentation"
+  url: "https://arxiv.org/abs/2312.05520"
+  year: 2023
+  authors:
+    - family-names: "Enevoldsen"
+      given-names: "Kenneth"
+      orcid: "https://orcid.org/0000-0001-8733-0966"
