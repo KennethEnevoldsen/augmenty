@@ -2,6 +2,43 @@
 
 
 
+## v1.4.3 (2023-12-26)
+
+### Ci
+
+* ci: Updated setup python ([`339836c`](https://github.com/KennethEnevoldsen/augmenty/commit/339836c079ee4937382f87830479ff2560ccf6ee))
+
+### Fix
+
+* fix: Added missing type ignores ([`4672b01`](https://github.com/KennethEnevoldsen/augmenty/commit/4672b0103ecec6fdd4116bf7f5dcfa3c8ce308bd))
+
+* fix: cleaning up unn. type ignores ([`0e4b222`](https://github.com/KennethEnevoldsen/augmenty/commit/0e4b222cfcba277f7e475c23bd3b21fa0946b669))
+
+### Unknown
+
+* polished tests ([`f4ffc6e`](https://github.com/KennethEnevoldsen/augmenty/commit/f4ffc6e4e7894554843e6bb3f91f05b410cc2895))
+
+* Merge pull request #220 from KennethEnevoldsen/KennethEnevoldsen-patch-2
+
+fix bug in subset ([`49784ea`](https://github.com/KennethEnevoldsen/augmenty/commit/49784ea3741363ba3d21a8d531121f2f8c195689))
+
+* fix eos bounds when creating paragraph subsets ([`9027a49`](https://github.com/KennethEnevoldsen/augmenty/commit/9027a49f7ccc2107be1e45962a298fb98773bec1))
+
+* Merge pull request #218 from KennethEnevoldsen/KennethEnevoldsen-patch-1
+
+fixed var name in docstring ([`31dda40`](https://github.com/KennethEnevoldsen/augmenty/commit/31dda4074ccb8068fe065e460cdf7fcd50053762))
+
+* fix bug in subset ([`da97b19`](https://github.com/KennethEnevoldsen/augmenty/commit/da97b19bb7ec61b67011313ddb001bcd49fc0986))
+
+* Update subset.pyf ([`be01698`](https://github.com/KennethEnevoldsen/augmenty/commit/be01698f8ee416588fecf481943e46c81d5a4e47))
+
+* paper: Updated based on feedback from @HLasse ([`96fff7c`](https://github.com/KennethEnevoldsen/augmenty/commit/96fff7cd74440279ab2a09a832ffdd27b49e4a26))
+
+* Added arxiv reference to citation ([`14b6356`](https://github.com/KennethEnevoldsen/augmenty/commit/14b635609b341f49657db1f7a2924869716c94f7))
+
+* Merge branch &#39;main&#39; of https://github.com/KennethEnevoldsen/augmenty ([`9dd8df7`](https://github.com/KennethEnevoldsen/augmenty/commit/9dd8df73bd117ef3a4ffd42d58e47bd05413d6dd))
+
+
 ## v1.4.2 (2023-12-09)
 
 ### Ci
