@@ -92,11 +92,11 @@ def create_paragraph_subset_augmenter_v1(
         >>> import spacy
         >>> nlp = spacy.blank("en")
         >>> nlp.add_pipe("sentencizer")
-        >>> upper_case_augmenter = augmenty.load("sent_subset_v1", level=0.7)
+        >>> augmenter = augmenty.load("sent_subset_v1", level=0.7)
         >>> text = "Augmenty is a wonderful tool for augmentation. " +
         >>>   "It have tons of different augmenters. " +
         >>>   " Augmenty is developed using spaCy."
-        >>> list(augmenty.texts([text], upper_case_augmenter, nlp))
+        >>> list(augmenty.texts([text], augmenter, nlp))
         ["Augmenty is a wonderful tool for augmentation. Augmenty is developed using
         spaCy."]
     """
