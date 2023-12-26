@@ -234,7 +234,10 @@
 
 <span class="kn">import</span> <span class="nn">spacy</span>
 <span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Token</span>
 <span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
+
+<span class="kn">from</span> <span class="nn">augmenty.util</span> <span class="kn">import</span> <span class="n">Augmenter</span>
 
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 <span class="kn">from</span> <span class="nn">..keyboard</span> <span class="kn">import</span> <span class="n">Keyboard</span>
@@ -245,10 +248,10 @@
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">replace</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
-    <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Token</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">t_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
             <span class="n">t_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -265,19 +268,17 @@
 <span class="k">def</span> <span class="nf">create_char_random_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">keyboard</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;en_qwerty_v1&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that replaces a character with a random character</span>
 <span class="sd">    from the keyboard.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to replace a character with a neightbouring</span>
-<span class="sd">            character.</span>
-<span class="sd">        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a</span>
-<span class="sd">            list of all keyboard you can run `augmenty,keyboards()`. Defaults</span>
+<span class="sd">        level: The probability to replace a character with a neightbouring character.</span>
+<span class="sd">        keyboard: A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty,keyboards()`. Defaults</span>
 <span class="sd">            to &quot;en_qwerty_v1&quot;.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter function.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>
@@ -298,17 +299,17 @@
 <span class="k">def</span> <span class="nf">create_char_replace_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">replace</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that replaces a character with a random character</span>
 <span class="sd">    from replace dict.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): probability to augment character, if document is augmented.</span>
-<span class="sd">        replace (dict): A dictionary denoting which characters denote potentials</span>
+<span class="sd">        level: probability to augment character, if document is augmented.</span>
+<span class="sd">        replace: A dictionary denoting which characters denote potentials</span>
 <span class="sd">            replace for each character.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter function.</span>
+<span class="sd">        The augmenter function.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; create_char_replace_augmenter_v1(level=0.02,</span>
@@ -326,21 +327,18 @@
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
     <span class="n">keyboard</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;en_qwerty_v1&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a augmenter which augments a text with plausible typos based on</span>
 <span class="sd">    keyboard distance.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to replace a character with a neightbouring</span>
-<span class="sd">            character.</span>
-<span class="sd">        distance (float, optional): keyboard distance. Defaults to 1.5 corresponding to</span>
-<span class="sd">            neighbouring keys including diagonals.</span>
-<span class="sd">        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a</span>
-<span class="sd">            list of all keyboard you can run `augmenty,keyboards.get_all()`. Defaults</span>
+<span class="sd">        level: The probability to replace a character with a neightbouring character.</span>
+<span class="sd">        distance: keyboard distance. Defaults to 1.5 corresponding to neighbouring keys including diagonals.</span>
+<span class="sd">        keyboard: A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty,keyboards.get_all()`. Defaults</span>
 <span class="sd">            to &quot;en_qwerty_v1&quot;.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmentation function</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>

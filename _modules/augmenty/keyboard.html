@@ -245,10 +245,10 @@
 <span class="sd">        Keyboard: a Keyboard object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">keyboard_array</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span>  <span class="c1"># type: ignore</span>
+    <span class="n">keyboard_array</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span>
     <span class="n">shift_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
 
-<div class="viewcode-block" id="Keyboard.coordinate"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.coordinate">[docs]</a>    <span class="k">def</span> <span class="nf">coordinate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="Keyboard.coordinate"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.coordinate">[docs]</a>    <span class="k">def</span> <span class="nf">coordinate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get coordinate for key.</span>
 
 <span class="sd">        Args:</span>
@@ -274,7 +274,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: a boolean indicating whether key is shifted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="s2">&quot;shift&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="s2">&quot;shift&quot;</span><span class="p">]:</span>  <span class="c1"># noqa</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
@@ -310,7 +310,7 @@
             <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">]):</span>
                 <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">keyboard_array</span><span class="p">[</span><span class="n">arr</span><span class="p">][</span><span class="n">x</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Keyboard.get_neighbours"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.get_neighbours">[docs]</a>    <span class="k">def</span> <span class="nf">get_neighbours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="Keyboard.get_neighbours"><a class="viewcode-back" href="../../augmenty.keyboard.html#augmenty.keyboard.Keyboard.get_neighbours">[docs]</a>    <span class="k">def</span> <span class="nf">get_neighbours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the neighbours of a key with a specified distance.</span>
 
 <span class="sd">        Args:</span>

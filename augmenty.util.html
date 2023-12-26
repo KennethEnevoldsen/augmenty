@@ -248,14 +248,11 @@
 <p>Utility functions for the package.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.augmenters">
-<span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">augmenters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#augmenters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.augmenters" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">augmenters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#augmenters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.augmenters" title="Permalink to this definition">#</a></dt>
 <dd><p>A utility function to get an overview of all augmenters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dictionary of all augmenters</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, Callable]</p>
 </dd>
 </dl>
 <p>Example:
@@ -271,19 +268,16 @@ True</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>docs</strong> (<em>Iterable</em><em>[</em><em>Doc</em><em>]</em>) – A iterable of spaCy Docs</p></li>
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – An augmenter</p></li>
-<li><p><strong>nlp</strong> (<em>Language</em>) – A spaCy language pipeline.</p></li>
+<li><p><strong>docs</strong> – A iterable of spaCy Docs</p></li>
+<li><p><strong>augmenter</strong> – An augmenter</p></li>
+<li><p><strong>nlp</strong> – A spaCy language pipeline.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>An iterator of the augmented Docs.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Iterator[Doc]</p>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Doc</em> – The augmented Docs.</p>
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Doc</em> – The augmented Docs.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -305,9 +299,6 @@ True</p>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all keyboards</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>List[str]]</p>
-</dd>
 </dl>
 <p>Example:
 &gt;&gt;&gt; keyboards = augmenty.keyboards()</p>
@@ -315,7 +306,7 @@ True</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="augmenty.util.load">
-<span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">augmenter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="_modules/augmenty/util.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.load" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">augmenty.util.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">augmenter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Language</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Example</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/augmenty/util.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#augmenty.util.load" title="Permalink to this definition">#</a></dt>
 <dd><p>A utility functionload an augmenter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -339,9 +330,6 @@ True</p>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A dictionary of meta data</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Dict[str, dict]</p>
-</dd>
 </dl>
 <p>Example:
 &gt;&gt;&gt; metadata = augmenty.meta()
@@ -355,19 +343,16 @@ True</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>texts</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – A iterable of strings</p></li>
-<li><p><strong>augmenter</strong> (<em>Callable</em><em>[</em><em>[</em><em>Language</em><em>, </em><em>Example</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>Example</em><em>]</em><em>]</em>) – An augmenter</p></li>
-<li><p><strong>nlp</strong> (<em>Language</em>) – A spaCy language pipeline.</p></li>
+<li><p><strong>texts</strong> – A iterable of strings</p></li>
+<li><p><strong>augmenter</strong> – An augmenter</p></li>
+<li><p><strong>nlp</strong> – A spaCy language pipeline.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>An iterator of the augmented texts.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Iterator[str]</p>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>str</em> – The augmented text.</p>
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The augmented text.</p>
 </dd>
 </dl>
 </dd></dl>

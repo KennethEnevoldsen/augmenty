@@ -227,6 +227,7 @@
           <h1>Source code for augmenty.span.entities</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">A</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Any</span><span class="p">,</span>
     <span class="n">Callable</span><span class="p">,</span>
@@ -245,24 +246,25 @@
 <span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
 <span class="kn">from</span> <span class="nn">spacy.util</span> <span class="kn">import</span> <span class="n">registry</span>
 
+<span class="kn">from</span> <span class="nn">augmenty.util</span> <span class="kn">import</span> <span class="n">Augmenter</span>
+
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">offset_range</span>
 
 <span class="c1"># create entity type</span>
-<span class="n">ENTITY</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Span</span><span class="p">,</span> <span class="n">Doc</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+<span class="n">ENTITY</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Span</span><span class="p">,</span> <span class="n">Doc</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_spacing_to_str</span><span class="p">(</span><span class="n">spacing</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
-    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+<span class="k">def</span> <span class="nf">_spacing_to_str</span><span class="p">(</span><span class="n">spacing</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">x</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">to_string</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">spacing</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">__normalize_entity</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="n">ENTITY</span><span class="p">,</span> <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="k">def</span> <span class="nf">__normalize_entity</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="n">ENTITY</span><span class="p">,</span> <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
     <span class="n">spacy</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">tag</span> <span class="o">=</span> <span class="kc">None</span>
@@ -284,7 +286,7 @@
         <span class="n">lemma</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">lemma_</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">entity</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;entity must be of type str, List[str] or Span, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+            <span class="sa">f</span><span class="s2">&quot;entity must be of type str, List[str] or Span, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="c1"># if not specifed use default values</span>
     <span class="k">if</span> <span class="n">spacy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -300,9 +302,9 @@
 
     <span class="n">_spacy</span> <span class="o">=</span> <span class="n">_spacing_to_str</span><span class="p">(</span><span class="n">spacy</span><span class="p">)</span>
     <span class="n">str_repr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">orth</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">_spacy</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>  <span class="c1"># type: ignore</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">orth</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">_spacy</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">str_repr</span> <span class="o">+=</span> <span class="n">e</span> <span class="o">+</span> <span class="n">s</span>
-    <span class="n">str_repr</span> <span class="o">+=</span> <span class="n">orth</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+    <span class="n">str_repr</span> <span class="o">+=</span> <span class="n">orth</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;ORTH&quot;</span><span class="p">:</span> <span class="n">orth</span><span class="p">,</span>
@@ -316,11 +318,11 @@
 
 
 <span class="k">def</span> <span class="nf">_update_span_annotations</span><span class="p">(</span>
-    <span class="n">span_anno</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">span_anno</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
     <span class="n">ent</span><span class="p">:</span> <span class="n">Span</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">entity_offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the span annotations to be in line with the new doc.&quot;&quot;&quot;</span>
     <span class="n">ent_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
 
@@ -343,11 +345,11 @@
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ENTITY</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ENTITY</span><span class="p">]],</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
-    <span class="n">replaced_ents</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ENTITY</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
+    <span class="n">replaced_ents</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ENTITY</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
@@ -451,10 +453,10 @@
 <div class="viewcode-block" id="create_ent_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_augmenter_v1">[docs]</a><span class="nd">@registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_replace_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_ent_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ENTITY</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">ent_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ENTITY</span><span class="p">]],</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">resolve_dependencies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces an entity based on a dictionary</span>
 <span class="sd">    lookup.</span>
 
@@ -509,17 +511,17 @@
 
 <div class="viewcode-block" id="create_per_replace_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_per_replace_augmenter_v1">[docs]</a><span class="nd">@registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;per_replace_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_per_replace_augmenter_v1</span><span class="p">(</span>
-    <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span>  <span class="c1"># type: ignore</span>
+    <span class="n">names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
-        <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+        <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="p">],</span>  <span class="c1"># {&quot;firstname&quot;: [&quot;Kenneth&quot;, &quot;Lasse&quot;], &quot;lastname&quot;: [&quot;Enevoldsen&quot;, &quot;Hansen&quot;]}</span>
-    <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>  <span class="c1"># [&quot;firstname&quot;, &quot;firstname&quot;, &quot;lastname&quot;]  # type: ignore</span>
+    <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>  <span class="c1"># [&quot;firstname&quot;, &quot;firstname&quot;, &quot;lastname&quot;]</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">names_p</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{},</span>  <span class="c1"># type: ignore</span>
-    <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+    <span class="n">names_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">patterns_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">replace_consistency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">person_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;PERSON&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an augmenter which replaces a name (PER) with a news sampled from</span>
 <span class="sd">    the names dictionary.</span>
 
@@ -550,6 +552,8 @@
 <span class="sd">        &gt;&gt;&gt;                                              person_tag=person_tag)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">if</span> <span class="n">names_p</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">names_p</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">names_gen</span> <span class="o">=</span> <span class="n">generator_from_name_dict</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">names_p</span><span class="p">,</span> <span class="n">patterns_p</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">create_ent_augmenter_v1</span><span class="p">(</span>
@@ -562,11 +566,11 @@
 <span class="k">def</span> <span class="nf">ent_format_augmenter_v1</span><span class="p">(</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
-    <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
-    <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>
+    <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+    <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
     <span class="n">tok_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">&quot;token_annotation&quot;</span><span class="p">]</span>
@@ -575,7 +579,7 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">ent_types</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span> <span class="ow">in</span> <span class="n">ent_types</span><span class="p">)</span> <span class="ow">and</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
             <span class="c1"># reorder tokens</span>
             <span class="n">new_ent</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">ent_</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ent</span><span class="p">]</span>
+            <span class="n">ent_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reordering</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ent</span><span class="p">):</span>
                     <span class="k">continue</span>
@@ -583,8 +587,7 @@
 
             <span class="c1"># format tokens</span>
             <span class="n">new_ent_</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">text</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">new_ent</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">text</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">new_ent</span><span class="p">,</span> <span class="n">formatter</span><span class="p">)</span>
             <span class="p">]</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_ent_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_ent</span><span class="p">):</span>
@@ -601,11 +604,11 @@
 
 <div class="viewcode-block" id="create_ent_format_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.span.html#augmenty.span.entities.create_ent_format_augmenter_v1">[docs]</a><span class="nd">@registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;ents_format_v1&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">create_ent_format_augmenter_v1</span><span class="p">(</span>
-    <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
-    <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">reordering</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span>
+    <span class="n">formatter</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Token</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]],</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+    <span class="n">ent_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter which reorders and formats a entity according to</span>
 <span class="sd">    reordering and formatting functions.</span>
 

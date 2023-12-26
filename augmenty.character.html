@@ -250,13 +250,10 @@
 <dd><p>Create an augment that randomly changes the casing of the document.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The percentage of character that will have its casing changed.</p>
+<dd class="field-odd"><p><strong>level</strong> – The percentage of character that will have its casing changed.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -283,18 +280,13 @@ from the keyboard.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – The probability to replace a character with a neightbouring
-character.</p></li>
-<li><p><strong>keyboard</strong> (<em>str</em><em>, </em><em>optional</em>) – A defined keyboard in the keyboard registry. To see a
-list of all keyboard you can run <cite>augmenty,keyboards()</cite>. Defaults
+<li><p><strong>level</strong> – The probability to replace a character with a neightbouring character.</p></li>
+<li><p><strong>keyboard</strong> – A defined keyboard in the keyboard registry. To see a list of all keyboard you can run <cite>augmenty,keyboards()</cite>. Defaults
 to “en_qwerty_v1”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The augmenter function.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
+<dd class="field-even"><p>The augmenter.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -317,16 +309,13 @@ from replace dict.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – probability to augment character, if document is augmented.</p></li>
-<li><p><strong>replace</strong> (<em>dict</em>) – A dictionary denoting which characters denote potentials
+<li><p><strong>level</strong> – probability to augment character, if document is augmented.</p></li>
+<li><p><strong>replace</strong> – A dictionary denoting which characters denote potentials
 replace for each character.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter function.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -344,20 +333,14 @@ keyboard distance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<em>float</em>) – The probability to replace a character with a neightbouring
-character.</p></li>
-<li><p><strong>distance</strong> (<em>float</em><em>, </em><em>optional</em>) – keyboard distance. Defaults to 1.5 corresponding to
-neighbouring keys including diagonals.</p></li>
-<li><p><strong>keyboard</strong> (<em>str</em><em>, </em><em>optional</em>) – A defined keyboard in the keyboard registry. To see a
-list of all keyboard you can run <cite>augmenty,keyboards.get_all()</cite>. Defaults
+<li><p><strong>level</strong> – The probability to replace a character with a neightbouring character.</p></li>
+<li><p><strong>distance</strong> – keyboard distance. Defaults to 1.5 corresponding to neighbouring keys including diagonals.</p></li>
+<li><p><strong>keyboard</strong> – A defined keyboard in the keyboard registry. To see a list of all keyboard you can run <cite>augmenty,keyboards.get_all()</cite>. Defaults
 to “en_qwerty_v1”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The augmentation function</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
+<dd class="field-even"><p>The augmenter.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -384,13 +367,10 @@ to “en_qwerty_v1”.</p></li>
 <dd><p>Creates an augmenter that removes spacing with a given probability.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – The probability to remove a space.</p>
+<dd class="field-odd"><p><strong>level</strong> – The probability to remove a space.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -416,13 +396,10 @@ to “en_qwerty_v1”.</p></li>
 with a given probability.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>float</em>) – probability to replace a character.</p>
+<dd class="field-odd"><p><strong>level</strong> – probability to replace a character.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The augmenter.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[Language, Example], Iterator[Example]]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>

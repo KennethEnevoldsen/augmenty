@@ -235,6 +235,8 @@
 <span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
 <span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
 
+<span class="kn">from</span> <span class="nn">augmenty.util</span> <span class="kn">import</span> <span class="n">Augmenter</span>
+
 <span class="kn">from</span> <span class="nn">..augment_utilities</span> <span class="kn">import</span> <span class="n">make_text_from_orth</span>
 
 
@@ -242,7 +244,7 @@
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
     <span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]:</span>
     <span class="k">def</span> <span class="nf">__replace</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -260,14 +262,14 @@
 <div class="viewcode-block" id="create_remove_spacing_augmenter_v1"><a class="viewcode-back" href="../../../augmenty.character.html#augmenty.character.spacing.create_remove_spacing_augmenter_v1">[docs]</a><span class="nd">@spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="p">(</span><span class="s2">&quot;remove_spacing_v1&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 <span class="k">def</span> <span class="nf">create_remove_spacing_augmenter_v1</span><span class="p">(</span>
     <span class="n">level</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an augmenter that removes spacing with a given probability.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        level (float): The probability to remove a space.</span>
+<span class="sd">        level: The probability to remove a space.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Callable[[Language, Example], Iterator[Example]]: The augmenter.</span>
+<span class="sd">        The augmenter.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import augmenty</span>

@@ -227,14 +227,16 @@
           <h1>Source code for augmenty.util</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utility functions for the package.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span>
 
-<span class="kn">import</span> <span class="nn">catalogue</span>  <span class="c1"># type: ignore</span>
-<span class="kn">import</span> <span class="nn">spacy</span>  <span class="c1"># type: ignore</span>
-<span class="kn">import</span> <span class="nn">thinc</span>  <span class="c1"># type: ignore</span>
-<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>  <span class="c1"># type: ignore</span>
-<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Doc</span>  <span class="c1"># type: ignore</span>
-<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>  <span class="c1"># type: ignore</span>
+<span class="kn">import</span> <span class="nn">catalogue</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">thinc</span>
+<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Doc</span>
+<span class="kn">from</span> <span class="nn">spacy.training</span> <span class="kn">import</span> <span class="n">Example</span>
+
+<span class="n">Augmenter</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]]</span>
 
 
 <span class="k">class</span> <span class="nc">registry</span><span class="p">(</span><span class="n">thinc</span><span class="o">.</span><span class="n">registry</span><span class="p">):</span>
@@ -242,19 +244,19 @@
 
 
 <div class="viewcode-block" id="docs"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.docs">[docs]</a><span class="k">def</span> <span class="nf">docs</span><span class="p">(</span>
-    <span class="n">docs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Doc</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
-    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">docs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Doc</span><span class="p">],</span>
+    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Augmenter</span><span class="p">,</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Doc</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Doc</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Augments an iterable of spaCy Doc.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        docs (Iterable[Doc]): A iterable of spaCy Docs</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter</span>
-<span class="sd">        nlp (Language): A spaCy language pipeline.</span>
+<span class="sd">        docs: A iterable of spaCy Docs</span>
+<span class="sd">        augmenter: An augmenter</span>
+<span class="sd">        nlp: A spaCy language pipeline.</span>
 
 <span class="sd">    Return:</span>
-<span class="sd">        Iterator[Doc]: An iterator of the augmented Docs.</span>
+<span class="sd">        An iterator of the augmented Docs.</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Doc: The augmented Docs.</span>
@@ -277,22 +279,22 @@
 
 
 <div class="viewcode-block" id="texts"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.texts">[docs]</a><span class="k">def</span> <span class="nf">texts</span><span class="p">(</span>
-    <span class="n">texts</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
-    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Language</span><span class="p">,</span> <span class="n">Example</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Example</span><span class="p">]],</span>  <span class="c1"># type: ignore</span>
+    <span class="n">texts</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">augmenter</span><span class="p">:</span> <span class="n">Augmenter</span><span class="p">,</span>
     <span class="n">nlp</span><span class="p">:</span> <span class="n">Language</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Augments an list of texts.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        texts (Iterable[str]): A iterable of strings</span>
-<span class="sd">        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter</span>
-<span class="sd">        nlp (Language): A spaCy language pipeline.</span>
+<span class="sd">        texts: A iterable of strings</span>
+<span class="sd">        augmenter: An augmenter</span>
+<span class="sd">        nlp: A spaCy language pipeline.</span>
 
 <span class="sd">    Return:</span>
-<span class="sd">        Iterator[str]: An iterator of the augmented texts.</span>
+<span class="sd">        An iterator of the augmented texts.</span>
 
 <span class="sd">    Yields:</span>
-<span class="sd">        str: The augmented text.</span>
+<span class="sd">        The augmented text.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">texts</span><span class="p">]</span>
@@ -305,11 +307,11 @@
         <span class="k">yield</span> <span class="n">doc</span><span class="o">.</span><span class="n">text</span></div>
 
 
-<div class="viewcode-block" id="augmenters"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.augmenters">[docs]</a><span class="k">def</span> <span class="nf">augmenters</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="augmenters"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.augmenters">[docs]</a><span class="k">def</span> <span class="nf">augmenters</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Augmenter</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A utility function to get an overview of all augmenters.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Dict[str, Callable]: Dictionary of all augmenters</span>
+<span class="sd">        Dictionary of all augmenters</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">    &gt;&gt;&gt; augmenters = augmenty.augmenters()</span>
@@ -319,7 +321,7 @@
     <span class="k">return</span> <span class="n">spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>  <span class="c1"># type: ignore</span></div>
 
 
-<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.load">[docs]</a><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">augmenter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.load">[docs]</a><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">augmenter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Augmenter</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A utility functionload an augmenter.</span>
 
 <span class="sd">    Returns:</span>
@@ -341,7 +343,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A utility function to get an overview of all keyboards.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        List[str]]: List of all keyboards</span>
+<span class="sd">        List of all keyboards</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">    &gt;&gt;&gt; keyboards = augmenty.keyboards()</span>
@@ -349,11 +351,11 @@
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">registry</span><span class="o">.</span><span class="n">keyboards</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="meta"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.meta">[docs]</a><span class="k">def</span> <span class="nf">meta</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="meta"><a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.meta">[docs]</a><span class="k">def</span> <span class="nf">meta</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a a dictionary containing metadata for each augmenter.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Dict[str, dict]: A dictionary of meta data</span>
+<span class="sd">        A dictionary of meta data</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">    &gt;&gt;&gt; metadata = augmenty.meta()</span>
@@ -364,8 +366,8 @@
     <span class="kn">import</span> <span class="nn">pathlib</span>
 
     <span class="n">p</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;meta.json&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="s2">&quot;meta.json&quot;</span>
+    <span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">r</span></div>
 </pre></div>
