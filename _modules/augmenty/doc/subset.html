@@ -319,11 +319,11 @@
 <span class="sd">        &gt;&gt;&gt; import spacy</span>
 <span class="sd">        &gt;&gt;&gt; nlp = spacy.blank(&quot;en&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; nlp.add_pipe(&quot;sentencizer&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; upper_case_augmenter = augmenty.load(&quot;sent_subset_v1&quot;, level=0.7)</span>
+<span class="sd">        &gt;&gt;&gt; augmenter = augmenty.load(&quot;sent_subset_v1&quot;, level=0.7)</span>
 <span class="sd">        &gt;&gt;&gt; text = &quot;Augmenty is a wonderful tool for augmentation. &quot; +</span>
 <span class="sd">        &gt;&gt;&gt;   &quot;It have tons of different augmenters. &quot; +</span>
 <span class="sd">        &gt;&gt;&gt;   &quot; Augmenty is developed using spaCy.&quot;</span>
-<span class="sd">        &gt;&gt;&gt; list(augmenty.texts([text], upper_case_augmenter, nlp))</span>
+<span class="sd">        &gt;&gt;&gt; list(augmenty.texts([text], augmenter, nlp))</span>
 <span class="sd">        [&quot;Augmenty is a wonderful tool for augmentation. Augmenty is developed using</span>
 <span class="sd">        spaCy.&quot;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
