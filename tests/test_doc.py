@@ -1,10 +1,12 @@
+import random
+
 import augmenty
-from spacy.tokens import Span
+from augmenty.doc import create_paragraph_subset_augmenter_v1
+from spacy.language import Language
+from spacy.tokens import Doc, Span
 
-from .fixtures import nlp_en
 
-
-def test_create_spongebob_augmenter(nlp_en):  # noqa F811
+def test_create_spongebob_augmenter(nlp_en: Language):
     spongebob_augmenter = augmenty.load("spongebob_v1", level=1)
     texts = ["A sample text"]
     aug_text = "A SaMpLe tExT"
@@ -13,7 +15,7 @@ def test_create_spongebob_augmenter(nlp_en):  # noqa F811
     assert aug_texts[0] == aug_text  # type: ignore
 
 
-def test_create_upper_case_augmenter(nlp_en):  # noqa F811
+def test_create_upper_case_augmenter(nlp_en: Language):
     spongebob_augmenter = augmenty.load("upper_case_v1", level=1)
     texts = ["A sample text"]
     aug_text = "A SAMPLE TEXT"
@@ -22,7 +24,7 @@ def test_create_upper_case_augmenter(nlp_en):  # noqa F811
     assert aug_texts[0] == aug_text  # type: ignore
 
 
-def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
+def test_paragraph_subset_augmenter(nlp_en: Language):
     text = (
         "My name is Kenneth Enevoldsen. "
         + "Augmenty is a wonderful tool for augmentation. "
@@ -70,3 +72,35 @@ def test_paragraph_subset_augmenter(nlp_en):  # noqa F811
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
     assert aug_docs[0].text == ""  # type: ignore
+
+
+def test_paragraph_subset_augmenter_edge_cases(nlp_en: Language):
+    random.seed(1)
+
+    doc = Doc(
+        nlp_en.vocab,
+        words=["I", "am", "John", "Heinz", "is", "happy", "."],
+        ents=["O", "O", "B-PER", "B-PER", "O", "O", "O"],
+        sent_starts=[True, False, False, True, False, False, False],
+    )
+
+    p_subset_aug = create_paragraph_subset_augmenter_v1(
+        min_paragraph=1,
+        max_paragraph=0.50,
+    )
+
+    aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
+    doc = aug_docs[0]
+    assert doc.text == "I am John " or doc.text == "Heinz is happy . "
+
+    random.seed(42)
+
+    doc = Doc(
+        nlp_en.vocab,
+        words=["I", "am", "John", "Doe", "Heinz", "is", "happy", "."],
+        ents=["O", "O", "B-PER", "I-PER", "B-PER", "O", "O", "O"],
+        sent_starts=[True, False, False, False, True, False, False, False],
+    )
+    aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
+    doc = aug_docs[0]
+    assert doc.text == "I am John Doe " or doc.text == "Heinz is happy . "

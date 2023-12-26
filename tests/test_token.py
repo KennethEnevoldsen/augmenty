@@ -1,13 +1,13 @@
 import augmenty
-import spacy  # type: ignore
+import spacy
 from augmenty.token.insert import create_token_insert_random_augmenter_v1
-from spacy.tokens import Doc  # type: ignore
+from spacy.language import Language
+from spacy.tokens import Doc
 
 from .books import BOOKS
-from .fixtures import nlp_da, nlp_en, nlp_en_md
 
 
-def test_create_starting_case_augmenter(nlp_en):  # noqa F811
+def test_create_starting_case_augmenter(nlp_en: Language):
     text = (
         "some of the start cases here should not be lowercased."
         + " There is naturally a chance that it might not end up that way, but it"
@@ -21,7 +21,7 @@ def test_create_starting_case_augmenter(nlp_en):  # noqa F811
     assert next(docs).text != text  # type: ignore
 
 
-def test_create_conditional_token_casing_augmenter(nlp_en):  # noqa F811
+def test_create_conditional_token_casing_augmenter(nlp_en: Language):
     tokens = ["Jeg", "ejer", "en", "hund"]
     pos = ["PRON", "VERB", "DET", "NOUN"]
     spaces = [True, True, True, False]
@@ -44,7 +44,7 @@ def test_create_conditional_token_casing_augmenter(nlp_en):  # noqa F811
     assert next(docs).text == solution  # type: ignore
 
 
-def test_create_token_dict_replace_augmenter(nlp_en):  # noqa F811
+def test_create_token_dict_replace_augmenter(nlp_en: Language):
     doc1 = Doc(
         nlp_en.vocab,
         words=["I", "am", "happy", "!"],
@@ -70,7 +70,7 @@ def test_create_token_dict_replace_augmenter(nlp_en):  # noqa F811
     assert next(docs).text == "Look a level door!"  # type: ignore
 
 
-def test_create_wordnet_synonym_augmenter(nlp_en, nlp_da):  # noqa F811
+def test_create_wordnet_synonym_augmenter(nlp_en: Language, nlp_da: Language):
     text = "Skal jeg pande dig en?"
 
     aug = spacy.registry.augmenters.get("wordnet_synonym_v1")(  # type: ignore
@@ -89,12 +89,12 @@ def test_create_wordnet_synonym_augmenter(nlp_en, nlp_da):  # noqa F811
 
     text = "Det kan jeg ikke slå"
     doc = nlp_da(text)
-    doc[-1].pos_ = "VERB"
+    doc[-1].pos_ = "VERB"  # type: ignore
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
     assert next(docs)[-1].text in ["pulsere", "banke"]  # type: ignore
 
 
-def test_create_letter_spacing_augmenter(nlp_en):  # noqa F811
+def test_create_letter_spacing_augmenter(nlp_en: Language):
     text = "not very happy"
 
     aug = spacy.registry.augmenters.get("letter_spacing_augmenter_v1")(level=1)  # type: ignore
@@ -105,7 +105,7 @@ def test_create_letter_spacing_augmenter(nlp_en):  # noqa F811
     assert next(docs).text == "n o t v e r y h a p p y"  # type: ignore
 
 
-def test_create_spacing_insertion_augmenter(nlp_en):  # noqa F811
+def test_create_spacing_insertion_augmenter(nlp_en: Language):
     text = "test"
 
     aug = augmenty.load("spacing_insertion_v1", level=1, max_insertions=1)
@@ -123,7 +123,7 @@ def test_create_spacing_insertion_augmenter(nlp_en):  # noqa F811
     assert next(docs)[0].text == "t e st"  # type: ignore
 
 
-def test_create_token_swap_augmenter(nlp_en):  # noqa F811
+def test_create_token_swap_augmenter(nlp_en: Language):
     doc1 = Doc(
         nlp_en.vocab,
         words=["I", "am", "happy", "!", "New"],
@@ -143,7 +143,7 @@ def test_create_token_swap_augmenter(nlp_en):  # noqa F811
     assert next(docs).text in ["I happy am ! New ", "I am happy ! New "]  # type: ignore
 
 
-def test_create_word_embedding_augmenter(nlp_en_md):  # noqa F811
+def test_create_word_embedding_augmenter(nlp_en_md: Language):
     text = "cat"
 
     doc = nlp_en_md(text)
@@ -187,7 +187,7 @@ def test_create_token_insert_augmenter(nlp_en):  # noqa F811
     assert docs[0][0].text == "word"  # type: ignore
 
 
-def test_create_token_insert_random_augmenter(nlp_en):  # noqa F811
+def test_create_token_insert_random_augmenter(nlp_en: Language):
     texts = ["one two three"] * 3
     # w. word list
     aug = create_token_insert_random_augmenter_v1(
@@ -215,7 +215,7 @@ def test_create_token_insert_random_augmenter(nlp_en):  # noqa F811
     list(augmenty.texts(texts, augmenter=aug, nlp=nlp_en))
 
 
-def test_create_duplicate_token_augmenter(nlp_en, nlp_en_md):  # noqa F811
+def test_create_duplicate_token_augmenter(nlp_en: Language, nlp_en_md: Language):
     words = ["cat"]
     spaces = [False]
     doc = Doc(nlp_en.vocab, words=words, spaces=spaces)
@@ -225,11 +225,11 @@ def test_create_duplicate_token_augmenter(nlp_en, nlp_en_md):  # noqa F811
     assert docs[0][0].text == "cat"  # type: ignore
     assert docs[0][1].text == "cat"  # type: ignore
     docs = list(
-        augmenty.docs(nlp_en_md("I am not happy"), augmenter=aug, nlp=nlp_en_md),
+        augmenty.docs(nlp_en_md("I am not happy"), augmenter=aug, nlp=nlp_en_md),  # type: ignore
     )
 
 
-def test_create_random_synonym_insertion_augmenter(nlp_en):  # noqa F811
+def test_create_random_synonym_insertion_augmenter(nlp_en: Language):
     words = ["cat"]
     spaces = [False]
     doc = Doc(nlp_en.vocab, words=words, spaces=spaces, pos=["NOUN"])

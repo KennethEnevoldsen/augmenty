@@ -1,10 +1,9 @@
 import augmenty
+from spacy.language import Language
 from spacy.tokens import Doc, Span
 
-from .fixtures import nlp_en, nlp_en_md
 
-
-def test_combine(nlp_en_md):  # noqa F811
+def test_combine(nlp_en_md: Language):
     words = ["Augmenty", "is", "a", "wonderful", "tool", "for", "augmentation", "."]
     spaces = [True, True, True, True, True, True, False, False]
     doc = Doc(nlp_en_md.vocab, words=words, spaces=spaces)
@@ -25,7 +24,7 @@ def test_combine(nlp_en_md):  # noqa F811
     assert augmented_docs[0][0].text == "spaCy"  # type: ignore
 
 
-def test_yield_original(nlp_en):  # noqa F811
+def test_yield_original(nlp_en: Language):  # F811
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     aug = augmenty.load("upper_case_v1", level=1)
@@ -37,7 +36,7 @@ def test_yield_original(nlp_en):  # noqa F811
     assert len(augmented_docs) == 2
 
 
-def test_repeat(nlp_en):  # noqa F811
+def test_repeat(nlp_en: Language):  # F811
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     aug = augmenty.load("upper_case_v1", level=1)
@@ -49,7 +48,7 @@ def test_repeat(nlp_en):  # noqa F811
     assert len(augmented_docs) == 3
 
 
-def test_set_doc_level(nlp_en):  # noqa F811
+def test_set_doc_level(nlp_en: Language):  # F811
     texts = ["Augmenty is a wonderful tool for augmentation."]
 
     aug = augmenty.load("upper_case_v1", level=1)

@@ -5,11 +5,9 @@ import pytest
 from spacy.language import Language
 from spacy.tokens import Doc
 
-from .fixtures import nlp_en, nlp_en_md
-
 
 @pytest.fixture()
-def doc(nlp_en: Language) -> Doc:  # noqa
+def doc(nlp_en: Language) -> Doc:
     doc = Doc(
         nlp_en.vocab,
         words=[

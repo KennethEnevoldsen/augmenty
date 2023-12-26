@@ -1,6 +1,6 @@
 import random
 from functools import partial
-from typing import Callable, Iterator, Union
+from typing import Iterator, Union
 
 import numpy as np
 import spacy
@@ -8,16 +8,17 @@ from spacy.language import Language
 from spacy.training import Example
 
 from augmenty.augment_utilities import make_text_from_orth
+from augmenty.util import Augmenter
 
 
 def paragraph_subset_augmenter_v1(
     nlp: Language,
     example: Example,
     *,
-    min_paragraph: Union[float, int],  # type: ignore
-    max_paragraph: Union[float, int],  # type: ignore
+    min_paragraph: Union[float, int],
+    max_paragraph: Union[float, int],
     respect_sentences: bool,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     example_dict = example.to_dict()
     token_anno = example_dict["token_annotation"]
     doc_anno = example_dict["doc_annotation"]
@@ -69,10 +70,10 @@ def paragraph_subset_augmenter_v1(
 
 @spacy.registry.augmenters("paragraph_subset_augmenter_v1")  # type: ignore
 def create_paragraph_subset_augmenter_v1(
-    min_paragraph: Union[float, int] = 1,  # type: ignore
-    max_paragraph: Union[float, int] = 1.00,  # type: ignore
+    min_paragraph: Union[float, int] = 1,
+    max_paragraph: Union[float, int] = 1.00,
     respect_sentences: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Create an augmenter that extracts a subset of a document.
 
     Args:

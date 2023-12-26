@@ -23,6 +23,8 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
 ]
 keywords = [
     "nlp",
@@ -62,7 +64,7 @@ da = ["dacy>=2.3.1"]
 all = ["nltk>=3.6.7"]
 dev = [
     "cruft>=2.0.0",
-    "pyright>=1.1.338",
+    "pyright>=1.1.343",
     "ruff>=0.0.254",
     "pyproject-parser[cli, readme]>=0.9.1",
 ]
@@ -157,7 +159,7 @@ exclude = [
 ]
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-target-version = "py39"
+target-version = "py38"
 
 [tool.ruff.flake8-annotations]
 mypy-init-return = true

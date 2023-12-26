@@ -18,10 +18,10 @@ class Keyboard(BaseModel):
         Keyboard: a Keyboard object
     """
 
-    keyboard_array: Dict[str, List[List[str]]]  # type: ignore
+    keyboard_array: Dict[str, List[List[str]]]
     shift_distance: int = 3
 
-    def coordinate(self, key: str) -> Tuple[int, int]:  # type: ignore
+    def coordinate(self, key: str) -> Tuple[int, int]:
         """Get coordinate for key.
 
         Args:
@@ -47,7 +47,7 @@ class Keyboard(BaseModel):
         Returns:
             bool: a boolean indicating whether key is shifted.
         """
-        for x in self.keyboard_array["shift"]:
+        for x in self.keyboard_array["shift"]:  # noqa
             if key in x:
                 return True
         return False
@@ -83,7 +83,7 @@ class Keyboard(BaseModel):
             for x, _ in enumerate(self.keyboard_array[arr]):
                 yield from self.keyboard_array[arr][x]
 
-    def get_neighbours(self, key: str, distance: int = 1) -> List[int]:  # type: ignore
+    def get_neighbours(self, key: str, distance: int = 1) -> List[int]:
         """Gets the neighbours of a key with a specified distance.
 
         Args:

@@ -1,21 +1,14 @@
 """Pytest script for testing all augmenters in a variety of cases."""
 
-from typing import Callable
+
+from typing import Iterable  # noqa
 
 import augmenty
 import numpy as np
 import pytest
 from spacy.language import Language
 from spacy.tokens import Token
-
-from .fixtures import (
-    books_w_annotations,
-    books_without_annotations,
-    dane_test,
-    nlp_da,
-    nlp_en,
-    nlp_en_md,
-)
+from spacy.training import Example
 
 np.seterr(divide="raise", invalid="raise")
 
@@ -100,7 +93,13 @@ augmenters_args = {
         ),
     ],
 )
-def test_augmenters(aug: str, args: dict, examples, nlp: Language, level: float):  # noqa  # type: ignore
+def test_augmenters(
+    aug: str,
+    args: dict,
+    examples: Iterable[Example],
+    nlp: Language,
+    level: float,
+):
     args["level"] = level
     augmenter = augmenty.load(aug, **args)
     augmented_examples = [e for ex in examples for e in augmenter(nlp=nlp, example=ex)]

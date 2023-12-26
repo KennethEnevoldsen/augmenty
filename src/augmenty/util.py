@@ -1,13 +1,15 @@
 """Utility functions for the package."""
 
-from typing import Callable, Dict, Iterable, Iterator, List
+from typing import Any, Callable, Dict, Iterable, Iterator, List
 
-import catalogue  # type: ignore
-import spacy  # type: ignore
-import thinc  # type: ignore
-from spacy.language import Language  # type: ignore
-from spacy.tokens import Doc  # type: ignore
-from spacy.training import Example  # type: ignore
+import catalogue
+import spacy
+import thinc
+from spacy.language import Language
+from spacy.tokens import Doc
+from spacy.training import Example
+
+Augmenter = Callable[[Language, Example], Iterator[Example]]
 
 
 class registry(thinc.registry):
@@ -15,19 +17,19 @@ class registry(thinc.registry):
 
 
 def docs(
-    docs: Iterable[Doc],  # type: ignore
-    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
+    docs: Iterable[Doc],
+    augmenter: Augmenter,
     nlp: Language,
-) -> Iterator[Doc]:  # type: ignore
+) -> Iterator[Doc]:
     """Augments an iterable of spaCy Doc.
 
     Args:
-        docs (Iterable[Doc]): A iterable of spaCy Docs
-        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter
-        nlp (Language): A spaCy language pipeline.
+        docs: A iterable of spaCy Docs
+        augmenter: An augmenter
+        nlp: A spaCy language pipeline.
 
     Return:
-        Iterator[Doc]: An iterator of the augmented Docs.
+        An iterator of the augmented Docs.
 
     Yields:
         Doc: The augmented Docs.
@@ -50,22 +52,22 @@ def docs(
 
 
 def texts(
-    texts: Iterable[str],  # type: ignore
-    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
+    texts: Iterable[str],
+    augmenter: Augmenter,
     nlp: Language,
-) -> Iterable[str]:  # type: ignore
+) -> Iterable[str]:
     """Augments an list of texts.
 
     Args:
-        texts (Iterable[str]): A iterable of strings
-        augmenter (Callable[[Language, Example], Iterator[Example]]): An augmenter
-        nlp (Language): A spaCy language pipeline.
+        texts: A iterable of strings
+        augmenter: An augmenter
+        nlp: A spaCy language pipeline.
 
     Return:
-        Iterator[str]: An iterator of the augmented texts.
+        An iterator of the augmented texts.
 
     Yields:
-        str: The augmented text.
+        The augmented text.
     """
     if isinstance(texts, str):
         texts = [texts]
@@ -78,11 +80,11 @@ def texts(
         yield doc.text
 
 
-def augmenters() -> Dict[str, Callable]:  # type: ignore
+def augmenters() -> Dict[str, Augmenter]:
     """A utility function to get an overview of all augmenters.
 
     Returns:
-        Dict[str, Callable]: Dictionary of all augmenters
+        Dictionary of all augmenters
 
     Example:
     >>> augmenters = augmenty.augmenters()
@@ -92,7 +94,7 @@ def augmenters() -> Dict[str, Callable]:  # type: ignore
     return spacy.registry.augmenters.get_all()  # type: ignore
 
 
-def load(augmenter: str, **kwargs) -> Callable:  # type: ignore
+def load(augmenter: str, **kwargs: Any) -> Augmenter:
     """A utility functionload an augmenter.
 
     Returns:
@@ -114,7 +116,7 @@ def keyboards() -> List[str]:  # type: ignore
     """A utility function to get an overview of all keyboards.
 
     Returns:
-        List[str]]: List of all keyboards
+        List of all keyboards
 
     Example:
     >>> keyboards = augmenty.keyboards()
@@ -122,11 +124,11 @@ def keyboards() -> List[str]:  # type: ignore
     return list(registry.keyboards.get_all().keys())
 
 
-def meta() -> Dict[str, dict]:  # type: ignore
+def meta() -> Dict[str, dict]:
     """Returns a a dictionary containing metadata for each augmenter.
 
     Returns:
-        Dict[str, dict]: A dictionary of meta data
+        A dictionary of meta data
 
     Example:
     >>> metadata = augmenty.meta()
@@ -137,7 +139,7 @@ def meta() -> Dict[str, dict]:  # type: ignore
     import pathlib
 
     p = pathlib.Path(__file__).parent.resolve()
-    p = os.path.join(p, "meta.json")  # type: ignore
-    with open(p) as f:  # type: ignore
+    p = p / "meta.json"
+    with p.open() as f:
         r = json.load(f)
     return r
