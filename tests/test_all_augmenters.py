@@ -1,7 +1,7 @@
 """Pytest script for testing all augmenters in a variety of cases."""
 
 
-from typing import Iterable  # noqa
+from typing import Iterable
 
 import augmenty
 import numpy as np
@@ -102,7 +102,7 @@ def test_augmenters(
 ):
     args["level"] = level
     augmenter = augmenty.load(aug, **args)
-    augmented_examples = [e for ex in examples for e in augmenter(nlp=nlp, example=ex)]
+    augmented_examples = [e for ex in examples for e in augmenter(nlp=nlp, example=ex)]  # type: ignore
 
 
 def test_check_untested():

@@ -6,6 +6,8 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
+from augmenty.util import Augmenter
+
 from ..augment_utilities import make_text_from_orth
 
 
@@ -13,7 +15,7 @@ def random_casing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     def __casing(c):
         if random.random() < level:
             return c.lower() if random.random() < 0.5 else c.upper()
@@ -31,14 +33,14 @@ def random_casing_augmenter_v1(
 @spacy.registry.augmenters("random_casing_v1")  # type: ignore
 def create_random_casing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Create an augment that randomly changes the casing of the document.
 
     Args:
-        level (float): The percentage of character that will have its casing changed.
+        level: The percentage of character that will have its casing changed.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty

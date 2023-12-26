@@ -1,5 +1,6 @@
 import random
 from functools import partial
+from re import A
 from typing import (
     Any,
     Callable,
@@ -18,24 +19,25 @@ from spacy.tokens import Doc, Span, Token
 from spacy.training import Example
 from spacy.util import registry
 
+from augmenty.util import Augmenter
+
 from ..augment_utilities import make_text_from_orth
 from .utils import offset_range
 
 # create entity type
-ENTITY = Union[str, List[str], Span, Doc]  # type: ignore
+ENTITY = Union[str, List[str], Span, Doc]
 
 
-def _spacing_to_str(spacing: Union[List[str], List[bool]]) -> List[str]:  # type: ignore
-    def to_string(x: Union[str, bool]) -> str:  # type: ignore
+def _spacing_to_str(spacing: Union[List[str], List[bool]]) -> List[str]:
+    def to_string(x: Union[str, bool]) -> str:
         if isinstance(x, str):
             return x
-        else:
-            return " " if x else ""
+        return " " if x else ""
 
     return [to_string(x) for x in spacing]
 
 
-def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:  # type: ignore
+def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
     spacy = None
     pos = None
     tag = None
@@ -57,7 +59,7 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:  # type
         lemma = [tok.lemma_ for tok in entity]
     else:
         raise ValueError(
-            f"entity must be of type str, List[str] or Span, not {type(entity)}",  # type: ignore
+            f"entity must be of type str, List[str] or Span, not {type(entity)}",
         )
     # if not specifed use default values
     if spacy is None:
@@ -73,9 +75,9 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:  # type
 
     _spacy = _spacing_to_str(spacy)
     str_repr = ""
-    for e, s in zip(orth[:-1], _spacy[:-1]):  # type: ignore
+    for e, s in zip(orth[:-1], _spacy[:-1]):
         str_repr += e + s
-    str_repr += orth[-1]  # type: ignore
+    str_repr += orth[-1]
 
     return {
         "ORTH": orth,
@@ -89,11 +91,11 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:  # type
 
 
 def _update_span_annotations(
-    span_anno: Dict[str, list],  # type: ignore
+    span_anno: Dict[str, list],
     ent: Span,
     offset: int,
     entity_offset: int,
-) -> Dict[str, list]:  # type: ignore
+) -> Dict[str, list]:
     """Update the span annotations to be in line with the new doc."""
     ent_range = (ent.start + offset, ent.end + offset)
 
@@ -116,11 +118,11 @@ def ent_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-    ent_dict: Dict[str, Iterable[ENTITY]],  # type: ignore
+    ent_dict: Dict[str, Iterable[ENTITY]],
     replace_consistency: bool,
     resolve_dependencies: bool,
-) -> Iterator[Example]:  # type: ignore
-    replaced_ents: Dict[str, ENTITY] = {}  # type: ignore
+) -> Iterator[Example]:
+    replaced_ents: Dict[str, ENTITY] = {}
     example_dict = example.to_dict()
 
     offset = 0
@@ -224,10 +226,10 @@ def ent_augmenter_v1(
 @registry.augmenters("ents_replace_v1")
 def create_ent_augmenter_v1(
     level: float,
-    ent_dict: Dict[str, Iterable[ENTITY]],  # type: ignore
+    ent_dict: Dict[str, Iterable[ENTITY]],
     replace_consistency: bool = True,
     resolve_dependencies: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Create an augmenter which replaces an entity based on a dictionary
     lookup.
 
@@ -282,17 +284,17 @@ def generator_from_name_dict(
 
 @registry.augmenters("per_replace_v1")
 def create_per_replace_augmenter_v1(
-    names: Dict[  # type: ignore
+    names: Dict[
         str,
-        List[str],  # type: ignore
+        List[str],
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
-    patterns: List[List[str]],  # ["firstname", "firstname", "lastname"]  # type: ignore
+    patterns: List[List[str]],  # ["firstname", "firstname", "lastname"]
     level: float,
-    names_p: Dict[str, List[float]] = {},  # type: ignore
-    patterns_p: Optional[List[float]] = None,  # type: ignore
+    names_p: Optional[Dict[str, List[float]]] = None,
+    patterns_p: Optional[List[float]] = None,
     replace_consistency: bool = True,
     person_tag: str = "PERSON",
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Create an augmenter which replaces a name (PER) with a news sampled from
     the names dictionary.
 
@@ -323,6 +325,8 @@ def create_per_replace_augmenter_v1(
         >>>                                              person_tag=person_tag)
     """
 
+    if names_p is None:
+        names_p = {}
     names_gen = generator_from_name_dict(names, patterns, names_p, patterns_p)
 
     return create_ent_augmenter_v1(
@@ -335,11 +339,11 @@ def create_per_replace_augmenter_v1(
 def ent_format_augmenter_v1(
     nlp: Language,
     example: Example,
-    reordering: List[Union[int, None]],  # type: ignore
-    formatter: List[Union[Callable[[Token], str], None]],  # type: ignore
+    reordering: List[Union[int, None]],
+    formatter: List[Union[Callable[[Token], str], None]],
     level: float,
-    ent_types: Optional[List[str]] = None,  # type: ignore
-) -> Iterator[Example]:  # type: ignore
+    ent_types: Optional[List[str]] = None,
+) -> Iterator[Example]:
     example_dict = example.to_dict()
 
     tok_anno = example_dict["token_annotation"]
@@ -348,7 +352,7 @@ def ent_format_augmenter_v1(
         if (ent_types is None or ent.label_ in ent_types) and random.random() < level:
             # reorder tokens
             new_ent = []
-            ent_ = [e for e in ent]
+            ent_ = list(ent)
             for i in reordering:
                 if i is not None and i >= len(ent):
                     continue
@@ -356,8 +360,7 @@ def ent_format_augmenter_v1(
 
             # format tokens
             new_ent_ = [
-                e.text if f is None else f(e)
-                for e, f in zip(new_ent, formatter)  # type: ignore
+                e.text if f is None else f(e) for e, f in zip(new_ent, formatter)
             ]
 
             if len(new_ent_) < len(new_ent):
@@ -374,11 +377,11 @@ def ent_format_augmenter_v1(
 
 @registry.augmenters("ents_format_v1")
 def create_ent_format_augmenter_v1(
-    reordering: List[Union[int, None]],  # type: ignore
-    formatter: List[Union[Callable[[Token], str], None]],  # type: ignore
+    reordering: List[Union[int, None]],
+    formatter: List[Union[Callable[[Token], str], None]],
     level: float,
-    ent_types: Optional[List[str]] = None,  # type: ignore
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+    ent_types: Optional[List[str]] = None,
+) -> Augmenter:
     """Creates an augmenter which reorders and formats a entity according to
     reordering and formatting functions.
 

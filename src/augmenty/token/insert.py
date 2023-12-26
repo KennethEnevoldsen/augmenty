@@ -8,6 +8,8 @@ from spacy.tokens import Token
 from spacy.training import Example
 from wasabi import msg
 
+from augmenty.util import Augmenter
+
 from ..augment_utilities import make_text_from_orth
 from .wordnet_util import init_wordnet
 
@@ -17,8 +19,8 @@ def token_insert_augmenter_v1(
     example: Example,
     level: float,
     respect_ents: bool,
-    insert: Callable[[Token], Dict[str, str]],  # type: ignore
-) -> Iterator[Example]:  # type: ignore
+    insert: Callable[[Token], Dict[str, str]],
+) -> Iterator[Example]:
     doc = example.y
 
     example_dict = example.to_dict()
@@ -71,9 +73,9 @@ def token_insert_augmenter_v1(
 @spacy.registry.augmenters("token_insert_v1")  # type: ignore
 def create_token_insert_augmenter_v1(
     level: float,
-    insert: Callable[[Token], Dict[str, str]],  # type: ignore
+    insert: Callable[[Token], Dict[str, str]],
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly inserts a token generated based on a
     insert function.
 
@@ -110,9 +112,9 @@ def create_token_insert_augmenter_v1(
 @spacy.registry.augmenters("token_insert_random_v1")  # type: ignore
 def create_token_insert_random_augmenter_v1(
     level: float,
-    insert: Optional[List[Union[str, Dict[str, str]]]] = None,  # type: ignore
+    insert: Optional[List[Union[str, Dict[str, str]]]] = None,
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:
@@ -163,7 +165,7 @@ def create_token_insert_random_augmenter_v1(
 def create_duplicate_token_augmenter_v1(
     level: float,
     respect_ents: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly duplicate a token token.
 
     Args:
@@ -208,11 +210,11 @@ def create_random_synonym_insertion_augmenter_v1(
     level: float,
     respect_pos: bool = True,
     respect_ents: bool = True,
-    pos_getter=lambda token: token.pos_,
-    lang: Optional[str] = None,  # type: ignore
-    context_window: Optional[int] = None,  # type: ignore
+    pos_getter: Callable[[Token], str] = lambda token: token.pos_,
+    lang: Optional[str] = None,
+    context_window: Optional[int] = None,
     verbose: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly inserts a synonym or from the tokens
     context. The synonyms are based on wordnet.
 
@@ -242,7 +244,7 @@ def create_random_synonym_insertion_augmenter_v1(
         ["I kitten saw a cat"]
     """
     init_wordnet()
-    from nltk.corpus import wordnet  # type: ignore
+    from nltk.corpus import wordnet
 
     from .wordnet_util import lang_wn_dict, upos_wn_dict
 
@@ -251,7 +253,7 @@ def create_random_synonym_insertion_augmenter_v1(
         lang: str,
         respect_pos: bool,
         verbose: bool,
-    ) -> Union[dict, None]:  # type: ignore
+    ) -> Union[dict, None]:
         doc = t.doc
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
@@ -265,12 +267,12 @@ def create_random_synonym_insertion_augmenter_v1(
             lang = doc.lang_
             lang = lang_wn_dict[lang]
 
-        rep = set()  # type: ignore
+        rep = set()
         if context_window:
             span = doc[
-                max(0, t.i - context_window) : min(  # type: ignore
+                max(0, t.i - context_window) : min(
                     len(doc),
-                    t.i + context_window,  # type: ignore
+                    t.i + context_window,
                 )
             ]
         elif doc.has_annotation("SENT_START"):
@@ -291,20 +293,20 @@ def create_random_synonym_insertion_augmenter_v1(
                         {
                             (lem, pos)
                             for syn in syns
-                            for lem in syn.lemma_names(lang=lang)  # type: ignore
+                            for lem in syn.lemma_names(lang=lang)
                         },
                     )
             else:
                 syns = wordnet.synsets(word, lang=lang)
                 rep = rep.union(
-                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},  # type: ignore
+                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},
                 )
 
         if rep:
-            text = random.sample(rep, k=1)[0]  # type: ignore
+            text = random.sample(rep, k=1)[0]
             if isinstance(text, tuple):
                 return {
-                    "ORTH": text[0],  # type: ignore
+                    "ORTH": text[0],
                     "POS": t.pos_,
                     "TAG": t.tag_,
                 }

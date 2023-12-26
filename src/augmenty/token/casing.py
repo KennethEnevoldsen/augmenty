@@ -2,10 +2,12 @@ import random
 from functools import partial
 from typing import Callable, Iterator, Optional
 
-import spacy  # type: ignore
-from spacy.language import Language  # type: ignore
+import spacy
+from spacy.language import Language
 from spacy.tokens import Token
-from spacy.training import Example  # type: ignore
+from spacy.training import Example
+
+from augmenty.util import Augmenter
 
 from ..augment_utilities import make_text_from_orth
 
@@ -16,7 +18,7 @@ def starting_case_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     def __casing(t):
         if random.random() < level:
             return (
@@ -34,7 +36,7 @@ def starting_case_augmenter_v1(
 @spacy.registry.augmenters("random_starting_case_v1")  # type: ignore
 def create_starting_case_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Creates an augmenter which randomly cases the first letter in each
     token.
 
@@ -61,8 +63,8 @@ def conditional_casing_augmenter_v1(
     example: Example,
     level: float,
     upper: bool,
-    conditional: Callable,  # type: ignore
-) -> Iterator[Example]:  # type: ignore
+    conditional: Callable,
+) -> Iterator[Example]:
     def __casing(t):
         if conditional(t) and random.random() < level:
             if upper:
@@ -79,11 +81,11 @@ def conditional_casing_augmenter_v1(
 
 @spacy.registry.augmenters("conditional_token_casing_v1")  # type: ignore
 def create_conditional_token_casing_augmenter_v1(
-    conditional: Callable[[Token], bool],  # type: ignore
+    conditional: Callable[[Token], bool],
     level: float,
-    lower: Optional[bool] = None,  # type: ignore
-    upper: Optional[bool] = None,  # type: ignore
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+    lower: Optional[bool] = None,
+    upper: Optional[bool] = None,
+) -> Augmenter:
     """Creates an augmenter that conditionally cases the first letter of a
     token based on the getter. Either lower og upper needs to specifiedd as
     True.

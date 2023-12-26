@@ -8,6 +8,8 @@ import spacy
 from spacy.language import Language
 from spacy.training import Example
 
+from augmenty.util import Augmenter
+
 from ..augment_utilities import make_text_from_orth
 
 
@@ -15,7 +17,7 @@ def remove_spacing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     def __replace(s):
         if random.random() < level and (s is True):
             return False
@@ -33,14 +35,14 @@ def remove_spacing_augmenter_v1(
 @spacy.registry.augmenters("remove_spacing_v1")  # type: ignore
 def create_remove_spacing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Creates an augmenter that removes spacing with a given probability.
 
     Args:
-        level (float): The probability to remove a space.
+        level: The probability to remove a space.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter.
+        The augmenter.
 
     Example:
         >>> import augmenty

@@ -7,7 +7,10 @@ from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
+from spacy.tokens import Token
 from spacy.training import Example
+
+from augmenty.util import Augmenter
 
 from ..augment_utilities import make_text_from_orth
 from ..keyboard import Keyboard
@@ -18,10 +21,10 @@ def char_replace_augmenter_v1(
     example: Example,
     level: float,
     replace: dict,
-) -> Iterator[Example]:  # type: ignore
-    def __replace(t):
+) -> Iterator[Example]:
+    def __replace(t: Token) -> str:
         t_ = []
-        for i, c in enumerate(t.text):
+        for c in t.text:
             if random.random() < level and c in replace:
                 c = random.choice(replace[c])
             t_.append(c)
@@ -38,19 +41,17 @@ def char_replace_augmenter_v1(
 def create_char_random_augmenter_v1(
     level: float,
     keyboard: str = "en_qwerty_v1",
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Creates an augmenter that replaces a character with a random character
     from the keyboard.
 
     Args:
-        level (float): The probability to replace a character with a neightbouring
-            character.
-        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a
-            list of all keyboard you can run `augmenty,keyboards()`. Defaults
+        level: The probability to replace a character with a neightbouring character.
+        keyboard: A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty,keyboards()`. Defaults
             to "en_qwerty_v1".
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter function.
+        The augmenter.
 
     Example:
         >>> import augmenty
@@ -71,17 +72,17 @@ def create_char_random_augmenter_v1(
 def create_char_replace_augmenter_v1(
     level: float,
     replace: dict,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Creates an augmenter that replaces a character with a random character
     from replace dict.
 
     Args:
-        level (float): probability to augment character, if document is augmented.
-        replace (dict): A dictionary denoting which characters denote potentials
+        level: probability to augment character, if document is augmented.
+        replace: A dictionary denoting which characters denote potentials
             replace for each character.
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmenter function.
+        The augmenter function.
 
     Example:
         >>> create_char_replace_augmenter_v1(level=0.02,
@@ -99,21 +100,18 @@ def create_keystroke_error_augmenter_v1(
     level: float,
     distance: float = 1.5,
     keyboard: str = "en_qwerty_v1",
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Augmenter:
     """Creates a augmenter which augments a text with plausible typos based on
     keyboard distance.
 
     Args:
-        level (float): The probability to replace a character with a neightbouring
-            character.
-        distance (float, optional): keyboard distance. Defaults to 1.5 corresponding to
-            neighbouring keys including diagonals.
-        keyboard (str, optional): A defined keyboard in the keyboard registry. To see a
-            list of all keyboard you can run `augmenty,keyboards.get_all()`. Defaults
+        level: The probability to replace a character with a neightbouring character.
+        distance: keyboard distance. Defaults to 1.5 corresponding to neighbouring keys including diagonals.
+        keyboard: A defined keyboard in the keyboard registry. To see a list of all keyboard you can run `augmenty,keyboards.get_all()`. Defaults
             to "en_qwerty_v1".
 
     Returns:
-        Callable[[Language, Example], Iterator[Example]]: The augmentation function
+        The augmenter.
 
     Example:
         >>> import augmenty
