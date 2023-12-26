@@ -50,9 +50,9 @@ def paragraph_subset_augmenter_v1(
 
     # Respect entity spans
     while start != 0 and example.y[start].ent_iob_ not in {"O", "B", ""}:
-        start = -1
+        start -= 1
     while end < doc_len - 1 and example.y[end + 1].ent_iob_ not in {"O", "B", ""}:
-        end = +1
+        end += 1
 
     for k in token_anno:
         token_anno[k] = token_anno[k][start:end]
