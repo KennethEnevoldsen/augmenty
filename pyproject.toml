@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "augmenty"
-version = "1.4.2"
+version = "1.4.3"
 description = "An augmentation library based on SpaCy for joint augmentation of text and labels."
 authors = [
     { name = "Kenneth Enevoldsen", email = "kennethcenevoldsen@gmail.com" },
