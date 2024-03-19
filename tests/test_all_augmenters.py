@@ -80,7 +80,9 @@ augmenters_args = {
 }
 
 
-@pytest.mark.parametrize("aug,args", [(k, augmenters_args[k]) for k in augmenters_args])  # noqa
+@pytest.mark.parametrize(
+    "aug,args", [(k, augmenters_args[k]) for k in augmenters_args]
+)  # noqa
 @pytest.mark.parametrize("level", [0.1, 0.5, 1])
 @pytest.mark.timeout(100)
 @pytest.mark.parametrize(
