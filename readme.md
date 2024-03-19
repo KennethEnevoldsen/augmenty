@@ -26,7 +26,7 @@ pip install augmenty
 Do note that this is a minimal installation. As some augmenters requires additional packages please write the following line to install all dependencies.
 
 ```
-pip install augmenty[all]
+pip install "augmenty[all]"
 ```
 
 For more detailed instructions on installing augmenty, including specific language support, see the [installation instructions](https://kennethenevoldsen.github.io/augmenty/installation).
@@ -39,6 +39,7 @@ import spacy
 import augmenty
 
 nlp = spacy.load("en_core_web_md")
+# if not installed run: python -m spacy download en_core_web_md
 
 docs = nlp.pipe(["Augmenty is a great tool for text augmentation"])
 

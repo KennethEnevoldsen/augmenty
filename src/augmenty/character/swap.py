@@ -1,6 +1,5 @@
 """Augmenters for swapping characters."""
 
-
 import random
 from functools import partial
 from typing import Callable, Iterator

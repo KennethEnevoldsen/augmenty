@@ -42,7 +42,7 @@ $ make install
 ```
 
 
-## How to test the project
+### How to test the project
 
 Run the full test suite:
 

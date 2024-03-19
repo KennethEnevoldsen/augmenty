@@ -1,6 +1,5 @@
 """Pytest script for testing all augmenters in a variety of cases."""
 
-
 from typing import Iterable
 
 import augmenty

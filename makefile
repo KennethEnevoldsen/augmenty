@@ -1,6 +1,7 @@
 install:
 	@echo "--- 🚀 Installing project ---"
 	pip install -e ".[dev, docs, tests,tutorials,all,da]" 
+	pip install -r tests/requirements.txt
 
 static-type-check:
 	@echo "--- 🔍 Running static type check ---"
@@ -11,7 +12,7 @@ lint:
 	@echo "--- 🧹 Running linters ---"
 	pyproject-parser check pyproject.toml 		# check pyproject.toml
 	ruff format .  								# running ruff formatting (.ipynb, .py)
-	ruff **/*.py --fix  						# running ruff linting (.py)
+	ruff check **/*.py --fix  					# running ruff linting (.py)
 
 test:
 	@echo "--- 🧪 Running tests ---"

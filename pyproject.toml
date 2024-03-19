@@ -69,7 +69,7 @@ dev = [
     "pyproject-parser[cli, readme]>=0.9.1",
 ]
 tests = [
-    "pytest>=7.1.3",
+    "pytest>=7.1.3,<8.0.0",       # due to https://github.com/TvoroG/pytest-lazy-fixture/issues/65
     "pytest-cov>=3.0.0",
     "pytest-lazy-fixture>=0.6.3",
     "pytest-timeout>=2.1.0",
@@ -92,7 +92,7 @@ pythonPlatform = "Darwin"
 [tool.ruff]
 extend-include = ["*.ipynb"]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-select = [
+lint.select = [
     "A",
     "ANN",
     "ARG",
@@ -120,7 +120,7 @@ select = [
     "SIM",
     "W",
 ]
-ignore = [
+lint.ignore = [
     "ANN101",
     "ANN401",
     "E402",
@@ -130,9 +130,9 @@ ignore = [
     "RET504",
     "COM812",
 ]
-ignore-init-module-imports = true
+lint.ignore-init-module-imports = true
 # Allow autofix for all enabled rules (when `--fix`) is provided.
-unfixable = ["ERA"]
+lint.unfixable = ["ERA"]
 # Exclude a variety of commonly ignored directories.
 exclude = [
     ".bzr",
@@ -158,10 +158,10 @@ exclude = [
     "docs/conf.py",
 ]
 # Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 target-version = "py38"
 
-[tool.ruff.flake8-annotations]
+[tool.ruff.lint.flake8-annotations]
 mypy-init-return = true
 suppress-none-returning = true
 
