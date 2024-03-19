@@ -12,7 +12,7 @@ lint:
 	@echo "--- 🧹 Running linters ---"
 	pyproject-parser check pyproject.toml 		# check pyproject.toml
 	ruff format .  								# running ruff formatting (.ipynb, .py)
-	ruff **/*.py --fix  						# running ruff linting (.py)
+	ruff check **/*.py --fix  					# running ruff linting (.py)
 
 test:
 	@echo "--- 🧪 Running tests ---"
