@@ -1,4 +1,5 @@
 """Function for defining and handling keyboard layouts."""
+
 from typing import Dict, List, Tuple
 
 from pydantic import BaseModel
