@@ -2,6 +2,35 @@
 
 
 
+## v1.4.4 (2024-03-19)
+
+### Documentation
+
+* docs: fix minor spelling mistake ([`46220c4`](https://github.com/KennethEnevoldsen/augmenty/commit/46220c4bb9d3eb14e914e69f6fdf4150cb6f8b69))
+
+* docs: Updated paper with feedback from @sap218 ([`4bf0cb2`](https://github.com/KennethEnevoldsen/augmenty/commit/4bf0cb2ec06bf28263bda8b819274be7b166b73a))
+
+### Fix
+
+* fix: ran linters ([`61d5e9c`](https://github.com/KennethEnevoldsen/augmenty/commit/61d5e9c3661521f983eb72e135aecf49fdddabc0))
+
+* fix: updated tests dependencies due to issues with pytest-fixtures:
+
+https://github.com/TvoroG/pytest-lazy-fixture/issues/65 ([`477895c`](https://github.com/KennethEnevoldsen/augmenty/commit/477895c48cd6a1d271994276d2cf535cdd214bd3))
+
+### Unknown
+
+* Merge pull request #221 from KennethEnevoldsen/review-update
+
+updated docs based on review ([`176a4ad`](https://github.com/KennethEnevoldsen/augmenty/commit/176a4adc9c30b36dc3f736971443ea97480278aa))
+
+* updated linters due to deprecation warning ([`98e6f97`](https://github.com/KennethEnevoldsen/augmenty/commit/98e6f97b70e3b55a279ea8e49129b0fa4fe852fc))
+
+* updated docs based on review ([`dac8fc7`](https://github.com/KennethEnevoldsen/augmenty/commit/dac8fc7aa8a0ee4a0cc313ab117291ada20fab16))
+
+* Merge branch &#39;main&#39; of https://github.com/KennethEnevoldsen/augmenty ([`1b47826`](https://github.com/KennethEnevoldsen/augmenty/commit/1b4782656f84e34770046cdc5568c6fcd0b25dfa))
+
+
 ## v1.4.3 (2023-12-26)
 
 ### Ci
