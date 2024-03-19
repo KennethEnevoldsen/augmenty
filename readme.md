@@ -39,6 +39,7 @@ import spacy
 import augmenty
 
 nlp = spacy.load("en_core_web_md")
+# if not installed run: python -m spacy download en_core_web_md
 
 docs = nlp.pipe(["Augmenty is a great tool for text augmentation"])
 

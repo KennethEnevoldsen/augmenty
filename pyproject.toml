@@ -69,7 +69,7 @@ dev = [
     "pyproject-parser[cli, readme]>=0.9.1",
 ]
 tests = [
-    "pytest>=7.1.3",
+    "pytest>=7.1.3,<8.0.0",       # due to https://github.com/TvoroG/pytest-lazy-fixture/issues/65
     "pytest-cov>=3.0.0",
     "pytest-lazy-fixture>=0.6.3",
     "pytest-timeout>=2.1.0",
