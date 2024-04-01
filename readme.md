@@ -44,7 +44,7 @@ nlp = spacy.load("en_core_web_md")
 docs = nlp.pipe(["Augmenty is a great tool for text augmentation"])
 
 entity_augmenter = augmenty.load("ents_replace_v1", 
-                                 ent_dict = {"ORG": [["spaCy"], ["spaCy", "Universe"]]}, level=1)
+                                 ent_dict = {"GPE": [["spaCy"], ["spaCy", "Universe"]]}, level=1)
 
 for doc in augmenty.docs(docs, augmenter=entity_augmenter, nlp=nlp):
     print(doc)
