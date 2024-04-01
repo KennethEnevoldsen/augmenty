@@ -35,19 +35,28 @@ For more detailed instructions on installing augmenty, including specific langua
 The following shows a simple example of how you can quickly augment text using Augmenty. For more on using augmenty see the [usage guides].
 
 ```python
-import spacy
 import augmenty
+import spacy
 
 nlp = spacy.load("en_core_web_md")
 # if not installed run: python -m spacy download en_core_web_md
 
-docs = nlp.pipe(["Augmenty is a great tool for text augmentation"])
+doc = nlp("Augmenty is a great tool for text augmentation")
 
-entity_augmenter = augmenty.load("ents_replace_v1", 
-                                 ent_dict = {"GPE": [["spaCy"], ["spaCy", "Universe"]]}, level=1)
+# check that the pipeline detects the entities (this done by SpaCy and is not a 100%)
+print(doc.ents)
+# (Augmenty,) is detected as an entity
 
-for doc in augmenty.docs(docs, augmenter=entity_augmenter, nlp=nlp):
-    print(doc)
+doc.ents[0].label_
+# 'GPE'. Depending on the model, the label might be different (e.g. 'ORG')
+
+entity_augmenter = augmenty.load(
+    "ents_replace_v1", ent_dict={"GPE": [["spaCy"], ["spaCy", "Universe"]]}, # label=GPE,
+    level=1
+)
+
+for augmented_doc in augmenty.docs([doc], augmenter=entity_augmenter, nlp=nlp):
+    print(augmented_doc)
 ```
 
 ```
