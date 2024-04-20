@@ -56,3 +56,5 @@ The package is mainly targeted at NLP researchers and practitioners who wish to 
 
 # Acknowledgements
 The authors thank the [contributors](https://github.com/KennethEnevoldsen/augmenty/graphs/contributors) of the package notably Lasse Hansen which provided meaningful feedback on the design of the package at early stages of development.
+
+# References
