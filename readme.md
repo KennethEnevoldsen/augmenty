@@ -4,14 +4,11 @@
 
 [![PyPI version](https://badge.fury.io/py/augmenty.svg)](https://pypi.org/project/augmenty/)
 [![python version](https://img.shields.io/badge/Python-%3E=3.8-blue)](https://github.com/kennethenevoldsen/augmenty)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)]([ruff])
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![github actions pytest](https://github.com/kennethenevoldsen/augmenty/actions/workflows/tests.yml/badge.svg)](https://github.com/kennethenevoldsen/augmenty/actions)
-[![github actions docs](https://github.com/kennethenevoldsen/augmenty/actions/workflows/documentation.yml/badge.svg)]([action])
-[![status](https://joss.theoj.org/papers/df84463b79f27f40a4da97f20b08a958/status.svg)]([joss])
+[![github actions docs](https://github.com/kennethenevoldsen/augmenty/actions/workflows/documentation.yml/badge.svg)](https://kennethenevoldsen.github.io/augmenty/)
+[![status](https://joss.theoj.org/papers/df84463b79f27f40a4da97f20b08a958/status.svg)](https://joss.theoj.org/papers/df84463b79f27f40a4da97f20b08a958)
 
-[action]: https://kennethenevoldsen.github.io/augmenty/
-[ruff]: https://github.com/astral-sh/ruff
-[joss]: https://joss.theoj.org/papers/df84463b79f27f40a4da97f20b08a958
 
 
 Augmenty is an augmentation library based on spaCy for augmenting texts. Besides a wide array of highly flexible augmenters, Augmenty provides a series of tools for working with augmenters, including combining and moderating augmenters. Augmenty differs from other augmentation libraries in that it corrects (as far as possible) the assigned labels under the augmentation, thus making many of the augmenters valid for training in a wider range of tasks.
