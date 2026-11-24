@@ -1,16 +1,16 @@
 """Utility functions used for augmentation."""
 
 import random
+from collections.abc import Callable, Iterable, Iterator
 from functools import partial
-from typing import Callable, Iterable, Iterator
 
 from spacy.language import Language
 from spacy.training import Example
 
 
 def combine(
-    augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]],  # type: ignore
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+    augmenters: Iterable[Callable[[Language, Example], Iterator[Example]]],
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Combines a series of spaCy style augmenters.
 
     Args:
@@ -38,9 +38,9 @@ def combine(
 
 
 def set_doc_level(
-    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
+    augmenter: Callable[[Language, Example], Iterator[Example]],
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Set the percantage of examples that the augmenter should be applied to.
 
     Args:
@@ -62,9 +62,9 @@ def set_doc_level(
 
 
 def repeat(
-    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
+    augmenter: Callable[[Language, Example], Iterator[Example]],
     n: int,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Repeats an augmenter n times over the same example thus increasing the
     sample size.
 
@@ -81,16 +81,16 @@ def repeat(
     """
 
     def __augment(nlp: Language, example: Example):
-        for i in range(n):  # type: ignore
+        for _i in range(n):
             yield from augmenter(nlp, example)
 
     return __augment
 
 
 def yield_original(
-    augmenter: Callable[[Language, Example], Iterator[Example]],  # type: ignore
+    augmenter: Callable[[Language, Example], Iterator[Example]],
     doc_level: float = 1.0,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Wraps and augmented such that it yields both the original and augmented
     example.
 
@@ -115,9 +115,10 @@ def make_text_from_orth(example_dict: dict) -> str:
     """Reconstructs the text based on ORTH and SPACY from an Example turned to
     dict."""
     text = ""
-    for orth, spacy in zip(  # type: ignore
+    for orth, spacy in zip(
         example_dict["token_annotation"]["ORTH"],
         example_dict["token_annotation"]["SPACY"],
+        strict=False,
     ):
         text += orth
         if spacy:

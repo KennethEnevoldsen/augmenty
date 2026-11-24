@@ -1,6 +1,6 @@
 import random
+from collections.abc import Callable, Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
@@ -12,7 +12,7 @@ def upper_casing_augmenter_v1(
     example: Example,
     *,
     level: float,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     if random.random() >= level:
         yield example
     else:
@@ -24,10 +24,10 @@ def upper_casing_augmenter_v1(
         yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("upper_case_v1")  # type: ignore
+@spacy.registry.augmenters("upper_case_v1")
 def create_upper_casing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmenter that converts documents to uppercase.
 
     Args:
@@ -53,7 +53,7 @@ def spongebob_augmenter_v1(
     example: Example,
     *,
     level: float,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     if random.random() >= level:
         yield example
     else:
@@ -66,10 +66,10 @@ def spongebob_augmenter_v1(
         yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("spongebob_v1")  # type: ignore
+@spacy.registry.augmenters("spongebob_v1")
 def create_spongebob_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Create an augmneter that converts documents to SpOnGeBoB casing.
 
     Args:

@@ -1,6 +1,6 @@
 import random
+from collections.abc import Callable, Iterator
 from functools import partial
-from typing import Callable, Iterator, Optional
 
 import spacy
 from spacy.language import Language
@@ -19,7 +19,7 @@ def starting_case_augmenter_v1(
     example: Example,
     level: float,
 ) -> Iterator[Example]:
-    def __casing(t):
+    def __casing(t: Token) -> str:
         if random.random() < level:
             return (
                 uncapitalize(t.text) if random.random() < 0.5 else t.text.capitalize()
@@ -33,7 +33,7 @@ def starting_case_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_starting_case_v1")  # type: ignore
+@spacy.registry.augmenters("random_starting_case_v1")
 def create_starting_case_augmenter_v1(
     level: float,
 ) -> Augmenter:
@@ -65,7 +65,7 @@ def conditional_casing_augmenter_v1(
     upper: bool,
     conditional: Callable,
 ) -> Iterator[Example]:
-    def __casing(t):
+    def __casing(t: Token) -> str:
         if conditional(t) and random.random() < level:
             if upper:
                 return t.text.capitalize()
@@ -79,12 +79,12 @@ def conditional_casing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("conditional_token_casing_v1")  # type: ignore
+@spacy.registry.augmenters("conditional_token_casing_v1")
 def create_conditional_token_casing_augmenter_v1(
     conditional: Callable[[Token], bool],
     level: float,
-    lower: Optional[bool] = None,
-    upper: Optional[bool] = None,
+    lower: bool | None = None,
+    upper: bool | None = None,
 ) -> Augmenter:
     """Creates an augmenter that conditionally cases the first letter of a
     token based on the getter. Either lower og upper needs to specifiedd as

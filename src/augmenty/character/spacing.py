@@ -1,8 +1,8 @@
 """Augmenters for modyfing spacing."""
 
 import random
+from collections.abc import Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
@@ -18,7 +18,7 @@ def remove_spacing_augmenter_v1(
     example: Example,
     level: float,
 ) -> Iterator[Example]:
-    def __replace(s):
+    def __replace(s: bool) -> bool:
         if random.random() < level and (s is True):
             return False
         return s
@@ -32,7 +32,7 @@ def remove_spacing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("remove_spacing_v1")  # type: ignore
+@spacy.registry.augmenters("remove_spacing_v1")
 def create_remove_spacing_augmenter_v1(
     level: float,
 ) -> Augmenter:

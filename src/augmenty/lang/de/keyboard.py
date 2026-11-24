@@ -2,7 +2,7 @@ from ...util import registry
 
 
 @registry.keyboards("de_qwerty_v1")
-def create_qwerty_de():
+def create_qwerty_de() -> dict[str, list[list[str]]]:
     qwerty = {
         "default": [
             ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "ß", "´"],

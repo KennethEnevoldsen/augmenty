@@ -1,22 +1,24 @@
 install:
 	@echo "--- 🚀 Installing project ---"
-	pip install -e ".[dev, docs, tests,tutorials,all,da]" 
-	pip install -r tests/requirements.txt
+	uv sync --all-extras --all-groups
 
 static-type-check:
 	@echo "--- 🔍 Running static type check ---"
-	pyright src/
-	pyright tests/
+	uv run --group dev ty check src/ tests/
 
 lint:
 	@echo "--- 🧹 Running linters ---"
-	pyproject-parser check pyproject.toml 		# check pyproject.toml
-	ruff format .  								# running ruff formatting (.ipynb, .py)
-	ruff check **/*.py --fix  					# running ruff linting (.py)
+	uv run --group dev ruff format .
+	uv run --group dev ruff check . --fix
+
+lint-check:
+	@echo "--- 🧹 Checking linting (no changes) ---"
+	uv run --group dev ruff format . --check
+	uv run --group dev ruff check .
 
 test:
 	@echo "--- 🧪 Running tests ---"
-	pytest tests/
+	uv run --group tests pytest tests/
 
 pr:
 	@echo "--- 🚀 Running PR checks ---"
@@ -27,14 +29,9 @@ pr:
 
 build-docs:
 	@echo "--- 📚 Building docs ---"
-	sphinx-build -b html docs docs/_build/html
+	uv run --group docs --extra all python docs/create_augmenters_table.py
+	uv run --group docs --extra all sphinx-build -M html docs/ docs/_build
 
 view-docs:
 	@echo "--- 👀 Viewing docs ---"
 	open docs/_build/html/index.html
-	
-update-from-template:
-	@echo "--- 🔄 Updating from template ---"
-	@echo "This will update the project from the template, make sure to resolve any .rej files"
-	cruft update --skip-apply-ask
-	

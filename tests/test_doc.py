@@ -1,9 +1,10 @@
 import random
 
-import augmenty
-from augmenty.doc import create_paragraph_subset_augmenter_v1
 from spacy.language import Language
 from spacy.tokens import Doc, Span
+
+import augmenty
+from augmenty.doc import create_paragraph_subset_augmenter_v1
 
 
 def test_create_spongebob_augmenter(nlp_en: Language):
@@ -12,7 +13,7 @@ def test_create_spongebob_augmenter(nlp_en: Language):
     aug_text = "A SaMpLe tExT"
 
     aug_texts = list(augmenty.texts(texts, spongebob_augmenter, nlp_en))
-    assert aug_texts[0] == aug_text  # type: ignore
+    assert aug_texts[0] == aug_text
 
 
 def test_create_upper_case_augmenter(nlp_en: Language):
@@ -21,7 +22,7 @@ def test_create_upper_case_augmenter(nlp_en: Language):
     aug_text = "A SAMPLE TEXT"
 
     aug_texts = list(augmenty.texts(texts, spongebob_augmenter, nlp_en))
-    assert aug_texts[0] == aug_text  # type: ignore
+    assert aug_texts[0] == aug_text
 
 
 def test_paragraph_subset_augmenter(nlp_en: Language):
@@ -48,12 +49,12 @@ def test_paragraph_subset_augmenter(nlp_en: Language):
         max_paragraph=1.00,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
-    assert aug_docs[0].text  # type: ignore
+    assert aug_docs[0].text
 
     # with sentencizer
     nlp_en.add_pipe("sentencizer")
     aug_texts = list(augmenty.texts([text], p_subset_aug, nlp_en))
-    assert aug_texts[0]  # type: ignore
+    assert aug_texts[0]
 
     # full length
     p_subset_aug = augmenty.load(
@@ -62,7 +63,7 @@ def test_paragraph_subset_augmenter(nlp_en: Language):
         max_paragraph=1.0,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
-    assert aug_docs[0].text == text  # type: ignore
+    assert aug_docs[0].text == text
 
     # zero length
     p_subset_aug = augmenty.load(
@@ -71,7 +72,7 @@ def test_paragraph_subset_augmenter(nlp_en: Language):
         max_paragraph=0.0,
     )
     aug_docs = list(augmenty.docs([doc], p_subset_aug, nlp_en))
-    assert aug_docs[0].text == ""  # type: ignore
+    assert aug_docs[0].text == ""
 
 
 def test_paragraph_subset_augmenter_issue_when_ent_at_sentence_bound(nlp_en: Language):

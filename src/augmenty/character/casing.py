@@ -1,6 +1,6 @@
 import random
+from collections.abc import Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
@@ -16,7 +16,7 @@ def random_casing_augmenter_v1(
     example: Example,
     level: float,
 ) -> Iterator[Example]:
-    def __casing(c):
+    def __casing(c: str) -> str:
         if random.random() < level:
             return c.lower() if random.random() < 0.5 else c.upper()
         return c
@@ -30,7 +30,7 @@ def random_casing_augmenter_v1(
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("random_casing_v1")  # type: ignore
+@spacy.registry.augmenters("random_casing_v1")
 def create_random_casing_augmenter_v1(
     level: float,
 ) -> Augmenter:

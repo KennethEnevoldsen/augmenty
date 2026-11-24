@@ -1,21 +1,20 @@
 """Pytest script for testing all augmenters in a variety of cases."""
 
-from typing import Iterable
+from collections.abc import Iterable
 
-import augmenty
 import numpy as np
 import pytest
 from spacy.language import Language
 from spacy.tokens import Token
 from spacy.training import Example
 
+import augmenty
+
 np.seterr(divide="raise", invalid="raise")
 
 
 def is_pronoun(token: Token) -> bool:
-    if token.pos_ == "PRON":
-        return True
-    return False
+    return token.pos_ == "PRON"
 
 
 abbreviate = lambda token: token.text[0] + "."  # noqa: E731

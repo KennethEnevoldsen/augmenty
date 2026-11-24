@@ -1,17 +1,7 @@
 import random
+from collections.abc import Callable, Generator, Iterable, Iterator
 from functools import partial
-from re import A
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    Generator,
-    Iterable,
-    Iterator,
-    List,
-    Optional,
-    Union,
-)
+from typing import Any
 
 import numpy as np
 from spacy.language import Language
@@ -25,11 +15,11 @@ from ..augment_utilities import make_text_from_orth
 from .utils import offset_range
 
 # create entity type
-ENTITY = Union[str, List[str], Span, Doc]
+ENTITY = str | list[str] | Span | Doc
 
 
-def _spacing_to_str(spacing: Union[List[str], List[bool]]) -> List[str]:
-    def to_string(x: Union[str, bool]) -> str:
+def _spacing_to_str(spacing: list[str] | list[bool]) -> list[str]:
+    def to_string(x: str | bool) -> str:
         if isinstance(x, str):
             return x
         return " " if x else ""
@@ -37,7 +27,7 @@ def _spacing_to_str(spacing: Union[List[str], List[bool]]) -> List[str]:
     return [to_string(x) for x in spacing]
 
 
-def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
+def __normalize_entity(entity: ENTITY, nlp: Language) -> dict[str, Any]:
     spacy = None
     pos = None
     tag = None
@@ -48,8 +38,6 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
         ent_doc = nlp(entity)
         orth = [tok.text for tok in ent_doc]
         spacy = [tok.whitespace_ for tok in ent_doc]
-    elif isinstance(entity, list):
-        orth = entity
     elif isinstance(entity, (Span, Doc)):
         orth = [tok.text for tok in entity]
         spacy = [tok.whitespace_ for tok in entity]
@@ -57,6 +45,8 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
         tag = [tok.tag_ for tok in entity]
         morph = [tok.morph for tok in entity]
         lemma = [tok.lemma_ for tok in entity]
+    elif isinstance(entity, list):
+        orth = entity
     else:
         raise ValueError(
             f"entity must be of type str, List[str] or Span, not {type(entity)}",
@@ -75,7 +65,7 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
 
     _spacy = _spacing_to_str(spacy)
     str_repr = ""
-    for e, s in zip(orth[:-1], _spacy[:-1]):
+    for e, s in zip(orth[:-1], _spacy[:-1], strict=False):
         str_repr += e + s
     str_repr += orth[-1]
 
@@ -91,23 +81,23 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> Dict[str, Any]:
 
 
 def _update_span_annotations(
-    span_anno: Dict[str, list],
+    span_anno: dict[str, list],
     ent: Span,
     offset: int,
     entity_offset: int,
-) -> Dict[str, list]:
+) -> dict[str, list]:
     """Update the span annotations to be in line with the new doc."""
     ent_range = (ent.start + offset, ent.end + offset)
 
     for anno_key, spans in span_anno.items():
         new_spans = []
         for span_start, span_end, _, __ in spans:
-            span_start, span_end = offset_range(
+            new_start, new_end = offset_range(
                 current_range=(span_start, span_end),
                 inserted_range=ent_range,
                 offset=entity_offset,
             )
-            new_spans.append((span_start, span_end, _, __))
+            new_spans.append((new_start, new_end, _, __))
 
         span_anno[anno_key] = new_spans
 
@@ -118,11 +108,11 @@ def ent_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-    ent_dict: Dict[str, Iterable[ENTITY]],
+    ent_dict: dict[str, Iterable[ENTITY]],
     replace_consistency: bool,
     resolve_dependencies: bool,
 ) -> Iterator[Example]:
-    replaced_ents: Dict[str, ENTITY] = {}
+    replaced_ents: dict[str, ENTITY] = {}
     example_dict = example.to_dict()
 
     offset = 0
@@ -134,7 +124,7 @@ def ent_augmenter_v1(
 
     should_update_heads = example.y.has_annotation("HEAD") and resolve_dependencies
     if should_update_heads:
-        head = np.array(tok_anno["HEAD"])  # type: ignore
+        head = np.array(tok_anno["HEAD"])
 
     for ent in example.y.ents:
         if ent.label_ in ent_dict and random.random() < level:
@@ -179,17 +169,17 @@ def ent_augmenter_v1(
             if should_update_heads:
                 # Handle HEAD
 
-                head[head > ent.start + offset] += entity_offset  # type: ignore
+                head[head > ent.start + offset] += entity_offset
                 # keep first head correcting for changing entity size, set rest to
                 # refer to index of first name
                 head = np.concatenate(
                     [
-                        np.array(head[: ent.start + offset]),  # before  # type: ignore
+                        np.array(head[: ent.start + offset]),  # before
                         np.array(
-                            [head[ent.root.i + offset]]  # type: ignore
+                            [head[ent.root.i + offset]]
                             + [ent.start + offset] * (len_ent - 1),
                         ),  # the entity
-                        np.array(head[ent.end + offset :]),  # after    # type: ignore
+                        np.array(head[ent.end + offset :]),  # after
                     ],
                 )
 
@@ -213,9 +203,9 @@ def ent_augmenter_v1(
                 )
 
     if should_update_heads:
-        tok_anno["HEAD"] = head.tolist()  # type: ignore
+        tok_anno["HEAD"] = head.tolist()
     else:
-        tok_anno["HEAD"] = list(range(len(tok_anno["ORTH"])))  # type: ignore
+        tok_anno["HEAD"] = list(range(len(tok_anno["ORTH"])))
 
     text = make_text_from_orth(example_dict)
 
@@ -226,7 +216,7 @@ def ent_augmenter_v1(
 @registry.augmenters("ents_replace_v1")
 def create_ent_augmenter_v1(
     level: float,
-    ent_dict: Dict[str, Iterable[ENTITY]],
+    ent_dict: dict[str, Iterable[ENTITY]],
     replace_consistency: bool = True,
     resolve_dependencies: bool = True,
 ) -> Augmenter:
@@ -264,10 +254,10 @@ def create_ent_augmenter_v1(
 
 
 def generator_from_name_dict(
-    names: Dict[str, List[str]],  # type: ignore
-    patterns: List[List[str]],  # type: ignore
-    names_p: Dict[str, List[float]],  # type: ignore
-    patterns_p: Optional[List[float]],  # type: ignore
+    names: dict[str, list[str]],
+    patterns: list[list[str]],
+    names_p: dict[str, list[float]],
+    patterns_p: list[float] | None,
 ):
     """A utility function for create_pers_replace_augmenter, which creates an
     infinite generator based on a names dictionary and a list of patterns,
@@ -275,23 +265,23 @@ def generator_from_name_dict(
     lp = len(patterns)
 
     while True:
-        i = np.random.choice(lp, size=1, replace=True, p=patterns_p)[0]  # type: ignore
+        i = np.random.choice(lp, size=1, replace=True, p=patterns_p)[0]
         yield [
-            str(np.random.choice(names[p], size=1, replace=True, p=names_p.get(p))[0])  # type: ignore
+            str(np.random.choice(names[p], size=1, replace=True, p=names_p.get(p))[0])
             for p in patterns[i]
         ]
 
 
 @registry.augmenters("per_replace_v1")
 def create_per_replace_augmenter_v1(
-    names: Dict[
+    names: dict[
         str,
-        List[str],
+        list[str],
     ],  # {"firstname": ["Kenneth", "Lasse"], "lastname": ["Enevoldsen", "Hansen"]}
-    patterns: List[List[str]],  # ["firstname", "firstname", "lastname"]
+    patterns: list[list[str]],  # ["firstname", "firstname", "lastname"]
     level: float,
-    names_p: Optional[Dict[str, List[float]]] = None,
-    patterns_p: Optional[List[float]] = None,
+    names_p: dict[str, list[float]] | None = None,
+    patterns_p: list[float] | None = None,
     replace_consistency: bool = True,
     person_tag: str = "PERSON",
 ) -> Augmenter:
@@ -301,7 +291,7 @@ def create_per_replace_augmenter_v1(
     Args:
         names: A dictionary of list of names to sample from.
             These could for example include first name and last names.
-        pattern: The pattern to create the names. This should be a
+        patterns: The pattern to create the names. This should be a
             list of patterns.
             Where a pattern is a list of strings, where the string denote the list in
             the names dictionary in which to sample from.
@@ -339,10 +329,10 @@ def create_per_replace_augmenter_v1(
 def ent_format_augmenter_v1(
     nlp: Language,
     example: Example,
-    reordering: List[Union[int, None]],
-    formatter: List[Union[Callable[[Token], str], None]],
+    reordering: list[int | None],
+    formatter: list[Callable[[Token], str] | None],
     level: float,
-    ent_types: Optional[List[str]] = None,
+    ent_types: list[str] | None = None,
 ) -> Iterator[Example]:
     example_dict = example.to_dict()
 
@@ -360,7 +350,8 @@ def ent_format_augmenter_v1(
 
             # format tokens
             new_ent_ = [
-                e.text if f is None else f(e) for e, f in zip(new_ent, formatter)
+                e.text if f is None else f(e)
+                for e, f in zip(new_ent, formatter, strict=False)
             ]
 
             if len(new_ent_) < len(new_ent):
@@ -377,10 +368,10 @@ def ent_format_augmenter_v1(
 
 @registry.augmenters("ents_format_v1")
 def create_ent_format_augmenter_v1(
-    reordering: List[Union[int, None]],
-    formatter: List[Union[Callable[[Token], str], None]],
+    reordering: list[int | None],
+    formatter: list[Callable[[Token], str] | None],
     level: float,
-    ent_types: Optional[List[str]] = None,
+    ent_types: list[str] | None = None,
 ) -> Augmenter:
     """Creates an augmenter which reorders and formats a entity according to
     reordering and formatting functions.

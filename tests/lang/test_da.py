@@ -10,7 +10,7 @@ from augmenty.lang.da import (
 )
 
 
-@pytest.fixture()
+@pytest.fixture
 def nlp() -> Language:
     nlp = Danish()
     return nlp
@@ -23,8 +23,8 @@ def test_create_da_æøå_replace_augmenter(nlp: Language):
     aug = create_da_æøå_replace_augmenter_v1(level=1)
     doc = nlp(text)
 
-    docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)  # type: ignore
-    assert next(docs).text == aug_text  # type: ignore
+    docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)
+    assert next(docs).text == aug_text
 
 
 def test_create_da_historical_noun_casing_augmenter(nlp: Language):
@@ -38,4 +38,4 @@ def test_create_da_historical_noun_casing_augmenter(nlp: Language):
     aug = create_da_historical_noun_casing_augmenter_v1(level=1)
     docs = augmenty.docs([doc], augmenter=aug, nlp=nlp)
 
-    assert next(docs).text == solution  # type: ignore
+    assert next(docs).text == solution

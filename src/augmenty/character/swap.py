@@ -1,11 +1,12 @@
 """Augmenters for swapping characters."""
 
 import random
+from collections.abc import Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
+from spacy.tokens import Token
 from spacy.training import Example
 
 from augmenty.util import Augmenter
@@ -16,7 +17,7 @@ from ..augment_utilities import make_text_from_orth
 def char_swap_augmenter_v1(
     nlp: Language, example: Example, level: float
 ) -> Iterator[Example]:
-    def __replace(t):
+    def __replace(t: Token) -> str:
         for i, c in enumerate(t.text[:-1]):
             if random.random() < level:
                 return t.text[:i] + t.text[i + 1] + c + t.text[i + 2 :]
@@ -29,7 +30,7 @@ def char_swap_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("char_swap_v1")  # type: ignore
+@spacy.registry.augmenters("char_swap_v1")
 def create_char_swap_augmenter_v1(
     level: float,
 ) -> Augmenter:

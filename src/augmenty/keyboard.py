@@ -1,7 +1,5 @@
 """Function for defining and handling keyboard layouts."""
 
-from typing import Dict, List, Tuple
-
 from pydantic import BaseModel
 
 from .util import registry
@@ -19,10 +17,10 @@ class Keyboard(BaseModel):
         Keyboard: a Keyboard object
     """
 
-    keyboard_array: Dict[str, List[List[str]]]
+    keyboard_array: dict[str, list[list[str]]]
     shift_distance: int = 3
 
-    def coordinate(self, key: str) -> Tuple[int, int]:
+    def coordinate(self, key: str) -> tuple[int, int]:
         """Get coordinate for key.
 
         Args:
@@ -84,7 +82,7 @@ class Keyboard(BaseModel):
             for x, _ in enumerate(self.keyboard_array[arr]):
                 yield from self.keyboard_array[arr][x]
 
-    def get_neighbours(self, key: str, distance: int = 1) -> List[int]:
+    def get_neighbours(self, key: str, distance: int = 1) -> list[int]:
         """Gets the neighbours of a key with a specified distance.
 
         Args:

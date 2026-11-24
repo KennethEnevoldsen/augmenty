@@ -1,7 +1,8 @@
 import os
 
-import augmenty
 from wasabi import MarkdownRenderer
+
+import augmenty
 
 print("Running create_augmenters_table.py")
 

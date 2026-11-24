@@ -48,8 +48,9 @@ doc.ents[0].label_
 # 'GPE'. Depending on the model, the label might be different (e.g. 'ORG')
 
 entity_augmenter = augmenty.load(
-    "ents_replace_v1", ent_dict={"GPE": [["spaCy"], ["spaCy", "Universe"]]}, # label=GPE,
-    level=1
+    "ents_replace_v1",
+    ent_dict={"GPE": [["spaCy"], ["spaCy", "Universe"]]},  # label=GPE,
+    level=1,
 )
 
 for augmented_doc in augmenty.docs([doc], augmenter=entity_augmenter, nlp=nlp):

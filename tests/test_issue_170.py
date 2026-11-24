@@ -3,25 +3,26 @@
 https://github.com/KennethEnevoldsen/augmenty/issues/170.
 """
 
-import augmenty
 import pytest
 import spacy
 from spacy.language import Language
 from spacy.tokens import Doc, Span
 
+import augmenty
 
-@pytest.fixture()
+
+@pytest.fixture
 def nlp() -> Language:
     nlp_ = spacy.blank("en")
     nlp_.add_pipe("sentencizer")
     return nlp_
 
 
-@pytest.fixture()
+@pytest.fixture
 def example_doc(nlp: Language) -> Doc:
     text = "Joc Pederson and Thairo Estrada (concussion protocol) are each progressing. SS Brandon Crawford"
     doc = nlp(text)
-    doc.ents = [  # type: ignore
+    doc.ents = [
         Span(doc, 0, 2, "pers"),
         Span(doc, 3, 5, "pers"),
         Span(doc, 14, 16, "pers"),
@@ -65,10 +66,10 @@ def test_entity_with_no_dep(nlp: Language, example_doc: Doc):
         replace_consistency=True,
         resolve_dependencies=True,
     )
-    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]  # noqa  # type: ignore
-    assert len(aug_doc.ents) == len(docs[0].ents)  # type: ignore
+    aug_doc = list(augmenty.docs(docs, augmenter, nlp))[0]  # noqa
+    assert len(aug_doc.ents) == len(docs[0].ents)
     assert (
         aug_doc.text
         == "Melvin R. Brown and Melvin R. Brown (concussion protocol) are each progressing. SS Melvin R. Brown"
     )
-    assert aug_doc[0].text == "Melvin"  # type: ignore
+    assert aug_doc[0].text == "Melvin"

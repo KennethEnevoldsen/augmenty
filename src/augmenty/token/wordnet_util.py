@@ -5,11 +5,10 @@ def init_wordnet():
         download("wordnet", quiet=True, raise_on_error=True)
         download("omw-1.4", quiet=True, raise_on_error=True)
     except ModuleNotFoundError as e:
-        print(e)  # type: ignore
         raise ModuleNotFoundError(
             "This augmenter requires NLTK. Use `pip install nltk` or"
             + " `pip install augmenty[all]`",
-        )
+        ) from e
 
 
 upos_wn_dict = {

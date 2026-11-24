@@ -66,8 +66,8 @@ all = ["nltk>=3.6.7"]
 
 [dependency-groups]
 dev = [
-    "pyright>=1.1.343",
-    "ruff>=0.0.254",
+    "ruff==0.17.6",
+    "ty>=0.0.109",
 ]
 tests = [
     "pytest>=7.1.3,<8.0.0",       # due to https://github.com/TvoroG/pytest-lazy-fixture/issues/65
@@ -103,14 +103,25 @@ en-core-web-lg = { url = "https://github.com/explosion/spacy-models/releases/dow
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
-[tool.pyright]
-exclude = [".*venv*"]
-pythonPlatform = "Darwin"
-
 [tool.ruff]
 extend-include = ["*.ipynb"]
-# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-lint.select = [
+target-version = "py310"
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "_build",
+    "build",
+    "dist",
+    "venv",
+    "__init__.py",
+    "docs/conf.py",
+]
+
+[tool.ruff.lint]
+select = [
     "A",
     "ANN",
     "ARG",
@@ -138,46 +149,25 @@ lint.select = [
     "SIM",
     "W",
 ]
-lint.ignore = [
-    "ANN101",
+ignore = [
+    "ANN202",  # return types of nested augmenter functions
     "ANN401",
     "E402",
     "E501",
-    "F401",
     "F841",
     "RET504",
     "COM812",
 ]
-lint.ignore-init-module-imports = true
 # Allow autofix for all enabled rules (when `--fix`) is provided.
-lint.unfixable = ["ERA"]
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".hg",
-    ".nox",
-    ".pants.d",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "venv",
-    "__init__.py",
-    "docs/conf.py",
-]
+unfixable = ["ERA"]
 # Allow unused variables when underscore-prefixed.
-lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-target-version = "py38"
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# keyboard layouts intentionally contain non-latin characters
+"src/augmenty/lang/*/keyboard.py" = ["RUF001"]
+# tutorials favour readability over annotations
+"docs/**" = ["ANN", "ERA"]
 
 [tool.ruff.lint.flake8-annotations]
 mypy-init-return = true
@@ -185,6 +175,9 @@ suppress-none-returning = true
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ty.src]
+include = ["src", "tests"]
 
 [tool.semantic_release]
 # PSR builds *before* it creates the tag, so setuptools-scm cannot see the new

@@ -1,6 +1,6 @@
 import random
+from collections.abc import Callable, Iterator
 from functools import partial
-from typing import Callable, Dict, Iterator, List, Optional, Union
 
 import spacy
 from spacy.language import Language
@@ -16,12 +16,12 @@ def token_dict_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],  # type: ignore
+    replace: dict[str, list[str]] | dict[str, dict[str, list[str]]],
     ignore_casing: bool,
-    getter: Callable[[Token], str],  # type: ignore
+    getter: Callable[[Token], str],
     keep_titlecase: bool,
-) -> Iterator[Example]:  # type: ignore
-    def __replace(t):
+) -> Iterator[Example]:
+    def __replace(t: Token) -> str:
         text = t.text
         if ignore_casing is True:
             text = text.lower()
@@ -44,14 +44,14 @@ def token_dict_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_dict_replace_v1")  # type: ignore
+@spacy.registry.augmenters("token_dict_replace_v1")
 def create_token__dict_replace_augmenter_v1(
     level: float,
-    replace: Union[Dict[str, List[str]], Dict[str, Dict[str, List[str]]]],  # type: ignore
+    replace: dict[str, list[str]] | dict[str, dict[str, list[str]]],
     ignore_casing: bool = True,
-    getter: Callable[[Token], str] = lambda token: token.pos_,  # type: ignore
+    getter: Callable[[Token], str] = lambda token: token.pos_,
     keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a
     dictionary.
 
@@ -86,14 +86,14 @@ def create_token__dict_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("wordnet_synonym_v1")  # type: ignore
+@spacy.registry.augmenters("wordnet_synonym_v1")
 def create_wordnet_synonym_augmenter_v1(
     level: float,
-    lang: Optional[str] = None,  # type: ignore
+    lang: str | None = None,
     respect_pos: bool = True,
-    getter: Callable = lambda token: token.pos_,  # type: ignore
+    getter: Callable = lambda token: token.pos_,
     keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter swaps a token with its synonym based on a
     dictionary.
 
@@ -115,7 +115,7 @@ def create_wordnet_synonym_augmenter_v1(
         >>>                                                              lang="en")
     """
     init_wordnet()
-    from nltk.corpus import wordnet  # type: ignore
+    from nltk.corpus import wordnet
 
     from .wordnet_util import lang_wn_dict, upos_wn_dict
 
@@ -123,16 +123,16 @@ def create_wordnet_synonym_augmenter_v1(
         nlp: Language,
         example: Example,
         level: float,
-        lang: Optional[str],  # type: ignore
-        getter: Callable,  # type: ignore
+        lang: str | None,
+        getter: Callable,
         respect_pos: bool,
         keep_titlecase: bool,
-    ) -> Iterator[Example]:  # type: ignore
+    ) -> Iterator[Example]:
         if lang is None:
             lang = nlp.lang
             lang = lang_wn_dict[lang]  # type: ignore
 
-        def __replace(t):
+        def __replace(t: Token) -> str:
             word = t.text.lower()
             if random.random() < level and (
                 respect_pos is False or getter(t) in upos_wn_dict
@@ -145,7 +145,7 @@ def create_wordnet_synonym_augmenter_v1(
                     rep = {
                         l
                         for syn in syns
-                        for l in syn.lemma_names(lang=lang)  # noqa E741 # type: ignore
+                        for l in syn.lemma_names(lang=lang)  # noqa E741
                     }
                     if word in rep:
                         rep.remove(word)
@@ -180,19 +180,19 @@ def token_replace_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-    replace: Callable[[Token], str],  # type: ignore
+    replace: Callable[[Token], str],
     keep_titlecase: bool,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     if keep_titlecase is True:
 
-        def __replace(t) -> str:
+        def __replace(t: Token) -> str:
             text = replace(t)
             if t.is_title is True:
                 text = text.capitalize()
             return text
 
     else:
-        __replace = replace  # type: ignore
+        __replace = replace
 
     example_dict = example.to_dict()
     example_dict["token_annotation"]["ORTH"] = [
@@ -203,11 +203,11 @@ def token_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_replace_v1")  # type: ignore
+@spacy.registry.augmenters("token_replace_v1")
 def create_token_replace_augmenter_v1(
-    replace: Callable[[Token], str],  # type: ignore
+    replace: Callable[[Token], str],
     keep_titlecase: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
@@ -232,14 +232,14 @@ def create_token_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("word_embedding_v1")  # type: ignore
+@spacy.registry.augmenters("word_embedding_v1")
 def create_word_embedding_augmenter_v1(
-    level=float,
+    level: float,
     n: int = 10,
-    nlp: Optional[Language] = None,  # type: ignore
+    nlp: Language | None = None,
     keep_titlecase: bool = True,
     ignore_casing: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter which replaces a token based on a replace function.
 
     Args:
@@ -247,7 +247,7 @@ def create_word_embedding_augmenter_v1(
         n: Number of most similar word vectors to sample from nlp
         nlp: A spaCy text-processing pipeline used for supplying the word vectors if the nlp model supplies doesn't contain word vectors.
         keep_titlecase: If original text was uppercased cased should replaces text also be?
-        ignore_case: The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing?
+        ignore_casing: The word embedding augmenter does not replace a word with the same word. Should this operation ignore casing?
 
     Returns:
         The augmenter.
@@ -289,5 +289,5 @@ def create_word_embedding_augmenter_v1(
         token_replace_augmenter_v1,
         replace=__replace,
         keep_titlecase=keep_titlecase,
-        level=level,  # type: ignore
+        level=level,
     )

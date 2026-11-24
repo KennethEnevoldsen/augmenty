@@ -1,6 +1,6 @@
 import random
+from collections.abc import Callable, Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import numpy as np
 import spacy
@@ -16,7 +16,7 @@ def token_swap_augmenter_v1(
     level: float,
     respect_ents: bool,
     respect_sentences: bool,
-) -> Iterator[Example]:  # type: ignore
+) -> Iterator[Example]:
     example_dict = example.to_dict()
 
     n_tok = len(example.y)
@@ -24,10 +24,10 @@ def token_swap_augmenter_v1(
     if respect_ents is True:
         swap_ents = False
 
-    is_swapped = set()  # type: ignore
+    is_swapped = set()
 
     tok_anno = example_dict["token_annotation"]
-    for i in range(n_tok):  # type: ignore
+    for i in range(n_tok):
         if i in is_swapped:
             continue
         if random.random() < level:
@@ -39,7 +39,7 @@ def token_swap_augmenter_v1(
             if min_i in is_swapped:
                 continue
             if min_i > i:
-                i, min_i = min_i, i  # make so that i is always the biggest
+                i, min_i = min_i, i  # noqa: PLW2901 make so that i is always the biggest
                 is_swapped.add(i)
             if min_i < 0 or i == n_tok:  # e.g. if n_tok == 1
                 continue
@@ -84,14 +84,14 @@ def token_swap_augmenter_v1(
                     continue
                 if k == "HEAD":
                     if example.y.has_annotation("HEAD"):
-                        head = np.array(tok_anno[k])  # type: ignore
+                        head = np.array(tok_anno[k])
                         head[head == i], head[head == min_i] = min_i, i
                         tok_anno[k] = head
                     else:
                         continue
                 tok_anno[k][i], tok_anno[k][min_i] = tok_anno[k][min_i], tok_anno[k][i]
 
-            if respect_ents is True and swap_ents is True:  # type: ignore
+            if respect_ents is True and swap_ents is True:
                 ents = example_dict["doc_annotation"]["entities"]
                 ent1, ent2 = ents[min_i], ents[i]
                 if ent1 != "O" or ent2 != "O":
@@ -107,12 +107,12 @@ def token_swap_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_swap_v1")  # type: ignore
+@spacy.registry.augmenters("token_swap_v1")
 def create_token_swap_augmenter_v1(
     level: float,
     respect_ents: bool = True,
     respect_sentences: bool = True,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
 
     Args:

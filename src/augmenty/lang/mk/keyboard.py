@@ -2,7 +2,7 @@ from ...util import registry
 
 
 @registry.keyboards("mk_v1")
-def create_mk():
+def create_mk() -> dict[str, list[list[str]]]:
     mk = {
         "default": [
             ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],

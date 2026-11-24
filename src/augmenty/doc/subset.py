@@ -1,6 +1,6 @@
 import random
+from collections.abc import Iterator
 from functools import partial
-from typing import Iterator, Union
 
 import numpy as np
 import spacy
@@ -15,8 +15,8 @@ def paragraph_subset_augmenter_v1(
     nlp: Language,
     example: Example,
     *,
-    min_paragraph: Union[float, int],
-    max_paragraph: Union[float, int],
+    min_paragraph: float | int,
+    max_paragraph: float | int,
     respect_sentences: bool,
 ) -> Iterator[Example]:
     example_dict = example.to_dict()
@@ -31,19 +31,19 @@ def paragraph_subset_augmenter_v1(
         n = doc_len
 
     min_n = (
-        int(min_paragraph * n) if isinstance(min_paragraph, float) else min_paragraph  # type: ignore
+        int(min_paragraph * n) if isinstance(min_paragraph, float) else min_paragraph
     )
     max_n = (
-        int(max_paragraph * n) if isinstance(max_paragraph, float) else max_paragraph  # type: ignore
+        int(max_paragraph * n) if isinstance(max_paragraph, float) else max_paragraph
     )
     n_to_keep = random.randint(min_n, max_n)
     start_n = random.randint(0, n - n_to_keep)
     end_n = start_n + n_to_keep
 
     if respect_sentences:
-        sents = sents[start_n:end_n]  # type: ignore
+        sents = sents[start_n:end_n]
         if sents:
-            start, end = sents[0].start, sents[-1].end  # type: ignore
+            start, end = sents[0].start, sents[-1].end
         else:
             start, end = 0, 0
     else:
@@ -75,19 +75,19 @@ def paragraph_subset_augmenter_v1(
         token_anno[k] = token_anno[k][start:end]
     doc_anno["entities"] = doc_anno["entities"][start:end]
     if example.y.has_annotation("HEAD"):
-        token_anno["HEAD"] = (np.array(token_anno["HEAD"]) - start).tolist()  # type: ignore
+        token_anno["HEAD"] = (np.array(token_anno["HEAD"]) - start).tolist()
     else:
-        token_anno["HEAD"] = list(range(len(token_anno["HEAD"])))  # type: ignore
+        token_anno["HEAD"] = list(range(len(token_anno["HEAD"])))
 
     text = make_text_from_orth(example_dict)
     doc = nlp.make_doc(text)
     yield Example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("paragraph_subset_augmenter_v1")  # type: ignore
+@spacy.registry.augmenters("paragraph_subset_augmenter_v1")
 def create_paragraph_subset_augmenter_v1(
-    min_paragraph: Union[float, int] = 1,
-    max_paragraph: Union[float, int] = 1.00,
+    min_paragraph: float | int = 1,
+    max_paragraph: float | int = 1.00,
     respect_sentences: bool = True,
 ) -> Augmenter:
     """Create an augmenter that extracts a subset of a document.

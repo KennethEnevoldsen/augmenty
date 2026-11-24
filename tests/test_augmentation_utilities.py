@@ -1,6 +1,7 @@
-import augmenty
 from spacy.language import Language
 from spacy.tokens import Doc, Span
+
+import augmenty
 
 
 def test_combine(nlp_en_md: Language):
@@ -21,7 +22,7 @@ def test_combine(nlp_en_md: Language):
 
     augmented_docs = list(augmenty.docs(docs, augmenter=combined_aug, nlp=nlp_en_md))
 
-    assert augmented_docs[0][0].text == "spaCy"  # type: ignore
+    assert augmented_docs[0][0].text == "spaCy"
 
 
 def test_yield_original(nlp_en: Language):  # F811

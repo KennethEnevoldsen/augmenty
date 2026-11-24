@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 import numpy as np
 from pydantic import BaseModel
 from spacy.vocab import Vocab
@@ -18,11 +16,11 @@ class static_embedding(BaseModel):
     class Config:
         arbitrary_types_allowed = True
 
-    unit_vectors: Optional[np.ndarray] = None  # type: ignore
-    keys: Optional[List[int]] = None  # type: ignore
-    vocab: Optional[Vocab] = None  # type: ignore
+    unit_vectors: np.ndarray | None = None
+    keys: list[int] | None = None
+    vocab: Vocab | None = None
 
-    def most_similar(self, target: str, n: int) -> List[str]:  # type: ignore
+    def most_similar(self, target: str, n: int) -> list[str]:
         """Calculate most similar vectors using cosine similarity.
 
         Args:
@@ -33,8 +31,8 @@ class static_embedding(BaseModel):
             A list of most similar word.
         """
         target = self.vocab.get_vector(target)  # type: ignore
-        unit_target = target / np.linalg.norm(target)  # type: ignore
-        distances = np.dot(self.unit_vectors, unit_target)  # type: ignore
+        unit_target = target / np.linalg.norm(target)
+        distances = np.dot(self.unit_vectors, unit_target)
         d = distances.argsort()[::-1][:n]
         return [self.vocab.strings[self.keys[w]] for w in d]  # type: ignore
 
@@ -44,7 +42,7 @@ class static_embedding(BaseModel):
 
         vectors = vocab.vectors.data
         unit_vectors = vectors.copy()
-        lengths = np.linalg.norm(unit_vectors, axis=-1)  # type: ignore
+        lengths = np.linalg.norm(unit_vectors, axis=-1)
         # only normalise non-zero length (to avoid zero division errors)
         unit_vectors[lengths > 0] = unit_vectors / lengths[lengths > 0][:, np.newaxis]
         return static_embedding(unit_vectors=unit_vectors, keys=keys, vocab=vocab)
@@ -58,6 +56,6 @@ class static_embedding(BaseModel):
     def __contains__(self, key: str) -> bool:
         if key in self.vocab:  # type: ignore
             v = self.vocab.get_vector(key)  # type: ignore
-            if np.linalg.norm(v) > 0:  # type: ignore
+            if np.linalg.norm(v) > 0:
                 return True
         return False

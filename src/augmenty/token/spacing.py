@@ -1,9 +1,10 @@
 import random
+from collections.abc import Callable, Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
+from spacy.tokens import Token
 from spacy.training import Example
 
 from ..augment_utilities import make_text_from_orth
@@ -13,10 +14,10 @@ def letter_spacing_augmenter_v1(
     nlp: Language,
     example: Example,
     level: float,
-) -> Iterator[Example]:  # type: ignore
-    def __spacing(t):
+) -> Iterator[Example]:
+    def __spacing(t: Token) -> str:
         if random.random() < level:
-            return " ".join([c for c in t.text])
+            return " ".join(list(t.text))
         return t.text
 
     example_dict = example.to_dict()
@@ -26,10 +27,10 @@ def letter_spacing_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("letter_spacing_augmenter_v1")  # type: ignore
+@spacy.registry.augmenters("letter_spacing_augmenter_v1")
 def create_letter_spacing_augmenter_v1(
     level: float,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Typically casing is used to add emphasis to words, but letter spacing
     has also been used to add e m p h a s i s  to words (e.g. by Grundtvig;
     Baunvig, Jarvis and Nielbo, 2020). This augmenter randomly adds letter
@@ -51,8 +52,8 @@ def spacing_insertion_augmenter_v1(
     example: Example,
     level: float,
     max_insertions: int,
-) -> Iterator[Example]:  # type: ignore
-    def __spacing(t):
+) -> Iterator[Example]:
+    def __spacing(t: Token) -> str:
         insertions = 0
         text = []
         for c in t.text[:-1]:  # can't put a space at the end
@@ -70,11 +71,11 @@ def spacing_insertion_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("spacing_insertion_v1")  # type: ignore
+@spacy.registry.augmenters("spacing_insertion_v1")
 def create_spacing_insertion_augmenter_v1(
     level: float,
     max_insertions: int = 1,
-) -> Callable[[Language, Example], Iterator[Example]]:  # type: ignore
+) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates and augmneter that randomly adds a space after a chara cter.
     Tokens are kept the same.
 

@@ -1,14 +1,12 @@
 import random
+from collections.abc import Callable, Iterator
 from functools import partial
-from typing import Callable, Dict, Iterator, List, Optional, Union
 
 import spacy
 from spacy.language import Language
 from spacy.tokens import Token
 from spacy.training import Example
 from wasabi import msg
-
-from augmenty.util import Augmenter
 
 from ..augment_utilities import make_text_from_orth
 from .wordnet_util import init_wordnet
@@ -19,7 +17,7 @@ def token_insert_augmenter_v1(
     example: Example,
     level: float,
     respect_ents: bool,
-    insert: Callable[[Token], Dict[str, str]],
+    insert: Callable[[Token], dict[str, str]],
 ) -> Iterator[Example]:
     doc = example.y
 
@@ -70,10 +68,10 @@ def token_insert_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("token_insert_v1")  # type: ignore
+@spacy.registry.augmenters("token_insert_v1")
 def create_token_insert_augmenter_v1(
     level: float,
-    insert: Callable[[Token], Dict[str, str]],
+    insert: Callable[[Token], dict[str, str]],
     respect_ents: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly inserts a token generated based on a
@@ -109,10 +107,10 @@ def create_token_insert_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("token_insert_random_v1")  # type: ignore
+@spacy.registry.augmenters("token_insert_random_v1")
 def create_token_insert_random_augmenter_v1(
     level: float,
-    insert: Optional[List[Union[str, Dict[str, str]]]] = None,
+    insert: list[str | dict[str, str]] | None = None,
     respect_ents: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly swaps two neighbouring tokens.
@@ -144,15 +142,14 @@ def create_token_insert_random_augmenter_v1(
 
     d = {"insert": insert}
 
-    def __insert(t: Token, d: dict) -> dict:
+    def __insert(t: Token) -> dict:
         if d["insert"] is None:
             d["insert"] = list(t.doc.vocab.strings)
-        t = random.choice(d["insert"])  # type: ignore
-        if isinstance(t, dict):
-            return t
-        return {"ORTH": t}
+        choice = random.choice(d["insert"])
+        if isinstance(choice, dict):
+            return choice
+        return {"ORTH": choice}
 
-    __insert = partial(__insert, d=d)
     return partial(
         token_insert_augmenter_v1,
         level=level,
@@ -161,7 +158,7 @@ def create_token_insert_random_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("duplicate_token_v1")  # type: ignore
+@spacy.registry.augmenters("duplicate_token_v1")
 def create_duplicate_token_augmenter_v1(
     level: float,
     respect_ents: bool = True,
@@ -185,7 +182,7 @@ def create_duplicate_token_augmenter_v1(
         ["one one two two three three"]
     """
 
-    def __insert(t: Token, respect_ents=respect_ents) -> dict:
+    def __insert(t: Token, respect_ents: bool = respect_ents) -> dict:
         insert_token = {
             "ORTH": t.text,
             "LEMMA": t.lemma_,
@@ -205,14 +202,14 @@ def create_duplicate_token_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("random_synonym_insertion_v1")  # type: ignore
+@spacy.registry.augmenters("random_synonym_insertion_v1")
 def create_random_synonym_insertion_augmenter_v1(
     level: float,
     respect_pos: bool = True,
     respect_ents: bool = True,
     pos_getter: Callable[[Token], str] = lambda token: token.pos_,
-    lang: Optional[str] = None,
-    context_window: Optional[int] = None,
+    lang: str | None = None,
+    context_window: int | None = None,
     verbose: bool = True,
 ) -> Callable[[Language, Example], Iterator[Example]]:
     """Creates an augmenter that randomly inserts a synonym or from the tokens
@@ -253,7 +250,7 @@ def create_random_synonym_insertion_augmenter_v1(
         lang: str,
         respect_pos: bool,
         verbose: bool,
-    ) -> Union[dict, None]:
+    ) -> dict | None:
         doc = t.doc
         if respect_pos is True and doc.has_annotation("POS") is False:
             if verbose:
@@ -293,13 +290,13 @@ def create_random_synonym_insertion_augmenter_v1(
                         {
                             (lem, pos)
                             for syn in syns
-                            for lem in syn.lemma_names(lang=lang)  # type: ignore
+                            for lem in syn.lemma_names(lang=lang)
                         },
                     )
             else:
                 syns = wordnet.synsets(word, lang=lang)
                 rep = rep.union(
-                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},  # type: ignore
+                    {lem for syn in syns for lem in syn.lemma_names(lang=lang)},
                 )
 
         if rep:

@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     texts = ["This is a test sentence."]
 
-    for i in range(10):
+    for _ in range(10):
         augmented_texts = augmenty.texts(texts, augmenter, nlp=nlp)
 
         for text in augmented_texts:

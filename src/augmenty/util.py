@@ -1,6 +1,7 @@
 """Utility functions for the package."""
 
-from typing import Any, Callable, Dict, Iterable, Iterator, List
+from collections.abc import Callable, Iterable, Iterator
+from typing import Any
 
 import catalogue
 import spacy
@@ -72,7 +73,7 @@ def texts(
     if isinstance(texts, str):
         texts = [texts]
 
-    def __gen() -> Iterable[Doc]:  # type: ignore
+    def __gen() -> Iterable[Doc]:
         for text in texts:
             yield nlp(text)
 
@@ -80,7 +81,7 @@ def texts(
         yield doc.text
 
 
-def augmenters() -> Dict[str, Augmenter]:
+def augmenters() -> dict[str, Augmenter]:
     """A utility function to get an overview of all augmenters.
 
     Returns:
@@ -91,7 +92,7 @@ def augmenters() -> Dict[str, Augmenter]:
     >>> "upper_case_v1" in augmenters
     True
     """
-    return spacy.registry.augmenters.get_all()  # type: ignore
+    return spacy.registry.augmenters.get_all()
 
 
 def load(augmenter: str, **kwargs: Any) -> Augmenter:
@@ -108,11 +109,11 @@ def load(augmenter: str, **kwargs: Any) -> Augmenter:
     >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
     ["HELLO THERE!"]
     """
-    aug = spacy.registry.augmenters.get(augmenter)  # type: ignore
+    aug = spacy.registry.augmenters.get(augmenter)
     return aug(**kwargs)
 
 
-def keyboards() -> List[str]:  # type: ignore
+def keyboards() -> list[str]:
     """A utility function to get an overview of all keyboards.
 
     Returns:
@@ -124,7 +125,7 @@ def keyboards() -> List[str]:  # type: ignore
     return list(registry.keyboards.get_all().keys())
 
 
-def meta() -> Dict[str, dict]:
+def meta() -> dict[str, dict]:
     """Returns a a dictionary containing metadata for each augmenter.
 
     Returns:
@@ -135,7 +136,6 @@ def meta() -> Dict[str, dict]:
     >>> metadata["token_swap_v1"]
     """
     import json
-    import os
     import pathlib
 
     p = pathlib.Path(__file__).parent.resolve()

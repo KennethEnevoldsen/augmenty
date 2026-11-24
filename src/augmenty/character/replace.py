@@ -1,8 +1,8 @@
 """Augmenters for randomly or semi-randomly replacing characters."""
 
 import random
+from collections.abc import Iterator
 from functools import partial
-from typing import Callable, Iterator
 
 import spacy
 from spacy.language import Language
@@ -25,8 +25,9 @@ def char_replace_augmenter_v1(
         t_ = []
         for c in t.text:
             if random.random() < level and c in replace:
-                c = random.choice(replace[c])
-            t_.append(c)
+                t_.append(random.choice(replace[c]))
+            else:
+                t_.append(c)
         return "".join(t_)
 
     example_dict = example.to_dict()
@@ -36,7 +37,7 @@ def char_replace_augmenter_v1(
     yield example.from_dict(doc, example_dict)
 
 
-@spacy.registry.augmenters("char_replace_random_v1")  # type: ignore
+@spacy.registry.augmenters("char_replace_random_v1")
 def create_char_random_augmenter_v1(
     level: float,
     keyboard: str = "en_qwerty_v1",
@@ -67,7 +68,7 @@ def create_char_random_augmenter_v1(
     return partial(char_replace_augmenter_v1, replace=replace_dict, level=level)
 
 
-@spacy.registry.augmenters("char_replace_v1")  # type: ignore
+@spacy.registry.augmenters("char_replace_v1")
 def create_char_replace_augmenter_v1(
     level: float,
     replace: dict,
@@ -94,7 +95,7 @@ def create_char_replace_augmenter_v1(
     )
 
 
-@spacy.registry.augmenters("keystroke_error_v1")  # type: ignore
+@spacy.registry.augmenters("keystroke_error_v1")
 def create_keystroke_error_augmenter_v1(
     level: float,
     distance: float = 1.5,

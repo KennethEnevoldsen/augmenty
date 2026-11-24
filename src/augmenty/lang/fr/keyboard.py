@@ -2,7 +2,7 @@ from ...util import registry
 
 
 @registry.keyboards("fr_azerty_v1")
-def create_qwerty_fr():
+def create_qwerty_fr() -> dict[str, list[list[str]]]:
     qwerty = {
         "default": [
             ["&", "é", '"', "'", "(", "§", "è", "!", "ç", "à", ")", "-"],
