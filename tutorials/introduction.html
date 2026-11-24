@@ -14,7 +14,7 @@
         <link rel="prefetch" href="../_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Getting Started - augmenty 1.4.5.dev12 documentation</title>
+        <title>Getting Started - augmenty 1.4.5.dev13 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -178,7 +178,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">augmenty 1.4.5.dev12 documentation</div></a>
+      <a href="../index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -436,61 +436,7 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">augmented_texts</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">texts</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">combined_aug</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">augmented_texts</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="nn">File ~/work/augmenty/augmenty/src/augmenty/util.py:80,</span> in <span class="ni">texts</span><span class="nt">(texts, augmenter, nlp)</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">78</span>         <span class="k">yield</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">80</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">(</span><span class="n">__gen</span><span class="p">(),</span> <span class="n">augmenter</span><span class="o">=</span><span class="n">augmenter</span><span class="p">,</span> <span class="n">nlp</span><span class="o">=</span><span class="n">nlp</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span>     <span class="k">yield</span> <span class="n">doc</span><span class="o">.</span><span class="n">text</span>
-
-<span class="nn">File ~/work/augmenty/augmenty/src/augmenty/util.py:51,</span> in <span class="ni">docs</span><span class="nt">(docs, augmenter, nlp)</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">examples</span> <span class="o">=</span> <span class="n">augmenter</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">51</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>     <span class="k">yield</span> <span class="n">e</span><span class="o">.</span><span class="n">y</span>
-
-<span class="nn">File ~/work/augmenty/augmenty/src/augmenty/augment_utilities.py:34,</span> in <span class="ni">combine.&lt;locals&gt;.apply_multiple_augmenters</span><span class="nt">(nlp, example)</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="n">example</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="k">for</span> <span class="n">aug</span> <span class="ow">in</span> <span class="n">augmenters</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">34</span>     <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">examples</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">aug</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">example</span><span class="p">)]</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="k">yield from</span> <span class="n">examples</span>
-
-<span class="nn">File ~/work/augmenty/augmenty/src/augmenty/token/replace.py:161,</span> in <span class="ni">create_wordnet_synonym_augmenter_v1.&lt;locals&gt;.wordnet_synonym_augmenter_v1</span><span class="nt">(nlp, example, level, lang, getter, respect_pos, keep_titlecase)</span>
-<span class="g g-Whitespace">    </span><span class="mi">157</span>     <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
-<span class="g g-Whitespace">    </span><span class="mi">159</span> <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">160</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">][</span><span class="s2">"ORTH"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-<span class="ne">--&gt; </span><span class="mi">161</span>     <span class="n">__replace</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">reference</span>
-<span class="g g-Whitespace">    </span><span class="mi">162</span> <span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">163</span> <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">164</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">make_doc</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="nn">File ~/work/augmenty/augmenty/src/augmenty/token/replace.py:153,</span> in <span class="ni">create_wordnet_synonym_augmenter_v1.&lt;locals&gt;.wordnet_synonym_augmenter_v1.&lt;locals&gt;.__replace</span><span class="nt">(t)</span>
-<span class="g g-Whitespace">    </span><span class="mi">151</span>     <span class="n">rep</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">152</span> <span class="k">if</span> <span class="n">rep</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">153</span>     <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span>         <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
-
-<span class="nn">File ~/work/_temp/uv-python-dir/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/random.py:413,</span> in <span class="ni">Random.sample</span><span class="nt">(self, population, k, counts)</span>
-<span class="g g-Whitespace">    </span><span class="mi">389</span> <span class="c1"># Sampling without replacement entails tracking either potential</span>
-<span class="g g-Whitespace">    </span><span class="mi">390</span> <span class="c1"># selections (the pool) in a list or previous selections in a set.</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span> 
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">409</span> <span class="c1"># too many calls to _randbelow(), making them slower and</span>
-<span class="g g-Whitespace">    </span><span class="mi">410</span> <span class="c1"># causing them to eat more entropy than necessary.</span>
-<span class="g g-Whitespace">    </span><span class="mi">412</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">_Sequence</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">413</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Population must be a sequence.  "</span>
-<span class="g g-Whitespace">    </span><span class="mi">414</span>                     <span class="s2">"For dicts or sets, use sorted(d)."</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="k">if</span> <span class="n">counts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="ne">TypeError</span>: Population must be a sequence.  For dicts or sets, use sorted(d).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a rattling shaft for augmentation which is arrive_at expend SpaCy uprise by Explosion.
 </pre></div>
 </div>
 </div>
@@ -529,8 +475,8 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a wonderful tool for augmentation.
-Augmentation is q wonderful tool for obtain6ng higher performance on li,ited data.
-You cxn also use it to see how robush your model is to changes.
+Augmentation is a wonderful tool for obtaining higher performance on limited data.
+You can also use it to see how donust your model is to changes.
 </pre></div>
 </div>
 </div>
@@ -551,9 +497,9 @@ You cxn also use it to see how robush your model is to changes.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a tool wonderful for augmentation.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty a is wonderful tool for augmentation.
 Augmenty is a wonderful tool for augmentation.
-is Augmentation wonderful a tool obtaining for higher performance on limited data.
+is Augmentation a wonderful tool for obtaining higher performance on limited data.
 Augmentation is a wonderful tool for obtaining higher performance on limited data.
 You can also use it to see how robust your is model to changes.
 You can also use it to see how robust your model is to changes.
@@ -628,7 +574,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Leah White
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Adam Reynolds
 </pre></div>
 </div>
 </div>
@@ -730,7 +676,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=757c012a"></script>
+</div><script src="../_static/documentation_options.js?v=dc3c754c"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
