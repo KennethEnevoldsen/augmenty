@@ -1,6 +1,4 @@
-# GitHub action to run linting
-
-name: run-linting
+name: lint
 
 on:
   pull_request:
@@ -9,20 +7,20 @@ on:
     branches: [main]
 
 jobs:
-  pre-commit:
+  lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v7
         with:
-          python-version: "3.8"
-          cache: "pip"
+          fetch-depth: 0
 
-      - name: Install dependencies
-        run: make install
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.4.0
+        with:
+          python-version: "3.12"
 
+      # fails on unformatted code or lint errors rather than fixing them
       - name: Lint
-        id: lint
-        run: |
-          make lint
+        run: make lint-check
