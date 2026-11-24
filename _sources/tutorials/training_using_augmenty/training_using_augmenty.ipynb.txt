@@ -154,7 +154,7 @@
     "\n",
     "texts = [\"This is a test sentence.\"]\n",
     "\n",
-    "for i in range(10):\n",
+    "for _i in range(10):\n",
     "    augmented_texts = augmenty.texts(texts, augmenter, nlp=nlp)\n",
     "\n",
     "    for text in augmented_texts:\n",
