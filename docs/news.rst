@@ -1,7 +1,7 @@
 News and Changelog
 ==============================
 
-To see the automatically created changelog see the `CHANGELOG.md <https://github.com/KennethEnevoldsen/augmenty/blob/main/CHANGELOG.md>`__ file.
+For the full list of changes in each release see the `GitHub releases <https://github.com/KennethEnevoldsen/augmenty/releases>`__.
 
 * 1.1.0 (17/01/23):
 
