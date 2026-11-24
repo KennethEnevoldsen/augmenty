@@ -300,7 +300,7 @@ def create_random_synonym_insertion_augmenter_v1(
                 )
 
         if rep:
-            text = random.sample(rep, k=1)[0]
+            text = random.choice(sorted(rep))
             if isinstance(text, tuple):
                 return {
                     "ORTH": text[0],

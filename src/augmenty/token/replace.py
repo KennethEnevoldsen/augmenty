@@ -150,7 +150,7 @@ def create_wordnet_synonym_augmenter_v1(
                     if word in rep:
                         rep.remove(word)
                     if rep:
-                        text = random.sample(rep, k=1)[0]
+                        text = random.choice(sorted(rep))
                         if keep_titlecase is True and t.is_title is True:
                             text = text.capitalize()
                         return text
