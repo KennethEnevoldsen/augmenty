@@ -74,7 +74,6 @@ tests = [
     "pytest-cov>=3.0.0",
     "pytest-lazy-fixture>=0.6.3",
     "pytest-timeout>=2.1.0",
-    "dacy>=2.3.1",                # DaNE test set
     "nltk>=3.10.0",                # wordnet augmenters
     "en-core-web-md",
 ]

@@ -267,7 +267,6 @@ docs = [
     { name = "sphinxext-opengraph" },
 ]
 tests = [
-    { name = "dacy" },
     { name = "en-core-web-md" },
     { name = "nltk" },
     { name = "pytest" },
@@ -306,7 +305,6 @@ docs = [
     { name = "sphinxext-opengraph", specifier = ">=0.7.3" },
 ]
 tests = [
-    { name = "dacy", specifier = ">=2.3.1" },
     { name = "en-core-web-md", url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl" },
     { name = "nltk", specifier = ">=3.10.0" },
     { name = "pytest", specifier = ">=7.1.3,<8.0.0" },
