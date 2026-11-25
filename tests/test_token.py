@@ -70,6 +70,26 @@ def test_create_token_dict_replace_augmenter(nlp_en: Language):
     assert next(docs).text == "Look a level door!"
 
 
+def test_token_dict_replace_augmenter_casing_and_sets(nlp_en: Language):
+    replace = {"Happy": {"cheery", "joyful"}}
+    aug = augmenty.load("token_dict_replace_v1", level=1, replace=replace)
+    texts = list(augmenty.texts(["Happy days", "happy days"], aug, nlp_en))
+    assert texts[0] in ["Cheery days", "Joyful days"]
+    assert texts[1] in ["cheery days", "joyful days"]
+    assert replace == {"Happy": {"cheery", "joyful"}}  # input is not mutated
+
+
+def test_wordnet_synonym_augmenter_issue_225(nlp_da: Language):
+    doc = Doc(
+        nlp_da.vocab,
+        words=["hund", "løber", "hurtigt"],
+        pos=["NOUN", "VERB", "ADV"],
+    )
+    aug = augmenty.load("wordnet_synonym_v1", level=1, lang="da")
+    (augmented,) = augmenty.docs([doc], augmenter=aug, nlp=nlp_da)
+    assert augmented[0].text != "hund"
+
+
 def test_create_wordnet_synonym_augmenter(nlp_en: Language, nlp_da: Language):
     text = "Skal jeg pande dig en?"
 

@@ -26,12 +26,12 @@ def token_dict_replace_augmenter_v1(
         if ignore_casing is True:
             text = text.lower()
         if text in replace and random.random() < level:
-            if isinstance(replace[t.text], dict):
+            if isinstance(replace[text], dict):
                 pos = getter(t)
-                if pos in replace[t.text]:
-                    text = random.sample(replace[t.text][pos], k=1)[0]  # type: ignore
+                if pos in replace[text]:
+                    text = random.choice(sorted(replace[text][pos]))  # type: ignore
             else:
-                text = random.sample(replace[t.text], k=1)[0]  # type: ignore
+                text = random.choice(sorted(replace[text]))
             if keep_titlecase is True and t.is_title is True:
                 text = text.capitalize()
             return text
@@ -73,8 +73,7 @@ def create_token__dict_replace_augmenter_v1(
         >>> create_token_dict_replace_augmenter(replace=replace, level=.10)
     """
     if ignore_casing is True:
-        for k in replace:
-            replace[k.lower()] = replace[k]  # type: ignore
+        replace = {k.lower(): v for k, v in replace.items()}  # type: ignore
 
     return partial(
         token_dict_replace_augmenter_v1,
