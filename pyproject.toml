@@ -61,7 +61,6 @@ Documentation = "https://kennethenevoldsen.github.io/augmenty/"
 Repository = "https://github.com/KennethEnevoldsen/augmenty"
 
 [project.optional-dependencies]
-da = ["dacy>=2.3.1"]
 all = ["nltk>=3.10.0"]
 
 [dependency-groups]

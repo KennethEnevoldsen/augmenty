@@ -18,16 +18,8 @@ You can install these additional dependencies by running the following command:
 Language specific augmentations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-augmenty supports language specific augmentations, which are not installed by default. To install these augmentations, run the following command:
-
-.. code-block::
-
-   pip install augmenty[{lang}]
-
-
-Where valid values for {lang} are:
-
-- ``da``: Danish
+Language specific augmenters (e.g. the Danish ``da_æøå_replace_v1``) and keyboard layouts are included in the
+base installation and do not require any additional dependencies.
 
 Development Installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -38,5 +30,5 @@ package using the following commands:
 .. code-block::
 
    git clone https://github.com/KennethEnevoldsen/augmenty
-
-   pip install -e ".[style,tests,docs]"
+   cd augmenty
+   make install  # uses uv to install the package and all development dependencies
