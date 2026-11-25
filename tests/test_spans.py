@@ -2,7 +2,8 @@ from collections.abc import Callable
 
 import pytest
 from spacy.language import Language
-from spacy.tokens import Doc
+from spacy.tokens import Doc, Span
+from spacy.training import Example
 
 import augmenty
 
@@ -182,3 +183,72 @@ def test_create_ent_format_augmenter(nlp_en_md):  # noqa F811
 
     aug_texts = list(augmenty.texts(texts, augmenter, nlp_en_md))
     assert aug_texts[0] == aug_text
+
+
+@pytest.fixture
+def doc_with_links(nlp_en: Language) -> Doc:
+    doc = Doc(
+        nlp_en.vocab,
+        words=["Kenneth", "Enevoldsen", "made", "Augmenty", "."],
+        spaces=[True, True, True, False, False],
+    )
+    doc.ents = [
+        Span(doc, 0, 2, "PER", kb_id="Q1"),
+        Span(doc, 3, 4, "ORG", kb_id="Q2"),
+    ]
+    return doc
+
+
+def test_ent_replace_with_links(nlp_en: Language, doc_with_links: Doc):
+    """Replaced entities drop their link, other links are kept (#219)."""
+    aug = augmenty.load("ents_replace_v1", level=1, ent_dict={"PER": [["Jo"]]})
+    (example,) = aug(nlp_en, Example(doc_with_links, doc_with_links))
+
+    assert example.y.text == "Jo made Augmenty."
+    assert [(e.text, e.kb_id_) for e in example.y.ents] == [
+        ("Jo", ""),
+        ("Augmenty", "Q2"),
+    ]
+
+
+def test_ent_format_with_links(nlp_en: Language, doc_with_links: Doc):
+    """Formatted entities keep their link (#219)."""
+    aug = augmenty.load(
+        "ents_format_v1",
+        level=1,
+        reordering=[-1, None],
+        formatter=[None, lambda t: t.text[0] + "."],
+        ent_types=["PER"],
+    )
+    (example,) = aug(nlp_en, Example(doc_with_links, doc_with_links))
+
+    assert example.y.text == "Enevoldsen K. made Augmenty."
+    assert [(e.text, e.kb_id_) for e in example.y.ents] == [
+        ("Enevoldsen K.", "Q1"),
+        ("Augmenty", "Q2"),
+    ]
+
+
+def test_ent_format_with_span_annotations(nlp_en: Language):
+    """Span annotations are moved along when a formatted entity changes length."""
+    doc = Doc(
+        nlp_en.vocab,
+        words=["Kenneth", "Enevoldsen", "made", "Augmenty", "."],
+        spaces=[True, True, True, False, False],
+        ents=["B-PER", "I-PER", "O", "B-ORG", "O"],
+    )
+    doc.spans["person"] = [doc[0:2]]
+    doc.spans["tool"] = [doc[3:4]]
+
+    aug = augmenty.load(
+        "ents_format_v1",
+        level=1,
+        reordering=[-1, None],
+        formatter=[None, lambda t: t.text[0] + "."],
+        ent_types=["PER"],
+    )
+    (augmented,) = augmenty.docs([doc], augmenter=aug, nlp=nlp_en)
+
+    assert augmented.text == "Enevoldsen K. made Augmenty."
+    assert augmented.spans["person"][0].text == "Enevoldsen K."
+    assert augmented.spans["tool"][0].text == "Augmenty"

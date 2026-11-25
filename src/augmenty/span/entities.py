@@ -80,16 +80,27 @@ def __normalize_entity(entity: ENTITY, nlp: Language) -> dict[str, Any]:
     }
 
 
-def _update_span_annotations(
-    span_anno: dict[str, list],
+def _update_char_annotations(
+    doc_anno: dict[str, Any],
     ent: Span,
     offset: int,
     entity_offset: int,
-) -> dict[str, list]:
-    """Update the span annotations to be in line with the new doc."""
-    ent_range = (ent.start + offset, ent.end + offset)
+    keep_link: bool,
+) -> None:
+    """Update the character offsets of the span and link annotations to be in
+    line with the new doc.
 
-    for anno_key, spans in span_anno.items():
+    Args:
+        doc_anno: The doc annotations of the example dict, updated in place.
+        ent: The entity which is changed.
+        offset: The character offset from previously changed entities.
+        entity_offset: The change in character length of the entity.
+        keep_link: Whether the entity should keep its link (e.g. when it is
+            reformatted), or have it removed (e.g. when it is replaced).
+    """
+    ent_range = (ent.start_char + offset, ent.end_char + offset)
+
+    for anno_key, spans in doc_anno["spans"].items():
         new_spans = []
         for span_start, span_end, _, __ in spans:
             new_start, new_end = offset_range(
@@ -99,9 +110,19 @@ def _update_span_annotations(
             )
             new_spans.append((new_start, new_end, _, __))
 
-        span_anno[anno_key] = new_spans
+        doc_anno["spans"][anno_key] = new_spans
 
-    return span_anno
+    links = doc_anno.get("links", {})
+    if not keep_link:
+        links.pop(ent_range, None)
+    doc_anno["links"] = {
+        offset_range(
+            current_range=link_range,
+            inserted_range=ent_range,
+            offset=entity_offset,
+        ): link
+        for link_range, link in links.items()
+    }
 
 
 def ent_augmenter_v1(
@@ -118,7 +139,6 @@ def ent_augmenter_v1(
     offset = 0
     str_offset = 0
 
-    spans_anno = example_dict["doc_annotation"]["spans"]
     tok_anno = example_dict["token_annotation"]
     ents = example_dict["doc_annotation"]["entities"]
 
@@ -183,11 +203,12 @@ def ent_augmenter_v1(
                     ],
                 )
 
-            spans_anno = _update_span_annotations(
-                spans_anno,
+            _update_char_annotations(
+                example_dict["doc_annotation"],
                 ent,
                 str_offset,
                 entity_str_offset,
+                keep_link=False,
             )
             offset += entity_offset
             str_offset += entity_str_offset
@@ -337,6 +358,7 @@ def ent_format_augmenter_v1(
     example_dict = example.to_dict()
 
     tok_anno = example_dict["token_annotation"]
+    str_offset = 0
 
     for ent in example.y.ents:
         if (ent_types is None or ent.label_ in ent_types) and random.random() < level:
@@ -359,6 +381,17 @@ def ent_format_augmenter_v1(
 
             tok_anno["ORTH"][ent.start : ent.end] = new_ent_
             tok_anno["LEMMA"][ent.start : ent.end] = new_ent_
+
+            # the spacing is kept per position, so only the token lengths change
+            entity_str_offset = sum(map(len, new_ent_)) - sum(len(t) for t in ent)
+            _update_char_annotations(
+                example_dict["doc_annotation"],
+                ent,
+                str_offset,
+                entity_str_offset,
+                keep_link=True,
+            )
+            str_offset += entity_str_offset
 
     text = make_text_from_orth(example_dict)
 
