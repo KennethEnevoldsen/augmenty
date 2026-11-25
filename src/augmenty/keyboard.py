@@ -1,12 +1,14 @@
 """Function for defining and handling keyboard layouts."""
 
-from pydantic import BaseModel
+from collections.abc import Iterator
+from dataclasses import dataclass
 
 from .util import registry
 
 
-class Keyboard(BaseModel):
-    """A Pydantic dataclass object for constructing Keyboard setup.
+@dataclass
+class Keyboard:
+    """A dataclass for constructing a keyboard setup.
 
     Args:
         keyboard_array: An array corresponding to a keyboard. This should include two keys a "default" and a "shift". Each containing
@@ -51,7 +53,7 @@ class Keyboard(BaseModel):
                 return True
         return False
 
-    def euclidian_distance(self, key_a: str, key_b: str) -> int:
+    def euclidian_distance(self, key_a: str, key_b: str) -> float:
         """Returns euclidian distance between two keys.
 
         Args:
@@ -72,7 +74,7 @@ class Keyboard(BaseModel):
 
         return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5 + shift_cost
 
-    def all_keys(self):
+    def all_keys(self) -> Iterator[str]:
         """Yields all keys in keyboard.
 
         Yields:
@@ -82,7 +84,7 @@ class Keyboard(BaseModel):
             for x, _ in enumerate(self.keyboard_array[arr]):
                 yield from self.keyboard_array[arr][x]
 
-    def get_neighbours(self, key: str, distance: int = 1) -> list[int]:
+    def get_neighbours(self, key: str, distance: float = 1) -> list[str]:
         """Gets the neighbours of a key with a specified distance.
 
         Args:
@@ -100,7 +102,7 @@ class Keyboard(BaseModel):
                 l.append(k)
         return l
 
-    def create_distance_dict(self, distance: int = 1) -> dict:
+    def create_distance_dict(self, distance: float = 1) -> dict[str, list[str]]:
         return {k: self.get_neighbours(k, distance=distance) for k in self.all_keys()}
 
     @staticmethod

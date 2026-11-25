@@ -6,6 +6,7 @@ For the full list of changes in each release see the [GitHub releases](https://g
   - Dropped support for Python 3.8 and 3.9, and added support for Python 3.11 to 3.14.
   - The wordnet augmenters now require `nltk>=3.10`, which uses the Open Multilingual Wordnet 2.0.
   - Removed the `da` extra, which only installed DaCy. The Danish augmenters require no additional dependencies.
+  - Renamed `augmenty.token.static_embedding_util.static_embedding` to `StaticEmbedding`.
 - **1.1.0** (17/01/23)
   - Added support for spaCy 3.4.0, this requires refactoring the names of all augmenters from `{augmenter-name}.v1` to `{augmenter-name}_v1` as the `.` is no longer allowed in spaCy component names.
 - **1.0.4** (11/10/22)

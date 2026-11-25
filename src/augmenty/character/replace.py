@@ -125,5 +125,5 @@ def create_keystroke_error_augmenter_v1(
         ["A sajple texr"]
     """
     kb = Keyboard.from_registry(keyboard)
-    replace_dict = kb.create_distance_dict(distance=distance)  # type: ignore
+    replace_dict = kb.create_distance_dict(distance=distance)
     return partial(char_replace_augmenter_v1, replace=replace_dict, level=level)

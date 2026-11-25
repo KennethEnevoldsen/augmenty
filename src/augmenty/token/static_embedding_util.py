@@ -1,9 +1,11 @@
+from dataclasses import dataclass, field
+
 import numpy as np
-from pydantic import BaseModel
 from spacy.vocab import Vocab
 
 
-class static_embedding(BaseModel):
+@dataclass
+class StaticEmbedding:
     """A utility object for computing most similar word vectors using
     precomputed normalized vectors.
 
@@ -13,12 +15,9 @@ class static_embedding(BaseModel):
         vocab: A SpaCy vocabulary
     """
 
-    class Config:
-        arbitrary_types_allowed = True
-
-    unit_vectors: np.ndarray | None = None
-    keys: list[int] | None = None
-    vocab: Vocab | None = None
+    unit_vectors: np.ndarray | None = field(default=None, repr=False)
+    keys: list[int] | None = field(default=None, repr=False)
+    vocab: Vocab | None = field(default=None, repr=False)
 
     def most_similar(self, target: str, n: int) -> list[str]:
         """Calculate most similar vectors using cosine similarity.
@@ -36,8 +35,8 @@ class static_embedding(BaseModel):
         d = distances.argsort()[::-1][:n]
         return [self.vocab.strings[self.keys[w]] for w in d]  # type: ignore
 
-    @staticmethod
-    def from_vocab(vocab: Vocab) -> "static_embedding":
+    @classmethod
+    def from_vocab(cls, vocab: Vocab) -> "StaticEmbedding":
         keys = list(vocab.vectors.keys())
 
         vectors = vocab.vectors.data
@@ -45,9 +44,9 @@ class static_embedding(BaseModel):
         lengths = np.linalg.norm(unit_vectors, axis=-1)
         # only normalise non-zero length (to avoid zero division errors)
         unit_vectors[lengths > 0] = unit_vectors / lengths[lengths > 0][:, np.newaxis]
-        return static_embedding(unit_vectors=unit_vectors, keys=keys, vocab=vocab)
+        return cls(unit_vectors=unit_vectors, keys=keys, vocab=vocab)
 
-    def update_from_vocab(self, vocab: Vocab):
+    def update_from_vocab(self, vocab: Vocab) -> None:
         emb = self.from_vocab(vocab)
         self.vocab = emb.vocab
         self.keys = emb.keys

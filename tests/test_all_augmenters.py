@@ -1,7 +1,5 @@
 """Pytest script for testing all augmenters in a variety of cases."""
 
-from collections.abc import Iterable
-
 import numpy as np
 import pytest
 from spacy.language import Language
@@ -81,29 +79,16 @@ augmenters_args = {
 @pytest.mark.parametrize("aug,args", [(k, augmenters_args[k]) for k in augmenters_args])  # noqa
 @pytest.mark.parametrize("level", [0.1, 0.5, 1])
 @pytest.mark.timeout(100)
-@pytest.mark.parametrize(
-    "examples,nlp",  # noqa
-    [
-        (
-            pytest.lazy_fixture("books_w_annotations"),  # type: ignore
-            pytest.lazy_fixture("nlp_en"),  # type: ignore
-        ),
-        (
-            pytest.lazy_fixture("books_without_annotations"),  # type: ignore
-            pytest.lazy_fixture("nlp_en"),  # type: ignore
-        ),
-    ],
-)
 def test_augmenters(
     aug: str,
     args: dict,
-    examples: Iterable[Example],
-    nlp: Language,
+    books: list[Example],
+    nlp_en: Language,
     level: float,
 ):
-    args["level"] = level
+    args = {**args, "level": level}
     augmenter = augmenty.load(aug, **args)
-    augmented_examples = [e for ex in examples for e in augmenter(nlp=nlp, example=ex)]  # type: ignore
+    augmented_examples = [e for ex in books for e in augmenter(nlp=nlp_en, example=ex)]  # type: ignore
 
 
 def test_check_untested():

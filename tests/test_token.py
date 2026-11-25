@@ -4,7 +4,7 @@ from spacy.tokens import Doc
 
 import augmenty
 from augmenty.token.insert import create_token_insert_random_augmenter_v1
-from augmenty.token.static_embedding_util import static_embedding
+from augmenty.token.static_embedding_util import StaticEmbedding
 
 from .books import BOOKS
 
@@ -149,7 +149,7 @@ def test_create_word_embedding_augmenter(nlp_en_md: Language):
     doc = nlp_en_md(text)
 
     # the augmenter samples from the n + 2 nearest neighbours (default n=10)
-    embedding = static_embedding.from_vocab(nlp_en_md.vocab)
+    embedding = StaticEmbedding.from_vocab(nlp_en_md.vocab)
     rep = [w.lower() for w in embedding.most_similar(text, n=12)]
 
     aug = augmenty.load("word_embedding_v1", level=1)

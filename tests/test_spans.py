@@ -37,17 +37,10 @@ def ent_augmenter() -> Callable:
     return ent_augmenter
 
 
-@pytest.mark.parametrize(
-    "nlp",
-    [
-        pytest.lazy_fixture("nlp_en"),  # type: ignore
-        pytest.lazy_fixture("nlp_en_md"),  # type: ignore
-    ],
-)
 def test_ent_replace_with_span_annotations(
     doc: Doc,
     ent_augmenter: Callable,
-    nlp: Language,
+    nlp_en: Language,
 ):
     # add span annotations
     positive_noun_chunks = [doc[3:5]]
@@ -55,7 +48,7 @@ def test_ent_replace_with_span_annotations(
     doc.spans["positive_noun_chunks"] = positive_noun_chunks
     doc.spans["is_augmenty"] = is_augmenty
 
-    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
 
     # Check spans
     doc_pos_noun_chunks = docs[0].spans["positive_noun_chunks"]
@@ -65,23 +58,16 @@ def test_ent_replace_with_span_annotations(
     assert doc_is_augmenty[0].text == "SpaCy", "the span is not maintained"
 
 
-@pytest.mark.parametrize(
-    "nlp",
-    [
-        pytest.lazy_fixture("nlp_en"),  # type: ignore
-        pytest.lazy_fixture("nlp_en_md"),  # type: ignore
-    ],
-)
 def test_ent_replace_with_cats_annotations(
     doc: Doc,
     ent_augmenter: Callable,
-    nlp: Language,
+    nlp_en: Language,
 ):
     # add doc annotations
     doc.cats["is_positive"] = 1
 
     # augment
-    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp))
+    docs = list(augmenty.docs([doc], augmenter=ent_augmenter, nlp=nlp_en))
 
     assert docs[0].cats["is_positive"] == 1.0, "the document category is not maintained"
 

@@ -17,6 +17,16 @@ class registry(thinc.registry):
     keyboards = catalogue.create("augmenty", "keyboards", entry_points=True)
 
 
+def _ensure_spacy_registry_populated() -> None:
+    """From spaCy 3.8 spaCy's own registry entries (e.g. the augmenter
+    `spacy.lower_case.v1`) are only registered once a pipeline is created or
+    the registry is explicitly populated.
+    """
+    ensure_populated = getattr(spacy.registry, "ensure_populated", None)
+    if ensure_populated is not None:
+        ensure_populated()
+
+
 def docs(
     docs: Iterable[Doc],
     augmenter: Augmenter,
@@ -92,6 +102,7 @@ def augmenters() -> dict[str, Augmenter]:
     >>> "upper_case_v1" in augmenters
     True
     """
+    _ensure_spacy_registry_populated()
     return spacy.registry.augmenters.get_all()
 
 
@@ -109,6 +120,7 @@ def load(augmenter: str, **kwargs: Any) -> Augmenter:
     >>> list(augmenty.texts(texts, upper_case_augmenter, nlp))
     ["HELLO THERE!"]
     """
+    _ensure_spacy_registry_populated()
     aug = spacy.registry.augmenters.get(augmenter)
     return aug(**kwargs)
 

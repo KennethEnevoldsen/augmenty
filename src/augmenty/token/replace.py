@@ -8,7 +8,7 @@ from spacy.tokens import Token
 from spacy.training import Example
 
 from ..augment_utilities import make_text_from_orth
-from .static_embedding_util import static_embedding
+from .static_embedding_util import StaticEmbedding
 from .wordnet_util import init_wordnet
 
 
@@ -261,7 +261,7 @@ def create_word_embedding_augmenter_v1(
         t: Token,
         n: int,
         ignore_casing: bool,
-        embedding: static_embedding,
+        embedding: StaticEmbedding,
     ) -> str:
         if embedding.vocab is None:
             embedding.update_from_vocab(t.doc.vocab)
@@ -282,7 +282,7 @@ def create_word_embedding_augmenter_v1(
                 return random.choice(rep)
         return t.text
 
-    embedding = static_embedding.from_vocab(nlp.vocab) if nlp else static_embedding()
+    embedding = StaticEmbedding.from_vocab(nlp.vocab) if nlp else StaticEmbedding()
 
     __replace = partial(replace, n=n, ignore_casing=ignore_casing, embedding=embedding)
     return partial(
