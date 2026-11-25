@@ -6,18 +6,20 @@ into smaller parts.
 
 ## augmenty.doc.casing
 
-```{automodule} augmenty.doc.casing
-:members:
-:undoc-members:
-:show-inheritance:
-:exclude-members: upper_casing_augmenter_v1, spongebob_augmenter_v1
+```{eval-rst}
+.. automodule:: augmenty.doc.casing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: upper_casing_augmenter_v1, spongebob_augmenter_v1
 ```
 
 ## augmenty.doc.subset
 
-```{automodule} augmenty.doc.subset
-:members:
-:undoc-members:
-:show-inheritance:
-:exclude-members: paragraph_subset_augmenter_v1
+```{eval-rst}
+.. automodule:: augmenty.doc.subset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: paragraph_subset_augmenter_v1
 ```

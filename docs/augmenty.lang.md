@@ -7,8 +7,9 @@ implemented independently for each language they are not listed here.
 
 ### augmenty.lang.da.augmenters
 
-```{automodule} augmenty.lang.da.augmenters
-:members:
-:undoc-members:
-:show-inheritance:
+```{eval-rst}
+.. automodule:: augmenty.lang.da.augmenters
+   :members:
+   :undoc-members:
+   :show-inheritance:
 ```

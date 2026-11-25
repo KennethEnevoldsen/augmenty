@@ -5,8 +5,9 @@ Keyboard is a custom class for implementing keyboard layouts and is required for
 
 ## augmenty.keyboard
 
-```{automodule} augmenty.keyboard
-:members:
-:undoc-members:
-:show-inheritance:
+```{eval-rst}
+.. automodule:: augmenty.keyboard
+   :members:
+   :undoc-members:
+   :show-inheritance:
 ```
