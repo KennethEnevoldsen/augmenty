@@ -35,12 +35,14 @@ Request features on the [Issue Tracker].
 
 ## How to set up your development environment
 
-To install all the development dependencies, you can use the [make] command:
+The project uses [uv] to manage the environment and [make] to run common tasks.
+Once uv is installed, install the package together with all development dependencies:
 
 ```console
 $ make install
 ```
 
+This creates a `.venv` in the project folder. You can run any command in it using `uv run`, e.g. `uv run python`.
 
 ### How to test the project
 
@@ -50,7 +52,16 @@ Run the full test suite:
 $ make test
 ```
 
-Unit tests are located in the _tests_ directory.
+Unit tests are located in the _tests_ directory. The tests use the `en_core_web_md` spaCy pipeline, which `make install` installs for you.
+
+### How to build the documentation
+
+The documentation is built using [Sphinx]:
+
+```console
+$ make build-docs
+$ make view-docs
+```
 
 ## How to submit changes
 
@@ -64,17 +75,24 @@ Your pull request needs to meet the following guidelines for acceptance:
 
 Feel free to submit early, though—we can always iterate on this.
 
-To run linting and code formatting checks before committing your change, you can run the following [make] command:
+Before opening a pull request, run the formatter, linter, type checker and tests:
 
 ```console
-$ make lint
+$ make pr
 ```
+
+The project is released automatically using [semantic-release], which determines the next version from the commit messages.
+Please use [conventional commits] for your commit messages (or the title of your pull request), e.g. `fix: ...`, `feat: ...` or `docs: ...`.
 
 It is recommended to open an issue before starting work on any major changes.
 This will allow a chance to talk it over with the owners and validate your approach.
 
 [pull request]: https://github.com/KennethEnevoldsen/augmenty/pulls
 [make]: https://makefiletutorial.com
+[uv]: https://docs.astral.sh/uv/getting-started/installation/
+[sphinx]: https://www.sphinx-doc.org
+[semantic-release]: https://python-semantic-release.readthedocs.io
+[conventional commits]: https://www.conventionalcommits.org
 
 <!-- github-only -->
 
