@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../../../_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>augmenty.span.entities - augmenty 1.4.5.dev13 documentation</title>
+        <title>augmenty.span.entities - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -171,7 +171,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -344,16 +344,27 @@
     <span class="p">}</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_update_span_annotations</span><span class="p">(</span>
-    <span class="n">span_anno</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_update_char_annotations</span><span class="p">(</span>
+    <span class="n">doc_anno</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">ent</span><span class="p">:</span> <span class="n">Span</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">entity_offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Update the span annotations to be in line with the new doc."""</span>
-    <span class="n">ent_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+    <span class="n">keep_link</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Update the character offsets of the span and link annotations to be in</span>
+<span class="sd">    line with the new doc.</span>
 
-    <span class="k">for</span> <span class="n">anno_key</span><span class="p">,</span> <span class="n">spans</span> <span class="ow">in</span> <span class="n">span_anno</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="sd">    Args:</span>
+<span class="sd">        doc_anno: The doc annotations of the example dict, updated in place.</span>
+<span class="sd">        ent: The entity which is changed.</span>
+<span class="sd">        offset: The character offset from previously changed entities.</span>
+<span class="sd">        entity_offset: The change in character length of the entity.</span>
+<span class="sd">        keep_link: Whether the entity should keep its link (e.g. when it is</span>
+<span class="sd">            reformatted), or have it removed (e.g. when it is replaced).</span>
+<span class="sd">    """</span>
+    <span class="n">ent_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start_char</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end_char</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">anno_key</span><span class="p">,</span> <span class="n">spans</span> <span class="ow">in</span> <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"spans"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">new_spans</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">span_start</span><span class="p">,</span> <span class="n">span_end</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">__</span> <span class="ow">in</span> <span class="n">spans</span><span class="p">:</span>
             <span class="n">new_start</span><span class="p">,</span> <span class="n">new_end</span> <span class="o">=</span> <span class="n">offset_range</span><span class="p">(</span>
@@ -363,9 +374,19 @@
             <span class="p">)</span>
             <span class="n">new_spans</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_start</span><span class="p">,</span> <span class="n">new_end</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">__</span><span class="p">))</span>
 
-        <span class="n">span_anno</span><span class="p">[</span><span class="n">anno_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_spans</span>
+        <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"spans"</span><span class="p">][</span><span class="n">anno_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_spans</span>
 
-    <span class="k">return</span> <span class="n">span_anno</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="n">doc_anno</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"links"</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_link</span><span class="p">:</span>
+        <span class="n">links</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">ent_range</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">doc_anno</span><span class="p">[</span><span class="s2">"links"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">offset_range</span><span class="p">(</span>
+            <span class="n">current_range</span><span class="o">=</span><span class="n">link_range</span><span class="p">,</span>
+            <span class="n">inserted_range</span><span class="o">=</span><span class="n">ent_range</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=</span><span class="n">entity_offset</span><span class="p">,</span>
+        <span class="p">):</span> <span class="n">link</span>
+        <span class="k">for</span> <span class="n">link_range</span><span class="p">,</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">ent_augmenter_v1</span><span class="p">(</span>
@@ -382,7 +403,6 @@
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">str_offset</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="n">spans_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"doc_annotation"</span><span class="p">][</span><span class="s2">"spans"</span><span class="p">]</span>
     <span class="n">tok_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">]</span>
     <span class="n">ents</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"doc_annotation"</span><span class="p">][</span><span class="s2">"entities"</span><span class="p">]</span>
 
@@ -447,11 +467,12 @@
                     <span class="p">],</span>
                 <span class="p">)</span>
 
-            <span class="n">spans_anno</span> <span class="o">=</span> <span class="n">_update_span_annotations</span><span class="p">(</span>
-                <span class="n">spans_anno</span><span class="p">,</span>
+            <span class="n">_update_char_annotations</span><span class="p">(</span>
+                <span class="n">example_dict</span><span class="p">[</span><span class="s2">"doc_annotation"</span><span class="p">],</span>
                 <span class="n">ent</span><span class="p">,</span>
                 <span class="n">str_offset</span><span class="p">,</span>
                 <span class="n">entity_str_offset</span><span class="p">,</span>
+                <span class="n">keep_link</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">offset</span> <span class="o">+=</span> <span class="n">entity_offset</span>
             <span class="n">str_offset</span> <span class="o">+=</span> <span class="n">entity_str_offset</span>
@@ -607,6 +628,7 @@
     <span class="n">example_dict</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
     <span class="n">tok_anno</span> <span class="o">=</span> <span class="n">example_dict</span><span class="p">[</span><span class="s2">"token_annotation"</span><span class="p">]</span>
+    <span class="n">str_offset</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">ent_types</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span> <span class="ow">in</span> <span class="n">ent_types</span><span class="p">)</span> <span class="ow">and</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
@@ -629,6 +651,17 @@
 
             <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"ORTH"</span><span class="p">][</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="p">:</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent_</span>
             <span class="n">tok_anno</span><span class="p">[</span><span class="s2">"LEMMA"</span><span class="p">][</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span> <span class="p">:</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_ent_</span>
+
+            <span class="c1"># the spacing is kept per position, so only the token lengths change</span>
+            <span class="n">entity_str_offset</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">new_ent_</span><span class="p">))</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ent</span><span class="p">)</span>
+            <span class="n">_update_char_annotations</span><span class="p">(</span>
+                <span class="n">example_dict</span><span class="p">[</span><span class="s2">"doc_annotation"</span><span class="p">],</span>
+                <span class="n">ent</span><span class="p">,</span>
+                <span class="n">str_offset</span><span class="p">,</span>
+                <span class="n">entity_str_offset</span><span class="p">,</span>
+                <span class="n">keep_link</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">str_offset</span> <span class="o">+=</span> <span class="n">entity_str_offset</span>
 
     <span class="n">text</span> <span class="o">=</span> <span class="n">make_text_from_orth</span><span class="p">(</span><span class="n">example_dict</span><span class="p">)</span>
 
@@ -726,7 +759,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="../../../_static/documentation_options.js?v=42848b40"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

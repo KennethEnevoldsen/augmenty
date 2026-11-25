@@ -7,14 +7,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="news.html" />
 <meta property="og:site_name" content="augmenty" />
-<meta property="og:description" content="For the full list of changes in each release see the GitHub releases. 1.1.0 (17/01/23):- Added support for SpaCy 3.4.0, this requires refactoring the names of all augmenters from{augmenter-name}.v1..." />
-<meta name="description" content="For the full list of changes in each release see the GitHub releases. 1.1.0 (17/01/23):- Added support for SpaCy 3.4.0, this requires refactoring the names of all augmenters from{augmenter-name}.v1..." />
+<meta property="og:description" content="For the full list of changes in each release see the GitHub releases. 2.0.0- Dropped support for Python 3.8 and 3.9, and added support for Python 3.11 to 3.14., The wordnet augmenters now require n..." />
+<meta name="description" content="For the full list of changes in each release see the GitHub releases. 2.0.0- Dropped support for Python 3.8 and 3.9, and added support for Python 3.11 to 3.14., The wordnet augmenters now require n..." />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Creating and Contributing Augmenters" href="adding_an_augmenter.html"><link rel="prev" title="Training using Augmenty" href="tutorials/training_using_augmenty/training_using_augmenty.html">
         <link rel="prefetch" href="_static/icon.png" as="image">
         <link rel="prefetch" href="_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>News and Changelog - augmenty 1.4.5.dev13 documentation</title>
+        <title>News and Changelog - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -178,7 +178,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -256,12 +256,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/docs/news.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/docs/news.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/edit/main/docs/news.rst" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/edit/main/docs/news.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -282,17 +282,25 @@
 <h1>News and Changelog<a class="headerlink" href="#news-and-changelog" title="Link to this heading">¶</a></h1>
 <p>For the full list of changes in each release see the <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/releases">GitHub releases</a>.</p>
 <ul class="simple">
-<li><p>1.1.0 (17/01/23):</p>
+<li><p><strong>2.0.0</strong></p>
 <ul>
-<li><p>Added support for SpaCy 3.4.0, this requires refactoring the names of all augmenters from <code class="docutils literal notranslate"><span class="pre">{augmenter-name}.v1</span></code> to <cite>{augmenter-name}_v1`</cite> as the <code class="docutils literal notranslate"><span class="pre">.</span></code> is no longer allowed in SpaCy component names.</p></li>
+<li><p>Dropped support for Python 3.8 and 3.9, and added support for Python 3.11 to 3.14.</p></li>
+<li><p>The wordnet augmenters now require <code class="docutils literal notranslate"><span class="pre">nltk&gt;=3.10</span></code>, which uses the Open Multilingual Wordnet 2.0.</p></li>
+<li><p>Removed the <code class="docutils literal notranslate"><span class="pre">da</span></code> extra, which only installed DaCy. The Danish augmenters require no additional dependencies.</p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">augmenty.token.static_embedding_util.static_embedding</span></code> to <code class="docutils literal notranslate"><span class="pre">StaticEmbedding</span></code>.</p></li>
 </ul>
 </li>
-<li><p>1.0.4 (11/10/22):</p>
+<li><p><strong>1.1.0</strong> (17/01/23)</p>
+<ul>
+<li><p>Added support for spaCy 3.4.0, this requires refactoring the names of all augmenters from <code class="docutils literal notranslate"><span class="pre">{augmenter-name}.v1</span></code> to <code class="docutils literal notranslate"><span class="pre">{augmenter-name}_v1</span></code> as the <code class="docutils literal notranslate"><span class="pre">.</span></code> is no longer allowed in spaCy component names.</p></li>
+</ul>
+</li>
+<li><p><strong>1.0.4</strong> (11/10/22)</p>
 <ul>
 <li><p>Hungarian keyboard was added (by <a class="reference external" href="https://github.com/qeterme">qeterme</a>)</p></li>
 </ul>
 </li>
-<li><p>1.0.0 (05/04/22)</p>
+<li><p><strong>1.0.0</strong> (05/04/22)</p>
 <ul>
 <li><p>Added new augmenters</p>
 <ul>
@@ -300,15 +308,15 @@
 </ul>
 </li>
 <li><p>Renamed all augmenters to include versioning (e.g. v1) for their create functions.</p></li>
-<li><p>restructured tests to be cleaner and notably run faster</p></li>
+<li><p>Restructured tests to be cleaner and notably run faster</p></li>
 </ul>
 </li>
-<li><p>0.0.1 (03/08/21)</p>
+<li><p><strong>0.0.1</strong> (03/08/21)</p>
 <ul>
 <li><p>First version of augmenty launches 🎉</p>
 <ul>
 <li><p>with more than 15 highly customizable augmenters,</p></li>
-<li><p>A high-quality code-base (coverage of 96% and a codefactor A),</p></li>
+<li><p>a high-quality code-base (coverage of 96% and a codefactor A),</p></li>
 <li><p>and utilities for easy application of augmenters to strings and spaCy Docs.</p></li>
 <li><p>Furthermore, it also includes a series of convenience functions for combining and moderating augmentations.</p></li>
 </ul>
@@ -374,7 +382,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="_static/documentation_options.js?v=42848b40"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

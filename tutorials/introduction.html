@@ -14,7 +14,7 @@
         <link rel="prefetch" href="../_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="../_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Getting Started - augmenty 1.4.5.dev13 documentation</title>
+        <title>Getting Started - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -178,7 +178,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="../index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -333,6 +333,9 @@ da_historical_noun_casing_v1
 ents_replace_v1
 per_replace_v1
 ents_format_v1
+spacy.combined_augmenter.v1
+spacy.lower_case.v1
+spacy.orth_variants.v1
 </pre></div>
 </div>
 </div>
@@ -436,7 +439,7 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a rattling shaft for augmentation which is arrive_at expend SpaCy uprise by Explosion.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a howling pecker for augmentation which is take_in employ SpaCy formulate by Explosion.
 </pre></div>
 </div>
 </div>
@@ -475,8 +478,8 @@ YOU CAN ALSO USE IT TO SEE HOW ROBUST YOUR MODEL IS TO CHANGES.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty is a wonderful tool for augmentation.
-Augmentation is a wonderful tool for obtaining higher performance on limited data.
-You can also use it to see how donust your model is to changes.
+Augmentatuon is a wondfrful tool f8r obtaining hivher pe4formance on lijited data,
+You can also use it to see how robust your model is to changes.
 </pre></div>
 </div>
 </div>
@@ -497,11 +500,11 @@ You can also use it to see how donust your model is to changes.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Augmenty a is wonderful tool for augmentation.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>is Augmenty wonderful a tool for augmentation.
 Augmenty is a wonderful tool for augmentation.
-is Augmentation a wonderful tool for obtaining higher performance on limited data.
+Augmentation is a wonderful tool for obtaining higher performance limited on data.
 Augmentation is a wonderful tool for obtaining higher performance on limited data.
-You can also use it to see how robust your is model to changes.
+You also can use it see to how your robust is model to changes.
 You can also use it to see how robust your model is to changes.
 </pre></div>
 </div>
@@ -525,7 +528,7 @@ You can also use it to see how robust your model is to changes.
 
 <span class="n">nlp_da</span> <span class="o">=</span> <span class="n">Danish</span><span class="p">()</span>
 
-<span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"wordnet_synonym.v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"da"</span><span class="p">)</span>
+<span class="n">synonym_augmenter</span> <span class="o">=</span> <span class="n">augmenty</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"wordnet_synonym_v1"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"da"</span><span class="p">)</span>
 <span class="n">augmented_corpus</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">e</span> <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">test</span><span class="p">(</span><span class="n">nlp_da</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">synonym_augmenter</span><span class="p">(</span><span class="n">nlp_da</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
 <span class="p">]</span>
@@ -574,7 +577,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Adam Reynolds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my name is Destiny Gregory
 </pre></div>
 </div>
 </div>
@@ -582,7 +585,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
 </section>
 <section id="creating-and-contributing-augmenters">
 <h2>Creating and Contributing Augmenters<a class="headerlink" href="#creating-and-contributing-augmenters" title="Link to this heading">¶</a></h2>
-<p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance the augmenter <code class="docutils literal notranslate"><span class="pre">per_replace_v1</span></code>, which replaces names in a text is a special case of the augmenter <code class="docutils literal notranslate"><span class="pre">ents_replace_v1</span></code> with better handling of first and last names. If you want to create an augmenter from scratch following spaCy’s <a class="reference external" href="https://spacy.io/usage/training#data-augmentation-custom">guide</a> on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well. If you find yourself in troubles feel free to ask in the <a class="reference internal" href="#missing"><span class="xref myst">augmenty forums</span></a>.</p>
+<p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance the augmenter <code class="docutils literal notranslate"><span class="pre">per_replace_v1</span></code>, which replaces names in a text is a special case of the augmenter <code class="docutils literal notranslate"><span class="pre">ents_replace_v1</span></code> with better handling of first and last names. If you want to create an augmenter from scratch following spaCy’s <a class="reference external" href="https://spacy.io/usage/training#data-augmentation-custom">guide</a> on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well. If you find yourself in troubles feel free to ask in the <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/discussions">augmenty forums</a>.</p>
 <p>When you are satisfied with your augmenter feel free submit a <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/pulls">pull request</a> to add the augmenter to augmenty.</p>
 </section>
 </section>
@@ -676,7 +679,7 @@ entities such as names. It is compatibile with multiple languages and has a lot 
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="../_static/documentation_options.js?v=42848b40"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

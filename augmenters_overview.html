@@ -14,7 +14,7 @@
         <link rel="prefetch" href="_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Overview of Augmenters - augmenty 1.4.5.dev13 documentation</title>
+        <title>Overview of Augmenters - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -178,7 +178,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -476,7 +476,37 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>spongebob_v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>spacy.combined_augmenter.v1</strong></p></td>
+<td><p>Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>spacy.lower_case.v1</strong></p></td>
+<td><p>Create a data augmentation callback that converts documents to lowercase.     The callback can be added to a corpus or other data iterator during training.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>spacy.orth_variants.v1</strong></p></td>
+<td><p>Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training.</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+<td><p>✅</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>spongebob_v1</strong></p></td>
 <td><p>Create an augmneter that converts documents to SpOnGeBoB casing.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -486,7 +516,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>token_dict_replace_v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_dict_replace_v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a     dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -496,7 +526,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>token_insert_random_v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>token_insert_random_v1</strong></p></td>
 <td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
 <td><p>✅</p></td>
 <td><p>❌</p></td>
@@ -506,7 +536,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>token_insert_v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_insert_v1</strong></p></td>
 <td><p>Creates an augmenter that randomly inserts a token generated based on a     insert function.</p></td>
 <td><p>✅</p></td>
 <td><p>❌</p></td>
@@ -516,7 +546,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>token_replace_v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>token_replace_v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -526,7 +556,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>token_swap_v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>token_swap_v1</strong></p></td>
 <td><p>Creates an augmenter that randomly swaps two neighbouring tokens.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -536,7 +566,7 @@
 <td><p>✅</p></td>
 <td><p>Usage: <a class="reference external" href="https://arxiv.org/abs/1901.11196?utm_campaign=Weekly%20Kaggle%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">Wei and Zau (2019)</a></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>upper_case_v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>upper_case_v1</strong></p></td>
 <td><p>Create an augmenter that converts documents to uppercase.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -546,7 +576,7 @@
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p><strong>word_embedding_v1</strong></p></td>
+<tr class="row-even"><td class="text-center"><p><strong>word_embedding_v1</strong></p></td>
 <td><p>Creates an augmenter which replaces a token based on a replace function.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -556,7 +586,7 @@
 <td><p>✅</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p><strong>wordnet_synonym_v1</strong></p></td>
+<tr class="row-odd"><td class="text-center"><p><strong>wordnet_synonym_v1</strong></p></td>
 <td><p>Creates an augmenter swaps a token with its synonym based on a     dictionary.</p></td>
 <td><p>✅</p></td>
 <td><p>✅</p></td>
@@ -627,7 +657,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="_static/documentation_options.js?v=42848b40"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

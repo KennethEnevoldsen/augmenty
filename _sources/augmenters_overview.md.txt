@@ -22,6 +22,9 @@ The following tables list all the available augmenters in augmenty, along with a
 | **random_synonym_insertion_v1** | Creates an augmenter that randomly inserts a synonym or from the tokens     context. The synonyms are based on wordnet. | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |  |
 | **remove_spacing_v1** | Creates an augmenter that removes spacing with a given probability. | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
 | **spacing_insertion_v1** | Creates and augmneter that randomly adds a space after a chara cter.     Tokens are kept the same. | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| **spacy.combined_augmenter.v1** | Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
+| **spacy.lower_case.v1** | Create a data augmentation callback that converts documents to lowercase.     The callback can be added to a corpus or other data iterator during training. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
+| **spacy.orth_variants.v1** | Create a data augmentation callback that uses orth-variant replacement.     The callback can be added to a corpus or other data iterator during training. | ✅ | ✅ | ✅ | ✅ |  | ✅ |  |
 | **spongebob_v1** | Create an augmneter that converts documents to SpOnGeBoB casing. | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
 | **token_dict_replace_v1** | Creates an augmenter swaps a token with its synonym based on a     dictionary. | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
 | **token_insert_random_v1** | Creates an augmenter that randomly swaps two neighbouring tokens. | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |  |

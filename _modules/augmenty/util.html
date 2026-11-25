@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../../_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="../../_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>augmenty.util - augmenty 1.4.5.dev13 documentation</title>
+        <title>augmenty.util - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -171,7 +171,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="../../index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -281,6 +281,16 @@
     <span class="n">keyboards</span> <span class="o">=</span> <span class="n">catalogue</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">"augmenty"</span><span class="p">,</span> <span class="s2">"keyboards"</span><span class="p">,</span> <span class="n">entry_points</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_ensure_spacy_registry_populated</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""From spaCy 3.8 spaCy's own registry entries (e.g. the augmenter</span>
+<span class="sd">    `spacy.lower_case.v1`) are only registered once a pipeline is created or</span>
+<span class="sd">    the registry is explicitly populated.</span>
+<span class="sd">    """</span>
+    <span class="n">ensure_populated</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">spacy</span><span class="o">.</span><span class="n">registry</span><span class="p">,</span> <span class="s2">"ensure_populated"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ensure_populated</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ensure_populated</span><span class="p">()</span>
+
+
 <div class="viewcode-block" id="docs">
 <a class="viewcode-back" href="../../augmenty.util.html#augmenty.util.docs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">docs</span><span class="p">(</span>
@@ -364,6 +374,7 @@
 <span class="sd">    &gt;&gt;&gt; "upper_case_v1" in augmenters</span>
 <span class="sd">    True</span>
 <span class="sd">    """</span>
+    <span class="n">_ensure_spacy_registry_populated</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span></div>
 
 
@@ -384,6 +395,7 @@
 <span class="sd">    &gt;&gt;&gt; list(augmenty.texts(texts, upper_case_augmenter, nlp))</span>
 <span class="sd">    ["HELLO THERE!"]</span>
 <span class="sd">    """</span>
+    <span class="n">_ensure_spacy_registry_populated</span><span class="p">()</span>
     <span class="n">aug</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">augmenters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">augmenter</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">aug</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -464,7 +476,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="../../_static/documentation_options.js?v=42848b40"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

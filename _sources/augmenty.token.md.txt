@@ -1,42 +1,41 @@
-Token-based
---------------------------------------------------
+# Token-based
 
+## augmenty.token.casing
 
-augmenty.token.casing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+```{eval-rst}
 .. automodule:: augmenty.token.casing
    :members:
    :undoc-members:
    :show-inheritance:
    :exclude-members: starting_case_augmenter_v1, conditional_casing_augmenter_v1, uncapitalize
+```
 
+## augmenty.token.replace
 
-augmenty.token.replace
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+```{eval-rst}
 .. automodule:: augmenty.token.replace
    :members:
    :undoc-members:
    :show-inheritance:
    :exclude-members: token_replace_augmenter_v1, token_dict_replace_augmenter_v1
+```
 
+## augmenty.token.spacing
 
-
-augmenty.token.spacing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+```{eval-rst}
 .. automodule:: augmenty.token.spacing
    :members:
    :undoc-members:
    :show-inheritance:
    :exclude-members: spacing_insertion_augmenter_v1, letter_spacing_augmenter_v1
+```
 
-augmenty.token.swap
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## augmenty.token.swap
 
+```{eval-rst}
 .. automodule:: augmenty.token.swap
    :members:
    :undoc-members:
    :show-inheritance:
    :exclude-members: token_swap_augmenter_v1
+```

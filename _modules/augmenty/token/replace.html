@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../../../_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>augmenty.token.replace - augmenty 1.4.5.dev13 documentation</title>
+        <title>augmenty.token.replace - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -171,7 +171,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -272,7 +272,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">spacy.training</span><span class="w"> </span><span class="kn">import</span> <span class="n">Example</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..augment_utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_text_from_orth</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.static_embedding_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">static_embedding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.static_embedding_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">StaticEmbedding</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.wordnet_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_wordnet</span>
 
 
@@ -290,12 +290,12 @@
         <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">replace</span> <span class="ow">and</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">text</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="n">pos</span> <span class="o">=</span> <span class="n">getter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">]:</span>
-                    <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">][</span><span class="n">pos</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+                <span class="k">if</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">[</span><span class="n">text</span><span class="p">]:</span>
+                    <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">text</span><span class="p">][</span><span class="n">pos</span><span class="p">]))</span>  <span class="c1"># type: ignore</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">replace</span><span class="p">[</span><span class="n">text</span><span class="p">]))</span>
             <span class="k">if</span> <span class="n">keep_titlecase</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">is_title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">text</span>
@@ -339,8 +339,7 @@
 <span class="sd">        &gt;&gt;&gt; create_token_dict_replace_augmenter(replace=replace, level=.10)</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">ignore_casing</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
-            <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">replace</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+        <span class="n">replace</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">replace</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
         <span class="n">token_dict_replace_augmenter_v1</span><span class="p">,</span>
@@ -536,7 +535,7 @@
         <span class="n">t</span><span class="p">:</span> <span class="n">Token</span><span class="p">,</span>
         <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">ignore_casing</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="n">embedding</span><span class="p">:</span> <span class="n">static_embedding</span><span class="p">,</span>
+        <span class="n">embedding</span><span class="p">:</span> <span class="n">StaticEmbedding</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">embedding</span><span class="o">.</span><span class="n">vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">embedding</span><span class="o">.</span><span class="n">update_from_vocab</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
@@ -557,7 +556,7 @@
                 <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
 
-    <span class="n">embedding</span> <span class="o">=</span> <span class="n">static_embedding</span><span class="o">.</span><span class="n">from_vocab</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">nlp</span> <span class="k">else</span> <span class="n">static_embedding</span><span class="p">()</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">StaticEmbedding</span><span class="o">.</span><span class="n">from_vocab</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">nlp</span> <span class="k">else</span> <span class="n">StaticEmbedding</span><span class="p">()</span>
 
     <span class="n">__replace</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">replace</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">ignore_casing</span><span class="o">=</span><span class="n">ignore_casing</span><span class="p">,</span> <span class="n">embedding</span><span class="o">=</span><span class="n">embedding</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
@@ -606,7 +605,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="../../../_static/documentation_options.js?v=42848b40"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

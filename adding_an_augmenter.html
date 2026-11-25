@@ -7,14 +7,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="adding_an_augmenter.html" />
 <meta property="og:site_name" content="augmenty" />
-<meta property="og:description" content="After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter per_replace.v1, which rep..." />
-<meta name="description" content="After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter per_replace.v1, which rep..." />
+<meta property="og:description" content="After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter per_replace_v1, which rep..." />
+<meta name="description" content="After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter per_replace_v1, which rep..." />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="FAQ" href="faq.html"><link rel="prev" title="News and Changelog" href="news.html">
         <link rel="prefetch" href="_static/icon.png" as="image">
         <link rel="prefetch" href="_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Creating and Contributing Augmenters - augmenty 1.4.5.dev13 documentation</title>
+        <title>Creating and Contributing Augmenters - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -178,7 +178,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -256,12 +256,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/docs/adding_an_augmenter.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/docs/adding_an_augmenter.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/edit/main/docs/adding_an_augmenter.rst" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/edit/main/docs/adding_an_augmenter.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -280,26 +280,26 @@
         <article role="main" id="furo-main-content">
           <section id="creating-and-contributing-augmenters">
 <h1>Creating and Contributing Augmenters<a class="headerlink" href="#creating-and-contributing-augmenters" title="Link to this heading">¶</a></h1>
-<p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter <code class="code docutils literal notranslate"><span class="pre">per_replace.v1</span></code>,
-which replaces names in a text is a special case of the augmenter <code class="code docutils literal notranslate"><span class="pre">ents_replace.v1</span></code> with better handling of first and last names.
-If you want to create an augmenter from scratch following spaCy’s guide on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well.
+<p>After using augmenty you might want to create and contribute an augmenter. Most augmenters can be created based on already existing augmenters. For instance, the augmenter <code class="docutils literal notranslate"><span class="pre">per_replace_v1</span></code>,
+which replaces names in a text, is a special case of the augmenter <code class="docutils literal notranslate"><span class="pre">ents_replace_v1</span></code> with better handling of first and last names.
+If you want to create an augmenter from scratch, following spaCy’s guide on creating custom augmenters is a good start. You can always use augmenters from augmenty as inspiration as well.
 If you find yourself in trouble feel free to ask in the augmenty <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/discussions">forums</a>.</p>
-<p>When you are satisfied with your augmenter feel free submit a <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/pulls">pull request</a> to add the augmenter to augmenty.</p>
-<p>When adding an new augmenter to Augmenty you should:</p>
+<p>When you are satisfied with your augmenter feel free to submit a <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/pulls">pull request</a> to add the augmenter to augmenty.</p>
+<p>When adding a new augmenter to augmenty you should:</p>
 <ul class="simple">
 <li><p>Add the augmenter.</p></li>
 <li><p>Add a create function for the augmenter.</p>
 <ul>
-<li><p>You should also add this to the spacy augmenters registry. You can do this easily using the decorator <code class="code docutils literal notranslate"><span class="pre">&#64;spacy.registry.augmenters(&quot;name_of_your_augmenter_v1&quot;)</span></code>. This allows the function to be fetchable using <code class="code docutils literal notranslate"><span class="pre">augmenty.load</span></code>.</p></li>
-<li><p>This is also the function that should contain the documentation. Which we recommend includes at least one example of usage.</p></li>
+<li><p>You should also add this to the spaCy augmenters registry. You can do this easily using the decorator <code class="docutils literal notranslate"><span class="pre">&#64;spacy.registry.augmenters(&quot;name_of_your_augmenter_v1&quot;)</span></code>. This allows the function to be fetchable using <code class="docutils literal notranslate"><span class="pre">augmenty.load</span></code>.</p></li>
+<li><p>This is also the function that should contain the documentation, which we recommend includes at least one example of usage.</p></li>
 </ul>
 </li>
 <li><p>Add at least one test of the function.</p></li>
-<li><p>Add an entry to the file <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/augmenty/meta.json">meta.json</a>. This entry is used for generating the augmenters overview and can contain:</p>
+<li><p>Add an entry to the file <a class="reference external" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/src/augmenty/meta.json">meta.json</a>. This entry is used for generating the augmenters overview and can contain:</p>
 <ul>
-<li><p>“description”: An optional short description, if there isn’t any it is extracted from the function documentation.</p></li>
-<li><p>“respects”: What label the augmentation respects.</p></li>
-<li><p>“references”: An optional dictionary of references, where the key refers to the reference type. Typically these include, “Data” (a reference to any data used), “Package” (a reference to any additional packages used), “Usage” (the reference to articles or other work using the augmentation). Each of this should contain a dictionary (or a list of dictionaries in case of multiples), where each have a “name” (e.g. “Miller (1998)”) and a “link”. See examples of other augmenters in the meta.json.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;description&quot;</span></code>: An optional short description, if there isn’t any it is extracted from the function documentation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;respects&quot;</span></code>: What label the augmentation respects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;references&quot;</span></code>: An optional dictionary of references, where the key refers to the reference type. Typically these include, “Data” (a reference to any data used), “Package” (a reference to any additional packages used), “Usage” (the reference to articles or other work using the augmentation). Each of these should contain a dictionary (or a list of dictionaries in case of multiples), where each has a “name” (e.g. “Miller (1998)”) and a “link”. See examples of other augmenters in the meta.json.</p></li>
 </ul>
 </li>
 </ul>
@@ -361,7 +361,7 @@ If you find yourself in trouble feel free to ask in the augmenty <a class="refer
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="_static/documentation_options.js?v=42848b40"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

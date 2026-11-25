@@ -14,7 +14,7 @@
         <link rel="prefetch" href="_static/icon_dark.png" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.ico"><!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
-        <title>Installation - augmenty 1.4.5.dev13 documentation</title>
+        <title>Installation - augmenty 1.4.5.dev22 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -178,7 +178,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">augmenty 1.4.5.dev13 documentation</div></a>
+      <a href="index.html"><div class="brand">augmenty 1.4.5.dev22 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -256,12 +256,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/docs/installation.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/blob/main/docs/installation.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/edit/main/docs/installation.rst" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/KennethEnevoldsen/augmenty/edit/main/docs/installation.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -281,32 +281,26 @@
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
 <p>To get started using augmenty simply install it using pip by running the following line in your terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">augmenty</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>augmenty
 </pre></div>
 </div>
 <p>augmenty relies on additional packages for some augmentations. For instance, the wordnet augmenter relies on the NLTK package.
 You can install these additional dependencies by running the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">augmenty</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"augmenty[all]"</span>
 </pre></div>
 </div>
 <section id="language-specific-augmentations">
 <h2>Language specific augmentations<a class="headerlink" href="#language-specific-augmentations" title="Link to this heading">¶</a></h2>
-<p>augmenty supports language specific augmentations, which are not installed by default. To install these augmentations, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">augmenty</span><span class="p">[{</span><span class="n">lang</span><span class="p">}]</span>
-</pre></div>
-</div>
-<p>Where valid values for {lang} are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">da</span></code>: Danish</p></li>
-</ul>
+<p>Language specific augmenters (e.g. the Danish <code class="docutils literal notranslate"><span class="pre">da_æøå_replace_v1</span></code>) and keyboard layouts are included in the
+base installation and do not require any additional dependencies.</p>
 </section>
 <section id="development-installation">
 <h2>Development Installation<a class="headerlink" href="#development-installation" title="Link to this heading">¶</a></h2>
 <p>To set up the development environment for this package, clone the repository and install the
 package using the following commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KennethEnevoldsen</span><span class="o">/</span><span class="n">augmenty</span>
-
-<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="s2">".[style,tests,docs]"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/KennethEnevoldsen/augmenty
+<span class="nb">cd</span><span class="w"> </span>augmenty
+make<span class="w"> </span>install<span class="w">  </span><span class="c1"># uses uv to install the package and all development dependencies</span>
 </pre></div>
 </div>
 </section>
@@ -388,7 +382,7 @@ package using the following commands:</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=dc3c754c"></script>
+</div><script src="_static/documentation_options.js?v=42848b40"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
